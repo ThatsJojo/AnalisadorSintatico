@@ -1,3 +1,7 @@
+/build/
+/nbproject/private/
+/dist/
+
 # Compiled class file
 *.class
 
