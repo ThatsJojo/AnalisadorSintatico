@@ -12,16 +12,19 @@ do código, e estamos ciente que estes trechos não serão considerados para fin
 package controller;
 
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.LinkedList;
+import javafx.util.Pair;
 import model.Arquivo;
 import util.CaminhoInvalidoException;
 import util.SemEntradasException;
 
 public class ControllerFluxoAnalise {
-    ControllerArquivos arquivoController;
-    LinkedList<Arquivo> arquivos;
-    AnalisadorLexico analisadorLexico;
-    String outputPath;
+    private final ControllerArquivos arquivoController;
+    private final LinkedList<Arquivo> arquivos;
+    private final AnalisadorLexico analisadorLexico;
+    private final AnalisadorSintatico analisadorSintatico;
+    private final String outputPath;
     
     /**
      * Esta classe irá controlar o fluxo da análise. Futuramente, ela controlará o fluxo de compilação.
@@ -35,6 +38,7 @@ public class ControllerFluxoAnalise {
         this.arquivos = arquivoController.getArquivos();//Pega todos os arquivos com nome apropriado na pasta de entrada.
         this.outputPath=outputPath;
         analisadorLexico = new AnalisadorLexico();
+        analisadorSintatico = new AnalisadorSintatico();
         if(!arquivoController.isFolder(outputPath)||!arquivoController.isFolder(inputPath)){
             throw new CaminhoInvalidoException();
         }
@@ -42,7 +46,10 @@ public class ControllerFluxoAnalise {
     
     public void comecarAnalise(){
         arquivos.forEach((Arquivo arq)->{//Itera os arquivos de entrada passando-os pela análise léxica.
-            String ret = analisadorLexico.analise(arq);//Pega a o conjunto de tokens gerados pelo conteúdo do arquivo.
+            Pair<Iterator,String> par = analisadorLexico.analise(arq);//Pega a o conjunto de tokens gerados pelo conteúdo do arquivo.
+            Iterator tokens = par.getKey();
+            analisadorSintatico.analise(tokens);
+            String ret = par.getValue();
             String outputFile = "saida";
             String inputFile = arq.getNome();
             int i;

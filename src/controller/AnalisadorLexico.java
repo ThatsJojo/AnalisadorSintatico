@@ -13,6 +13,8 @@ package controller;
 
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
+import javafx.util.Pair;
 import model.Arquivo;
 import model.Token;
 import util.ReconhecedorCaracteres;
@@ -28,6 +30,7 @@ public class AnalisadorLexico {
     //
     private static final HashSet<String> palavrasReservadas = new HashSet();
     private static final HashSet<String> delimitadores = new HashSet();
+    private final LinkedList<Token> tokens;
 
     int estado = 0;
     int token = 0;
@@ -67,6 +70,7 @@ public class AnalisadorLexico {
         delimitadores.add("{");
         delimitadores.add("}");
         delimitadores.add(".");
+        tokens = new LinkedList();
     }
 
     /**
@@ -74,7 +78,8 @@ public class AnalisadorLexico {
      * @param arquivo arquivo a ser analisado.
      * @return 
      */
-    public String analise(Arquivo arquivo) {
+    public Pair<Iterator, String> analise(Arquivo arquivo) {
+        tokens.clear();
         Iterator linhas = arquivo.getConteudo();
         boolean inComment = false;//flag para indicar se a leitura está dentro de um comentario de bloco
         analiseRet="";
@@ -445,7 +450,11 @@ public class AnalisadorLexico {
             arquivo.setErrosLexicos(arquivo.getErrosLexicos()+1);
         }
         System.out.println("Análise léxica realizada "+(arquivo.getErrosLexicos()==0?"com":"sem")+" sucesso ("+String.format("%03d", arquivo.getErrosLexicos())+" erros léxicos encontrados) "+" no arquivos "+arquivo.getNome());
-        return analiseRet;
+        return new Pair<>(tokens.iterator(), analiseRet);
+    }
+    
+    public Iterator getTokens(){
+        return tokens.iterator();
     }
 
     /*
@@ -453,7 +462,9 @@ public class AnalisadorLexico {
     */
     private void addToken(String id, String lexema, int line) {
         Token t = new Token(id, lexema, line);
+        tokens.add(t);
         analiseRet += t + "\n";
+        
         this.lexema = "";
     }
 }
