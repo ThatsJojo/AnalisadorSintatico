@@ -1,0 +1,20 @@
+start
+
+string nome = ("João&");
+string teste_01;
+int ##;
+
+//Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
+function teste () {
+print(nome, idade);
+
+print(idade+5);
+
+/*
+Etiam id rutrum erat, faucibus aliquet orci. Sed placerat 
+velit quis quam convallis, a consectetur eros rutrum.
+*//
+}(
+
+end

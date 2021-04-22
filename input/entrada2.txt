@@ -1,0 +1,9 @@
+void main (string args){
+    system("cls);
+    printf("\n\n\nTecle 1 para retornar ao menu inicial.\n");
+    int _a = 2.1.1;
+    int 2b = 5;
+    if(_a < 2b){
+        print(_a + 2b);
+    }                                          /* Acabou o código
+}

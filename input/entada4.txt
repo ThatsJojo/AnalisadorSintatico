@@ -1,0 +1,8 @@
+while(true){
+  print(“hello world)
+int a =869#;
+}
+
+/* that’s it, have a good year
+
+:D

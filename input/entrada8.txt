@@ -1,0 +1,8 @@
+int a = 10;
+print(a);
+
+// int boolean 
+
+int b=8;
+
+boolean c = 10/8;

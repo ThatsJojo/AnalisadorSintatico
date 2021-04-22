@@ -1,0 +1,13 @@
+#
+$
+
+if(a<10 & b>a | a!=b)
+
+str  = "string;
+num1 = 12.a;
+num2 = 10;
+
+/* Comment 1 
+
+print( f1(1, 2) );
+*

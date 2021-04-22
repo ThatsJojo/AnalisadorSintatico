@@ -1,0 +1,12 @@
+string a ="Casa";
+
+int b= 8;
+for(int i = 0; i < 10; i++){
+if (b!=i) print(a);
+}
+
+/* teste de comentario em bloco mal formado
+
+1 2 3 5
+a b c d e
+< > ;
