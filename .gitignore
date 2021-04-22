@@ -1,6 +1,8 @@
 /build/
-/nbproject/private/
+/nbproject/
 /dist/
+manifest.mf
+build.xml
 
 # Compiled class file
 *.class
