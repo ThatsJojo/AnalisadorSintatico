@@ -15,11 +15,19 @@ public class Token {
     private final String lexema;
     private final int linha;
     private final String id;
+    private final int codigo;
+    private static int count = 0;
+    
+    private static synchronized int getCodigo(){
+        return count++;
+    }
 
     public Token(String id, String lexema, int linha) {
         this.lexema = lexema;
         this.linha = linha;
         this.id = id;
+        this.codigo = Token.getCodigo();
+        
     }
 
     public String getLexema() {
@@ -38,4 +46,31 @@ public class Token {
     public String toString() {
         return String.format("%04d", linha)+" "+id+" "+lexema;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 71 * hash + this.codigo;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Token other = (Token) obj;
+        if (this.codigo != other.codigo) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 }
