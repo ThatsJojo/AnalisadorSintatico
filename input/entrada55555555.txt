@@ -26,5 +26,5 @@ linha23for(int i = jota+w; i<size-1.5;i++)i--
 "opa \ç \""
 "opa \ç
 "opa \"
-eita "Cadeia & de caracteres não pode ter \n
+eita "Cadeia & troll não pode ter \n
 "

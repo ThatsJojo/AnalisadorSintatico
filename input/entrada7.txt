@@ -1,12 +1,6 @@
-string a ="Casa";
+int54 { } Codigo1) 1.a 1.2 para 1231teste == j&&i 5||4 real}boolean
+i!=jota A==9} 6.2!<=9.87 8>seis casa
+for(int i=0;i<j . size;i++)
+int i extends
 
-int b= 8;
-for(int i = 0; i < 10; i++){
-if (b!=i) print(a);
-}
-
-/* teste de comentario em bloco mal formado
-
-1 2 3 5
-a b c d e
-< > ;
+Tem+1 arquivo lá no input

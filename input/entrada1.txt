@@ -1,9 +1,9 @@
-void main (string args){
-    system("cls");
-    printf("\n\n\nTecle 1 para retornar ao menu inicial.\n");
-    int a = 2;
-    int b = 5;
-    if(a < b){
-        print(a + b);
-    }
-}
+12. int54 //{ } Codigo1) 1.a 1.2 para 1231teste == j&&i 5||4 real}boolean
+int num[10];
+for(int i=0;i<size;i++){
+     num[i]=i;
+     print(num[i]);
+}/
+
+int i = 2.2;
+Abacaxi sem doce

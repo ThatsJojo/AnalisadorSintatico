@@ -98,5 +98,5 @@
 0028 CMF "opa \"
 0029 IDE eita
 0029 SIB ã
-0029 CMF "Cadeia & de caracteres no pode ter \n
+0029 CMF "Cadeia & troll no pode ter \n
 0030 CMF "
