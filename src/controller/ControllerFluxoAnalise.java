@@ -12,11 +12,14 @@ do código, e estamos ciente que estes trechos não serão considerados para fin
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.logging.Level;
 import javafx.util.Pair;
 import model.Arquivo;
 import util.CaminhoInvalidoException;
+import util.FimInesperadoDeArquivo;
 import util.SemEntradasException;
 
 public class ControllerFluxoAnalise {
@@ -46,9 +49,13 @@ public class ControllerFluxoAnalise {
     
     public void comecarAnalise(){
         arquivos.forEach((Arquivo arq)->{//Itera os arquivos de entrada passando-os pela análise léxica.
-            Pair<Iterator,String> par = analisadorLexico.analise(arq);//Pega a o conjunto de tokens gerados pelo conteúdo do arquivo.
-            Iterator tokens = par.getKey();
-            analisadorSintatico.analise(tokens);
+            Pair<ArrayList,String> par = analisadorLexico.analise(arq);//Pega a o conjunto de tokens gerados pelo conteúdo do arquivo.
+            ArrayList tokens = par.getKey();
+            try {
+                analisadorSintatico.analise(tokens);
+            } catch (FimInesperadoDeArquivo ex) {
+                System.out.println("O Analisador Sintático detectou fim de arquivo inesperado em: "+arq.getNome());;
+            }
             String ret = par.getValue();
             String outputFile = "saida";
             String inputFile = arq.getNome();

@@ -11,6 +11,7 @@ do código, e estamos ciente que estes trechos não serão considerados para fin
 
 package controller;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -30,7 +31,7 @@ public class AnalisadorLexico {
     //
     private static final HashSet<String> palavrasReservadas = new HashSet();
     private static final HashSet<String> delimitadores = new HashSet();
-    private final LinkedList<Token> tokens;
+    private final ArrayList<Token> tokens;
 
     int estado = 0;
     int token = 0;
@@ -70,7 +71,7 @@ public class AnalisadorLexico {
         delimitadores.add("{");
         delimitadores.add("}");
         delimitadores.add(".");
-        tokens = new LinkedList();
+        tokens = new ArrayList();
     }
 
     /**
@@ -78,7 +79,7 @@ public class AnalisadorLexico {
      * @param arquivo arquivo a ser analisado.
      * @return 
      */
-    public Pair<Iterator, String> analise(Arquivo arquivo) {
+    public Pair<ArrayList, String> analise(Arquivo arquivo) {
         tokens.clear();
         Iterator linhas = arquivo.getConteudo();
         boolean inComment = false;//flag para indicar se a leitura está dentro de um comentario de bloco
@@ -450,7 +451,7 @@ public class AnalisadorLexico {
             arquivo.setErrosLexicos(arquivo.getErrosLexicos()+1);
         }
         System.out.println("Análise léxica realizada "+(arquivo.getErrosLexicos()==0?"com":"sem")+" sucesso ("+String.format("%03d", arquivo.getErrosLexicos())+" erros léxicos encontrados) "+" no arquivos "+arquivo.getNome());
-        return new Pair<>(tokens.iterator(), analiseRet);
+        return new Pair<>(tokens, analiseRet);
     }
     
     public Iterator getTokens(){
