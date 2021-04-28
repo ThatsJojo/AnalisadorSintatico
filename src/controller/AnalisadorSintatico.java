@@ -239,8 +239,56 @@ public class AnalisadorSintatico {
         }
     }
 
-    private void constDeclaration() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void constDeclaration() throws FimInesperadoDeArquivo {
+        consumeToken();
+        if (currentToken.getLexema().equals("{")) {
+            consumeToken();
+            primeiraConst();
+        } else {
+            error();
+        }
+    }
+
+    private void primeiraConst() throws FimInesperadoDeArquivo {
+        continueConst();
+        constId();
+    }
+
+    private void continueConst() throws FimInesperadoDeArquivo {
+        if (currentToken.getLexema().equals("struct")) {
+            consumeToken();
+        }
+        dataType();
+    }
+
+    private void constId() throws FimInesperadoDeArquivo {
+        if (currentToken.getId().equals("IDE")) {
+            consumeToken();
+            constExpression();
+        } else {
+            error();
+        }
+    }
+
+    private void constExpression() throws FimInesperadoDeArquivo {
+        switch (currentToken.getLexema()) {
+            case "=":
+                consumeToken();
+                value();
+                verifConst();
+                break;
+            case "[":
+                consumeToken();
+                vectMatIndex();
+                if (currentToken.getLexema().equals("]")) {
+                    consumeToken();
+                    estruturaConst();
+                }
+                break;
+            default:
+                error();
+                break;
+        }
     }
 
     private void varDeclaration() throws FimInesperadoDeArquivo {
@@ -299,7 +347,8 @@ public class AnalisadorSintatico {
                 if (currentToken.getLexema().equals("]")) {
                     consumeToken();
                     estrutura();
-                }   break;
+                }
+                break;
             default:
                 error();
                 break;
@@ -313,8 +362,10 @@ public class AnalisadorSintatico {
             functionCall();
         } else if (currentToken.getLexema().equals("true") || currentToken.getLexema().equals("false")) {
             consumeToken();
+        } //else if()
+        else {
+            error();
         }
-        //else if()
     }
 
     private void verifVar() {
@@ -359,6 +410,14 @@ public class AnalisadorSintatico {
                 error();
                 break;
         }
+    }
+
+    private void verifConst() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void estruturaConst() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
