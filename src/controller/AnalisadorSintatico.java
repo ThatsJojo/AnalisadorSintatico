@@ -174,9 +174,86 @@ public class AnalisadorSintatico {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    private void functionList() {
+    private void functionList() throws FimInesperadoDeArquivo {
+        switch (currentToken.getLexema()) {
+            case "procedure":
+                procedure();
+                break;
+            case "function":
+                function();
+                break;
+            default:
+                error();
+                break;
+        }
+    }
+    
+    private void procedure() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    private void function() throws FimInesperadoDeArquivo {
+        consumeToken();
+        dataType();
+        if(currentToken.getId().equals("IDE")){
+            consumeToken();
+            if(currentToken.getLexema().equals("(")){
+                continueFunction();
+            }
+            else{
+                error();
+            }
+        }
+        else{
+            error();
+        }
+    }
+    
+    private void continueFunction() throws FimInesperadoDeArquivo {
+        consumeToken();
+        if(currentToken.getLexema().equals(")")){
+            consumeToken();
+            parameters();
+            blockFunction();
+        }
+        else if (currentToken.getId().equals("IDE") || firstTypes.contains(currentToken.getLexema())) {
+            blockFunction();
+        }
+        else{
+            error();
+        }
+    }
+
+    private void blockFunction() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void parameters() throws FimInesperadoDeArquivo {
+        dataType();
+        if(currentToken.getId().equals("IDE")){
+            paramLoop();
+        }
+        else{
+            error();
+        }
+        
+    }
+    
+    private void paramLoop() throws FimInesperadoDeArquivo {
+        consumeToken();
+        switch (currentToken.getLexema()) {
+            case ",":
+                parameters();
+                break;
+            case ")":
+                consumeToken();
+                break;
+            default:
+                error();
+                break;
+        }
+    }
+
 
     //verifica se é um tipo válido
     private void dataType() throws FimInesperadoDeArquivo {

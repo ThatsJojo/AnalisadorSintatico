@@ -162,7 +162,7 @@ public class AnalisadorLexico {
                             if(i==size-1){
                                 this.addToken("ATRIB", lexema, line);
                             }else
-                                estado = 18;//O tratamento é igual ao do caso anterior, pode-se ir ao mesmo estado.
+                                estado = 18;
                         } else if (caractere == '/') {
                             if(i==size-1){
                                 this.addToken("ART", lexema, line);//Operador Aritmético, caso seja apenas '/'.
