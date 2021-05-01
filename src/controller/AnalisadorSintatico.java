@@ -167,8 +167,7 @@ public class AnalisadorSintatico {
         } else if (t.getId().equals("IDE")) {
             functionList();
             methods();
-        }
-        else{
+        } else {
             error();
         }
     }
@@ -211,7 +210,7 @@ public class AnalisadorSintatico {
     }
 
     private void procedureContent2() {
-        
+
     }
 
     private void procedureContent3() {
@@ -298,8 +297,7 @@ public class AnalisadorSintatico {
                 consumeToken();
                 if (currentToken.getLexema().equals("}")) {
                     consumeToken();
-                }
-                else{
+                } else {
                     error();
                 }
             } else {
@@ -309,7 +307,7 @@ public class AnalisadorSintatico {
             error();
         }
     }
-    
+
     private void blockFuncContent() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -516,6 +514,7 @@ public class AnalisadorSintatico {
         }
     }
 
+    //Incompleto
     private void value() throws FimInesperadoDeArquivo {
         Token t = lookahead();
         if (t.getLexema().equals("(") && currentToken.getId().equals("IDE")) {
@@ -529,8 +528,20 @@ public class AnalisadorSintatico {
         }
     }
 
-    private void verifVar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void verifVar() throws FimInesperadoDeArquivo {
+        switch (currentToken.getLexema()) {
+            case ",":
+                consumeToken();
+                varId();
+                break;
+            case ";":
+                consumeToken();
+                proxVar();
+                break;
+            default:
+                error();
+                break;
+        }
     }
 
     private void proxVar() throws FimInesperadoDeArquivo {

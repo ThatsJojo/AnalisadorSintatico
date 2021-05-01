@@ -2,19 +2,11 @@ typedef struct Pessoa Pessoa;
 typedef string frase;
 
 var{
-    int i = 10, jota = 4, k, l, m, n;
-    boolean flag1 = true, flag2, flag3;
-    real opa = 3.2, zip, zop, zup;
-    string xablau = "teste";
+    int k, l, m, n;
+    real zip, zop, zup;
     
 }
 
-
-procedure soma (){
-    var {
-          int c;
-    }
-}
 
 procedure start(){
     var{
