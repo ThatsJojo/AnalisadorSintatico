@@ -60,7 +60,7 @@ public class AnalisadorSintatico {
         if (countToken >= tokens.size()) {
             throw new FimInesperadoDeArquivo();
         }
-        return (Token) tokens.get(countToken + 1);
+        return (Token) tokens.get(countToken);
     }
 
     private void error() {
@@ -161,16 +161,60 @@ public class AnalisadorSintatico {
 
     private void methods() throws FimInesperadoDeArquivo {
         Token t = lookahead();
-        if (t.getLexema().equals("start") && currentToken.getLexema().equals("procedure")) {
+        if (t.getLexema().equals("start")) {
+            consumeToken();
             startProcedure();
-        } else {
+        } else if (t.getId().equals("IDE")) {
             functionList();
             methods();
+        }
+        else{
+            error();
+        }
+    }
+
+    private void startProcedure() throws FimInesperadoDeArquivo {
+        consumeToken();
+        if (currentToken.getLexema().equals("(")) {
+            consumeToken();
+            if (currentToken.getLexema().equals(")")) {
+                consumeToken();
+                if (currentToken.getLexema().equals("{")) {
+                    consumeToken();
+                    procedureContent();
+                } else {
+                    error();
+                }
+            } else {
+                error();
+            }
+        } else {
+            error();
         }
 
     }
 
-    private void startProcedure() {
+    private void procedureContent() throws FimInesperadoDeArquivo {
+        switch (currentToken.getLexema()) {
+            case "var":
+                varDeclaration();
+                procedureContent2();
+                break;
+            case "const":
+                constDeclaration();
+                procedureContent3();
+                break;
+            //case "": código
+            default:
+                error();
+        }
+    }
+
+    private void procedureContent2() {
+        
+    }
+
+    private void procedureContent3() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -187,58 +231,99 @@ public class AnalisadorSintatico {
                 break;
         }
     }
-    
-    private void procedure() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+    private void procedure() throws FimInesperadoDeArquivo {
+        consumeToken();
+        if (currentToken.getId().equals("IDE")) {
+            consumeToken();
+            if (currentToken.getLexema().equals("(")) {
+                procedureParams();
+                if (currentToken.getLexema().equals("{")) {
+                    consumeToken();
+                    procedureContent();
+                } else {
+                    error();
+                }
+            } else {
+                error();
+            }
+        } else {
+            error();
+        }
+    }
+
+    private void procedureParams() throws FimInesperadoDeArquivo {
+        consumeToken();
+        if (currentToken.getLexema().equals(")")) {
+            consumeToken();
+        } else if (currentToken.getId().equals("IDE") || firstTypes.contains(currentToken.getLexema())) {
+            parameters();
+        } else {
+            error();
+        }
     }
 
     private void function() throws FimInesperadoDeArquivo {
         consumeToken();
         dataType();
-        if(currentToken.getId().equals("IDE")){
+        if (currentToken.getId().equals("IDE")) {
             consumeToken();
-            if(currentToken.getLexema().equals("(")){
+            if (currentToken.getLexema().equals("(")) {
                 continueFunction();
-            }
-            else{
+            } else {
                 error();
             }
-        }
-        else{
-            error();
-        }
-    }
-    
-    private void continueFunction() throws FimInesperadoDeArquivo {
-        consumeToken();
-        if(currentToken.getLexema().equals(")")){
-            consumeToken();
-            parameters();
-            blockFunction();
-        }
-        else if (currentToken.getId().equals("IDE") || firstTypes.contains(currentToken.getLexema())) {
-            blockFunction();
-        }
-        else{
+        } else {
             error();
         }
     }
 
-    private void blockFunction() {
+    private void continueFunction() throws FimInesperadoDeArquivo {
+        consumeToken();
+        if (currentToken.getLexema().equals(")")) {
+            consumeToken();
+            blockFunction();
+        } else if (currentToken.getId().equals("IDE") || firstTypes.contains(currentToken.getLexema())) {
+            parameters();
+            blockFunction();
+        } else {
+            error();
+        }
+    }
+
+    private void blockFunction() throws FimInesperadoDeArquivo {
+        if (currentToken.getLexema().equals("{")) {
+            blockFuncContent();
+            if (currentToken.getLexema().equals(";")) {
+                consumeToken();
+                if (currentToken.getLexema().equals("}")) {
+                    consumeToken();
+                }
+                else{
+                    error();
+                }
+            } else {
+                error();
+            }
+        } else {
+            error();
+        }
+    }
+    
+    private void blockFuncContent() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     private void parameters() throws FimInesperadoDeArquivo {
         dataType();
-        if(currentToken.getId().equals("IDE")){
+        if (currentToken.getId().equals("IDE")) {
             paramLoop();
-        }
-        else{
+        } else {
             error();
         }
-        
+
     }
-    
+
     private void paramLoop() throws FimInesperadoDeArquivo {
         consumeToken();
         switch (currentToken.getLexema()) {
@@ -253,7 +338,6 @@ public class AnalisadorSintatico {
                 break;
         }
     }
-
 
     //verifica se é um tipo válido
     private void dataType() throws FimInesperadoDeArquivo {
@@ -449,8 +533,20 @@ public class AnalisadorSintatico {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    private void proxVar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void proxVar() throws FimInesperadoDeArquivo {
+        switch (currentToken.getLexema()) {
+            case "struct":
+                consumeToken();
+                continueVar();
+                varId();
+                break;
+            case "}":
+                consumeToken();
+                break;
+            default:
+                error();
+                break;
+        }
     }
 
     private void vectMatIndex() {
