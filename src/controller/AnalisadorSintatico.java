@@ -43,9 +43,9 @@ public class AnalisadorSintatico {
         else
             error();
         if (erros==0) {
-            System.out.println("Analise Sintatica não retornou erros");
+            System.out.println("Análise Sintática não retornou erros");
         } else {
-            System.out.println("FORAM DETECTADOS "+this.erros+" SINTATICOS DETECTADOS");
+            System.out.println("FORAM DETECTADOS "+this.erros+" SINTÁTICOS");
         }
     }
     
@@ -66,7 +66,9 @@ public class AnalisadorSintatico {
     private void error(){
         this.erros++;
     }
-    
+   
+//================================== Cabeçalhos de início do código ==================================
+//****************************************************************************************************      
     private void inicio() throws FimInesperadoDeArquivo {
         switch (currentToken.getLexema()) {
             case "typedef":
@@ -169,22 +171,231 @@ public class AnalisadorSintatico {
         }
         
     }
+//********************************** Cabeçalhos de início do código **********************************      
+//====================================================================================================
     
-    private void startProcedure() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 
-    private void functionList() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
+//============================================ Data Types ============================================
+//****************************************************************************************************    
     private void dataType() throws FimInesperadoDeArquivo{
             if(currentToken.getId().equals("IDE")||firstTypes.contains(currentToken.getLexema()))
                 consumeToken();
             else
                 error();
     }
+    
+    private void valueMethod() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+//******************************************** Data Types ********************************************   
+//====================================================================================================
 
+    
+    
+//======================================= Variable Declaration =======================================
+//****************************************************************************************************      
+    private void varDeclaration() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }    
+//*************************************** Variable Declaration ***************************************      
+//====================================================================================================
+
+    
+    
+//========================================= Const Declaration ========================================
+//****************************************************************************************************   
+    private void constDeclaration() throws FimInesperadoDeArquivo {
+        consumeToken();
+        if(currentToken.getLexema().equals("{")){
+            consumeToken();
+            continueConst();
+            constID();
+        }else
+            error();
+        
+    }
+    
+    private void continueConst() throws FimInesperadoDeArquivo {
+        if(currentToken.getLexema().equals("struct")){
+            consumeToken();
+            dataType();
+        }else
+            dataType();
+    }
+
+    private void constID() throws FimInesperadoDeArquivo {
+        if(currentToken.getId().equals("IDE")){
+            consumeToken();
+            constExp();
+        }
+        else
+            error();
+        
+    }
+    
+    private void constExp() throws FimInesperadoDeArquivo {
+        switch (currentToken.getLexema()) {
+            case "=":
+                consumeToken();
+                valueMethod();
+                verifConst();
+                break;
+            case "[":
+                consumeToken();
+                vectMatIndex();
+                if(currentToken.getLexema().equals("]")){
+                    consumeToken();
+                    estruturaConst();
+                }else
+                    error();
+                break;
+            default:
+                error();
+                break;
+        }
+    }
+    
+    private void estruturaConst() throws FimInesperadoDeArquivo {
+        switch (currentToken.getLexema()) {
+            case "=":
+                if(currentToken.getLexema().equals("[")){
+                    consumeToken();
+                    valueMethod();
+                    proxConstVetor();
+                }else
+                    error();
+                break;
+            case "[":
+                consumeToken();
+                vectMatIndex();
+                if(currentToken.getLexema().equals("]")){
+                    consumeToken();
+                    if(currentToken.getLexema().equals("=")){
+                        consumeToken();
+                        initConstMatriz();
+                    }else
+                        error();
+                }else
+                    error();
+                break;
+            default:
+                error();
+                break;
+        }
+    }
+    
+    private void verifConst() throws FimInesperadoDeArquivo {
+        switch(currentToken.getLexema()){
+            case ",":
+                consumeToken();
+                constID();
+                break;
+            case ";":
+                consumeToken();
+                proxConst();
+                break;
+            default:
+                error();
+                break;
+        }
+    }
+    
+    private void proxConst() throws FimInesperadoDeArquivo{
+        if(currentToken.getLexema().equals("}")){
+            consumeToken();
+        }else{
+            continueConst();
+            constID();
+        }
+    }
+    
+    private void proxConstVetor() throws FimInesperadoDeArquivo {
+        switch(currentToken.getLexema()){
+            case ",":
+                consumeToken();
+                valueMethod();
+                proxConstVetor();
+                break;
+            case "]":
+                consumeToken();
+                verifConst();
+                break;
+            default:
+                error();
+                break;
+        }
+    }
+    
+    private void vectMatIndex() {
+        
+    }
+
+    private void initConstMatriz() throws FimInesperadoDeArquivo {
+        if(currentToken.getLexema().equals("[")){
+            consumeToken();
+            matrizConstValue();
+        }else
+            error();
+    }
+    
+    private void matrizConstValue() throws FimInesperadoDeArquivo {
+        if(currentToken.getLexema().equals("[")){
+            consumeToken();
+            valueMethod();
+            proxConstMatriz();
+        }else
+            error();
+    }
+    
+    private void proxConstMatriz() throws FimInesperadoDeArquivo {
+        switch(currentToken.getLexema()){
+            case ",":
+                consumeToken();
+                valueMethod();
+                proxConstMatriz();
+                break;
+            case "]":
+                    consumeToken();
+                    nextConst();
+                break;
+            default:
+                error();
+        }
+    }
+    
+    private void nextConst()throws FimInesperadoDeArquivo{
+        switch(currentToken.getLexema()){
+            case ",":
+                consumeToken();
+                matrizConstValue();
+                break;
+            case "]":
+                consumeToken();
+                verifConst();
+                break;
+            default:
+                error();
+        }
+    }
+//***************************************** Const Declaration ****************************************  
+//====================================================================================================
+  
+
+    
+//======================================== Struct Declaration ========================================
+//****************************************************************************************************
+    private void structDeclaration() {            
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+//**************************************** Struct Declaration ****************************************
+//====================================================================================================   
+    
+    
+    
+    
+//======================================== Typedef Declaration =======================================
+//****************************************************************************************************
     private void typedefDeclaration() throws FimInesperadoDeArquivo{
         consumeToken();
         if(currentToken.getLexema().equals("struct")){
@@ -213,20 +424,25 @@ public class AnalisadorSintatico {
                 error();
         }
     }
+//**************************************** Typedef Declaration *************************************** 
+//====================================================================================================
+
+    
+    private void startProcedure() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void functionList() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+
+    
+    
 
     
 
-    private void constDeclaration() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private void varDeclaration() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private void structDeclaration() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 
     
 }
