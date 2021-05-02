@@ -454,21 +454,16 @@ private void constDeclaration() throws FimInesperadoDeArquivo {
         consumeToken();
         if (currentToken.getLexema().equals("{")) {
             consumeToken();
-            primeiraConst();
+            continueConst();
+            constId();
         } else {
             error();
         }
     }
 
-    private void primeiraConst() throws FimInesperadoDeArquivo {
-        continueConst();
-        constId();
-    }
-
     private void continueConst() throws FimInesperadoDeArquivo {
-        if (currentToken.getLexema().equals("struct")) {
+        if (currentToken.getLexema().equals("struct"))
             consumeToken();
-        }else
         dataType();
     }
 
@@ -503,7 +498,8 @@ private void constDeclaration() throws FimInesperadoDeArquivo {
                 if (currentToken.getLexema().equals("]")) {
                     consumeToken();
                     estruturaConst();
-                }
+                }else
+                    error();
                 break;
             default:
                 error();
@@ -514,6 +510,7 @@ private void constDeclaration() throws FimInesperadoDeArquivo {
     private void estruturaConst() throws FimInesperadoDeArquivo {
         switch (currentToken.getLexema()) {
             case "=":
+                consumeToken();
                 if(currentToken.getLexema().equals("[")){
                     consumeToken();
                     value();
