@@ -2,6 +2,7 @@ package controller;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import model.Arquivo;
 import model.Token;
 import util.FimInesperadoDeArquivo;
 
@@ -31,7 +32,7 @@ public class AnalisadorSintatico {
         firstInicio.add("function");
     }
 
-    void analise(ArrayList tokens) throws FimInesperadoDeArquivo {
+    void analise(Arquivo arq, ArrayList tokens) throws FimInesperadoDeArquivo {
         this.erros = 0;
         this.tokens = tokens;
         //percorrer toda a lista de tokens até o ultimo elemento
@@ -42,9 +43,9 @@ public class AnalisadorSintatico {
             error();
         }
         if (erros == 0) {
-            System.out.println("Analise Sintatica não retornou erros");
+            System.out.println("Análise Sintática no arquivo "+arq.getNome()+" não retornou erros");
         } else {
-            System.out.println("FORAM DETECTADOS " + this.erros + " SINTATICOS DETECTADOS");
+            System.out.println("FORAM DETECTADOS " + this.erros + " ERROS SINTÁTICOS NO ARQUIVO "+arq.getNome());
         }
     }
 
@@ -198,9 +199,13 @@ public class AnalisadorSintatico {
     //Incompleto
     private void value() throws FimInesperadoDeArquivo {
         Token t = lookahead();
-        if (t.getLexema().equals("(") && currentToken.getId().equals("IDE")) {
-            consumeToken();
-            functionCall();
+        if(currentToken.getId().equals("IDE")){
+            if (t.getLexema().equals("(")) {
+                consumeToken();
+                functionCall();
+            }else{
+                consumeToken();
+            }
         } else if (currentToken.getLexema().equals("true") || currentToken.getLexema().equals("false")) {
             consumeToken();
         } //else if()
@@ -218,8 +223,11 @@ public class AnalisadorSintatico {
         }
     }
     
-    private void vectMatIndex() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void vectMatIndex() throws FimInesperadoDeArquivo {
+        if(currentToken.getId().equals("NRO")){
+            consumeToken();
+        }else
+            error();
     }
     
     
@@ -297,17 +305,114 @@ public class AnalisadorSintatico {
                 vectMatIndex();
                 if(currentToken.getLexema().equals("]")){
                     consumeToken();
-                    
+                    contMatriz();
                 }
+                else
+                    error();
                 break;
             case "=":
                 consumeToken();
+                initVetor();
                 break;
             case ",":
                 consumeToken();
+                varId();
                 break;
             case ";":
                 consumeToken();
+                proxVar();
+                break;
+            default:
+                error();
+        }
+    }
+    
+    private void initVetor() throws FimInesperadoDeArquivo{
+        if(currentToken.getLexema().equals("[")){
+            consumeToken();
+            value();
+            proxVetor();
+        }else
+            error();
+    }
+    
+    private void proxVetor() throws FimInesperadoDeArquivo{
+        switch (currentToken.getLexema()) {
+            case ",":
+                consumeToken();
+                value();
+                proxVetor();
+                break;
+            case "]":
+                consumeToken();
+                verifVar();
+                break;
+            default:
+                error();
+        }
+    }
+    
+    private void contMatriz() throws FimInesperadoDeArquivo{
+        switch (currentToken.getLexema()) {
+            case "=":
+                consumeToken();
+                initMatriz();
+                break;
+            case ",":
+                consumeToken();
+                varId();
+                break;
+            case ";":
+                consumeToken();
+                proxVar();
+                break;
+            default:
+                error();
+        }
+    }
+    
+    private void initMatriz() throws FimInesperadoDeArquivo{
+        if(currentToken.getLexema().equals("[")){
+            consumeToken();
+            matrizValue();
+        }else
+            error();
+    }
+    
+    private void matrizValue() throws FimInesperadoDeArquivo{
+        if(currentToken.getLexema().equals("[")){
+            consumeToken();
+            value();
+            proxMatriz();
+        }else
+            error();
+    }
+    
+    private void proxMatriz() throws FimInesperadoDeArquivo{
+        switch (currentToken.getLexema()) {
+            case ",":
+                consumeToken();
+                value();
+                proxMatriz();
+                break;
+            case "]":
+                consumeToken();
+                next();
+                break;
+            default:
+                error();
+        }
+    }
+    
+    private void next() throws FimInesperadoDeArquivo{
+        switch (currentToken.getLexema()) {
+            case ",":
+                consumeToken();
+                matrizValue();
+                break;
+            case "]":
+                consumeToken();
+                verifVar();
                 break;
             default:
                 error();
@@ -331,18 +436,11 @@ public class AnalisadorSintatico {
     }
 
     private void proxVar() throws FimInesperadoDeArquivo {
-        switch (currentToken.getLexema()) {
-            case "struct":
-                consumeToken();
-                continueVar();
-                varId();
-                break;
-            case "}":
-                consumeToken();
-                break;
-            default:
-                error();
-                break;
+        if(currentToken.getLexema().equals("}")) {
+            consumeToken();
+        }else{
+            continueVar();
+            varId();
         }
     }
 //*************************************** Variable Declaration ***************************************      

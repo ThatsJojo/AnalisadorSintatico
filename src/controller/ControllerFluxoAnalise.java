@@ -52,7 +52,7 @@ public class ControllerFluxoAnalise {
             Pair<ArrayList,String> par = analisadorLexico.analise(arq);//Pega a o conjunto de tokens gerados pelo conteúdo do arquivo.
             ArrayList tokens = par.getKey();
             try {
-                analisadorSintatico.analise(tokens);
+                analisadorSintatico.analise(arq, tokens);
             } catch (FimInesperadoDeArquivo ex) {
                 System.out.println("O Analisador Sintático detectou fim de arquivo inesperado em: "+arq.getNome());;
             }
