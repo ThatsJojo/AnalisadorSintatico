@@ -1,3 +1,17 @@
 typedef struct Pessoa Pessoa;
 typedef string frase;
 
+var{
+    int k, l, m, n;
+    real zip, zop, zup;
+    
+}
+
+
+procedure start(){
+    var{
+        struct Pessoa xablau;
+    }
+}
+
+

@@ -160,9 +160,9 @@ public class AnalisadorLexico {
                         } else if (caractere == '=') {//Semelhante ao caso anterior, dintinguindo entre '=' ou "==".
                             lexema += caractere;
                             if(i==size-1){
-                                this.addToken("REL", lexema, line);
+                                this.addToken("ATRIB", lexema, line);
                             }else
-                                estado = 10;//O tratamento é igual ao do caso anterior, pode-se ir ao mesmo estado.
+                                estado = 18;
                         } else if (caractere == '/') {
                             if(i==size-1){
                                 this.addToken("ART", lexema, line);//Operador Aritmético, caso seja apenas '/'.
@@ -438,6 +438,17 @@ public class AnalisadorLexico {
                             arquivo.setErrosLexicos(arquivo.getErrosLexicos()+1);
                         }else//Caso contrário, volta para aguardar o encerramenteo da cadeia.
                             estado = 16;
+                        break;
+                    case 18: 
+                        if (caractere == '=') {
+                            lexema += caractere;//Lexema possui "=="
+                            this.addToken("REL", lexema, line);
+                            estado = 0;
+                        } else {
+                            caractereExcedente = true;//Caractere excedente tratado em estado 0.
+                            this.addToken("ATRIB", lexema, line); // Lexema possui "="
+                            estado = 0;
+                        }
                         break;
                     default://Caso caia em um estado não determinístico, volta para 
                         lexema = "";
