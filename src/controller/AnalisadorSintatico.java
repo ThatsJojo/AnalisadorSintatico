@@ -230,6 +230,52 @@ public class AnalisadorSintatico {
             error();
     }
     
+    private void aritmeticValue() throws FimInesperadoDeArquivo{
+        switch (currentToken.getId()) {
+            case "NRO":
+            case "CAD":
+                consumeToken();
+                break;
+            default:
+                variavel();
+        }
+    }
+    
+    private void variavel() throws FimInesperadoDeArquivo{
+        if(currentToken.getId().equals("IDE")){
+            consumeToken();
+            String aheadToken = lookahead().getLexema();
+            if(aheadToken.equals(".")|aheadToken.equals("["))
+                contElement();
+        }else{
+            switch (currentToken.getLexema()) {
+                case "global":
+                case "local":
+                    consumeToken();
+                    if(currentToken.getLexema().equals(".")){
+                        consumeToken();
+                        if(currentToken.getId().equals("IDE"))
+                            consumeToken();
+                        else
+                            error();
+                    }else
+                        error();
+                    break;
+                default:
+                    startElement();
+            }
+        }
+        
+    }
+    
+    private void startElement(){
+        
+    }
+    
+    private void contElement(){
+        
+    }
+    
     
 //******************************************** Data Types ********************************************   
 //====================================================================================================
@@ -831,8 +877,34 @@ private void constDeclaration() throws FimInesperadoDeArquivo {
 //*************************************** Typedef Declaration ****************************************  
 //====================================================================================================
 
+
+
+//=========================================== Operations =============================================  
+//****************************************************************************************************    
+    private void opNeage() throws FimInesperadoDeArquivo{
+        switch (currentToken.getLexema()) {
+            case "-":
+                consumeToken();
+                aritmeticValue();
+                break;
+            case "(":
+                consumeToken();
+                aritmeticValue();
+                if(currentToken.getLexema().equals(")"))
+                    consumeToken();
+                else
+                    error();
+                break;
+            default:
+                aritmeticValue();
+        }
+    }
     
-    //verifica se é um operador relacional
+    private void aritmeticValue();
+
+
+
+//verifica se é um operador relacional
     private void relSymbol() throws FimInesperadoDeArquivo {
         if (currentToken.getId().equals("REL")) {
             consumeToken();
@@ -849,6 +921,13 @@ private void constDeclaration() throws FimInesperadoDeArquivo {
             error();
         }
     }
+//******************************************* Operations *********************************************  
+//====================================================================================================
+    
+    
+    
+//========================================== Function Call ===========================================  
+//****************************************************************************************************
     private void functionCall() throws FimInesperadoDeArquivo {
         int i = 0; //deixar assim enquanto nao tiver o <VALUE> pronto
         if (i == 2) { //colocar conjunto first de value;
@@ -876,5 +955,7 @@ private void constDeclaration() throws FimInesperadoDeArquivo {
                 break;
         }
     }
+//****************************************** Function Call *******************************************  
+//====================================================================================================
 
 }

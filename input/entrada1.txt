@@ -16,6 +16,7 @@ const{
 	int i[2][3]=[[false,true, zip, zop],[biri, flinston],[opa],[eita]], joao=i,false1 =  j;
 
 }
+
 procedure start(){
     var{
         struct Pessoa xablau;
