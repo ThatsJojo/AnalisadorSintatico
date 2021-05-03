@@ -21,6 +21,8 @@ procedure start(){
     var{
         struct Pessoa xablau;
     }
+    read(i);
 }
+
 
 
