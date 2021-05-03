@@ -8,13 +8,14 @@ import util.FimInesperadoDeArquivo;
 
 public class AnalisadorSintatico {
 
-    private Token currentToken;
+    private Token privateCurrentToken;
     private int erros;
     private ArrayList tokens;
     private int countToken = 0;
 
     private static final HashSet<String> firstTypes = new HashSet();
     private static final HashSet<String> firstInicio = new HashSet();
+    private static final HashSet<String> firstComando = new HashSet();
 
     public AnalisadorSintatico() {
         //Conjunto first do método types
@@ -30,6 +31,15 @@ public class AnalisadorSintatico {
         firstInicio.add("const");
         firstInicio.add("procedure");
         firstInicio.add("function");
+
+        //Conjunto first do método comando
+        firstComando.add("print");
+        firstComando.add("read");
+        firstComando.add("while");
+        firstComando.add("const");
+        firstComando.add("typedef");
+        firstComando.add("struct");
+        firstComando.add("if");
     }
 
     void analise(Arquivo arq, ArrayList tokens) throws FimInesperadoDeArquivo {
@@ -37,24 +47,39 @@ public class AnalisadorSintatico {
         this.tokens = tokens;
         //percorrer toda a lista de tokens até o ultimo elemento
         consumeToken();
-        if (firstInicio.contains(currentToken.getLexema())) {
+        if (firstInicio.contains(currentToken().getLexema())) {
             inicio();
         } else {
             error();
         }
         if (erros == 0) {
-            System.out.println("Análise Sintática no arquivo "+arq.getNome()+" não retornou erros");
+            System.out.println("Análise Sintática no arquivo " + arq.getNome() + " não retornou erros");
         } else {
-            System.out.println("FORAM DETECTADOS " + this.erros + " ERROS SINTÁTICOS NO ARQUIVO "+arq.getNome());
+            System.out.println("FORAM DETECTADOS " + this.erros + " ERROS SINTÁTICOS NO ARQUIVO " + arq.getNome());
         }
     }
 
     private boolean consumeToken() throws FimInesperadoDeArquivo {
-        if (countToken >= tokens.size()) {
+        if (countToken > tokens.size()) {
             throw new FimInesperadoDeArquivo();
         }
-        this.currentToken = (Token) tokens.get(countToken++);
-        return true;
+        else if(countToken == tokens.size()){
+            this.privateCurrentToken = new Token("EOF", null, privateCurrentToken.getLinha());
+            countToken++;
+            return false;
+        }
+        else{
+            this.privateCurrentToken = (Token) tokens.get(countToken++); 
+            return true;
+        }
+        
+    }
+    
+    private Token currentToken() throws FimInesperadoDeArquivo{
+        if(privateCurrentToken == null || privateCurrentToken.getId().equals("EOF")){
+            throw new FimInesperadoDeArquivo();
+        }
+        return privateCurrentToken;
     }
 
     private Token lookahead() throws FimInesperadoDeArquivo {
@@ -68,11 +93,10 @@ public class AnalisadorSintatico {
         this.erros++;
     }
 
-    
 //================================== Cabeçalhos de início do código ==================================
 //****************************************************************************************************     
     private void inicio() throws FimInesperadoDeArquivo {
-        switch (currentToken.getLexema()) {
+        switch (currentToken().getLexema()) {
             case "typedef":
                 typedefDeclaration();
                 inicio();
@@ -99,7 +123,7 @@ public class AnalisadorSintatico {
     }
 
     private void header1() throws FimInesperadoDeArquivo {
-        switch (currentToken.getLexema()) {
+        switch (currentToken().getLexema()) {
             case "typedef":
                 typedefDeclaration();
                 header1();
@@ -122,7 +146,7 @@ public class AnalisadorSintatico {
     }
 
     private void header2() throws FimInesperadoDeArquivo {
-        switch (currentToken.getLexema()) {
+        switch (currentToken().getLexema()) {
             case "typedef":
                 typedefDeclaration();
                 header2();
@@ -145,7 +169,7 @@ public class AnalisadorSintatico {
     }
 
     private void header3() throws FimInesperadoDeArquivo {
-        switch (currentToken.getLexema()) {
+        switch (currentToken().getLexema()) {
             case "typedef":
                 typedefDeclaration();
                 header3();
@@ -165,7 +189,7 @@ public class AnalisadorSintatico {
 
     private void methods() throws FimInesperadoDeArquivo {
         Token t = lookahead();
-        if (t.getLexema().equals("start")) {
+        if (t.getLexema().equals("start") && currentToken().getLexema().equals("procedure")) {
             consumeToken();
             startProcedure();
         } else if (t.getId().equals("IDE")) {
@@ -175,9 +199,9 @@ public class AnalisadorSintatico {
             error();
         }
     }
-    
+
     private void functionList() throws FimInesperadoDeArquivo {
-        switch (currentToken.getLexema()) {
+        switch (currentToken().getLexema()) {
             case "procedure":
                 procedure();
                 break;
@@ -191,56 +215,61 @@ public class AnalisadorSintatico {
     }
 //********************************** Cabeçalhos de início do código **********************************      
 //====================================================================================================
-    
-
 
 //============================================ Data Types ============================================
 //**************************************************************************************************** 
     //Incompleto
     private void value() throws FimInesperadoDeArquivo {
         Token t = lookahead();
-        if(currentToken.getId().equals("IDE")){
+        if (currentToken().getId().equals("IDE")) {
             if (t.getLexema().equals("(")) {
                 consumeToken();
                 functionCall();
-            }else{
+            } else {
                 consumeToken();
             }
-        } else if (currentToken.getLexema().equals("true") || currentToken.getLexema().equals("false")) {
+        } else if (currentToken().getLexema().equals("true") || currentToken().getLexema().equals("false")) {
             consumeToken();
         } //else if()
         else {
             error();
         }
     }
-    
+
     //verifica se é um tipo válido
     private void dataType() throws FimInesperadoDeArquivo {
-        if (currentToken.getId().equals("IDE") || firstTypes.contains(currentToken.getLexema())) {
+        if (currentToken().getId().equals("IDE") || firstTypes.contains(currentToken().getLexema())) {
             consumeToken();
         } else {
             error();
         }
     }
-    
+
     private void vectMatIndex() throws FimInesperadoDeArquivo {
-        if(currentToken.getId().equals("NRO")){
+        if (currentToken().getId().equals("NRO")) {
             consumeToken();
-        }else
+        } else {
             error();
+        }
     }
-    
-    
+
+    //Incompleto, só para testar com identificador
+    private void variavel() throws FimInesperadoDeArquivo {
+        consumeToken();
+        if (currentToken().getId().equals("IDE")) {
+            consumeToken();
+        } else {
+            error();
+        }
+    }
+
 //******************************************** Data Types ********************************************   
 //====================================================================================================
-    
-    
-   
 //======================================= Variable Declaration =======================================
 //****************************************************************************************************
     private void varDeclaration() throws FimInesperadoDeArquivo {
         consumeToken();
-        if (currentToken.getLexema().equals("{")) {
+        if (currentToken().getLexema().equals("{")) {
             consumeToken();
             primeiraVar();
         } else {
@@ -254,14 +283,14 @@ public class AnalisadorSintatico {
     }
 
     private void continueVar() throws FimInesperadoDeArquivo {
-        if (currentToken.getLexema().equals("struct")) {
+        if (currentToken().getLexema().equals("struct")) {
             consumeToken();
         }
         dataType();
     }
 
     private void varId() throws FimInesperadoDeArquivo {
-        if (currentToken.getId().equals("IDE")) {
+        if (currentToken().getId().equals("IDE")) {
             consumeToken();
             varExpression();
         } else {
@@ -270,7 +299,7 @@ public class AnalisadorSintatico {
     }
 
     private void varExpression() throws FimInesperadoDeArquivo {
-        switch (currentToken.getLexema()) {
+        switch (currentToken().getLexema()) {
             case ",":
                 consumeToken();
                 varId();
@@ -287,7 +316,7 @@ public class AnalisadorSintatico {
             case "[":
                 consumeToken();
                 vectMatIndex();
-                if (currentToken.getLexema().equals("]")) {
+                if (currentToken().getLexema().equals("]")) {
                     consumeToken();
                     estrutura();
                 }
@@ -297,18 +326,18 @@ public class AnalisadorSintatico {
                 break;
         }
     }
-    
-    private void estrutura() throws FimInesperadoDeArquivo{
-        switch(currentToken.getLexema()){
+
+    private void estrutura() throws FimInesperadoDeArquivo {
+        switch (currentToken().getLexema()) {
             case "[":
                 consumeToken();
                 vectMatIndex();
-                if(currentToken.getLexema().equals("]")){
+                if (currentToken().getLexema().equals("]")) {
                     consumeToken();
                     contMatriz();
-                }
-                else
+                } else {
                     error();
+                }
                 break;
             case "=":
                 consumeToken();
@@ -326,18 +355,19 @@ public class AnalisadorSintatico {
                 error();
         }
     }
-    
-    private void initVetor() throws FimInesperadoDeArquivo{
-        if(currentToken.getLexema().equals("[")){
+
+    private void initVetor() throws FimInesperadoDeArquivo {
+        if (currentToken().getLexema().equals("[")) {
             consumeToken();
             value();
             proxVetor();
-        }else
+        } else {
             error();
+        }
     }
-    
-    private void proxVetor() throws FimInesperadoDeArquivo{
-        switch (currentToken.getLexema()) {
+
+    private void proxVetor() throws FimInesperadoDeArquivo {
+        switch (currentToken().getLexema()) {
             case ",":
                 consumeToken();
                 value();
@@ -351,9 +381,9 @@ public class AnalisadorSintatico {
                 error();
         }
     }
-    
-    private void contMatriz() throws FimInesperadoDeArquivo{
-        switch (currentToken.getLexema()) {
+
+    private void contMatriz() throws FimInesperadoDeArquivo {
+        switch (currentToken().getLexema()) {
             case "=":
                 consumeToken();
                 initMatriz();
@@ -370,26 +400,28 @@ public class AnalisadorSintatico {
                 error();
         }
     }
-    
-    private void initMatriz() throws FimInesperadoDeArquivo{
-        if(currentToken.getLexema().equals("[")){
+
+    private void initMatriz() throws FimInesperadoDeArquivo {
+        if (currentToken().getLexema().equals("[")) {
             consumeToken();
             matrizValue();
-        }else
+        } else {
             error();
+        }
     }
-    
-    private void matrizValue() throws FimInesperadoDeArquivo{
-        if(currentToken.getLexema().equals("[")){
+
+    private void matrizValue() throws FimInesperadoDeArquivo {
+        if (currentToken().getLexema().equals("[")) {
             consumeToken();
             value();
             proxMatriz();
-        }else
+        } else {
             error();
+        }
     }
-    
-    private void proxMatriz() throws FimInesperadoDeArquivo{
-        switch (currentToken.getLexema()) {
+
+    private void proxMatriz() throws FimInesperadoDeArquivo {
+        switch (currentToken().getLexema()) {
             case ",":
                 consumeToken();
                 value();
@@ -403,9 +435,9 @@ public class AnalisadorSintatico {
                 error();
         }
     }
-    
-    private void next() throws FimInesperadoDeArquivo{
-        switch (currentToken.getLexema()) {
+
+    private void next() throws FimInesperadoDeArquivo {
+        switch (currentToken().getLexema()) {
             case ",":
                 consumeToken();
                 matrizValue();
@@ -420,7 +452,7 @@ public class AnalisadorSintatico {
     }
 
     private void verifVar() throws FimInesperadoDeArquivo {
-        switch (currentToken.getLexema()) {
+        switch (currentToken().getLexema()) {
             case ",":
                 consumeToken();
                 varId();
@@ -436,23 +468,21 @@ public class AnalisadorSintatico {
     }
 
     private void proxVar() throws FimInesperadoDeArquivo {
-        if(currentToken.getLexema().equals("}")) {
+        if (currentToken().getLexema().equals("}")) {
             consumeToken();
-        }else{
+        } else {
             continueVar();
             varId();
         }
     }
 //*************************************** Variable Declaration ***************************************      
 //====================================================================================================
-    
-    
-    
+
 //========================================= Const Declaration ========================================
 //**************************************************************************************************** 
-private void constDeclaration() throws FimInesperadoDeArquivo {
+    private void constDeclaration() throws FimInesperadoDeArquivo {
         consumeToken();
-        if (currentToken.getLexema().equals("{")) {
+        if (currentToken().getLexema().equals("{")) {
             consumeToken();
             continueConst();
             constId();
@@ -462,31 +492,32 @@ private void constDeclaration() throws FimInesperadoDeArquivo {
     }
 
     private void continueConst() throws FimInesperadoDeArquivo {
-        if (currentToken.getLexema().equals("struct"))
+        if (currentToken().getLexema().equals("struct")) {
             consumeToken();
+        }
         dataType();
     }
 
-    private void proxConst() throws FimInesperadoDeArquivo{
-        if(currentToken.getLexema().equals("}")){
+    private void proxConst() throws FimInesperadoDeArquivo {
+        if (currentToken().getLexema().equals("}")) {
             consumeToken();
-        }else{
+        } else {
             continueConst();
             constId();
         }
     }
-    
+
     private void constId() throws FimInesperadoDeArquivo {
-        if (currentToken.getId().equals("IDE")) {
+        if (currentToken().getId().equals("IDE")) {
             consumeToken();
             constExpression();
         } else {
             error();
         }
     }
-    
+
     private void constExpression() throws FimInesperadoDeArquivo {
-        switch (currentToken.getLexema()) {
+        switch (currentToken().getLexema()) {
             case "=":
                 consumeToken();
                 value();
@@ -495,50 +526,54 @@ private void constDeclaration() throws FimInesperadoDeArquivo {
             case "[":
                 consumeToken();
                 vectMatIndex();
-                if (currentToken.getLexema().equals("]")) {
+                if (currentToken().getLexema().equals("]")) {
                     consumeToken();
                     estruturaConst();
-                }else
+                } else {
                     error();
+                }
                 break;
             default:
                 error();
                 break;
         }
     }
-    
+
     private void estruturaConst() throws FimInesperadoDeArquivo {
-        switch (currentToken.getLexema()) {
+        switch (currentToken().getLexema()) {
             case "=":
                 consumeToken();
-                if(currentToken.getLexema().equals("[")){
+                if (currentToken().getLexema().equals("[")) {
                     consumeToken();
                     value();
                     proxConstVetor();
-                }else
+                } else {
                     error();
+                }
                 break;
             case "[":
                 consumeToken();
                 vectMatIndex();
-                if(currentToken.getLexema().equals("]")){
+                if (currentToken().getLexema().equals("]")) {
                     consumeToken();
-                    if(currentToken.getLexema().equals("=")){
+                    if (currentToken().getLexema().equals("=")) {
                         consumeToken();
                         initConstMatriz();
-                    }else
+                    } else {
                         error();
-                }else
+                    }
+                } else {
                     error();
+                }
                 break;
             default:
                 error();
                 break;
         }
     }
-    
+
     private void proxConstVetor() throws FimInesperadoDeArquivo {
-        switch(currentToken.getLexema()){
+        switch (currentToken().getLexema()) {
             case ",":
                 consumeToken();
                 value();
@@ -553,42 +588,44 @@ private void constDeclaration() throws FimInesperadoDeArquivo {
                 break;
         }
     }
-    
+
     private void initConstMatriz() throws FimInesperadoDeArquivo {
-        if(currentToken.getLexema().equals("[")){
+        if (currentToken().getLexema().equals("[")) {
             consumeToken();
             matrizConstValue();
-        }else
+        } else {
             error();
+        }
     }
-    
+
     private void matrizConstValue() throws FimInesperadoDeArquivo {
-        if(currentToken.getLexema().equals("[")){
+        if (currentToken().getLexema().equals("[")) {
             consumeToken();
             value();
             proxConstMatriz();
-        }else
+        } else {
             error();
+        }
     }
-    
+
     private void proxConstMatriz() throws FimInesperadoDeArquivo {
-        switch(currentToken.getLexema()){
+        switch (currentToken().getLexema()) {
             case ",":
                 consumeToken();
                 value();
                 proxConstMatriz();
                 break;
             case "]":
-                    consumeToken();
-                    nextConst();
+                consumeToken();
+                nextConst();
                 break;
             default:
                 error();
         }
     }
-    
-    private void nextConst()throws FimInesperadoDeArquivo{
-        switch(currentToken.getLexema()){
+
+    private void nextConst() throws FimInesperadoDeArquivo {
+        switch (currentToken().getLexema()) {
             case ",":
                 consumeToken();
                 matrizConstValue();
@@ -601,9 +638,9 @@ private void constDeclaration() throws FimInesperadoDeArquivo {
                 error();
         }
     }
-    
+
     private void verifConst() throws FimInesperadoDeArquivo {
-        switch(currentToken.getLexema()){
+        switch (currentToken().getLexema()) {
             case ",":
                 consumeToken();
                 constId();
@@ -619,17 +656,15 @@ private void constDeclaration() throws FimInesperadoDeArquivo {
     }
 //***************************************** Const Declaration ****************************************  
 //====================================================================================================
-    
-    
-    
+
 //======================================= Function Declaration =======================================
 //****************************************************************************************************
     private void function() throws FimInesperadoDeArquivo {
         consumeToken();
         dataType();
-        if (currentToken.getId().equals("IDE")) {
+        if (currentToken().getId().equals("IDE")) {
             consumeToken();
-            if (currentToken.getLexema().equals("(")) {
+            if (currentToken().getLexema().equals("(")) {
                 continueFunction();
             } else {
                 error();
@@ -641,10 +676,10 @@ private void constDeclaration() throws FimInesperadoDeArquivo {
 
     private void continueFunction() throws FimInesperadoDeArquivo {
         consumeToken();
-        if (currentToken.getLexema().equals(")")) {
+        if (currentToken().getLexema().equals(")")) {
             consumeToken();
             blockFunction();
-        } else if (currentToken.getId().equals("IDE") || firstTypes.contains(currentToken.getLexema())) {
+        } else if (currentToken().getId().equals("IDE") || firstTypes.contains(currentToken().getLexema())) {
             parameters();
             blockFunction();
         } else {
@@ -653,11 +688,11 @@ private void constDeclaration() throws FimInesperadoDeArquivo {
     }
 
     private void blockFunction() throws FimInesperadoDeArquivo {
-        if (currentToken.getLexema().equals("{")) {
+        if (currentToken().getLexema().equals("{")) {
             blockFuncContent();
-            if (currentToken.getLexema().equals(";")) {
+            if (currentToken().getLexema().equals(";")) {
                 consumeToken();
-                if (currentToken.getLexema().equals("}")) {
+                if (currentToken().getLexema().equals("}")) {
                     consumeToken();
                 } else {
                     error();
@@ -676,7 +711,7 @@ private void constDeclaration() throws FimInesperadoDeArquivo {
 
     private void parameters() throws FimInesperadoDeArquivo {
         dataType();
-        if (currentToken.getId().equals("IDE")) {
+        if (currentToken().getId().equals("IDE")) {
             paramLoop();
         } else {
             error();
@@ -686,7 +721,7 @@ private void constDeclaration() throws FimInesperadoDeArquivo {
 
     private void paramLoop() throws FimInesperadoDeArquivo {
         consumeToken();
-        switch (currentToken.getLexema()) {
+        switch (currentToken().getLexema()) {
             case ",":
                 parameters();
                 break;
@@ -697,29 +732,27 @@ private void constDeclaration() throws FimInesperadoDeArquivo {
                 error();
                 break;
         }
-    }    
+    }
 //*************************************** Function Declaration ***************************************  
 //====================================================================================================
-    
-    
-    
+
 //======================================== Struct Declaration ========================================
 //**************************************************************************************************** 
     private void structDeclaration() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }  
+    }
 //**************************************** Struct Declaration ****************************************  
 //====================================================================================================
-    
+
 //====================================== Procedure Declaration =======================================
 //****************************************************************************************************     
     private void startProcedure() throws FimInesperadoDeArquivo {
         consumeToken();
-        if (currentToken.getLexema().equals("(")) {
+        if (currentToken().getLexema().equals("(")) {
             consumeToken();
-            if (currentToken.getLexema().equals(")")) {
+            if (currentToken().getLexema().equals(")")) {
                 consumeToken();
-                if (currentToken.getLexema().equals("{")) {
+                if (currentToken().getLexema().equals("{")) {
                     consumeToken();
                     procedureContent();
                 } else {
@@ -735,36 +768,72 @@ private void constDeclaration() throws FimInesperadoDeArquivo {
     }
 
     private void procedureContent() throws FimInesperadoDeArquivo {
-        switch (currentToken.getLexema()) {
-            case "var":
-                varDeclaration();
-                procedureContent2();
-                break;
-            case "const":
-                constDeclaration();
-                procedureContent3();
-                break;
-            //case "": código
-            default:
-                error();
+        if (currentToken().getLexema().equals("var")) {
+            varDeclaration();
+            procedureContent2();
+        } else if (currentToken().getLexema().equals("const")) {
+            constDeclaration();
+            procedureContent3();
+        } else {
+            error();
         }
     }
 
-    private void procedureContent2() {
+    private void procedureContent2() throws FimInesperadoDeArquivo {
+        if (currentToken().getLexema().equals("const")) {
+            constDeclaration();
+            procedureContent4();
+        } else if (firstComando.contains(currentToken().getLexema())) {
+            codigo();
+            if (currentToken().getLexema().equals("}")) {
+                consumeToken();
+            } else {
+                error();
+            }
+        } else if (firstComando.contains(currentToken().getLexema())) {
+            codigo();
 
+        } else {
+            error();
+        }
     }
 
-    private void procedureContent3() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void procedureContent3() throws FimInesperadoDeArquivo {
+        if (currentToken().getLexema().equals("var")) {
+            varDeclaration();
+            procedureContent4();
+        } else if (firstComando.contains(currentToken().getLexema())) {
+            codigo();
+            if (currentToken().getLexema().equals("}")) {
+                consumeToken();
+            } else {
+                error();
+            }
+        } else {
+            error();
+        }
     }
-    
+
+    private void procedureContent4() throws FimInesperadoDeArquivo {
+        if (firstComando.contains(currentToken().getLexema())) {
+            codigo();
+            if (currentToken().getLexema().equals("}")) {
+                consumeToken();
+            } else {
+                error();
+            }
+        } else {
+            error();
+        }
+    }
+
     private void procedure() throws FimInesperadoDeArquivo {
         consumeToken();
-        if (currentToken.getId().equals("IDE")) {
+        if (currentToken().getId().equals("IDE")) {
             consumeToken();
-            if (currentToken.getLexema().equals("(")) {
+            if (currentToken().getLexema().equals("(")) {
                 procedureParams();
-                if (currentToken.getLexema().equals("{")) {
+                if (currentToken().getLexema().equals("{")) {
                     consumeToken();
                     procedureContent();
                 } else {
@@ -780,9 +849,9 @@ private void constDeclaration() throws FimInesperadoDeArquivo {
 
     private void procedureParams() throws FimInesperadoDeArquivo {
         consumeToken();
-        if (currentToken.getLexema().equals(")")) {
+        if (currentToken().getLexema().equals(")")) {
             consumeToken();
-        } else if (currentToken.getId().equals("IDE") || firstTypes.contains(currentToken.getLexema())) {
+        } else if (currentToken().getId().equals("IDE") || firstTypes.contains(currentToken().getLexema())) {
             parameters();
         } else {
             error();
@@ -791,19 +860,129 @@ private void constDeclaration() throws FimInesperadoDeArquivo {
 //************************************** Procedure Declaration ***************************************  
 //====================================================================================================
 
+//====================================== Codigo ======================================================
+//****************************************************************************************************  
+    private void codigo() throws FimInesperadoDeArquivo {
+        if (firstComando.contains(currentToken().getLexema())) { // adicionar opções de functionCall, incremento, decremento
+            comando();                                       //e atribuição
+            codigo();
+        }
+    }
 
-    
+    private void comando() throws FimInesperadoDeArquivo {
+        switch (currentToken().getLexema()) {
+            case "print":
+                print();
+                break;
+            case "read":
+                read();
+                break;
+            case "typedef":
+                typedefDeclaration();
+                break;
+            case "struct":
+                structDeclaration();
+                break;
+            case "if":
+                conditional();
+                break;
+            case "while":
+                whileLoop();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void print() throws FimInesperadoDeArquivo {
+        consumeToken();
+        if (currentToken().getLexema().equals("(")) {
+            printableList();
+        } else {
+            error();
+        }
+    }
+
+    private void printableList() throws FimInesperadoDeArquivo {
+        value();
+        nextPrintValue();
+    }
+
+    private void nextPrintValue() throws FimInesperadoDeArquivo {
+        consumeToken();
+        switch (currentToken().getLexema()) {
+            case ",":
+                printableList();
+                break;
+            case ")":
+                consumeToken();
+                if (currentToken().getLexema().equals(";")) {
+                    consumeToken();
+                } else {
+                    error();
+                }
+                break;
+            default:
+                error();
+                break;
+        }
+    }
+
+    private void read() throws FimInesperadoDeArquivo {
+        consumeToken();
+        if (currentToken().getLexema().equals("(")) {
+            readParams();
+        } else {
+            error();
+        }
+    }
+
+    private void readParams() throws FimInesperadoDeArquivo {
+        variavel();
+        readLoop();
+    }
+
+    private void readLoop() throws FimInesperadoDeArquivo {
+        switch (currentToken().getLexema()) {
+            case ",":
+                readParams();
+                break;
+            case ")":
+                consumeToken();
+                if (currentToken().getLexema().equals(";")) {
+                    consumeToken();
+                    
+                } else {
+                    error();
+                }
+                break;
+            default:
+                error();
+                break;
+        }
+    }
+
+    private void conditional() {
+
+    }
+
+    private void whileLoop() {
+
+    }
+
+//************************************** Codigo ****************************************************** 
+//====================================================================================================
 //====================================== Procedure Declaration =======================================
 //**************************************************************************************************** 
     private void typedefDeclaration() throws FimInesperadoDeArquivo {
         consumeToken();
-        if (currentToken.getLexema().equals("struct")) {
+        if (currentToken().getLexema().equals("struct")) {
             consumeToken();
-            if (currentToken.getId().equals("IDE")) {
+            if (currentToken().getId().equals("IDE")) {
                 consumeToken();
-                if (currentToken.getId().equals("IDE")) {
+                if (currentToken().getId().equals("IDE")) {
                     consumeToken();
-                    if (currentToken.getLexema().equals(";")) {
+                    if (currentToken().getLexema().equals(";")) {
                         consumeToken();
                     } else {
                         error();
@@ -816,9 +995,9 @@ private void constDeclaration() throws FimInesperadoDeArquivo {
             }
         } else {
             dataType();
-            if (currentToken.getId().equals("IDE")) {
+            if (currentToken().getId().equals("IDE")) {
                 consumeToken();
-                if (currentToken.getLexema().equals(";")) {
+                if (currentToken().getLexema().equals(";")) {
                     consumeToken();
                 } else {
                     error();
@@ -831,10 +1010,9 @@ private void constDeclaration() throws FimInesperadoDeArquivo {
 //*************************************** Typedef Declaration ****************************************  
 //====================================================================================================
 
-    
     //verifica se é um operador relacional
     private void relSymbol() throws FimInesperadoDeArquivo {
-        if (currentToken.getId().equals("REL")) {
+        if (currentToken().getId().equals("REL")) {
             consumeToken();
         } else {
             error();
@@ -843,18 +1021,19 @@ private void constDeclaration() throws FimInesperadoDeArquivo {
 
     //verifica se é um operador lógico
     private void logicSymbol() throws FimInesperadoDeArquivo {
-        if (currentToken.getId().equals("LOG")) {
+        if (currentToken().getId().equals("LOG")) {
             consumeToken();
         } else {
             error();
         }
     }
+
     private void functionCall() throws FimInesperadoDeArquivo {
         int i = 0; //deixar assim enquanto nao tiver o <VALUE> pronto
         if (i == 2) { //colocar conjunto first de value;
             value();
             fCallParams();
-        } else if (currentToken.getLexema().equals(")")) {
+        } else if (currentToken().getLexema().equals(")")) {
             consumeToken();
         } else {
             error();
@@ -863,7 +1042,7 @@ private void constDeclaration() throws FimInesperadoDeArquivo {
     }
 
     private void fCallParams() throws FimInesperadoDeArquivo {
-        switch (currentToken.getLexema()) {
+        switch (currentToken().getLexema()) {
             case ",":
                 value();
                 fCallParams();
