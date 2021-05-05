@@ -216,6 +216,8 @@ public class AnalisadorSintatico {
 //********************************** Cabeçalhos de início do código **********************************      
 //====================================================================================================
 
+    
+    
 //============================================ Data Types ============================================
 //**************************************************************************************************** 
     //Incompleto
@@ -223,7 +225,7 @@ public class AnalisadorSintatico {
         Token t = lookahead();
         if (currentToken().getId().equals("IDE")) {
             if (t.getLexema().equals("(")) {
-                consumeToken();
+                consumeToken(); 
                 functionCall();
             } else {
                 consumeToken();
@@ -246,11 +248,7 @@ public class AnalisadorSintatico {
     }
 
     private void vectMatIndex() throws FimInesperadoDeArquivo {
-        if (currentToken().getId().equals("NRO")) {
-            consumeToken();
-        } else {
-            error();
-        }
+        aritmeticOp();
     }
 
     private void aritmeticValue() throws FimInesperadoDeArquivo{
@@ -265,9 +263,9 @@ public class AnalisadorSintatico {
     }
     
     private void variavel() throws FimInesperadoDeArquivo{
+        String aheadToken = lookahead().getLexema();
         if(currentToken().getId().equals("IDE")){
             consumeToken();
-            String aheadToken = lookahead().getLexema();
             if(aheadToken.equals(".")|aheadToken.equals("["))
                 contElement();
         }else{
@@ -277,26 +275,64 @@ public class AnalisadorSintatico {
                     consumeToken();
                     if(currentToken().getLexema().equals(".")){
                         consumeToken();
-                        if(currentToken().getId().equals("IDE"))
+                        if(currentToken().getId().equals("IDE")){
                             consumeToken();
-                        else
+                            if(aheadToken.equals(".")|aheadToken.equals("["))
+                                contElement();
+                        }else
                             error();
                     }else
                         error();
                     break;
                 default:
-                    startElement();
+                    error();
             }
         }
         
     }
     
-    private void startElement(){
-        
+    private void contElement() throws FimInesperadoDeArquivo{
+        switch (currentToken().getLexema()) {
+            case ".":
+                structE1();
+                break;
+            case "[":
+                consumeToken();
+                vectMatIndex();
+                if(currentToken().getLexema().equals("]")){
+                    String ahead = lookahead().getLexema();
+                    if(ahead.equals(".")){
+                        consumeToken();
+                        structE1();
+                    }else if(ahead.equals("[")){
+                        consumeToken();
+                        consumeToken();
+                        vectMatIndex();
+                        if(currentToken().getLexema().equals("]")){
+                            consumeToken();
+                            if(lookahead().getLexema().equals("."))
+                                structE1();
+                        }else
+                            error();
+                    }
+                    
+                }else
+                    error();
+                break;
+            default:
+                error();
+        }
     }
     
-    private void contElement(){
-        
+    private void structE1() throws FimInesperadoDeArquivo{
+        consumeToken();
+        String ahead = lookahead().getLexema();
+        if(currentToken().getId().equals("IDE")){
+            consumeToken();
+            if(ahead.equals(".")||ahead.equals("["))
+                contElement();
+        }else
+            error();
     }
 //******************************************** Data Types ********************************************   
 //====================================================================================================
@@ -516,6 +552,8 @@ public class AnalisadorSintatico {
 //*************************************** Variable Declaration ***************************************      
 //====================================================================================================
 
+    
+    
 //========================================= Const Declaration ========================================
 //**************************************************************************************************** 
     private void constDeclaration() throws FimInesperadoDeArquivo {
@@ -695,6 +733,8 @@ public class AnalisadorSintatico {
 //***************************************** Const Declaration ****************************************  
 //====================================================================================================
 
+    
+    
 //======================================= Function Declaration =======================================
 //****************************************************************************************************
     private void function() throws FimInesperadoDeArquivo {
@@ -774,6 +814,8 @@ public class AnalisadorSintatico {
 //*************************************** Function Declaration ***************************************  
 //====================================================================================================
 
+    
+    
 //======================================== Struct Declaration ========================================
 //**************************************************************************************************** 
     private void structDeclaration() {
@@ -782,6 +824,8 @@ public class AnalisadorSintatico {
 //**************************************** Struct Declaration ****************************************  
 //====================================================================================================
 
+    
+    
 //====================================== Procedure Declaration =======================================
 //****************************************************************************************************     
     private void startProcedure() throws FimInesperadoDeArquivo {
@@ -898,6 +942,8 @@ public class AnalisadorSintatico {
 //************************************** Procedure Declaration ***************************************  
 //====================================================================================================
 
+    
+    
 //====================================== Codigo ======================================================
 //****************************************************************************************************  
     private void codigo() throws FimInesperadoDeArquivo {
@@ -1010,6 +1056,9 @@ public class AnalisadorSintatico {
 
 //************************************** Codigo ****************************************************** 
 //====================================================================================================
+    
+    
+    
 //====================================== Procedure Declaration =======================================
 //**************************************************************************************************** 
     private void typedefDeclaration() throws FimInesperadoDeArquivo {
@@ -1071,8 +1120,11 @@ public class AnalisadorSintatico {
         }
     }
 
-
-//verifica se é um operador relacional
+    private void aritmeticOp(){
+        
+    }
+    
+    //verifica se é um operador relacional
     private void relSymbol() throws FimInesperadoDeArquivo {
         if (currentToken().getId().equals("REL")) {
             consumeToken();
