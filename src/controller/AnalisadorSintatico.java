@@ -220,7 +220,7 @@ public class AnalisadorSintatico {
     
 //============================================ Data Types ============================================
 //**************************************************************************************************** 
-    //Incompleto
+    //Incompleto... 
     private void value() throws FimInesperadoDeArquivo {
         Token t = lookahead();
         if (currentToken().getId().equals("IDE")) {
@@ -248,7 +248,7 @@ public class AnalisadorSintatico {
     }
 
     private void vectMatIndex() throws FimInesperadoDeArquivo {
-        aritmeticOp();
+        aritmeticOp();  
     }
 
     private void aritmeticValue() throws FimInesperadoDeArquivo{
