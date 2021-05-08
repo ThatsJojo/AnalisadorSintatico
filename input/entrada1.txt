@@ -22,10 +22,18 @@ const{
 
 }
 
+function int soma(){
+    read(i, u[i]);
+    return i;
+}
+
 procedure start(){
     var{
         struct Pessoa xablau;
     }
-    read(i);
+    typedef struct Pessoa Pessoa;
+    typedef string frase;
+    read(i, u[i]);
+
 }
 

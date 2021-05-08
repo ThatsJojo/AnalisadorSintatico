@@ -32,7 +32,7 @@ public class AnalisadorSintatico {
         firstInicio.add("procedure");
         firstInicio.add("function");
 
-        //Conjunto first do método comando
+        //Conjunto first do método comando //faltam algumas coisas
         firstComando.add("print");
         firstComando.add("read");
         firstComando.add("while");
@@ -62,21 +62,19 @@ public class AnalisadorSintatico {
     private boolean consumeToken() throws FimInesperadoDeArquivo {
         if (countToken > tokens.size()) {
             throw new FimInesperadoDeArquivo();
-        }
-        else if(countToken == tokens.size()){
+        } else if (countToken == tokens.size()) {
             this.privateCurrentToken = new Token("EOF", null, privateCurrentToken.getLinha());
             countToken++;
             return false;
-        }
-        else{
-            this.privateCurrentToken = (Token) tokens.get(countToken++); 
+        } else {
+            this.privateCurrentToken = (Token) tokens.get(countToken++);
             return true;
         }
-        
+
     }
-    
-    private Token currentToken() throws FimInesperadoDeArquivo{
-        if(privateCurrentToken == null || privateCurrentToken.getId().equals("EOF")){
+
+    private Token currentToken() throws FimInesperadoDeArquivo {
+        if (privateCurrentToken == null || privateCurrentToken.getId().equals("EOF")) {
             throw new FimInesperadoDeArquivo();
         }
         return privateCurrentToken;
@@ -89,11 +87,15 @@ public class AnalisadorSintatico {
         return (Token) tokens.get(countToken);
     }
 
+    private Token lookback() throws FimInesperadoDeArquivo {
+        return (Token) tokens.get(countToken - 2);
+    }
+
     private void error() throws FimInesperadoDeArquivo {
-        System.out.println("Erro no token "+currentToken().getId()+" na linha "+currentToken().getLinha()+": "+currentToken().getLexema()+" lookahead: "+lookahead().getLexema());
+        System.out.println("Erro no token " + currentToken().getId() + " na linha " + currentToken().getLinha() + ": " + currentToken().getLexema() + " lookahead: " + lookahead().getLexema());
         this.erros++;
         int i = 0;
-        int j = 1/i;
+        int j = 1 / i;
     }
 
 //================================== Cabeçalhos de início do código ==================================
@@ -191,9 +193,10 @@ public class AnalisadorSintatico {
     }
 
     private void methods() throws FimInesperadoDeArquivo {
+        Token pf = currentToken();
+        consumeToken();
         Token t = lookahead();
-        if (t.getLexema().equals("start") && currentToken().getLexema().equals("procedure")) {
-            consumeToken();
+        if (currentToken().getLexema().equals("start") && pf.getLexema().equals("procedure")) {
             startProcedure();
         } else if (t.getId().equals("IDE")) {
             functionList();
@@ -204,7 +207,8 @@ public class AnalisadorSintatico {
     }
 
     private void functionList() throws FimInesperadoDeArquivo {
-        switch (currentToken().getLexema()) {
+        Token t = lookback();
+        switch (t.getLexema()) {
             case "procedure":
                 procedure();
                 break;
@@ -219,8 +223,6 @@ public class AnalisadorSintatico {
 //********************************** Cabeçalhos de início do código **********************************      
 //====================================================================================================
 
-    
-    
 //============================================ Data Types ============================================
 //**************************************************************************************************** 
     //Incompleto... 
@@ -228,22 +230,23 @@ public class AnalisadorSintatico {
         Token t = lookahead();
         if (currentToken().getId().equals("IDE")) {
             if (t.getLexema().equals("(")) {
-                consumeToken(); 
+                consumeToken();
                 functionCall();
             } else {
                 operation();
             }
-        }else{
+        } else {
             switch (currentToken().getLexema()) {
                 case "true":
                 case "false":
-                    if(t.getId().equals("REL")||t.getId().equals("LOG"))
+                    if (t.getId().equals("REL") || t.getId().equals("LOG")) {
                         operation();
-                    else
+                    } else {
                         consumeToken();
+                    }
                     break;
                 default:
-                        operation();
+                    operation();
                     break;
             }
         }
@@ -259,10 +262,10 @@ public class AnalisadorSintatico {
     }
 
     private void vectMatIndex() throws FimInesperadoDeArquivo {
-        aritmeticOp();  
+        aritmeticOp();
     }
 
-    private void aritmeticValue() throws FimInesperadoDeArquivo{
+    private void aritmeticValue() throws FimInesperadoDeArquivo {
         switch (currentToken().getId()) {
             case "NRO":
             case "CAD":
@@ -272,37 +275,41 @@ public class AnalisadorSintatico {
                 error();
         }
     }
-    
-    private void variavel() throws FimInesperadoDeArquivo{
+
+    private void variavel() throws FimInesperadoDeArquivo {
         String aheadToken = lookahead().getLexema();
-        if(currentToken().getId().equals("IDE")){
+        if (currentToken().getId().equals("IDE")) {
             consumeToken();
-            if(aheadToken.equals(".")||aheadToken.equals("["))
+            if (aheadToken.equals(".") || aheadToken.equals("[")) {
                 contElement();
-        }else{
+            }
+        } else {
             switch (currentToken().getLexema()) {
                 case "global":
                 case "local":
                     consumeToken();
-                    if(currentToken().getLexema().equals(".")){
+                    if (currentToken().getLexema().equals(".")) {
                         consumeToken();
-                        if(currentToken().getId().equals("IDE")){
+                        if (currentToken().getId().equals("IDE")) {
                             consumeToken();
-                            if(aheadToken.equals(".")|aheadToken.equals("["))
+                            if (aheadToken.equals(".") | aheadToken.equals("[")) {
                                 contElement();
-                        }else
+                            }
+                        } else {
                             error();
-                    }else
+                        }
+                    } else {
                         error();
+                    }
                     break;
                 default:
                     error();
             }
         }
-        
+
     }
-    
-    private void contElement() throws FimInesperadoDeArquivo{
+
+    private void contElement() throws FimInesperadoDeArquivo {
         switch (currentToken().getLexema()) {
             case ".":
                 structE1();
@@ -310,43 +317,46 @@ public class AnalisadorSintatico {
             case "[":
                 consumeToken();
                 vectMatIndex();
-                if(currentToken().getLexema().equals("]")){
+                if (currentToken().getLexema().equals("]")) {
                     consumeToken();
-                    if(currentToken().getLexema().equals(".")){
+                    if (currentToken().getLexema().equals(".")) {
                         structE1();
-                    }else if(currentToken().getLexema().equals("[")){
+                    } else if (currentToken().getLexema().equals("[")) {
                         consumeToken();
                         vectMatIndex();
-                        if(currentToken().getLexema().equals("]")){
+                        if (currentToken().getLexema().equals("]")) {
                             consumeToken();
-                            if(lookahead().getLexema().equals("."))
+                            if (lookahead().getLexema().equals(".")) {
                                 structE1();
-                        }else
+                            }
+                        } else {
                             error();
+                        }
                     }
-                }else
+                } else {
                     error();
+                }
                 break;
             default:
                 error();
         }
     }
-    
-    private void structE1() throws FimInesperadoDeArquivo{
+
+    private void structE1() throws FimInesperadoDeArquivo {
         consumeToken();
         String ahead = lookahead().getLexema();
-        if(currentToken().getId().equals("IDE")){
+        if (currentToken().getId().equals("IDE")) {
             consumeToken();
-            if(ahead.equals(".")||ahead.equals("["))
+            if (ahead.equals(".") || ahead.equals("[")) {
                 contElement();
-        }else
+            }
+        } else {
             error();
+        }
     }
 //******************************************** Data Types ********************************************   
 //====================================================================================================
-    
-    
-    
+
 //======================================= Variable Declaration =======================================
 //****************************************************************************************************
     private void varDeclaration() throws FimInesperadoDeArquivo {
@@ -560,8 +570,6 @@ public class AnalisadorSintatico {
 //*************************************** Variable Declaration ***************************************      
 //====================================================================================================
 
-    
-    
 //========================================= Const Declaration ========================================
 //**************************************************************************************************** 
     private void constDeclaration() throws FimInesperadoDeArquivo {
@@ -741,12 +749,9 @@ public class AnalisadorSintatico {
 //***************************************** Const Declaration ****************************************  
 //====================================================================================================
 
-    
-    
 //======================================= Function Declaration =======================================
 //****************************************************************************************************
     private void function() throws FimInesperadoDeArquivo {
-        consumeToken();
         dataType();
         if (currentToken().getId().equals("IDE")) {
             consumeToken();
@@ -775,6 +780,7 @@ public class AnalisadorSintatico {
 
     private void blockFunction() throws FimInesperadoDeArquivo {
         if (currentToken().getLexema().equals("{")) {
+            consumeToken();
             blockFuncContent();
             if (currentToken().getLexema().equals(";")) {
                 consumeToken();
@@ -791,8 +797,71 @@ public class AnalisadorSintatico {
         }
     }
 
-    private void blockFuncContent() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void blockFuncContent() throws FimInesperadoDeArquivo {
+        if (currentToken().getLexema().equals("var")) {
+            varDeclaration();
+            content1();
+        } else if (currentToken().getLexema().equals("const")) {
+            constDeclaration();
+            content2();
+        } else if (firstComando.contains(currentToken().getLexema())) {
+            codigo();
+            if (currentToken().getLexema().equals("return")) {
+                consumeToken();
+                value();
+            } else {
+                error();
+            }
+        } else {
+            error();
+        }
+
+    }
+
+    private void content1() throws FimInesperadoDeArquivo {
+        if (currentToken().getLexema().equals("const")) {
+            constDeclaration();
+            content3();
+        } else if (firstComando.contains(currentToken().getLexema())) {
+            codigo();
+            if (currentToken().getLexema().equals("return")) {
+                consumeToken();
+                value();
+            } else {
+                error();
+            }
+        } else {
+            error();
+        }
+    }
+
+    private void content2() throws FimInesperadoDeArquivo {
+        if (currentToken().getLexema().equals("var")) {
+            varDeclaration();
+            content3();
+        } else if (firstComando.contains(currentToken().getLexema())) {
+            codigo();
+            if (currentToken().getLexema().equals("return")) {
+                consumeToken();
+                value();
+            } else {
+                error();
+            }
+        } else {
+            error();
+        }
+    }
+
+    private void content3() throws FimInesperadoDeArquivo {
+        if (firstComando.contains(currentToken().getLexema())) {
+            codigo();
+            if (currentToken().getLexema().equals("return")) {
+                consumeToken();
+                value();
+            } else {
+                error();
+            }
+        }
     }
 
     private void parameters() throws FimInesperadoDeArquivo {
@@ -802,7 +871,6 @@ public class AnalisadorSintatico {
         } else {
             error();
         }
-
     }
 
     private void paramLoop() throws FimInesperadoDeArquivo {
@@ -822,8 +890,6 @@ public class AnalisadorSintatico {
 //*************************************** Function Declaration ***************************************  
 //====================================================================================================
 
-    
-    
 //======================================== Struct Declaration ========================================
 //**************************************************************************************************** 
     private void structDeclaration() {
@@ -832,8 +898,6 @@ public class AnalisadorSintatico {
 //**************************************** Struct Declaration ****************************************  
 //====================================================================================================
 
-    
-    
 //====================================== Procedure Declaration =======================================
 //****************************************************************************************************     
     private void startProcedure() throws FimInesperadoDeArquivo {
@@ -884,9 +948,6 @@ public class AnalisadorSintatico {
             } else {
                 error();
             }
-        } else if (firstComando.contains(currentToken().getLexema())) {
-            codigo();
-
         } else {
             error();
         }
@@ -954,8 +1015,6 @@ public class AnalisadorSintatico {
 //************************************** Procedure Declaration ***************************************  
 //====================================================================================================
 
-    
-    
 //====================================== Codigo ======================================================
 //****************************************************************************************************  
     private void codigo() throws FimInesperadoDeArquivo {
@@ -1005,7 +1064,6 @@ public class AnalisadorSintatico {
     }
 
     private void nextPrintValue() throws FimInesperadoDeArquivo {
-        consumeToken();
         switch (currentToken().getLexema()) {
             case ",":
                 printableList();
@@ -1042,13 +1100,14 @@ public class AnalisadorSintatico {
     private void readLoop() throws FimInesperadoDeArquivo {
         switch (currentToken().getLexema()) {
             case ",":
+                consumeToken();
                 readParams();
                 break;
             case ")":
                 consumeToken();
                 if (currentToken().getLexema().equals(";")) {
                     consumeToken();
-                    
+
                 } else {
                     error();
                 }
@@ -1059,7 +1118,30 @@ public class AnalisadorSintatico {
         }
     }
 
-    private void conditional() {
+    private void conditional() throws FimInesperadoDeArquivo {
+        consumeToken();
+        if (currentToken().getLexema().equals("(")) {
+            consumeToken();
+            boolOperation();
+            if (currentToken().getLexema().equals(")")) {
+                consumeToken();
+                if (currentToken().getLexema().equals("{")) {
+                    consumeToken();
+                    codigo();
+                    if (currentToken().getLexema().equals("}")) {
+                        consumeToken();
+                    } else {
+                        error();
+                    }
+                } else {
+                    error();
+                }
+            } else {
+                error();
+            }
+        } else {
+            error();
+        }
 
     }
 
@@ -1069,9 +1151,6 @@ public class AnalisadorSintatico {
 
 //************************************** Codigo ****************************************************** 
 //====================================================================================================
-    
-    
-    
 //====================================== Procedure Declaration =======================================
 //**************************************************************************************************** 
     private void typedefDeclaration() throws FimInesperadoDeArquivo {
@@ -1110,23 +1189,22 @@ public class AnalisadorSintatico {
 //*************************************** Typedef Declaration ****************************************  
 //====================================================================================================
 
-    
-
 //=========================================== Operations =============================================  
 //****************************************************************************************************    
     //Produções que podem assumir valores aritméticos
-    private void opNegate() throws FimInesperadoDeArquivo{
-        if(currentToken().getId().equals("CAD")||currentToken().getId().equals("NRO")){
+    private void opNegate() throws FimInesperadoDeArquivo {
+        if (currentToken().getId().equals("CAD") || currentToken().getId().equals("NRO")) {
             consumeToken();
             return;
         }
         switch (currentToken().getLexema()) {
             case "-":
                 consumeToken();
-                if(currentToken().getId().equals("IDE"))
+                if (currentToken().getId().equals("IDE")) {
                     variavel();
-                else
+                } else {
                     aritmeticValue();
+                }
                 break;
             case "--":
             case "++":
@@ -1134,42 +1212,45 @@ public class AnalisadorSintatico {
                 variavel();
             default:
                 variavel();
-                if(currentToken().getLexema().equals("++")||currentToken().getLexema().equals("--"))
+                if (currentToken().getLexema().equals("++") || currentToken().getLexema().equals("--")) {
                     consumeToken();
+                }
         }
     }
 
     //Operação aritmética
-    private void aritmeticOp() throws FimInesperadoDeArquivo{
-        if(currentToken().getLexema().equals("-")&&lookahead().getLexema().equals("("))
+    private void aritmeticOp() throws FimInesperadoDeArquivo {
+        if (currentToken().getLexema().equals("-") && lookahead().getLexema().equals("(")) {
             consumeToken();
-        if(currentToken().getLexema().equals("(")){
+        }
+        if (currentToken().getLexema().equals("(")) {
             consumeToken();
             aritmeticOp();
-            if(currentToken().getLexema().equals(")")){
+            if (currentToken().getLexema().equals(")")) {
                 consumeToken();
-                if(currentToken().getLexema().equals("*")||currentToken().getLexema().equals("/")){
+                if (currentToken().getLexema().equals("*") || currentToken().getLexema().equals("/")) {
                     consumeToken();
                     aritmeticOp();
                 }
-            }else
+            } else {
                 error();
-        }else{
+            }
+        } else {
             opNegate();
-            if(currentToken().getLexema().equals("*")||currentToken().getLexema().equals("/")){
+            if (currentToken().getLexema().equals("*") || currentToken().getLexema().equals("/")) {
                 consumeToken();
                 aritmeticOp();
             }
         }
-        if(currentToken().getLexema().equals("+")||currentToken().getLexema().equals("-")){
+        if (currentToken().getLexema().equals("+") || currentToken().getLexema().equals("-")) {
             consumeToken();
             aritmeticOp();
-        }    
+        }
     }
-    
+
     //Operação relacional
-    private void logicOrRelacionalOp() throws FimInesperadoDeArquivo{
-        switch(currentToken().getId()){
+    private void logicOrRelacionalOp() throws FimInesperadoDeArquivo {
+        switch (currentToken().getId()) {
             case "REL":
             case "LOG":
                 consumeToken();
@@ -1180,37 +1261,39 @@ public class AnalisadorSintatico {
         }
     }
 
-    
     //Verifica os possíveis valores de uma operação relacional ou lógica.
-    private void contRelLogic() throws FimInesperadoDeArquivo{
+    private void contRelLogic() throws FimInesperadoDeArquivo {
         switch (currentToken().getLexema()) {
-                    case "true":
-                    case "false":
-                        Token t = (Token) lookahead();
-                        if(t.getId().equals("REL")||t.getId().equals("LOG")){
-                            consumeToken();
-                            consumeToken();
-                            operation();
-                        }else
-                            consumeToken();
-                        break;
-                    default:
-                        operation();
-                        break;
+            case "true":
+            case "false":
+                Token t = (Token) lookahead();
+                if (t.getId().equals("REL") || t.getId().equals("LOG")) {
+                    consumeToken();
+                    consumeToken();
+                    operation();
+                } else {
+                    consumeToken();
                 }
+                break;
+            default:
+                operation();
+                break;
+        }
     }
-    
+
     //Operação de negação.
-    private void negBoolValue() throws FimInesperadoDeArquivo{
-        if(currentToken().getLexema().equals("!")){
+    private void negBoolValue() throws FimInesperadoDeArquivo {
+        if (currentToken().getLexema().equals("!")) {
             consumeToken();
             variavel();
-        }else
+        } else {
             error();
+
+        }
     }
-    
+
     //Produções de valor booleano que não possuem operações aritméticas no first.
-    private void boolOnlyOp() throws FimInesperadoDeArquivo{
+    private void boolOnlyOp() throws FimInesperadoDeArquivo {
         switch (currentToken().getLexema()) {
             case "true":
             case "false":
@@ -1218,62 +1301,65 @@ public class AnalisadorSintatico {
                 logicOrRelacionalOp();
                 break;
             case "!":
-                consumeToken();
                 negBoolValue();
                 break;
             case "(":
                 consumeToken();
-                if(currentToken().getId().equals("NRO")||currentToken().getId().equals("CAD")
-                        ||currentToken().getId().equals("IDE")||currentToken().getLexema().equals("-")){
+                if (currentToken().getId().equals("NRO") || currentToken().getId().equals("CAD")
+                        || currentToken().getId().equals("IDE") || currentToken().getLexema().equals("-")) {
                     aritmeticOp();
                     logicOrRelacionalOp();
-                    if(currentToken().getLexema().equals(")")){
+                    if (currentToken().getLexema().equals(")")) {
                         consumeToken();
                         logicOrRelacionalOp();
-                    }else{
+                    } else {
                         logicOrRelacionalOp();
-                        if(currentToken().getLexema().equals(")")){
+                        if (currentToken().getLexema().equals(")")) {
                             consumeToken();
-                            if(currentToken().getId().equals("REL")||currentToken().getId().equals("LOG")){
+                            if (currentToken().getId().equals("REL") || currentToken().getId().equals("LOG")) {
                                 logicOrRelacionalOp();
+                            }
+                        } else {
+                            error();
                         }
-                        }else
-                            error();    
                     }
-                }else{
+                } else {
                     boolOnlyOp();
-                    if(currentToken().getLexema().equals(")")){
+                    if (currentToken().getLexema().equals(")")) {
                         consumeToken();
-                        if(currentToken().getId().equals("REL")||currentToken().getId().equals("LOG")){
+                        if (currentToken().getId().equals("REL") || currentToken().getId().equals("LOG")) {
                             consumeToken();
                             logicOrRelacionalOp();
                         }
-                    }else
+                    } else {
                         error();
+                    }
                 }
                 break;
             default:
-                    error();
+                error();
         }
     }
-    
+
     //Operações que podem retornar valores binários.
-    private void boolOperation() throws FimInesperadoDeArquivo{
-        if(currentToken().getId().equals("NRO")||currentToken().getId().equals("CAD")
-                        ||currentToken().getId().equals("IDE")||currentToken().getLexema().equals("-")){
+    private void boolOperation() throws FimInesperadoDeArquivo {
+        if (currentToken().getId().equals("NRO") || currentToken().getId().equals("CAD")
+                || currentToken().getId().equals("IDE") || currentToken().getLexema().equals("-")) {
             aritmeticOp();
             logicOrRelacionalOp();
-        }else
+        } else {
             boolOnlyOp();
+        }
     }
-    
-    private void operation() throws FimInesperadoDeArquivo{
-        if(currentToken().getId().equals("NRO")||currentToken().getId().equals("CAD")
-                        ||currentToken().getId().equals("IDE")||currentToken().getLexema().equals("-")){
+
+    private void operation() throws FimInesperadoDeArquivo {
+        if (currentToken().getId().equals("NRO") || currentToken().getId().equals("CAD")
+                || currentToken().getId().equals("IDE") || currentToken().getLexema().equals("-")) {
             aritmeticOp();
-            if(currentToken().getId().equals("REL")||currentToken().getId().equals("LOG"))
+            if (currentToken().getId().equals("REL") || currentToken().getId().equals("LOG")) {
                 logicOrRelacionalOp();
-        }else{
+            }
+        } else {
             switch (currentToken().getLexema()) {
                 case "true":
                 case "false":
@@ -1281,42 +1367,44 @@ public class AnalisadorSintatico {
                     logicOrRelacionalOp();
                     break;
                 case "!":
-                    consumeToken();
                     negBoolValue();
                     break;
                 case "(":
                     consumeToken();
-                    if(currentToken().getId().equals("NRO")||currentToken().getId().equals("CAD")
-                        ||currentToken().getId().equals("IDE")||currentToken().getLexema().equals("-")){
+                    if (currentToken().getId().equals("NRO") || currentToken().getId().equals("CAD")
+                            || currentToken().getId().equals("IDE") || currentToken().getLexema().equals("-")) {
                         aritmeticOp();
-                        if(currentToken().getId().equals("REL")||currentToken().getId().equals("LOG"))
+                        if (currentToken().getId().equals("REL") || currentToken().getId().equals("LOG")) {
                             logicOrRelacionalOp();
-                    }else{
+                        }
+                    } else {
                         boolOnlyOp();
-                        if(currentToken().getLexema().equals(")")){
+                        if (currentToken().getLexema().equals(")")) {
                             consumeToken();
-                            if(currentToken().getId().equals("REL")||currentToken().getId().equals("LOG"))
+                            if (currentToken().getId().equals("REL") || currentToken().getId().equals("LOG")) {
                                 logicOrRelacionalOp();
-                        }else
+                            }
+                        } else {
                             error();
+                        }
                     }
-                    if(currentToken().getLexema().equals(")")){
+                    if (currentToken().getLexema().equals(")")) {
                         consumeToken();
-                        if(currentToken().getId().equals("REL")||currentToken().getId().equals("LOG"))
+                        if (currentToken().getId().equals("REL") || currentToken().getId().equals("LOG")) {
                             logicOrRelacionalOp();
-                    }else
+                        }
+                    } else {
                         error();
+                    }
                     break;
                 default:
-                        error();
+                    error();
             }
         }
     }
 //******************************************* Operations *********************************************  
 //====================================================================================================
-    
-    
-    
+
 //========================================== Function Call ===========================================  
 //****************************************************************************************************
     private void functionCall() throws FimInesperadoDeArquivo {

@@ -1,9 +1,13 @@
-int54 //{ } Codigo1) 1.a 1.2 para 1231teste == j&&i 5||4 real}boolean
-int num[10]; 7
+typedef struct Pessoa Pessoa;
+typedef string frase;
 
-for(int i=0aaisldkfaj;i<size;i++){8
-     num[i]=i;
-     print(num[i]);==
+var{
+	int a, b;
 }
 
-/*int i = 2.2;
+procedure start(){
+    var{
+        struct Pessoa xablau;
+    }
+    read(i);
+}
