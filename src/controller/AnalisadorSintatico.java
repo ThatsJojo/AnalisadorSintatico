@@ -87,7 +87,7 @@ public class AnalisadorSintatico {
         return (Token) tokens.get(countToken);
     }
 
-    private Token lookback() throws FimInesperadoDeArquivo {
+    private Token look2back() throws FimInesperadoDeArquivo {
         return (Token) tokens.get(countToken - 2);
     }
 
@@ -207,7 +207,7 @@ public class AnalisadorSintatico {
     }
 
     private void functionList() throws FimInesperadoDeArquivo {
-        Token t = lookback();
+        Token t = look2back();
         switch (t.getLexema()) {
             case "procedure":
                 procedure();
@@ -1125,15 +1125,21 @@ public class AnalisadorSintatico {
             boolOperation();
             if (currentToken().getLexema().equals(")")) {
                 consumeToken();
-                if (currentToken().getLexema().equals("{")) {
+                if (currentToken().getLexema().equals("then")) {
                     consumeToken();
-                    codigo();
-                    if (currentToken().getLexema().equals("}")) {
+                    if (currentToken().getLexema().equals("{")) {
                         consumeToken();
+                        codigo();
+                        if (currentToken().getLexema().equals("}")) {
+                            consumeToken();
+                        } else {
+                            error();
+                        }
                     } else {
                         error();
                     }
-                } else {
+                }
+                else{
                     error();
                 }
             } else {

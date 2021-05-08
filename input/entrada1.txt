@@ -24,6 +24,9 @@ const{
 
 function int soma(){
     read(i, u[i]);
+    if(!variavel) then{
+       read(i);
+    }
     return i;
 }
 
