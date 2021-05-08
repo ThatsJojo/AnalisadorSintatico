@@ -89,7 +89,8 @@ public class AnalisadorSintatico {
         return (Token) tokens.get(countToken);
     }
 
-    private void error() {
+    private void error() throws FimInesperadoDeArquivo {
+        System.out.println("Erro no token: "+currentToken().getLexema()+" lookahead: "+lookahead().getLexema());
         this.erros++;
     }
 
@@ -238,19 +239,9 @@ public class AnalisadorSintatico {
                         operation();
                     else
                         consumeToken();
-                case "!":
-                case "++":
-                case "--":
-                case "-":
-                case "(":    
-                    operation();
                     break;
                 default:
-                    if(currentToken().getId().equals("NRO")||currentToken().getId().equals("CAD"))
                         operation();
-                    else
-                        error();
-                            
                     break;
             }
         }
@@ -276,7 +267,7 @@ public class AnalisadorSintatico {
                 consumeToken();
                 break;
             default:
-                variavel();
+                error();
         }
     }
     
@@ -1119,49 +1110,187 @@ public class AnalisadorSintatico {
 
 //=========================================== Operations =============================================  
 //****************************************************************************************************    
-    private void opNeage() throws FimInesperadoDeArquivo{
+    //Produções que podem assumir valores aritméticos
+    private void opNegate() throws FimInesperadoDeArquivo{
+        if(currentToken().getId().equals("CAD")||currentToken().getId().equals("NRO")){
+            consumeToken();
+            return;
+        }
         switch (currentToken().getLexema()) {
             case "-":
                 consumeToken();
                 aritmeticValue();
                 break;
-            case "(":
+            case "--":
+            case "++":
                 consumeToken();
-                aritmeticValue();
-                if(currentToken().getLexema().equals(")"))
+                variavel();
+            default:
+                variavel();
+                if(currentToken().getLexema().equals("++")||currentToken().getLexema().equals("--"))
                     consumeToken();
-                else
-                    error();
+        }
+    }
+
+    //Operação aritmética
+    private void aritmeticOp() throws FimInesperadoDeArquivo{
+        if(currentToken().getLexema().equals("(")){
+            consumeToken();
+            aritmeticOp();
+            if(currentToken().getLexema().equals(")"))
+                consumeToken();
+            else
+                error();
+        }else{
+            opNegate();
+            if(currentToken().getLexema().equals("*")||currentToken().getLexema().equals("/")){
+                consumeToken();
+                aritmeticOp();
+            }
+        }
+        if(currentToken().getLexema().equals("+")||currentToken().getLexema().equals("-")){
+            consumeToken();
+            aritmeticOp();
+        }    
+    }
+    
+    //Operação relacional
+    private void logicOrRelacionalOp() throws FimInesperadoDeArquivo{
+        switch(currentToken().getId()){
+            case "REL":
+            case "LOG":
+                consumeToken();
+                contRelLogic();
                 break;
             default:
-                aritmeticValue();
+                error();
         }
     }
 
-    private void aritmeticOp(){
-        
+    
+    //Verifica os possíveis valores de uma operação relacional ou lógica.
+    private void contRelLogic() throws FimInesperadoDeArquivo{
+        switch (currentToken().getLexema()) {
+                    case "true":
+                    case "false":
+                        Token t = (Token) lookahead();
+                        if(t.getId().equals("REL")||t.getId().equals("LOG")){
+                            consumeToken();
+                            consumeToken();
+                            operation();
+                        }else
+                            consumeToken();
+                        break;
+                    default:
+                        operation();
+                        break;
+                }
     }
     
-    //verifica se é um operador relacional
-    private void relSymbol() throws FimInesperadoDeArquivo {
-        if (currentToken().getId().equals("REL")) {
+    //Operação de negação.
+    private void negBoolValue() throws FimInesperadoDeArquivo{
+        if(currentToken().getLexema().equals("!")){
             consumeToken();
-        } else {
+            variavel();
+        }else
             error();
-        }
     }
-
-    //verifica se é um operador lógico
-    private void logicSymbol() throws FimInesperadoDeArquivo {
-        if (currentToken().getId().equals("LOG")) {
-            consumeToken();
-        } else {
-            error();
+    
+    //Produções de valor booleano que não possuem operações aritméticas no first.
+    private void boolOnlyOp() throws FimInesperadoDeArquivo{
+        switch (currentToken().getLexema()) {
+            case "true":
+            case "false":
+                consumeToken();
+                logicOrRelacionalOp();
+                break;
+            case "!":
+                consumeToken();
+                negBoolValue();
+                break;
+            case "(":
+                consumeToken();
+                if(currentToken().getId().equals("NRO")||currentToken().getId().equals("CAD")){
+                    aritmeticOp();
+                    logicOrRelacionalOp();
+                    if(currentToken().getLexema().equals(")")){
+                        consumeToken();
+                        logicOrRelacionalOp();
+                    }else{
+                        logicOrRelacionalOp();
+                        if(currentToken().getLexema().equals(")")){
+                            if(currentToken().getId().equals("REL")||currentToken().getId().equals("LOG")){
+                                logicOrRelacionalOp();
+                        }
+                        }else
+                            error();    
+                    }
+                }else{
+                    boolOnlyOp();
+                    if(currentToken().getLexema().equals(")")){
+                        consumeToken();
+                        if(currentToken().getId().equals("REL")||currentToken().getId().equals("LOG")){
+                            consumeToken();
+                            logicOrRelacionalOp();
+                        }
+                    }else
+                        error();
+                }
+                break;
+            default:
+                    error();
         }
     }
     
-    private void operation(){
-        
+    //Operações que podem retornar valores binários.
+    private void boolOperation() throws FimInesperadoDeArquivo{
+        if(currentToken().getId().equals("NRO")||currentToken().getId().equals("CAD")){
+            aritmeticOp();
+            logicOrRelacionalOp();
+        }else
+            boolOnlyOp();
+    }
+    
+    private void operation() throws FimInesperadoDeArquivo{
+        if(currentToken().getId().equals("NRO")||currentToken().getId().equals("CAD")){
+            aritmeticOp();
+            if(currentToken().getId().equals("REL")||currentToken().getId().equals("LOG"))
+                logicOrRelacionalOp();
+        }else{
+            switch (currentToken().getLexema()) {
+                case "true":
+                case "false":
+                    consumeToken();
+                    logicOrRelacionalOp();
+                    break;
+                case "!":
+                    consumeToken();
+                    negBoolValue();
+                    break;
+                case "(":
+                    consumeToken();
+                    if(currentToken().getId().equals("NRO")||currentToken().getId().equals("CAD")){
+                        aritmeticOp();
+                        if(currentToken().getId().equals("REL")||currentToken().getId().equals("LOG"))
+                            logicOrRelacionalOp();
+                    }else{
+                        boolOnlyOp();
+                        if(currentToken().getLexema().equals(")")){
+                            if(currentToken().getId().equals("REL")||currentToken().getId().equals("LOG"))
+                                logicOrRelacionalOp();
+                        }else
+                            error();
+                    }
+                    if(currentToken().getLexema().equals(")")){
+                        if(currentToken().getId().equals("REL")||currentToken().getId().equals("LOG"))
+                            logicOrRelacionalOp();
+                    }else
+                        error();
+                    break;
+                default:
+                        error();
+            }
+        }
     }
 //******************************************* Operations *********************************************  
 //====================================================================================================
