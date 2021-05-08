@@ -311,12 +311,10 @@ public class AnalisadorSintatico {
                 consumeToken();
                 vectMatIndex();
                 if(currentToken().getLexema().equals("]")){
-                    String ahead = lookahead().getLexema();
-                    if(ahead.equals(".")){
-                        consumeToken();
+                    consumeToken();
+                    if(currentToken().getLexema().equals(".")){
                         structE1();
-                    }else if(ahead.equals("[")){
-                        consumeToken();
+                    }else if(currentToken().getLexema().equals("[")){
                         consumeToken();
                         vectMatIndex();
                         if(currentToken().getLexema().equals("]")){
@@ -326,7 +324,6 @@ public class AnalisadorSintatico {
                         }else
                             error();
                     }
-                    
                 }else
                     error();
                 break;
@@ -1122,7 +1119,10 @@ public class AnalisadorSintatico {
         switch (currentToken().getLexema()) {
             case "-":
                 consumeToken();
-                aritmeticValue();
+                if(currentToken().getId().equals("IDE"))
+                    variavel();
+                else
+                    aritmeticValue();
                 break;
             case "--":
             case "++":
@@ -1137,12 +1137,18 @@ public class AnalisadorSintatico {
 
     //Operação aritmética
     private void aritmeticOp() throws FimInesperadoDeArquivo{
+        if(currentToken().getLexema().equals("-")&&lookahead().getLexema().equals("("))
+            consumeToken();
         if(currentToken().getLexema().equals("(")){
             consumeToken();
             aritmeticOp();
-            if(currentToken().getLexema().equals(")"))
+            if(currentToken().getLexema().equals(")")){
                 consumeToken();
-            else
+                if(currentToken().getLexema().equals("*")||currentToken().getLexema().equals("/")){
+                    consumeToken();
+                    aritmeticOp();
+                }
+            }else
                 error();
         }else{
             opNegate();
@@ -1214,7 +1220,7 @@ public class AnalisadorSintatico {
             case "(":
                 consumeToken();
                 if(currentToken().getId().equals("NRO")||currentToken().getId().equals("CAD")
-                        ||currentToken().getId().equals("IDE")){
+                        ||currentToken().getId().equals("IDE")||currentToken().getLexema().equals("-")){
                     aritmeticOp();
                     logicOrRelacionalOp();
                     if(currentToken().getLexema().equals(")")){
@@ -1223,6 +1229,7 @@ public class AnalisadorSintatico {
                     }else{
                         logicOrRelacionalOp();
                         if(currentToken().getLexema().equals(")")){
+                            consumeToken();
                             if(currentToken().getId().equals("REL")||currentToken().getId().equals("LOG")){
                                 logicOrRelacionalOp();
                         }
@@ -1249,7 +1256,7 @@ public class AnalisadorSintatico {
     //Operações que podem retornar valores binários.
     private void boolOperation() throws FimInesperadoDeArquivo{
         if(currentToken().getId().equals("NRO")||currentToken().getId().equals("CAD")
-                        ||currentToken().getId().equals("IDE")){
+                        ||currentToken().getId().equals("IDE")||currentToken().getLexema().equals("-")){
             aritmeticOp();
             logicOrRelacionalOp();
         }else
@@ -1258,7 +1265,7 @@ public class AnalisadorSintatico {
     
     private void operation() throws FimInesperadoDeArquivo{
         if(currentToken().getId().equals("NRO")||currentToken().getId().equals("CAD")
-                        ||currentToken().getId().equals("IDE")){
+                        ||currentToken().getId().equals("IDE")||currentToken().getLexema().equals("-")){
             aritmeticOp();
             if(currentToken().getId().equals("REL")||currentToken().getId().equals("LOG"))
                 logicOrRelacionalOp();
@@ -1276,19 +1283,21 @@ public class AnalisadorSintatico {
                 case "(":
                     consumeToken();
                     if(currentToken().getId().equals("NRO")||currentToken().getId().equals("CAD")
-                        ||currentToken().getId().equals("IDE")){
+                        ||currentToken().getId().equals("IDE")||currentToken().getLexema().equals("-")){
                         aritmeticOp();
                         if(currentToken().getId().equals("REL")||currentToken().getId().equals("LOG"))
                             logicOrRelacionalOp();
                     }else{
                         boolOnlyOp();
                         if(currentToken().getLexema().equals(")")){
+                            consumeToken();
                             if(currentToken().getId().equals("REL")||currentToken().getId().equals("LOG"))
                                 logicOrRelacionalOp();
                         }else
                             error();
                     }
                     if(currentToken().getLexema().equals(")")){
+                        consumeToken();
                         if(currentToken().getId().equals("REL")||currentToken().getId().equals("LOG"))
                             logicOrRelacionalOp();
                     }else
