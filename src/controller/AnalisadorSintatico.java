@@ -228,13 +228,31 @@ public class AnalisadorSintatico {
                 consumeToken(); 
                 functionCall();
             } else {
-                consumeToken();
+                operation();
             }
-        } else if (currentToken().getLexema().equals("true") || currentToken().getLexema().equals("false")) {
-            consumeToken();
-        } //else if()
-        else {
-            error();
+        }else{
+            switch (currentToken().getLexema()) {
+                case "true":
+                case "false":
+                    if(t.getId().equals("REL")||t.getId().equals("LOG"))
+                        operation();
+                    else
+                        consumeToken();
+                case "!":
+                case "++":
+                case "--":
+                case "-":
+                case "(":    
+                    operation();
+                    break;
+                default:
+                    if(currentToken().getId().equals("NRO")||currentToken().getId().equals("CAD"))
+                        operation();
+                    else
+                        error();
+                            
+                    break;
+            }
         }
     }
 
@@ -1140,6 +1158,10 @@ public class AnalisadorSintatico {
         } else {
             error();
         }
+    }
+    
+    private void operation(){
+        
     }
 //******************************************* Operations *********************************************  
 //====================================================================================================
