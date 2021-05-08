@@ -90,8 +90,10 @@ public class AnalisadorSintatico {
     }
 
     private void error() throws FimInesperadoDeArquivo {
-        System.out.println("Erro no token: "+currentToken().getLexema()+" lookahead: "+lookahead().getLexema());
+        System.out.println("Erro no token "+currentToken().getId()+": "+currentToken().getLexema()+" lookahead: "+lookahead().getLexema());
         this.erros++;
+        int i = 0;
+        int j = 1/i;
     }
 
 //================================== Cabeçalhos de início do código ==================================
@@ -275,7 +277,7 @@ public class AnalisadorSintatico {
         String aheadToken = lookahead().getLexema();
         if(currentToken().getId().equals("IDE")){
             consumeToken();
-            if(aheadToken.equals(".")|aheadToken.equals("["))
+            if(aheadToken.equals(".")||aheadToken.equals("["))
                 contElement();
         }else{
             switch (currentToken().getLexema()) {
@@ -1024,6 +1026,7 @@ public class AnalisadorSintatico {
     private void read() throws FimInesperadoDeArquivo {
         consumeToken();
         if (currentToken().getLexema().equals("(")) {
+            consumeToken();
             readParams();
         } else {
             error();
@@ -1210,7 +1213,8 @@ public class AnalisadorSintatico {
                 break;
             case "(":
                 consumeToken();
-                if(currentToken().getId().equals("NRO")||currentToken().getId().equals("CAD")){
+                if(currentToken().getId().equals("NRO")||currentToken().getId().equals("CAD")
+                        ||currentToken().getId().equals("IDE")){
                     aritmeticOp();
                     logicOrRelacionalOp();
                     if(currentToken().getLexema().equals(")")){
@@ -1244,7 +1248,8 @@ public class AnalisadorSintatico {
     
     //Operações que podem retornar valores binários.
     private void boolOperation() throws FimInesperadoDeArquivo{
-        if(currentToken().getId().equals("NRO")||currentToken().getId().equals("CAD")){
+        if(currentToken().getId().equals("NRO")||currentToken().getId().equals("CAD")
+                        ||currentToken().getId().equals("IDE")){
             aritmeticOp();
             logicOrRelacionalOp();
         }else
@@ -1252,7 +1257,8 @@ public class AnalisadorSintatico {
     }
     
     private void operation() throws FimInesperadoDeArquivo{
-        if(currentToken().getId().equals("NRO")||currentToken().getId().equals("CAD")){
+        if(currentToken().getId().equals("NRO")||currentToken().getId().equals("CAD")
+                        ||currentToken().getId().equals("IDE")){
             aritmeticOp();
             if(currentToken().getId().equals("REL")||currentToken().getId().equals("LOG"))
                 logicOrRelacionalOp();
@@ -1269,7 +1275,8 @@ public class AnalisadorSintatico {
                     break;
                 case "(":
                     consumeToken();
-                    if(currentToken().getId().equals("NRO")||currentToken().getId().equals("CAD")){
+                    if(currentToken().getId().equals("NRO")||currentToken().getId().equals("CAD")
+                        ||currentToken().getId().equals("IDE")){
                         aritmeticOp();
                         if(currentToken().getId().equals("REL")||currentToken().getId().equals("LOG"))
                             logicOrRelacionalOp();
