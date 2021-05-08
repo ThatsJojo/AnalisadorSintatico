@@ -69,6 +69,7 @@ public class ControllerFluxoAnalise {
             }
             try {
                 arquivoController.escreverArquivo(outputPath+outputFile+".txt", ret);//Concluída a análise, cria o arquivo de saída correspondente.
+                System.out.println("O arquivo "+outputFile+".txt foi criado com êxito.");
             } catch (IOException ex) {
                 System.out.println("Não foi possível criar o arquivo "+outputPath+outputFile+".txt");
             }

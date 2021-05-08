@@ -30,9 +30,9 @@ public class AnalisadorLexico {
     //
     private static final HashSet<String> palavrasReservadas = new HashSet();
     private static final HashSet<String> delimitadores = new HashSet();
-    private final ArrayList<Token> tokens;
-
-    int estado = 0;
+	private final ArrayList<Token> tokens;
+    
+	int estado = 0;
     int token = 0;
     boolean fimCodigo = false;
     private String analiseRet = "";
@@ -78,7 +78,7 @@ public class AnalisadorLexico {
      * @param arquivo arquivo a ser analisado.
      * @return 
      */
-    public Pair<ArrayList, String> analise(Arquivo arquivo) {
+	public Pair<ArrayList, String> analise(Arquivo arquivo) {
         tokens.clear();
         Iterator linhas = arquivo.getConteudo();
         boolean inComment = false;//flag para indicar se a leitura está dentro de um comentario de bloco
@@ -161,13 +161,14 @@ public class AnalisadorLexico {
                             if(i==size-1){
                                 this.addToken("ATRIB", lexema, line);
                             }else
-                                estado = 18;
+                                estado = 18;//O tratamento é igual ao do caso anterior, pode-se ir ao mesmo estado.
                         } else if (caractere == '/') {
                             if(i==size-1){
                                 this.addToken("ART", lexema, line);//Operador Aritmético, caso seja apenas '/'.
                             }else//Distinguir, no estado 11, entre "/**/", "//" e '/'
                                 estado = 11;
                         }else if(caractere == '*'){//Estando no estado 0, '*' forma Operador Aritmético.
+                            lexema += caractere;
                             this.addToken("ART", lexema, line);
                         } else if (caractere == '+') {//Distinguir-se-á entre '+' e "++".
                             lexema += caractere;
@@ -470,8 +471,8 @@ public class AnalisadorLexico {
         System.out.println("Análise léxica realizada "+(arquivo.getErrosLexicos()==0?"com":"sem")+" sucesso ("+String.format("%03d", arquivo.getErrosLexicos())+" erros léxicos encontrados) "+" no arquivos "+arquivo.getNome());
         return new Pair<>(tokens, analiseRet);
     }
-    
-    public Iterator getTokens(){
+	
+	public Iterator getTokens(){
         return tokens.iterator();
     }
 

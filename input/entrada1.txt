@@ -5,6 +5,10 @@ var{
 	int i[2] = [false,true], j = false;
 	real i = false,k=true, k[3]=[urubu,sem,asa], l;
 	int i[2][3]=[[false,true, zip, zop],[biri, flinston],[opa],[eita]], joao=i,false1 =  j;
+	int i[2*90] = [false,true], j = false;
+	real i = false,k=true, k[3]=[urubu,sem,asa], l;
+	int i[2][3]=[[false,true, zip, zop],[biri, flinston],[opa],[eita]], joao=i,false1 =  j;
+
 }
 
 const{
@@ -23,6 +27,4 @@ procedure start(){
     }
     read(i);
 }
-
-
 

@@ -90,7 +90,7 @@ public class AnalisadorSintatico {
     }
 
     private void error() throws FimInesperadoDeArquivo {
-        System.out.println("Erro no token "+currentToken().getId()+": "+currentToken().getLexema()+" lookahead: "+lookahead().getLexema());
+        System.out.println("Erro no token "+currentToken().getId()+" na linha "+currentToken().getLinha()+": "+currentToken().getLexema()+" lookahead: "+lookahead().getLexema());
         this.erros++;
         int i = 0;
         int j = 1/i;
