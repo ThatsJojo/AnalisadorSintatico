@@ -30,6 +30,16 @@ function int soma(){
     return i;
 }
 
+procedure teste(){
+    var{
+        struct Pessoa xablau;
+    }
+    typedef struct Pessoa Pessoa;
+    typedef string frase;
+    read(i, u[i]);
+
+}
+
 procedure start(){
     var{
         struct Pessoa xablau;

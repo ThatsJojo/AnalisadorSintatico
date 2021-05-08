@@ -87,10 +87,6 @@ public class AnalisadorSintatico {
         return (Token) tokens.get(countToken);
     }
 
-    private Token look2back() throws FimInesperadoDeArquivo {
-        return (Token) tokens.get(countToken - 2);
-    }
-
     private void error() throws FimInesperadoDeArquivo {
         System.out.println("Erro no token " + currentToken().getId() + " na linha " + currentToken().getLinha() + ": " + currentToken().getLexema() + " lookahead: " + lookahead().getLexema());
         this.erros++;
@@ -193,26 +189,23 @@ public class AnalisadorSintatico {
     }
 
     private void methods() throws FimInesperadoDeArquivo {
-        Token pf = currentToken();
-        consumeToken();
         Token t = lookahead();
-        if (currentToken().getLexema().equals("start") && pf.getLexema().equals("procedure")) {
+        if (t.getLexema().equals("start") && currentToken().getLexema().equals("procedure")) {
+            consumeToken();
             startProcedure();
-        } else if (t.getId().equals("IDE")) {
+        } else {
             functionList();
             methods();
-        } else {
-            error();
-        }
+        } 
     }
 
     private void functionList() throws FimInesperadoDeArquivo {
-        Token t = look2back();
-        switch (t.getLexema()) {
+        switch (currentToken().getLexema()) {
             case "procedure":
                 procedure();
                 break;
             case "function":
+                consumeToken();
                 function();
                 break;
             default:
