@@ -858,14 +858,18 @@ public class AnalisadorSintatico {
     }
 
     private void procedureContent() throws FimInesperadoDeArquivo {
-        if (currentToken().getLexema().equals("var")) {
-            varDeclaration();
-            procedureContent2();
-        } else if (currentToken().getLexema().equals("const")) {
-            constDeclaration();
-            procedureContent3();
-        } else {
-            error();
+        switch (currentToken().getLexema()) {
+            case "var":
+                varDeclaration();
+                procedureContent2();
+                break;
+            case "const":
+                constDeclaration();
+                procedureContent3();
+                break;
+            default:
+                error();
+                break;
         }
     }
 
