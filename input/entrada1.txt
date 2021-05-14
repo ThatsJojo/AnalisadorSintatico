@@ -27,6 +27,11 @@ function int soma(){
     if(!variavel) then{
        read(i);
     }
+
+    while(!variavel){
+	read(j);
+    }
+
     return i;
 }
 

@@ -196,7 +196,7 @@ public class AnalisadorSintatico {
         } else {
             functionList();
             methods();
-        } 
+        }
     }
 
     private void functionList() throws FimInesperadoDeArquivo {
@@ -1125,14 +1125,14 @@ public class AnalisadorSintatico {
                         codigo();
                         if (currentToken().getLexema().equals("}")) {
                             consumeToken();
+                            elsePart();
                         } else {
                             error();
                         }
                     } else {
                         error();
                     }
-                }
-                else{
+                } else {
                     error();
                 }
             } else {
@@ -1144,8 +1144,47 @@ public class AnalisadorSintatico {
 
     }
 
-    private void whileLoop() {
+    private void elsePart() throws FimInesperadoDeArquivo {
+        if (currentToken().getLexema().equals("else")) {
+            consumeToken();
+            if (currentToken().getLexema().equals("{")) {
+                consumeToken();
+                codigo();
+                if (currentToken().getLexema().equals("}")) {
+                    consumeToken();
+                } else {
+                    error();
+                }
+            } else {
+                error();
+            }
+        }
+    }
 
+    private void whileLoop() throws FimInesperadoDeArquivo {
+        consumeToken();
+        if (currentToken().getLexema().equals("(")) {
+            consumeToken();
+            boolOperation();
+            if (currentToken().getLexema().equals(")")) {
+                consumeToken();
+                if (currentToken().getLexema().equals("{")) {
+                    consumeToken();
+                    codigo();
+                    if (currentToken().getLexema().equals("}")) {
+                        consumeToken();
+                    } else {
+                        error();
+                    }
+                } else {
+                    error();
+                }
+            } else {
+                error();
+            }
+        } else {
+            error();
+        }
     }
 
 //************************************** Codigo ****************************************************** 
