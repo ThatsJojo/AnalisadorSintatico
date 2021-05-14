@@ -40,6 +40,7 @@ public class AnalisadorSintatico {
         firstComando.add("typedef");
         firstComando.add("struct");
         firstComando.add("if");
+
     }
 
     void analise(Arquivo arq, ArrayList tokens) throws FimInesperadoDeArquivo {
@@ -1011,34 +1012,68 @@ public class AnalisadorSintatico {
 //====================================== Codigo ======================================================
 //****************************************************************************************************  
     private void codigo() throws FimInesperadoDeArquivo {
-        if (firstComando.contains(currentToken().getLexema())) { // adicionar opções de functionCall, incremento, decremento
-            comando();                                       //e atribuição
+        if (firstComando.contains(currentToken().getLexema()) || currentToken().getId().equals("IDE") || currentToken().getLexema().equals("++") || currentToken().getLexema().equals("--")) { //IDE para increment e decrement, functioncall e atribuição
+            comando();
             codigo();
         }
     }
 
     private void comando() throws FimInesperadoDeArquivo {
-        switch (currentToken().getLexema()) {
-            case "print":
-                print();
-                break;
-            case "read":
-                read();
-                break;
-            case "typedef":
-                typedefDeclaration();
-                break;
-            case "struct":
-                structDeclaration();
-                break;
-            case "if":
-                conditional();
-                break;
-            case "while":
-                whileLoop();
-                break;
-            default:
-                break;
+        if (currentToken().getLexema().equals("print")) {
+            print();
+        } else if (currentToken().getLexema().equals("read")) {
+            read();
+        } else if (currentToken().getLexema().equals("typedef")) {
+            typedefDeclaration();
+        } else if (currentToken().getLexema().equals("struct")) {
+            structDeclaration();
+        } else if (currentToken().getLexema().equals("if")) {
+            conditional();
+        } else if (currentToken().getLexema().equals("while")) {
+            whileLoop();
+        } else if (currentToken().getId().equals("IDE")) {
+            Token t = lookahead();
+            if (t.getLexema().equals("(")) {
+                functionCall();
+            } else { // casos de incrementop, decrementop e atribuição (first é variável nos 3 casos)
+                variavel();
+                //atribuição
+                switch (currentToken().getLexema()) {
+                    case "=":
+                        consumeToken();
+                        value();
+                        if (currentToken().getLexema().equals(";")) {
+                            consumeToken();
+                        } else {
+                            error();
+                        }
+                        break;
+                    case "++":
+                    case "--":
+                        consumeToken();
+                        if (currentToken().getLexema().equals(";")) {
+                            consumeToken();
+                        } else {
+                            error();
+                        }
+                        break;
+                    default:
+                        error();
+                        break;
+                }
+
+            }
+        } //caso de pré incremento/decremento
+        else if (currentToken().getLexema().equals("++") || currentToken().getLexema().equals("--")) {
+            consumeToken();
+            variavel();
+            if (currentToken().getLexema().equals(";")) {
+                consumeToken();
+            } else {
+                error();
+            }
+        } else {
+            error();
         }
     }
 
@@ -1446,16 +1481,23 @@ public class AnalisadorSintatico {
 //========================================== Function Call ===========================================  
 //****************************************************************************************************
     private void functionCall() throws FimInesperadoDeArquivo {
-        int i = 0; //deixar assim enquanto nao tiver o <VALUE> pronto
-        if (i == 2) { //colocar conjunto first de value;
-            value();
-            fCallParams();
-        } else if (currentToken().getLexema().equals(")")) {
+        consumeToken();
+        if (currentToken().getLexema().equals("(")) {
             consumeToken();
+            if (currentToken().getLexema().equals(")")) {
+                consumeToken();
+                if (currentToken().getLexema().equals(";")) {
+                    consumeToken();
+                } else {
+                    error();
+                }
+            } else {
+                value();
+                fCallParams();
+            }
         } else {
             error();
         }
-
     }
 
     private void fCallParams() throws FimInesperadoDeArquivo {
@@ -1466,6 +1508,11 @@ public class AnalisadorSintatico {
                 break;
             case ")":
                 consumeToken();
+                if (currentToken().getLexema().equals(";")) {
+                    consumeToken();
+                } else {
+                    error();
+                }
                 break;
             default:
                 error();

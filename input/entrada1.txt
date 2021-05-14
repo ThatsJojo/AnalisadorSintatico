@@ -27,7 +27,11 @@ function int soma(){
     if(!variavel) then{
        read(i);
     }
-
+    i++;
+    i--;
+    --i;
+    ++j;
+    teste();
     while(!variavel){
 	read(j);
     }
@@ -38,6 +42,7 @@ function int soma(){
 procedure teste(){
     var{
         struct Pessoa xablau;
+        int soma;
     }
     typedef struct Pessoa Pessoa;
     typedef string frase;
