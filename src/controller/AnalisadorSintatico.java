@@ -886,14 +886,156 @@ public class AnalisadorSintatico {
 
 //======================================== Struct Declaration ========================================
 //**************************************************************************************************** 
-    private void structDeclaration() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void structDeclaration() throws FimInesperadoDeArquivo {
+        consumeToken();
+        if (currentToken().getId().equals("IDE")) {
+            structVars();
+        } else {
+            error();
+        }
     }
-//**************************************** Struct Declaration ****************************************  
-//====================================================================================================
 
-//====================================== Procedure Declaration =======================================
-//****************************************************************************************************     
+    private void structVars() throws FimInesperadoDeArquivo {
+        consumeToken();
+        switch (currentToken().getLexema()) {
+            case "{":
+                consumeToken();
+                blockVarStruct();
+                break;
+            case "extends":
+                consumeToken();
+                if (currentToken().getId().equals("IDE")) {
+                    consumeToken();
+                    if (currentToken().getLexema().equals("{")) {
+                        consumeToken();
+                        blockVarStruct();
+                    }
+                    else{
+                        error();
+                    }
+                } else {
+                    error();
+                }   break;
+            default:
+                error();
+                break;
+        }
+    }
+
+    private void blockVarStruct() throws FimInesperadoDeArquivo {
+        if (currentToken().getLexema().equals("var")) {
+            consumeToken();
+            if (currentToken().getLexema().equals("{")) {
+                consumeToken();
+                firstStructVar();
+            } else {
+                error();
+            }
+        } else {
+            error();
+        }
+    }
+
+    private void firstStructVar() throws FimInesperadoDeArquivo {
+        dataType();
+        structVarId();
+    }
+
+    private void structVarId() throws FimInesperadoDeArquivo {
+        if (currentToken().getId().equals("IDE")) {
+            consumeToken();
+            structVarExp();
+        } else {
+            error();
+        }
+    }
+
+    private void structVarExp() throws FimInesperadoDeArquivo {
+        switch (currentToken().getLexema()) {
+            case ",":
+                consumeToken();
+                structVarId();
+                break;
+            case ";":
+                consumeToken();
+                proxStructVar();
+                break;
+            case "[":
+                consumeToken();
+                vectMatIndex();
+                if (currentToken().getId().equals("]")) {
+                    consumeToken();
+                    structMatriz();
+                } else {
+                    error();
+                }
+                break;
+            default:
+                error();
+                break;
+        }
+    }
+
+    private void proxStructVar() throws FimInesperadoDeArquivo {
+        if (currentToken().getLexema().equals("}")) {
+            consumeToken();
+            if (currentToken().getLexema().equals("}")) {
+                consumeToken();
+            } else {
+                error();
+            }
+        } else {
+            dataType();
+            structVarId();
+        }
+    }
+
+    private void structMatriz() throws FimInesperadoDeArquivo {
+        switch (currentToken().getLexema()) {
+            case "[":
+                consumeToken();
+                vectMatIndex();
+                if (currentToken().getLexema().equals("]")) {
+                    consumeToken();
+                    contStructMatriz();
+                } else {
+                    error();
+                }
+                break;
+            case ",":
+                consumeToken();
+                structVarId();
+                break;
+            case ";":
+                consumeToken();
+                proxStructVar();
+                break;
+            default:
+                error();
+                break;
+        }
+    }
+
+    private void contStructMatriz() throws FimInesperadoDeArquivo {
+        switch (currentToken().getLexema()) {
+            case ",":
+                consumeToken();
+                structVarId();
+                break;
+            case ";":
+                consumeToken();
+                proxStructVar();
+                break;
+            default:
+                error();
+                break;
+        }
+    }
+
+    //**************************************** Struct Declaration ****************************************  
+    //====================================================================================================
+    //====================================== Procedure Declaration =======================================
+    //****************************************************************************************************     
     private void startProcedure() throws FimInesperadoDeArquivo {
         consumeToken();
         if (currentToken().getLexema().equals("(")) {

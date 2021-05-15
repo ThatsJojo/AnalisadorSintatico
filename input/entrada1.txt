@@ -1,6 +1,18 @@
 typedef struct Pessoa Pessoa;
 typedef string frase;
 
+struct pessoa {
+    var{
+        String cpf, nome;
+        int idade, peso, altura;
+    }
+}
+
+struct funcionario extends pessoa{
+    var{
+        real salario;
+    }
+}
 var{
 	int i[2] = [false,true], j = false;
 	real i = false,k=true, k[3]=[urubu,sem,asa], l;
