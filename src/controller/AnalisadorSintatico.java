@@ -44,7 +44,7 @@ public class AnalisadorSintatico {
 
     }
 
-    void analise(Arquivo arq, ArrayList tokens) throws FimInesperadoDeArquivo {
+    public String analise(Arquivo arq, ArrayList tokens) throws FimInesperadoDeArquivo {
         analiseret = "";
         this.erros = 0;
         this.tokens = tokens;
@@ -60,6 +60,7 @@ public class AnalisadorSintatico {
         } else {
             System.out.println("FORAM DETECTADOS " + this.erros + " ERROS SINTÁTICOS NO ARQUIVO " + arq.getNome());
         }
+        return analiseret;
     }
 
     private boolean consumeToken() throws FimInesperadoDeArquivo {
