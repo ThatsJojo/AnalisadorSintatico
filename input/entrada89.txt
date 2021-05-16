@@ -1,0 +1,74 @@
+typedef struct Pessoa Pessoa;
+typedef string frase;
+
+struct pessoa {
+    var{
+        String cpf, nome;
+        int idade, peso, altura;
+    }
+}
+
+struct funcionario extends pessoa{
+    var{
+        real salario;
+    }
+}
+var{
+	int i[2] = [false,true], j = false;
+	real i = false,k=true, k[3]=[urubu,sem,asa], l;
+	int i[2][3]=[[false,true, zip, zop],[biri, flinston],[opa],[eita]], joao=i,false1 =  j;
+	//Testanto operações
+	int i[2*90/1520] = [false,(2+3)!=(2+3)<7], j = false<=(8*5.2+i[5/4]*jota.ka[21][5+3]);
+	real i = 10*3.1+2.7*8.777/15+(128/12.2), k=i[20.5/(12-15)*(-I+20)]||(128&&15)>14, k[3]=[urubu,sem,asa], l;
+	int i[2*3][3+2]=[[false,true||ele, zip<=zop, uat&&zap],[biri>flinston, opa-flinston],[-opa*2],[2/(eita)]], joao=-i,false1 =  -(j/2);
+
+}
+
+const{
+	int i = false, j = true;
+	real i = reali, joao = safe;
+	int i[2]=[opa,zap];
+	int i[2] = [false,true], j = false;
+	real i = false,k=true, k[3]=[urubu,sem,asa];
+	int i[2][3]=[[false,true, zip, zop],[biri, flinston],[opa],[eita]], joao=i,false1 =  j;
+
+}
+
+function int soma(){
+    read(i, u[i]);
+    if(!variavel) then{
+       read(i);
+    }
+    i++;
+    i--;
+    --i;
+    ++j;
+    teste();
+    while(!variavel){
+	read(j);
+    }
+
+    return i;
+}
+
+procedure teste(){
+    var{
+        struct Pessoa xablau;
+        int soma;
+    }
+    typedef struct Pessoa Pessoa;
+    typedef string frase;
+    read(i, u[i]);
+
+}
+
+procedure start(){
+    var{
+        struct Pessoa xablau;
+    }
+    typedef struct Pessoa Pessoa;
+    typedef string frase;
+    read(i, u[i]);
+
+
+

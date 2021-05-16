@@ -49,10 +49,10 @@ public class ControllerFluxoAnalise {
     
     public void comecarAnalise(){
         arquivos.forEach((Arquivo arq)->{//Itera os arquivos de entrada passando-os pela análise léxica.
+            System.out.println("Arquivo atual: "+arq.getNome());
             Pair<ArrayList,String> par = analisadorLexico.analise(arq);//Pega a o conjunto de tokens gerados pelo conteúdo do arquivo.
             ArrayList tokens = par.getKey();
-            analisadorSintatico.analise(arq, tokens);
-            String ret = par.getValue();
+            String ret = analisadorSintatico.analise(arq, tokens);
             String outputFile = "saida";
             String inputFile = arq.getNome();
             int i;
@@ -65,9 +65,9 @@ public class ControllerFluxoAnalise {
             }
             try {
                 arquivoController.escreverArquivo(outputPath+outputFile+".txt", ret);//Concluída a análise, cria o arquivo de saída correspondente.
-                System.out.println("O arquivo "+outputFile+".txt foi criado com êxito.");
+                System.out.println("O arquivo "+outputFile+".txt foi criado com êxito.\n");
             } catch (IOException ex) {
-                System.out.println("Não foi possível criar o arquivo "+outputPath+outputFile+".txt");
+                System.out.println("Não foi possível criar o arquivo "+outputPath+outputFile+".txt\n");
             }
         });
     }

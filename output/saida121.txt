@@ -1,11 +1,1 @@
-0001 IDE kkkk
-0001 IDE agora
-0001 IDE foi
-0001 IDE fdp
-0001 IDE do
-0001 IDE carai
-0001 IDE kkk12
-0001 REL <
-0001 NRO 45
-0001 LOG ||
-0001 NRO 27
+IDE ERRO SINTÁTICO. ESPERAVA: "typedef", "struct", "var", "const", "procedure" ou "function".  Encontrado: kkkk

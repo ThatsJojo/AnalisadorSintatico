@@ -48,6 +48,8 @@ public class AnalisadorSintatico {
         analiseret = "";
         this.erros = 0;
         this.tokens = tokens;
+        countToken = 0;
+        privateCurrentToken = null;
         //percorrer toda a lista de tokens até o ultimo elemento
         try{
             consumeToken();
@@ -57,13 +59,11 @@ public class AnalisadorSintatico {
                 error("\"typedef\", \"struct\", \"var\", \"const\", \"procedure\" ou \"function\"");
             }
         }catch(FimInesperadoDeArquivo e){
-            analiseret += ""+(privateCurrentToken==null?""+privateCurrentToken.getId():"0000")+" ERRO SINTÁTICO. EOF";
+            analiseret += ""+(privateCurrentToken==null?""+privateCurrentToken.getId():"0000")
+                    +" ERRO SINTÁTICO. EOF";
         }
-        if (erros == 0) {
-            System.out.println("Análise Sintática no arquivo " + arq.getNome() + " não retornou erros");
-        } else {
-            System.out.println("FORAM DETECTADOS " + this.erros + " ERROS SINTÁTICOS NO ARQUIVO " + arq.getNome());
-        }
+        System.out.println("Análise Sintática realizada "+(erros==0?"com":"sem")+" sucesso ("+String.format("%03d", erros)
+                +" erros sintáticos encontrados) no arquivo " + arq.getNome() + ".");
         return analiseret;
     }
 
@@ -71,13 +71,17 @@ public class AnalisadorSintatico {
         if (countToken > tokens.size()) {
             throw new FimInesperadoDeArquivo();
         } else if (countToken == tokens.size()) {
+            analiseret += ""+privateCurrentToken.getLinha()+" "+
+                    privateCurrentToken.getId()+" "+privateCurrentToken.getLexema()+"\n";
             this.privateCurrentToken = new Token("EOF", null, privateCurrentToken.getLinha());
             countToken++;
             return false;
         } else {
-            this.privateCurrentToken = (Token) tokens.get(countToken++);
-            analiseret += ""+privateCurrentToken.getLinha()+" "+
+            if(countToken!=0)
+                analiseret += ""+privateCurrentToken.getLinha()+" "+
                     privateCurrentToken.getId()+" "+privateCurrentToken.getLexema()+"\n";
+            this.privateCurrentToken = (Token) tokens.get(countToken++);
+            
             return true;
         }
 
@@ -85,6 +89,7 @@ public class AnalisadorSintatico {
 
     private Token currentToken() throws FimInesperadoDeArquivo {
         if (privateCurrentToken == null || privateCurrentToken.getId().equals("EOF")) {
+            erros++;
             throw new FimInesperadoDeArquivo();
         }
         return privateCurrentToken;
@@ -92,6 +97,7 @@ public class AnalisadorSintatico {
 
     private Token lookahead() throws FimInesperadoDeArquivo {
         if (countToken >= tokens.size()) {
+            erros++;
             throw new FimInesperadoDeArquivo();
         }
         return (Token) tokens.get(countToken);
@@ -101,12 +107,12 @@ public class AnalisadorSintatico {
         analiseret+=""+privateCurrentToken.getId()+" ERRO SINTÁTICO. ESPERAVA: "+
                 esperado+".  Encontrado: "+currentToken().getLexema();
 
-        System.out.println("Erro no token " + currentToken().getId() + " na linha " 
+        System.out.println("Erro"+erros+" no token " + currentToken().getId() + " na linha " 
                 + currentToken().getLinha() + ": " + currentToken().getLexema() 
                 + " lookahead: " + lookahead().getLexema());
         this.erros++;
-        int i = 0;
-        int j = 1 / i;
+//        int i = 0;
+//        int j = 1 / i;
     }
 
 //================================== Cabeçalhos de início do código ==================================
