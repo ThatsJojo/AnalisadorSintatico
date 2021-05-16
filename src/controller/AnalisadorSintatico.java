@@ -68,16 +68,21 @@ public class AnalisadorSintatico {
     }
 
     private boolean consumeToken() throws FimInesperadoDeArquivo {
+        return consumeToken(false);
+    }
+    
+    private boolean consumeToken(Boolean tokenErro)throws FimInesperadoDeArquivo{
         if (countToken > tokens.size()) {
             throw new FimInesperadoDeArquivo();
         } else if (countToken == tokens.size()) {
-            analiseret += ""+privateCurrentToken.getLinha()+" "+
+            if(!tokenErro)
+                analiseret += ""+privateCurrentToken.getLinha()+" "+
                     privateCurrentToken.getId()+" "+privateCurrentToken.getLexema()+"\n";
             this.privateCurrentToken = new Token("EOF", null, privateCurrentToken.getLinha());
             countToken++;
             return false;
         } else {
-            if(countToken!=0)
+            if(countToken!=0&&!tokenErro)
                 analiseret += ""+privateCurrentToken.getLinha()+" "+
                     privateCurrentToken.getId()+" "+privateCurrentToken.getLexema()+"\n";
             this.privateCurrentToken = (Token) tokens.get(countToken++);
@@ -111,6 +116,7 @@ public class AnalisadorSintatico {
                 + currentToken().getLinha() + ": " + currentToken().getLexema() 
                 + " lookahead: " + lookahead().getLexema());
         this.erros++;
+        consumeToken(true);
 //        int i = 0;
 //        int j = 1 / i;
     }
