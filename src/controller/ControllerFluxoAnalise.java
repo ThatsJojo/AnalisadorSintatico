@@ -51,11 +51,7 @@ public class ControllerFluxoAnalise {
         arquivos.forEach((Arquivo arq)->{//Itera os arquivos de entrada passando-os pela análise léxica.
             Pair<ArrayList,String> par = analisadorLexico.analise(arq);//Pega a o conjunto de tokens gerados pelo conteúdo do arquivo.
             ArrayList tokens = par.getKey();
-            try {
-                analisadorSintatico.analise(arq, tokens);
-            } catch (FimInesperadoDeArquivo ex) {
-                System.out.println("O Analisador Sintático detectou fim de arquivo inesperado em: "+arq.getNome());;
-            }
+            analisadorSintatico.analise(arq, tokens);
             String ret = par.getValue();
             String outputFile = "saida";
             String inputFile = arq.getNome();

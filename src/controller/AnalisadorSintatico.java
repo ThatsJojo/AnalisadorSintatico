@@ -44,16 +44,20 @@ public class AnalisadorSintatico {
 
     }
 
-    public String analise(Arquivo arq, ArrayList tokens) throws FimInesperadoDeArquivo {
+    public String analise(Arquivo arq, ArrayList tokens) {
         analiseret = "";
         this.erros = 0;
         this.tokens = tokens;
         //percorrer toda a lista de tokens até o ultimo elemento
-        consumeToken();
-        if (firstInicio.contains(currentToken().getLexema())) {
-            inicio();
-        } else {
-            error("\"typedef\", \"struct\", \"var\", \"const\", \"procedure\" ou \"function\"");
+        try{
+            consumeToken();
+            if (firstInicio.contains(currentToken().getLexema())) {
+                inicio();
+            } else {
+                error("\"typedef\", \"struct\", \"var\", \"const\", \"procedure\" ou \"function\"");
+            }
+        }catch(FimInesperadoDeArquivo e){
+            analiseret += ""+(privateCurrentToken==null?""+privateCurrentToken.getId():"0000")+" ERRO SINTÁTICO. EOF";
         }
         if (erros == 0) {
             System.out.println("Análise Sintática no arquivo " + arq.getNome() + " não retornou erros");
