@@ -12,6 +12,7 @@ public class AnalisadorSintatico {
     private int erros;
     private ArrayList tokens;
     private int countToken = 0;
+    private String analiseret = "";
 
     private static final HashSet<String> firstTypes = new HashSet();
     private static final HashSet<String> firstInicio = new HashSet();
@@ -44,6 +45,7 @@ public class AnalisadorSintatico {
     }
 
     void analise(Arquivo arq, ArrayList tokens) throws FimInesperadoDeArquivo {
+        analiseret = "";
         this.erros = 0;
         this.tokens = tokens;
         //percorrer toda a lista de tokens até o ultimo elemento
@@ -51,7 +53,7 @@ public class AnalisadorSintatico {
         if (firstInicio.contains(currentToken().getLexema())) {
             inicio();
         } else {
-            error();
+            error("\"typedef\", \"struct\", \"var\", \"const\", \"procedure\" ou \"function\"");
         }
         if (erros == 0) {
             System.out.println("Análise Sintática no arquivo " + arq.getNome() + " não retornou erros");
@@ -69,6 +71,8 @@ public class AnalisadorSintatico {
             return false;
         } else {
             this.privateCurrentToken = (Token) tokens.get(countToken++);
+            analiseret += ""+privateCurrentToken.getLinha()+" "+
+                    privateCurrentToken.getId()+" "+privateCurrentToken.getLexema()+"\n";
             return true;
         }
 
@@ -88,8 +92,13 @@ public class AnalisadorSintatico {
         return (Token) tokens.get(countToken);
     }
 
-    private void error() throws FimInesperadoDeArquivo {
-        System.out.println("Erro no token " + currentToken().getId() + " na linha " + currentToken().getLinha() + ": " + currentToken().getLexema() + " lookahead: " + lookahead().getLexema());
+    private void error(String esperado) throws FimInesperadoDeArquivo {
+        analiseret+=""+privateCurrentToken.getId()+" ERRO SINTÁTICO. ESPERAVA: "+
+                esperado+".  Encontrado: "+currentToken().getLexema();
+
+        System.out.println("Erro no token " + currentToken().getId() + " na linha " 
+                + currentToken().getLinha() + ": " + currentToken().getLexema() 
+                + " lookahead: " + lookahead().getLexema());
         this.erros++;
         int i = 0;
         int j = 1 / i;
@@ -120,7 +129,7 @@ public class AnalisadorSintatico {
                 methods();
                 break;
             default:
-                error();
+                error("\"typedef\", \"struct\", \"var\", \"const\", \"procedure\" ou \"function\"");
         }
     }
 
@@ -143,7 +152,7 @@ public class AnalisadorSintatico {
                 methods();
                 break;
             default:
-                error();
+                error("\"typedef\", \"struct\", \"const\", \"procedure\" ou \"function\"");
         }
     }
 
@@ -166,7 +175,7 @@ public class AnalisadorSintatico {
                 methods();
                 break;
             default:
-                error();
+                error("\"typedef\", \"struct\", \"var\", \"procedure\" ou \"function\"");
         }
     }
 
@@ -185,7 +194,7 @@ public class AnalisadorSintatico {
                 methods();
                 break;
             default:
-                error();
+                error("\"typedef\", \"struct\", \"procedure\", \"function\"");
         }
     }
 
@@ -210,7 +219,7 @@ public class AnalisadorSintatico {
                 function();
                 break;
             default:
-                error();
+                error("\"procedure\" ou \"function\"");
                 break;
         }
     }
@@ -251,7 +260,7 @@ public class AnalisadorSintatico {
         if (currentToken().getId().equals("IDE") || firstTypes.contains(currentToken().getLexema())) {
             consumeToken();
         } else {
-            error();
+            error("IDE");
         }
     }
 
@@ -266,7 +275,7 @@ public class AnalisadorSintatico {
                 consumeToken();
                 break;
             default:
-                error();
+                error("NRO ou CAD");
         }
     }
 
@@ -290,17 +299,16 @@ public class AnalisadorSintatico {
                                 contElement();
                             }
                         } else {
-                            error();
+                            error("IDE");
                         }
                     } else {
-                        error();
+                        error("'.'");
                     }
                     break;
                 default:
-                    error();
+                    error("IDE, \"global\" ou \"local\"");
             }
         }
-
     }
 
     private void contElement() throws FimInesperadoDeArquivo {
@@ -324,15 +332,15 @@ public class AnalisadorSintatico {
                                 structE1();
                             }
                         } else {
-                            error();
+                            error("']'");
                         }
                     }
                 } else {
-                    error();
+                    error("]");
                 }
                 break;
             default:
-                error();
+                error("'.' ou '[' ");
         }
     }
 
@@ -345,7 +353,7 @@ public class AnalisadorSintatico {
                 contElement();
             }
         } else {
-            error();
+            error("IDE");
         }
     }
 //******************************************** Data Types ********************************************   
@@ -359,7 +367,7 @@ public class AnalisadorSintatico {
             consumeToken();
             primeiraVar();
         } else {
-            error();
+            error("'{'");
         }
     }
 
@@ -380,7 +388,7 @@ public class AnalisadorSintatico {
             consumeToken();
             varExpression();
         } else {
-            error();
+            error("IDE");
         }
     }
 
@@ -408,7 +416,7 @@ public class AnalisadorSintatico {
                 }
                 break;
             default:
-                error();
+                error("',', '=', ';', '['");
                 break;
         }
     }
@@ -422,7 +430,7 @@ public class AnalisadorSintatico {
                     consumeToken();
                     contMatriz();
                 } else {
-                    error();
+                    error("']'");
                 }
                 break;
             case "=":
@@ -438,7 +446,7 @@ public class AnalisadorSintatico {
                 proxVar();
                 break;
             default:
-                error();
+                error("'[', '=', ',', ';'");
         }
     }
 
@@ -448,7 +456,7 @@ public class AnalisadorSintatico {
             value();
             proxVetor();
         } else {
-            error();
+            error("'['");
         }
     }
 
@@ -464,7 +472,7 @@ public class AnalisadorSintatico {
                 verifVar();
                 break;
             default:
-                error();
+                error("',', ']'");
         }
     }
 
@@ -483,7 +491,7 @@ public class AnalisadorSintatico {
                 proxVar();
                 break;
             default:
-                error();
+                error("'=', ',', ';'");
         }
     }
 
@@ -492,7 +500,7 @@ public class AnalisadorSintatico {
             consumeToken();
             matrizValue();
         } else {
-            error();
+            error("'['");
         }
     }
 
@@ -502,7 +510,7 @@ public class AnalisadorSintatico {
             value();
             proxMatriz();
         } else {
-            error();
+            error("'['");
         }
     }
 
@@ -518,7 +526,7 @@ public class AnalisadorSintatico {
                 next();
                 break;
             default:
-                error();
+                error("',', ']'");
         }
     }
 
@@ -533,7 +541,7 @@ public class AnalisadorSintatico {
                 verifVar();
                 break;
             default:
-                error();
+                error("',', ']'");
         }
     }
 
@@ -548,7 +556,7 @@ public class AnalisadorSintatico {
                 proxVar();
                 break;
             default:
-                error();
+                error("',', ';'");
                 break;
         }
     }
@@ -573,7 +581,7 @@ public class AnalisadorSintatico {
             continueConst();
             constId();
         } else {
-            error();
+            error("'{'");
         }
     }
 
@@ -598,7 +606,7 @@ public class AnalisadorSintatico {
             consumeToken();
             constExpression();
         } else {
-            error();
+            error("IDE");
         }
     }
 
@@ -616,11 +624,11 @@ public class AnalisadorSintatico {
                     consumeToken();
                     estruturaConst();
                 } else {
-                    error();
+                    error("']'");
                 }
                 break;
             default:
-                error();
+                error("'=', '['");
                 break;
         }
     }
@@ -634,7 +642,7 @@ public class AnalisadorSintatico {
                     value();
                     proxConstVetor();
                 } else {
-                    error();
+                    error("'['");
                 }
                 break;
             case "[":
@@ -646,14 +654,14 @@ public class AnalisadorSintatico {
                         consumeToken();
                         initConstMatriz();
                     } else {
-                        error();
+                        error("'='");
                     }
                 } else {
-                    error();
+                    error("']'");
                 }
                 break;
             default:
-                error();
+                error("'=' ou '['");
                 break;
         }
     }
@@ -670,7 +678,7 @@ public class AnalisadorSintatico {
                 verifConst();
                 break;
             default:
-                error();
+                error("',' ou ']'");
                 break;
         }
     }
@@ -680,7 +688,7 @@ public class AnalisadorSintatico {
             consumeToken();
             matrizConstValue();
         } else {
-            error();
+            error("'['");
         }
     }
 
@@ -690,7 +698,7 @@ public class AnalisadorSintatico {
             value();
             proxConstMatriz();
         } else {
-            error();
+            error("'['");
         }
     }
 
@@ -706,7 +714,7 @@ public class AnalisadorSintatico {
                 nextConst();
                 break;
             default:
-                error();
+                error("',', ']'");
         }
     }
 
@@ -721,7 +729,7 @@ public class AnalisadorSintatico {
                 verifConst();
                 break;
             default:
-                error();
+                error("',' ou ']'");
         }
     }
 
@@ -736,7 +744,7 @@ public class AnalisadorSintatico {
                 proxConst();
                 break;
             default:
-                error();
+                error("',' ou ';'");
                 break;
         }
     }
@@ -752,10 +760,10 @@ public class AnalisadorSintatico {
             if (currentToken().getLexema().equals("(")) {
                 continueFunction();
             } else {
-                error();
+                error("'('");
             }
         } else {
-            error();
+            error("IDE");
         }
     }
 
@@ -768,7 +776,7 @@ public class AnalisadorSintatico {
             parameters();
             blockFunction();
         } else {
-            error();
+            error("IDE, ')', \"int\" \"real\" \"boolean\"ou \"string\"");
         }
     }
 
@@ -781,13 +789,13 @@ public class AnalisadorSintatico {
                 if (currentToken().getLexema().equals("}")) {
                     consumeToken();
                 } else {
-                    error();
+                    error("'}'");
                 }
             } else {
-                error();
+                error("';'");
             }
         } else {
-            error();
+            error("'{'");
         }
     }
 
@@ -804,10 +812,11 @@ public class AnalisadorSintatico {
                 consumeToken();
                 value();
             } else {
-                error();
+                error("\"return\"");
             }
         } else {
-            error();
+            error("\"var\", \"const\", \"print\", \"read\", \"while\", \"const\","
+                    + " \"typedef\", \"struct\" ou \"if\"");
         }
 
     }
@@ -822,10 +831,11 @@ public class AnalisadorSintatico {
                 consumeToken();
                 value();
             } else {
-                error();
+                error("\"return\"");
             }
         } else {
-            error();
+            error("\"const\", \"print\", \"read\", \"while\", \"const\","
+                    + " \"typedef\", \"struct\" ou \"if\"");
         }
     }
 
@@ -839,10 +849,11 @@ public class AnalisadorSintatico {
                 consumeToken();
                 value();
             } else {
-                error();
+                error("\"return\"");
             }
         } else {
-            error();
+            error("\"var\", \"print\", \"read\", \"while\", \"const\","
+                    + " \"typedef\", \"struct\" ou \"if\"");
         }
     }
 
@@ -853,7 +864,7 @@ public class AnalisadorSintatico {
                 consumeToken();
                 value();
             } else {
-                error();
+                error("\"return\"");
             }
         }
     }
@@ -863,7 +874,7 @@ public class AnalisadorSintatico {
         if (currentToken().getId().equals("IDE")) {
             paramLoop();
         } else {
-            error();
+            error("IDE");
         }
     }
 
@@ -877,7 +888,7 @@ public class AnalisadorSintatico {
                 consumeToken();
                 break;
             default:
-                error();
+                error("',' ou ')'");
                 break;
         }
     }
@@ -891,7 +902,7 @@ public class AnalisadorSintatico {
         if (currentToken().getId().equals("IDE")) {
             structVars();
         } else {
-            error();
+            error("IDE");
         }
     }
 
@@ -911,13 +922,13 @@ public class AnalisadorSintatico {
                         blockVarStruct();
                     }
                     else{
-                        error();
+                        error("'{'");
                     }
                 } else {
-                    error();
+                    error("IDE");
                 }   break;
             default:
-                error();
+                error("'{' ou \"extends\"");
                 break;
         }
     }
@@ -929,10 +940,10 @@ public class AnalisadorSintatico {
                 consumeToken();
                 firstStructVar();
             } else {
-                error();
+                error("'{'");
             }
         } else {
-            error();
+            error("\"var\"");
         }
     }
 
@@ -946,7 +957,7 @@ public class AnalisadorSintatico {
             consumeToken();
             structVarExp();
         } else {
-            error();
+            error("IDE");
         }
     }
 
@@ -967,11 +978,11 @@ public class AnalisadorSintatico {
                     consumeToken();
                     structMatriz();
                 } else {
-                    error();
+                    error("]");
                 }
                 break;
             default:
-                error();
+                error("',', ';' ou '['");
                 break;
         }
     }
@@ -982,7 +993,7 @@ public class AnalisadorSintatico {
             if (currentToken().getLexema().equals("}")) {
                 consumeToken();
             } else {
-                error();
+                error("'}'");
             }
         } else {
             dataType();
@@ -999,7 +1010,7 @@ public class AnalisadorSintatico {
                     consumeToken();
                     contStructMatriz();
                 } else {
-                    error();
+                    error("']'");
                 }
                 break;
             case ",":
@@ -1011,7 +1022,7 @@ public class AnalisadorSintatico {
                 proxStructVar();
                 break;
             default:
-                error();
+                error("'[', ',' ou ';'");
                 break;
         }
     }
@@ -1027,7 +1038,7 @@ public class AnalisadorSintatico {
                 proxStructVar();
                 break;
             default:
-                error();
+                error("',' ou ';'");
                 break;
         }
     }
@@ -1046,13 +1057,13 @@ public class AnalisadorSintatico {
                     consumeToken();
                     procedureContent();
                 } else {
-                    error();
+                    error("'{'");
                 }
             } else {
-                error();
+                error("')'");
             }
         } else {
-            error();
+            error("'('");
         }
 
     }
@@ -1068,7 +1079,7 @@ public class AnalisadorSintatico {
                 procedureContent3();
                 break;
             default:
-                error();
+                error("\"var\" ou \"const\"");
                 break;
         }
     }
@@ -1082,10 +1093,11 @@ public class AnalisadorSintatico {
             if (currentToken().getLexema().equals("}")) {
                 consumeToken();
             } else {
-                error();
+                error("'}'");
             }
         } else {
-            error();
+            error("\"const\", \"print\", \"read\", \"while\", \"const\","
+                    + " \"typedef\", \"struct\" ou \"if\"");
         }
     }
 
@@ -1098,10 +1110,11 @@ public class AnalisadorSintatico {
             if (currentToken().getLexema().equals("}")) {
                 consumeToken();
             } else {
-                error();
+                error("'}'");
             }
         } else {
-            error();
+            error("\"var\", \"print\", \"read\", \"while\", \"const\","
+                    + " \"typedef\", \"struct\" ou \"if\"");
         }
     }
 
@@ -1111,10 +1124,11 @@ public class AnalisadorSintatico {
             if (currentToken().getLexema().equals("}")) {
                 consumeToken();
             } else {
-                error();
+                error("'}");
             }
         } else {
-            error();
+            error("\"print\", \"read\", \"while\", \"const\","
+                    + " \"typedef\", \"struct\" ou \"if\"");
         }
     }
 
@@ -1128,13 +1142,13 @@ public class AnalisadorSintatico {
                     consumeToken();
                     procedureContent();
                 } else {
-                    error();
+                    error("'{'");
                 }
             } else {
-                error();
+                error("'('");
             }
         } else {
-            error();
+            error("IDE");
         }
     }
 
@@ -1145,7 +1159,7 @@ public class AnalisadorSintatico {
         } else if (currentToken().getId().equals("IDE") || firstTypes.contains(currentToken().getLexema())) {
             parameters();
         } else {
-            error();
+            error("')' ou IDE");
         }
     }
 //************************************** Procedure Declaration ***************************************  
@@ -1187,7 +1201,7 @@ public class AnalisadorSintatico {
                         if (currentToken().getLexema().equals(";")) {
                             consumeToken();
                         } else {
-                            error();
+                            error("';'");
                         }
                         break;
                     case "++":
@@ -1196,11 +1210,11 @@ public class AnalisadorSintatico {
                         if (currentToken().getLexema().equals(";")) {
                             consumeToken();
                         } else {
-                            error();
+                            error("';'");
                         }
                         break;
                     default:
-                        error();
+                        error("'=', \"--\" ou \"++\"");
                         break;
                 }
 
@@ -1212,10 +1226,10 @@ public class AnalisadorSintatico {
             if (currentToken().getLexema().equals(";")) {
                 consumeToken();
             } else {
-                error();
+                error("';'");
             }
         } else {
-            error();
+            error("\"++\" ou \"--\"");
         }
     }
 
@@ -1224,7 +1238,7 @@ public class AnalisadorSintatico {
         if (currentToken().getLexema().equals("(")) {
             printableList();
         } else {
-            error();
+            error("'('");
         }
     }
 
@@ -1243,11 +1257,11 @@ public class AnalisadorSintatico {
                 if (currentToken().getLexema().equals(";")) {
                     consumeToken();
                 } else {
-                    error();
+                    error("';'");
                 }
                 break;
             default:
-                error();
+                error("',' ou ')'");
                 break;
         }
     }
@@ -1258,7 +1272,7 @@ public class AnalisadorSintatico {
             consumeToken();
             readParams();
         } else {
-            error();
+            error("'('");
         }
     }
 
@@ -1279,11 +1293,11 @@ public class AnalisadorSintatico {
                     consumeToken();
 
                 } else {
-                    error();
+                    error("';'");
                 }
                 break;
             default:
-                error();
+                error("',' ou ')'");
                 break;
         }
     }
@@ -1304,19 +1318,19 @@ public class AnalisadorSintatico {
                             consumeToken();
                             elsePart();
                         } else {
-                            error();
+                            error("'}'");
                         }
                     } else {
-                        error();
+                        error("'{'");
                     }
                 } else {
-                    error();
+                    error("\"then\"");
                 }
             } else {
-                error();
+                error("')'");
             }
         } else {
-            error();
+            error("'('");
         }
 
     }
@@ -1330,10 +1344,10 @@ public class AnalisadorSintatico {
                 if (currentToken().getLexema().equals("}")) {
                     consumeToken();
                 } else {
-                    error();
+                    error("'}");
                 }
             } else {
-                error();
+                error("\"else\"");
             }
         }
     }
@@ -1351,16 +1365,16 @@ public class AnalisadorSintatico {
                     if (currentToken().getLexema().equals("}")) {
                         consumeToken();
                     } else {
-                        error();
+                        error("'}'");
                     }
                 } else {
-                    error();
+                    error("'{'");
                 }
             } else {
-                error();
+                error("')'");
             }
         } else {
-            error();
+            error("'('");
         }
     }
 
@@ -1379,13 +1393,13 @@ public class AnalisadorSintatico {
                     if (currentToken().getLexema().equals(";")) {
                         consumeToken();
                     } else {
-                        error();
+                        error("';'");
                     }
                 } else {
-                    error();
+                    error("IDE");
                 }
             } else {
-                error();
+                error("IDE");
             }
         } else {
             dataType();
@@ -1394,10 +1408,10 @@ public class AnalisadorSintatico {
                 if (currentToken().getLexema().equals(";")) {
                     consumeToken();
                 } else {
-                    error();
+                    error("';'");
                 }
             } else {
-                error();
+                error("IDE ou \"struc\"");
             }
         }
     }
@@ -1448,7 +1462,7 @@ public class AnalisadorSintatico {
                     aritmeticOp();
                 }
             } else {
-                error();
+                error("'*' ou '/'");
             }
         } else {
             opNegate();
@@ -1472,7 +1486,7 @@ public class AnalisadorSintatico {
                 contRelLogic();
                 break;
             default:
-                error();
+                error("REL ou LOG");
         }
     }
 
@@ -1502,7 +1516,7 @@ public class AnalisadorSintatico {
             consumeToken();
             variavel();
         } else {
-            error();
+            error("'!'");
 
         }
     }
@@ -1535,7 +1549,7 @@ public class AnalisadorSintatico {
                                 logicOrRelacionalOp();
                             }
                         } else {
-                            error();
+                            error("')'");
                         }
                     }
                 } else {
@@ -1547,12 +1561,12 @@ public class AnalisadorSintatico {
                             logicOrRelacionalOp();
                         }
                     } else {
-                        error();
+                        error("')'");
                     }
                 }
                 break;
             default:
-                error();
+                error("'!', '(', \"true\" ou \"false\"");
         }
     }
 
@@ -1600,7 +1614,7 @@ public class AnalisadorSintatico {
                                 logicOrRelacionalOp();
                             }
                         } else {
-                            error();
+                            error("')'");
                         }
                     }
                     if (currentToken().getLexema().equals(")")) {
@@ -1609,11 +1623,11 @@ public class AnalisadorSintatico {
                             logicOrRelacionalOp();
                         }
                     } else {
-                        error();
+                        error("')'");
                     }
                     break;
                 default:
-                    error();
+                    error("'!', '(', \"true\" ou \"false\"");
             }
         }
     }
@@ -1631,14 +1645,14 @@ public class AnalisadorSintatico {
                 if (currentToken().getLexema().equals(";")) {
                     consumeToken();
                 } else {
-                    error();
+                    error("';'");
                 }
             } else {
                 value();
                 fCallParams();
             }
         } else {
-            error();
+            error("'('");
         }
     }
 
@@ -1653,11 +1667,11 @@ public class AnalisadorSintatico {
                 if (currentToken().getLexema().equals(";")) {
                     consumeToken();
                 } else {
-                    error();
+                    error("';'");
                 }
                 break;
             default:
-                error();
+                error("',' ou ')'");
                 break;
         }
     }
