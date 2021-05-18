@@ -272,6 +272,7 @@ public class AnalisadorSintatico {
         }
     }
     
+    //recebeu var no início
     private void header1Erro() throws FimInesperadoDeArquivo {
         if(currentToken().getLexema().equals("var")){
             error(" campo \"var{}\" já declarado", false);
@@ -288,11 +289,22 @@ public class AnalisadorSintatico {
         
         error(" (Token Ausente):  \"typedef\", \"struct\", \"const\", \"procedure\" ou \"function\"", false);
         
-        while(!firstTypes.contains(currentToken().getLexema())&&!currentToken().getLexema().equals("{")&&!currentToken().getId().equals("IDE")){
+        while(currentToken().getLexema().equals("var")||(!firstTypes.contains(currentToken().getLexema())
+                &&!currentToken().getLexema().equals("{")&&!currentToken().getId().equals("IDE")&&!firstInicio.contains(currentToken().getLexema()))){
             error("ESPERAVA: \"int\", \"real\", \"boolean\", \"string\", IDE ou '{'", true);
+        }if(firstInicio.contains(currentToken().getLexema())){
+            error("Token de sincronização", false);
+            header1();
+            return;
         }
         
         Token t = lookahead();
+        if(firstInicio.contains(t.getLexema())){
+            error("Token de sincronização no lookahead", true);
+            header1();
+            return;
+        }
+        
         if(currentToken().getId().equals("IDE")){
             if(t.getId().equals("IDE")){
                 error(" assumiu token ausente = \"typedef\"", false);
@@ -317,6 +329,12 @@ public class AnalisadorSintatico {
         }else{
             if(t.getId().equals("IDE")){
                 Token tp = lookaheadP();
+                if(firstInicio.contains(tp.getLexema())){
+                    error("Token de sincronização no lookahead", true);
+                    error("Token de sincronização no lookahead", true);
+                    header1();
+                    return;
+                }
                 switch (tp.getLexema()) {
                     case ";":
                         error(" assumiu token ausente = \"typedef\"", false);
@@ -392,11 +410,23 @@ public class AnalisadorSintatico {
         
         error(" (Token Ausente):  \"typedef\", \"struct\", \"var\", \"procedure\" ou \"function\"", false);
         
-        while(!firstTypes.contains(currentToken().getLexema())&&!currentToken().getLexema().equals("{")&&!currentToken().getId().equals("IDE")){
-            error("ESPERAVA: \"int\", \"real\", \"boolean\", \"string\", IDE ou '{'", true);
+        while(currentToken().getLexema().equals("const")||(
+                !firstTypes.contains(currentToken().getLexema())&&!currentToken().getId().equals("IDE")&&!firstInicio.contains(currentToken().getLexema()))){
+            error("ESPERAVA: \"int\", \"real\", \"boolean\", \"string\", IDE, '{', ou \"var\"", true);
+        }if(firstInicio.contains(currentToken().getLexema())){
+            error("Token de sincronização", false);
+            header2();
+            return;
         }
         
+        
         Token t = lookahead();
+        if(firstInicio.contains(t.getLexema())){
+            error("Token de sincronização no lookahead", true);
+            header2();
+            return;
+        }
+        
         if(currentToken().getId().equals("IDE")){
             if(t.getId().equals("IDE")){
                 error(" assumiu token ausente = \"typedef\"", false);
@@ -421,6 +451,12 @@ public class AnalisadorSintatico {
         }else{
             if(t.getId().equals("IDE")){
                 Token tp = lookaheadP();
+                if(firstInicio.contains(tp.getLexema())){
+                    error("Token de sincronização no lookahead", true);
+                    error("Token de sincronização no lookahead", true);
+                    header2();
+                    return;
+                }
                 switch (tp.getLexema()) {
                     case ";":
                         error(" assumiu token ausente = \"typedef\"", false);
@@ -491,11 +527,23 @@ public class AnalisadorSintatico {
         
         error(" (Token Ausente):  \"typedef\", \"struct\", \"var\", \"procedure\" ou \"function\"", false);
         
-        while(!firstTypes.contains(currentToken().getLexema())&&!currentToken().getId().equals("IDE")){
+        while(currentToken().getLexema().equals("const")||currentToken().getLexema().equals("var")||(
+                !firstTypes.contains(currentToken().getLexema())&&!currentToken().getId().equals("IDE")&&!firstInicio.contains(currentToken().getLexema()))){
             error("ESPERAVA: \"int\", \"real\", \"boolean\", \"string\" ou IDE ", true);
+        }if(firstInicio.contains(currentToken().getLexema())){
+            error("Token de sincronização", false);
+            header3();
+            return;
         }
         
+        
         Token t = lookahead();
+        if(firstInicio.contains(t.getLexema())){
+            error("Token de sincronização no lookahead", true);
+            header3();
+            return;
+        }
+        
         if(currentToken().getId().equals("IDE")){
             if(t.getId().equals("IDE")){
                 error(" assumiu token ausente = \"typedef\"", false);
@@ -516,6 +564,12 @@ public class AnalisadorSintatico {
         }else{
             if(t.getId().equals("IDE")){
                 Token tp = lookaheadP();
+                if(firstInicio.contains(tp.getLexema())){
+                    error("Token de sincronização no lookahead", true);
+                    error("Token de sincronização no lookahead", true);
+                    header3();
+                    return;
+                }
                 switch (tp.getLexema()) {
                     case ";":
                         error(" assumiu token ausente = \"typedef\"", false);
@@ -564,13 +618,37 @@ public class AnalisadorSintatico {
                 functionList();
                 break;
             default:
-                error("ESPERAVA: \"procedure\" ou \"function\"", true);
-                break;
+                if(currentToken().getId().equals("IDE")){
+                    if(lookahead().getLexema().equals("(")){
+                        error("assumiu token ausente = \"procedure\"", false);
+                        procedureDefine();
+                    }else if(lookahead().getId().equals("IDE")){
+                        error("assumiu token ausente = \"function\"", false);
+                        function();
+                        functionList();
+                    }else{
+                        error("tentativa falha de assumir produção de \"procedure\" ou \"function\".", true);
+                        error("ESPERAVA: IDE ou '('", true);
+                        functionList();
+                    }
+                }else if(firstTypes.contains(currentToken().getLexema())){
+                    error("assumiu token ausente = \"function\"", false);
+                    function();
+                    functionList();
+                }else{
+                    error("tentativa falha de assumir produção de \"procedure\" ou \"function\".", true);
+                }
         }
+    }
+    
+    private void functionListErro(){
+        
     }
 //********************************** Cabeçalhos de início do código **********************************      
 //====================================================================================================
 
+    
+    
 //============================================ Data Types ============================================
 //**************************************************************************************************** 
     //Incompleto... 

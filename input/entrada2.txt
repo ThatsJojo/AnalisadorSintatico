@@ -13,9 +13,11 @@ j + i 0
 
 typedef string frase;
 
-const{
+{
 	int a=1, b=2;
 }
+
+struct int i ;
 
 var{
 	int a=1, b=2;
@@ -27,7 +29,7 @@ struct pessoa{
 	var{int i;}
 }
 
- string frase;
+ string joao function int fstart(){return 5;};frase;
 
  pessoa{
 	var{int i;}
@@ -66,7 +68,7 @@ var{
 
 }
 
-function int sftart(){
+ inteiro sftart(){
     //read(a);
     i=10;
     i++;

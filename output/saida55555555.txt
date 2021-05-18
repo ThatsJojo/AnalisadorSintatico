@@ -105,7 +105,7 @@
 23 IDE i
 23 ATRIB = ERRO SINTÁTICO. ESPERAVA: ',' ou ')'.  Encontrado: =
 23 IDE jota ERRO SINTÁTICO. ESPERAVA: '{'.  Encontrado: jota
-23 ART + ERRO SINTÁTICO. ESPERAVA: "procedure" ou "function".  Encontrado: +
+23 ART + ERRO SINTÁTICO. tentativa falha de assumir produção de "procedure" ou "function"..  Encontrado: +
 23 IDE w ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: w
 23 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
 23 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i

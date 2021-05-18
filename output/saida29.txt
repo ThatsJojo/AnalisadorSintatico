@@ -12,9 +12,9 @@
 1 DEL )
 1 DEL {
 2 PRE return ERRO SINTÁTICO. ESPERAVA: '}.  Encontrado: return
-2 IDE c ERRO SINTÁTICO. ESPERAVA: "procedure" ou "function".  Encontrado: c
-2 REL == ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ==
-2 SIB ' ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: '
+2 IDE c ERRO SINTÁTICO. tentativa falha de assumir produção de "procedure" ou "function"..  Encontrado: c
+2 REL == ERRO SINTÁTICO. ESPERAVA: IDE ou '('.  Encontrado: ==
+2 SIB ' ERRO SINTÁTICO. tentativa falha de assumir produção de "procedure" ou "function"..  Encontrado: '
 2 SIB ' ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: '
 2 LOG || ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ||
 2 IDE c ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: c
