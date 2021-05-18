@@ -1,8 +1,10 @@
-1 IDE public ERRO SINTÁTICO. ESPERAVA: "typedef", "struct", "var", "const", "procedure" ou "function" - Token Ausente..  Encontrado: public
+1 IDE public ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "var", "const", "procedure" ou "function".  Encontrado: public
+1 IDE public ERRO SINTÁTICO.  assumiu token ausente = "typedef".  Encontrado: public
 1 IDE public
 1 IDE static
 1 PRE boolean ERRO SINTÁTICO. ESPERAVA: ';'.  Encontrado: boolean
-1 IDE isSpace ERRO SINTÁTICO. ESPERAVA: "typedef", "struct", "var", "const", "procedure" ou "function" - Token Ausente..  Encontrado: isSpace
+1 IDE isSpace ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "var", "const", "procedure" ou "function".  Encontrado: isSpace
+1 IDE isSpace ERRO SINTÁTICO.  assumiu token ausente = "procedure".  Encontrado: isSpace
 1 IDE isSpace
 1 DEL (
 1 IDE char
@@ -11,3 +13,113 @@
 1 DEL {
 2 PRE return ERRO SINTÁTICO. ESPERAVA: '}.  Encontrado: return
 2 IDE c ERRO SINTÁTICO. ESPERAVA: "procedure" ou "function".  Encontrado: c
+2 REL == ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ==
+2 SIB ' ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: '
+2 SIB ' ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: '
+2 LOG || ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ||
+2 IDE c ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: c
+2 REL == ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ==
+2 SIB ' ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: '
+2 SIB \ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: \
+2 IDE t ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: t
+2 SIB ' ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: '
+2 LOG || ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ||
+2 IDE c ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: c
+2 REL == ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ==
+2 SIB ' ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: '
+2 SIB \ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: \
+2 IDE n ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: n
+2 SIB ' ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: '
+2 LOG || ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ||
+2 IDE c ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: c
+2 REL == ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ==
+2 SIB ' ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: '
+2 SIB \ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: \
+2 IDE r ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: r
+2 SIB ' ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: '
+2 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+3 DEL } ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: }
+5 IDE public ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: public
+5 IDE static ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: static
+5 PRE boolean ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: boolean
+5 IDE isChar ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: isChar
+5 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+5 IDE char ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: char
+5 IDE c ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: c
+5 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+5 DEL { ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: {
+6 PRE return ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: return
+6 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+6 IDE c ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: c
+6 REL > ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: >
+6 NRO 64 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 64
+6 LOG && ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: &&
+6 IDE c ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: c
+6 REL < ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: <
+6 NRO 91 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 91
+6 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+6 LOG || ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ||
+6 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+6 IDE c ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: c
+6 REL > ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: >
+6 NRO 96 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 96
+6 LOG && ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: &&
+6 IDE c ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: c
+6 REL < ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: <
+6 NRO 123 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 123
+6 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+6 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+7 DEL } ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: }
+9 IDE public ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: public
+9 IDE static ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: static
+9 PRE boolean ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: boolean
+9 IDE isDigit ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: isDigit
+9 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+9 IDE char ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: char
+9 IDE c ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: c
+9 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+9 DEL { ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: {
+10 PRE return ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: return
+10 IDE c ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: c
+10 REL >= ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: >=
+10 SIB ' ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: '
+10 NRO 0 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 0
+10 SIB ' ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: '
+10 LOG && ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: &&
+10 IDE c ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: c
+10 REL <= ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: <=
+10 SIB ' ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: '
+10 NRO 9 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 9
+10 SIB ' ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: '
+10 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+11 DEL } ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: }
+13 IDE public ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: public
+13 IDE static ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: static
+13 PRE boolean ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: boolean
+13 IDE isUnderline ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: isUnderline
+13 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+13 IDE char ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: char
+13 IDE c ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: c
+13 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+13 DEL { ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: {
+14 PRE return ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: return
+14 IDE c ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: c
+14 REL == ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ==
+14 NRO 95 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 95
+14 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+15 DEL } ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: }
+17 IDE public ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: public
+17 IDE static ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: static
+17 PRE boolean ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: boolean
+17 IDE isDot ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: isDot
+17 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+17 IDE char ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: char
+17 IDE c ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: c
+17 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+17 DEL { ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: {
+18 PRE return ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: return
+18 IDE c ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: c
+18 REL == ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ==
+18 NRO 46 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 46
+18 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+19 DEL } ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: }

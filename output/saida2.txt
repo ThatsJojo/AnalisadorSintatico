@@ -1,141 +1,685 @@
 1 PRE typedef
 1 PRE struct
 1 IDE Pessoa
-1 IDE Pessoa
-1 DEL ;
-2 PRE typedef
-2 PRE string
-2 IDE frase
-2 DEL ;
-4 PRE var
-4 DEL {
-5 PRE int
-5 IDE a
-5 DEL ,
-5 IDE b
-5 DEL ;
-6 DEL }
-8 PRE function
-8 PRE int
-8 IDE sftart
-8 DEL (
-8 DEL )
-8 DEL {
-10 IDE i
-10 ATRIB =
-10 NRO 10
-10 DEL ;
-11 IDE i
-11 ART ++
+1 DEL , ERRO SINTÁTICO. ESPERAVA: IDE.  Encontrado: ,
+2 IDE Pessoa ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "var", "const", "procedure" ou "function".  Encontrado: Pessoa
+2 IDE Pessoa ERRO SINTÁTICO. tentativa falha de assumir produção de "struct", "typedef" ou "procedure".  Encontrado: Pessoa
+2 DEL ; ERRO SINTÁTICO. ESPERAVA: "extends", '(' IDE ou '{'.  Encontrado: ;
+4 PRE typedef
+4 PRE int
+4 IDE inteiro
+4 DEL ;
+6 PRE typedef
+6 IDE inteiro
+6 IDE numero
+6 DEL ;
+9 PRE string ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "var", "const", "procedure" ou "function".  Encontrado: string
+9 PRE string ERRO SINTÁTICO.  assumiu token ausente = "typedef".  Encontrado: string
+9 PRE string
+9 IDE frase
+9 DEL ;
+11 IDE id ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "var", "const", "procedure" ou "function".  Encontrado: id
+11 IDE id ERRO SINTÁTICO.  assumiu token ausente = "typedef".  Encontrado: id
+11 IDE id
+11 IDE zop
 11 DEL ;
-12 IDE i
-12 ART --
-12 DEL ;
-13 PRE return
-13 IDE a
-13 DEL ;
-14 DEL }
-16 PRE function
-16 PRE int
-16 IDE sftart
-16 DEL (
-16 DEL )
+12 IDE j ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "var", "const", "procedure" ou "function".  Encontrado: j
+12 IDE j ERRO SINTÁTICO. tentativa falha de assumir produção de "struct", "typedef" ou "procedure".  Encontrado: j
+12 ART + ERRO SINTÁTICO. ESPERAVA: "extends", '(' IDE ou '{'.  Encontrado: +
+12 IDE i ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "var", "const", "procedure" ou "function".  Encontrado: i
+12 IDE i ERRO SINTÁTICO. tentativa falha de assumir produção de "struct", "typedef" ou "procedure".  Encontrado: i
+12 NRO 0 ERRO SINTÁTICO. ESPERAVA: "extends", '(' IDE ou '{'.  Encontrado: 0
+14 PRE typedef
+14 PRE string
+14 IDE frase
+14 DEL ;
+16 PRE const
 16 DEL {
-18 IDE i
-18 ART ++
-18 DEL ;
-19 IDE i
-19 ART --
-19 DEL ;
-20 PRE return
-20 IDE a
-20 DEL ;
-21 DEL }
-23 PRE function
-23 PRE int
-23 IDE sftart
-23 DEL (
-23 DEL )
-23 DEL {
-25 IDE i
-25 ART --
-25 DEL ;
-26 IDE i
-26 ART --
-26 DEL ;
-27 PRE return
-27 IDE a
+17 PRE int
+17 IDE a
+17 ATRIB =
+17 NRO 1
+17 DEL ,
+17 IDE b
+17 ATRIB =
+17 NRO 2
+17 DEL ;
+18 DEL }
+20 PRE var
+20 DEL {
+21 PRE int
+21 IDE a
+21 ATRIB =
+21 NRO 1
+21 DEL ,
+21 IDE b
+21 ATRIB =
+21 NRO 2
+21 DEL ;
+22 DEL }
+24 PRE string ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "var", "procedure" ou "function".  Encontrado: string
+24 PRE string ERRO SINTÁTICO.  assumiu token ausente = "typedef".  Encontrado: string
+24 PRE string
+24 IDE frase
+24 DEL ;
+26 PRE struct
+26 IDE pessoa
+26 DEL {
+27 PRE var
+27 DEL {
+27 PRE int
+27 IDE i
 27 DEL ;
+27 DEL }
 28 DEL }
-30 PRE function
-30 PRE int
-30 IDE sftart
-30 DEL (
-30 DEL )
-30 DEL {
-32 ART ++
-32 IDE i
-32 DEL ;
+30 PRE string ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "var", "procedure" ou "function".  Encontrado: string
+30 PRE string ERRO SINTÁTICO.  assumiu token ausente = "typedef".  Encontrado: string
+30 PRE string
+30 IDE frase
+30 DEL ;
+32 IDE pessoa ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "var", "procedure" ou "function".  Encontrado: pessoa
+32 IDE pessoa ERRO SINTÁTICO.  assumiu token ausente = "struct".  Encontrado: pessoa
+32 IDE pessoa
+32 DEL {
+33 PRE var
+33 DEL {
+33 PRE int
 33 IDE i
-33 ART ++
 33 DEL ;
-34 IDE i
-34 ART --
-34 DEL ;
-35 PRE return
-35 IDE a
-35 DEL ;
-36 DEL }
-38 PRE function
-38 PRE int
-38 IDE sftart
-38 DEL (
-38 DEL )
+33 DEL }
+34 DEL }
+36 PRE string ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "var", "procedure" ou "function".  Encontrado: string
+36 PRE string ERRO SINTÁTICO.  assumiu token ausente = "typedef".  Encontrado: string
+36 PRE string
+36 IDE frase
+36 DEL ;
+38 IDE pessoa ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "var", "procedure" ou "function".  Encontrado: pessoa
+38 IDE pessoa ERRO SINTÁTICO.  assumiu token ausente = "struct".  Encontrado: pessoa
+38 IDE pessoa
 38 DEL {
-40 ART --
-40 IDE i
-40 DEL ;
-41 IDE i
-41 ART ++
-41 DEL ;
-42 IDE i
-42 ART --
+39 PRE var
+39 DEL {
+39 PRE int
+39 IDE i
+39 DEL ;
+39 DEL }
+40 DEL }
+42 PRE typedef
+42 PRE string
+42 IDE frase
 42 DEL ;
-43 PRE return
-43 IDE a
-43 DEL ;
-44 DEL }
-46 PRE procedure
-46 IDE fstart
-46 DEL (
-46 DEL )
-46 DEL {
-47 PRE read
-47 DEL (
-47 IDE a
-47 DEL )
-47 DEL ;
-48 IDE i
-48 ART ++
-48 DEL ;
-49 IDE i
-49 ART --
-49 DEL ;
-50 DEL }
-52 PRE procedure
-52 PRE start
-52 DEL (
-52 DEL )
-52 DEL {
-53 PRE read
-53 DEL (
-53 IDE a
-53 DEL )
-53 DEL ;
-54 IDE i
-54 ART ++
-54 DEL ;
-55 IDE i
-55 ART --
-55 DEL ;
-56 DEL }
+44 PRE const ERRO SINTÁTICO.  campos "var{}" e "const{}" já declarados.  Encontrado: const
+44 PRE const ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: const
+44 DEL { ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: {
+45 PRE int ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: int
+45 IDE i ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: i
+45 ATRIB = ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: =
+45 NRO 20 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 20
+45 ART * ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: *
+45 NRO 8 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 8
+45 ART + ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: +
+45 CAD "jacobina" ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: "jacobina"
+45 DEL ; ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ;
+46 PRE int ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: int
+46 IDE i ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: i
+46 DEL [ ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: [
+46 NRO 2 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 2
+46 DEL ] ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ]
+46 ATRIB = ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: =
+46 DEL [ ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: [
+46 PRE false ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: false
+46 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+46 PRE true ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: true
+46 DEL ] ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ]
+46 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+46 IDE j ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: j
+46 ATRIB = ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: =
+46 PRE false ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: false
+46 DEL ; ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ;
+47 PRE int ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: int
+47 IDE jota ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: jota
+47 ATRIB = ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: =
+47 NRO 2 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 2
+47 ART * ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: *
+47 IDE focafunc ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: focafunc
+47 DEL [ ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: [
+47 IDE jota ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: jota
+47 DEL ] ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ]
+47 ART * ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: *
+47 IDE pedro ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: pedro
+47 DEL ( ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: (
+47 CAD "Joao" ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: "Joao"
+47 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+47 NRO 85 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 85
+47 ART * ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: *
+47 NRO 3 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 3
+47 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+47 IDE i ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: i
+47 DEL [ ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: [
+47 NRO 2 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 2
+47 ART * ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: *
+47 IDE focafunc ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: focafunc
+47 DEL ( ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: (
+47 CAD "Joao" ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: "Joao"
+47 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+47 NRO 85 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 85
+47 ART * ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: *
+47 NRO 3 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 3
+47 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+47 IDE i ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: i
+47 DEL [ ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: [
+47 NRO 7 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 7
+47 DEL ] ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ]
+47 DEL ) ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: )
+47 DEL ] ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ]
+47 DEL ) ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: )
+47 DEL ; ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ;
+48 PRE string ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: string
+48 IDE japa ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: japa
+48 ATRIB = ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: =
+48 CAD "Opa gangnangstyle" ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: "Opa gangnangstyle"
+48 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+48 IDE zoom ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: zoom
+48 ATRIB = ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: =
+48 CAD "app" ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: "app"
+48 DEL ; ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ;
+49 PRE real ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: real
+49 IDE i ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: i
+49 ATRIB = ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: =
+49 PRE false ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: false
+49 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+49 IDE k ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: k
+49 ATRIB = ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: =
+49 PRE true ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: true
+49 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+49 IDE k ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: k
+49 DEL [ ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: [
+49 NRO 3 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 3
+49 DEL ] ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ]
+49 ATRIB = ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: =
+49 DEL [ ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: [
+49 IDE urubu ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: urubu
+49 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+49 IDE sem ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: sem
+49 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+49 IDE asa ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: asa
+49 DEL ] ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ]
+49 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+49 IDE l ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: l
+49 ATRIB = ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: =
+49 NRO 1 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 1
+49 DEL ; ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ;
+50 PRE int ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: int
+50 IDE i ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: i
+50 DEL [ ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: [
+50 NRO 2 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 2
+50 DEL ] ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ]
+50 DEL [ ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: [
+50 NRO 3 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 3
+50 DEL ] ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ]
+50 ATRIB = ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: =
+50 DEL [ ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: [
+50 DEL [ ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: [
+50 PRE false ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: false
+50 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+50 PRE true ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: true
+50 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+50 IDE zip ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: zip
+50 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+50 IDE zop ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: zop
+50 DEL ] ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ]
+50 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+50 DEL [ ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: [
+50 IDE biri ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: biri
+50 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+50 IDE flinston ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: flinston
+50 DEL ] ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ]
+50 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+50 DEL [ ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: [
+50 IDE opa ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: opa
+50 DEL ] ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ]
+50 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+50 DEL [ ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: [
+50 IDE eita ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: eita
+50 DEL ] ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ]
+50 DEL ] ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ]
+50 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+50 IDE joao ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: joao
+50 ATRIB = ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: =
+50 IDE i ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: i
+50 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+50 IDE false1 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: false1
+50 ATRIB = ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: =
+50 IDE j ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: j
+50 DEL ; ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ;
+52 PRE int ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: int
+52 IDE i ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: i
+52 DEL [ ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: [
+52 NRO 2 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 2
+52 ART * ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: *
+52 NRO 90 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 90
+52 ART / ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: /
+52 NRO 1520 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 1520
+52 DEL ] ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ]
+52 ATRIB = ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: =
+52 DEL [ ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: [
+52 PRE false ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: false
+52 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+52 DEL ( ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: (
+52 NRO 2 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 2
+52 ART + ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: +
+52 NRO 3 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 3
+52 DEL ) ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: )
+52 REL != ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: !=
+52 DEL ( ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: (
+52 NRO 2 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 2
+52 ART + ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: +
+52 NRO 3 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 3
+52 DEL ) ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: )
+52 REL < ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: <
+52 NRO 7 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 7
+52 DEL ] ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ]
+52 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+52 IDE j ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: j
+52 ATRIB = ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: =
+52 PRE false ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: false
+52 REL <= ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: <=
+52 DEL ( ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: (
+52 NRO 8 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 8
+52 ART * ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: *
+52 NRO 5.2 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 5.2
+52 ART + ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: +
+52 IDE i ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: i
+52 DEL [ ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: [
+52 NRO 5 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 5
+52 ART / ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: /
+52 NRO 4 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 4
+52 DEL ] ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ]
+52 ART * ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: *
+52 IDE jota ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: jota
+52 DEL . ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: .
+52 IDE ka ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ka
+52 DEL [ ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: [
+52 NRO 21 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 21
+52 DEL ] ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ]
+52 DEL [ ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: [
+52 NRO 5 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 5
+52 ART + ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: +
+52 NRO 3 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 3
+52 DEL ] ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ]
+52 DEL ) ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: )
+52 DEL ; ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ;
+53 PRE real ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: real
+53 IDE i ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: i
+53 ATRIB = ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: =
+53 NRO 10 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 10
+53 ART * ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: *
+53 NRO 3.1 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 3.1
+53 ART + ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: +
+53 NRO 2.7 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 2.7
+53 ART * ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: *
+53 NRO 8.777 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 8.777
+53 ART / ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: /
+53 NRO 15 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 15
+53 ART + ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: +
+53 DEL ( ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: (
+53 NRO 128 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 128
+53 ART / ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: /
+53 NRO 12.2 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 12.2
+53 DEL ) ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: )
+53 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+53 IDE k ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: k
+53 ATRIB = ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: =
+53 IDE i ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: i
+53 DEL [ ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: [
+53 NRO 20.5 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 20.5
+53 ART / ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: /
+53 DEL ( ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: (
+53 NRO 12 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 12
+53 ART - ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: -
+53 NRO 15 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 15
+53 DEL ) ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: )
+53 ART * ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: *
+53 DEL ( ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: (
+53 ART - ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: -
+53 IDE I ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: I
+53 ART + ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: +
+53 NRO 20 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 20
+53 DEL ) ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: )
+53 DEL ] ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ]
+53 LOG || ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ||
+53 DEL ( ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: (
+53 NRO 128 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 128
+53 LOG && ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: &&
+53 NRO 15 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 15
+53 DEL ) ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: )
+53 REL > ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: >
+53 NRO 14 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 14
+53 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+53 IDE k ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: k
+53 DEL [ ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: [
+53 NRO 3 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 3
+53 DEL ] ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ]
+53 ATRIB = ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: =
+53 DEL [ ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: [
+53 IDE urubu ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: urubu
+53 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+53 IDE sem ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: sem
+53 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+53 IDE asa ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: asa
+53 DEL ] ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ]
+53 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+53 IDE j ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: j
+53 ATRIB = ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: =
+53 IDE jota ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: jota
+53 DEL ; ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ;
+54 PRE int ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: int
+54 IDE i ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: i
+54 DEL [ ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: [
+54 NRO 2 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 2
+54 ART * ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: *
+54 NRO 3 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 3
+54 DEL ] ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ]
+54 DEL [ ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: [
+54 NRO 3 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 3
+54 ART + ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: +
+54 NRO 2 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 2
+54 DEL ] ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ]
+54 ATRIB = ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: =
+54 DEL [ ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: [
+54 DEL [ ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: [
+54 PRE false ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: false
+54 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+54 PRE true ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: true
+54 LOG || ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ||
+54 IDE ele ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ele
+54 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+54 IDE zip ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: zip
+54 REL <= ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: <=
+54 IDE zop ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: zop
+54 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+54 IDE uat ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: uat
+54 LOG && ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: &&
+54 IDE zap ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: zap
+54 DEL ] ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ]
+54 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+54 DEL [ ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: [
+54 IDE biri ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: biri
+54 REL > ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: >
+54 IDE flinston ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: flinston
+54 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+54 IDE opa ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: opa
+54 ART - ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: -
+54 IDE flinston ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: flinston
+54 DEL ] ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ]
+54 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+54 DEL [ ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: [
+54 ART - ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: -
+54 IDE opa ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: opa
+54 ART * ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: *
+54 NRO 2 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 2
+54 DEL ] ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ]
+54 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+54 DEL [ ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: [
+54 NRO 2 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 2
+54 ART / ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: /
+54 DEL ( ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: (
+54 IDE eita ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: eita
+54 DEL ) ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: )
+54 DEL ] ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ]
+54 DEL ] ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ]
+54 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+54 IDE joao ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: joao
+54 ATRIB = ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: =
+54 ART - ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: -
+54 IDE i ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: i
+54 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+54 IDE false1 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: false1
+54 ATRIB = ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: =
+54 ART - ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: -
+54 DEL ( ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: (
+54 IDE j ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: j
+54 ART / ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: /
+54 NRO 2 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 2
+54 DEL ) ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: )
+54 DEL ; ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ;
+57 DEL } ERRO SINTÁTICO. Token de sincronização.  Encontrado: }
+59 PRE var ERRO SINTÁTICO.  campos "var{}" e "const{}" já declarados.  Encontrado: var
+59 PRE var ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: var
+59 DEL { ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: {
+60 PRE int ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: int
+60 IDE i ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: i
+60 ATRIB = ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: =
+60 PRE false ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: false
+60 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+60 IDE j ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: j
+60 ATRIB = ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: =
+60 PRE true ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: true
+60 DEL ; ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ;
+61 PRE real ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: real
+61 IDE i ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: i
+61 ATRIB = ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: =
+61 IDE reali ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: reali
+61 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+61 IDE joao ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: joao
+61 ATRIB = ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: =
+61 IDE safe ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: safe
+61 DEL ; ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ;
+62 PRE int ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: int
+62 IDE i ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: i
+62 DEL [ ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: [
+62 NRO 2 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 2
+62 DEL ] ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ]
+62 ATRIB = ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: =
+62 DEL [ ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: [
+62 IDE opa ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: opa
+62 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+62 IDE zap ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: zap
+62 DEL ] ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ]
+62 DEL ; ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ;
+63 PRE int ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: int
+63 IDE i ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: i
+63 DEL [ ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: [
+63 NRO 2 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 2
+63 DEL ] ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ]
+63 ATRIB = ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: =
+63 DEL [ ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: [
+63 PRE false ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: false
+63 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+63 PRE true ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: true
+63 DEL ] ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ]
+63 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+63 IDE j ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: j
+63 ATRIB = ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: =
+63 PRE false ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: false
+63 DEL ; ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ;
+64 PRE real ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: real
+64 IDE i ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: i
+64 ATRIB = ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: =
+64 PRE false ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: false
+64 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+64 IDE k ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: k
+64 ATRIB = ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: =
+64 PRE true ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: true
+64 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+64 IDE k ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: k
+64 DEL [ ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: [
+64 NRO 3 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 3
+64 DEL ] ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ]
+64 ATRIB = ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: =
+64 DEL [ ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: [
+64 IDE urubu ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: urubu
+64 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+64 IDE sem ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: sem
+64 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+64 IDE asa ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: asa
+64 DEL ] ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ]
+64 DEL ; ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ;
+65 PRE int ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: int
+65 IDE i ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: i
+65 DEL [ ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: [
+65 NRO 2 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 2
+65 DEL ] ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ]
+65 DEL [ ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: [
+65 NRO 3 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: 3
+65 DEL ] ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ]
+65 ATRIB = ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: =
+65 DEL [ ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: [
+65 DEL [ ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: [
+65 PRE false ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: false
+65 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+65 PRE true ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: true
+65 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+65 IDE zip ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: zip
+65 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+65 IDE zop ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: zop
+65 DEL ] ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ]
+65 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+65 DEL [ ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: [
+65 IDE biri ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: biri
+65 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+65 IDE flinston ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: flinston
+65 DEL ] ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ]
+65 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+65 DEL [ ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: [
+65 IDE opa ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: opa
+65 DEL ] ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ]
+65 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+65 DEL [ ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: [
+65 IDE eita ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: eita
+65 DEL ] ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ]
+65 DEL ] ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ]
+65 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+65 IDE joao ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: joao
+65 ATRIB = ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: =
+65 IDE i ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: i
+65 DEL , ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ,
+65 IDE false1 ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: false1
+65 ATRIB = ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: =
+65 IDE j ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: j
+65 DEL ; ERRO SINTÁTICO. ESPERAVA: '}' "typedef", "function", "procedure" ou "struct".  Encontrado: ;
+67 DEL } ERRO SINTÁTICO. Token de sincronização.  Encontrado: }
+69 PRE function
+69 PRE int
+69 IDE sftart
+69 DEL (
+69 DEL )
+69 DEL {
+71 IDE i
+71 ATRIB =
+71 NRO 10
+71 DEL ;
+72 IDE i
+72 ART ++
+72 DEL ;
+73 IDE i
+73 ART --
+73 DEL ;
+74 PRE return
+74 IDE a
+74 DEL ;
+75 DEL }
+77 PRE function
+77 PRE int
+77 IDE sftart
+77 DEL (
+77 DEL )
+77 DEL {
+79 IDE i
+79 ART ++
+79 DEL ;
+80 IDE i
+80 ART --
+80 DEL ;
+81 PRE return
+81 IDE a
+81 DEL ;
+82 DEL }
+84 PRE function
+84 PRE int
+84 IDE sftart
+84 DEL (
+84 DEL )
+84 DEL {
+86 IDE i
+86 ART --
+86 DEL ;
+87 IDE i
+87 ART --
+87 DEL ;
+88 PRE return
+88 IDE a
+88 DEL ;
+89 DEL }
+91 PRE function
+91 PRE int
+91 IDE sftart
+91 DEL (
+91 DEL )
+91 DEL {
+93 ART ++
+93 IDE i
+93 DEL ;
+94 IDE i
+94 ART ++
+94 DEL ;
+95 IDE i
+95 ART --
+95 DEL ;
+96 PRE return
+96 IDE a
+96 DEL ;
+97 DEL }
+99 PRE function
+99 PRE int
+99 IDE sftart
+99 DEL (
+99 DEL )
+99 DEL {
+101 ART --
+101 IDE i
+101 DEL ;
+102 IDE i
+102 ART ++
+102 DEL ;
+103 IDE i
+103 ART --
+103 DEL ;
+104 PRE return
+104 IDE a
+104 DEL ;
+105 DEL }
+107 PRE procedure
+107 IDE fstart
+107 DEL (
+107 DEL )
+107 DEL {
+108 PRE read
+108 DEL (
+108 IDE a
+108 DEL )
+108 DEL ;
+109 IDE i
+109 ART ++
+109 DEL ;
+110 IDE i
+110 ART --
+110 DEL ;
+111 DEL }
+113 PRE procedure
+113 PRE start
+113 DEL (
+113 DEL )
+113 DEL {
+114 PRE read
+114 DEL (
+114 IDE a
+114 DEL )
+114 DEL ;
+115 IDE i
+115 ART ++
+115 DEL ;
+116 IDE i
+116 ART --
+116 DEL ;
+117 DEL }

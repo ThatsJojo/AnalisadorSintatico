@@ -16,6 +16,7 @@ public class AnalisadorSintatico {
 
     private static final HashSet<String> firstTypes = new HashSet();
     private static final HashSet<String> firstComando = new HashSet();
+    private static final HashSet<String> firstInicio = new HashSet();
 
     public AnalisadorSintatico() {
         //Conjunto first do método types
@@ -32,6 +33,16 @@ public class AnalisadorSintatico {
         firstComando.add("typedef");
         firstComando.add("struct");
         firstComando.add("if");
+        firstComando.add("++");
+        firstComando.add("--");
+        
+        //conjunto first do método comando
+        firstInicio.add("typedef");
+        firstInicio.add("const");
+        firstInicio.add("var");
+        firstInicio.add("function");
+        firstInicio.add("procedure");
+        firstInicio.add("struct");
 
     }
 
@@ -44,11 +55,20 @@ public class AnalisadorSintatico {
         //percorrer toda a lista de tokens até o ultimo elemento
         try{
             consumeToken();
-                inicio();
+            inicio();
         }catch(FimInesperadoDeArquivo e){
             analiseret += ""+(privateCurrentToken==null?""+privateCurrentToken.getId():"0000")
                     +" ERRO SINTÁTICO. EOF";
         }
+        
+        try{
+            while(hasToken()){
+                error("ESPERADO: EOF", true);
+            }
+        } catch (FimInesperadoDeArquivo ex) {}
+        
+        
+        
         System.out.println("Análise Sintática realizada "+(erros==0?"com":"sem")+" sucesso ("+String.format("%03d", erros)
                 +" erros sintáticos encontrados) no arquivo " + arq.getNome() + ".");
         return analiseret;
@@ -78,6 +98,10 @@ public class AnalisadorSintatico {
         }
 
     }
+    
+    private boolean hasToken(){
+        return countToken < tokens.size()+1;
+    }
 
     private Token currentToken() throws FimInesperadoDeArquivo {
         if (privateCurrentToken == null || privateCurrentToken.getId().equals("EOF")) {
@@ -104,7 +128,7 @@ public class AnalisadorSintatico {
     }
 
     private void error(String esperado, boolean consumir) throws FimInesperadoDeArquivo {
-        analiseret+=""+privateCurrentToken.getLinha()+" "+privateCurrentToken.getId()+" "+privateCurrentToken.getLexema()+" ERRO SINTÁTICO. ESPERAVA: "+
+        analiseret+=""+privateCurrentToken.getLinha()+" "+privateCurrentToken.getId()+" "+privateCurrentToken.getLexema()+" ERRO SINTÁTICO. "+
                 esperado+".  Encontrado: "+currentToken().getLexema()+"\n";
         
         System.out.println("Erro"+erros+" no token " + currentToken().getId() + " na linha " 
@@ -151,31 +175,39 @@ public class AnalisadorSintatico {
                 functionList();
                 break;
             default:
-                error("\"typedef\", \"struct\", \"var\", \"const\", \"procedure\" ou \"function\" - Token Ausente.", false);
+                error(" (Token Ausente):  \"typedef\", \"struct\", \"var\", \"const\", \"procedure\" ou \"function\"", false);
                 inicioErro();
         }
     }
     
     private void inicioErro() throws FimInesperadoDeArquivo{
         while(!firstTypes.contains(currentToken().getLexema())&&!currentToken().getLexema().equals("{")&&!currentToken().getId().equals("IDE")){
-            error("\"int\", \"real\", \"boolean\", \"string\", IDE ou '{'", true);
+            if(firstInicio.contains(currentToken().getLexema())){
+                inicio();
+                return;
+            }
+            error(" (Token Ausente):  \"int\", \"real\", \"boolean\", \"string\", IDE ou '{'", true);
         }
         Token t = lookahead();
         if(currentToken().getId().equals("IDE")){
             if(t.getId().equals("IDE")){
+                error(" assumiu token ausente = \"typedef\"", false);
                 typedefDeclaration();
                 inicio();
             }else if(t.getLexema().equals("(")){
+                error(" assumiu token ausente = \"procedure\"", false);
                 procedureDefine();
             }else if(t.getLexema().equals("extends")||t.getLexema().equals("{")){
+                error(" assumiu token ausente = \"struct\"", false);
                 structDeclaration();
                 inicio();
             }else{
-                error("PRE ausente", true);
-                error("\"extends\", IDE ou '{'", true);
-                inicioErro();
+                error("tentativa falha de assumir produção de \"struct\", \"typedef\" ou \"procedure\"", true);
+                error("ESPERAVA: \"extends\", '(' IDE ou '{'", true);
+                inicio();
             }
         }else if(currentToken().getLexema().equals("{")){
+            error(" assumiu token ausente = \"var\"", false);
             varDeclaration();
             header1();
         }else{
@@ -183,29 +215,32 @@ public class AnalisadorSintatico {
                 Token tp = lookaheadP();
                 switch (tp.getLexema()) {
                     case ";":
+                        error(" assumiu token ausente = \"typedef\"", false);
                         typedefDeclaration();
                         inicio();
                         break;
                     case "(":
+                        error(" assumiu token ausente = \"function\"", false);
                         function();
                         functionList();
                         break;
                     default:
-                        error("';', ou '('", true);
-                        inicioErro();
+                        error("tentativa falha de assumir produção de \"typedef\" ou \"function\".", true);
+                        error("tentativa falha de assumir produção de \"typedef\" ou \"function\".", true);
+                        error("ESPERAVA: ';', ou '('.", true);
+                        inicio();
                         break;
                 }
             }else{
-                error("PRE ausente", true);
-                error("PRE ausente", true);
-                error("\"int\", \"real\", \"boolean\", \"string\", IDE ou '{'", true);
+                error("ESPERAVA: PRE", true);
+                error("ESPERAVA: PRE", true);
+                error("ESPERAVA: \"int\", \"real\", \"boolean\", \"string\", IDE ou '{'", true);
                 inicioErro();
             }
         }
     }
     
-    
-
+    //recebue var no início
     private void header1() throws FimInesperadoDeArquivo {
         switch (currentToken().getLexema()) {
             case "typedef":
@@ -233,10 +268,82 @@ public class AnalisadorSintatico {
                 functionList();
                 break;
             default:
-                error("\"typedef\", \"struct\", \"const\", \"procedure\" ou \"function\"", true);
+                header1Erro();
+        }
+    }
+    
+    private void header1Erro() throws FimInesperadoDeArquivo {
+        if(currentToken().getLexema().equals("var")){
+            error(" campo \"var{}\" já declarado", false);
+            while(currentToken().getLexema().equals("var")||(!currentToken().getLexema().equals("}")&&!firstInicio.contains(currentToken().getLexema()))){
+                error("ESPERAVA: '}' \"typedef\", \"const\", \"function\", \"procedure\" ou \"struct\"", true);
+            }
+            if(currentToken().getLexema().equals("}")){
+                error("Token de sincronização", true);
+            }else
+                error("Token de sincronização", false);
+            header1();
+            return;
+        }
+        
+        error(" (Token Ausente):  \"typedef\", \"struct\", \"const\", \"procedure\" ou \"function\"", false);
+        
+        while(!firstTypes.contains(currentToken().getLexema())&&!currentToken().getLexema().equals("{")&&!currentToken().getId().equals("IDE")){
+            error("ESPERAVA: \"int\", \"real\", \"boolean\", \"string\", IDE ou '{'", true);
+        }
+        
+        Token t = lookahead();
+        if(currentToken().getId().equals("IDE")){
+            if(t.getId().equals("IDE")){
+                error(" assumiu token ausente = \"typedef\"", false);
+                typedefDeclaration();
+                header1();
+            }else if(t.getLexema().equals("(")){
+                error(" assumiu token ausente = \"procedure\"", false);
+                procedureDefine();
+            }else if(t.getLexema().equals("extends")||t.getLexema().equals("{")){
+                error(" assumiu token ausente = \"struct\"", false);
+                structDeclaration();
+                header1();
+            }else{
+                error("tentativa falha de assumir produção de \"struct\", \"typedef\" ou \"procedure\"", true);
+                error("ESPERAVA: \"extends\", '(' IDE ou '{'", true);
+                header1();
+            }
+        }else if(currentToken().getLexema().equals("{")){
+            error(" assumiu token ausente = \"const\"", false);
+            constDeclaration();
+            header3();
+        }else{
+            if(t.getId().equals("IDE")){
+                Token tp = lookaheadP();
+                switch (tp.getLexema()) {
+                    case ";":
+                        error(" assumiu token ausente = \"typedef\"", false);
+                        typedefDeclaration();
+                        header1();
+                        break;
+                    case "(":
+                        error(" assumiu token ausente = \"function\"", false);
+                        function();
+                        functionList();
+                        break;
+                    default:
+                        error("tentativa falha de assumir produção de \"typedef\" ou \"function\".", true);
+                        error("tentativa falha de assumir produção de \"typedef\" ou \"function\".", true);
+                        error("ESPERAVA: ';', ou '('.", true);
+                        inicio();
+                        break;
+                }
+            }else{
+                error("tentativa falha de assumir produção de \"typedef\" ou \"function\".", true);
+                error("ESPERAVA: IDE", true);
+                header1();
+            }
         }
     }
 
+    //Já recebeu o const
     private void header2() throws FimInesperadoDeArquivo {
         switch (currentToken().getLexema()) {
             case "typedef":
@@ -264,10 +371,83 @@ public class AnalisadorSintatico {
                 functionList();
                 break;
             default:
-                error("\"typedef\", \"struct\", \"var\", \"procedure\" ou \"function\"", true);
+                header2Erro();
         }
     }
-
+    
+    //Já recebeu o const
+    private void header2Erro() throws FimInesperadoDeArquivo {
+        if(currentToken().getLexema().equals("const")){
+            error(" campo \"const{}\" já declarado", false);
+            while(currentToken().getLexema().equals("const")||(!currentToken().getLexema().equals("}")&&!firstInicio.contains(currentToken().getLexema()))){
+                error("ESPERAVA: '}' \"typedef\", \"var\", \"function\", \"procedure\" ou \"struct\"", true);
+            }
+            if(currentToken().getLexema().equals("}")){
+                error("Token de sincronização", true);
+            }else
+                error("Token de sincronização", false);
+            header2();
+            return;
+        }
+        
+        error(" (Token Ausente):  \"typedef\", \"struct\", \"var\", \"procedure\" ou \"function\"", false);
+        
+        while(!firstTypes.contains(currentToken().getLexema())&&!currentToken().getLexema().equals("{")&&!currentToken().getId().equals("IDE")){
+            error("ESPERAVA: \"int\", \"real\", \"boolean\", \"string\", IDE ou '{'", true);
+        }
+        
+        Token t = lookahead();
+        if(currentToken().getId().equals("IDE")){
+            if(t.getId().equals("IDE")){
+                error(" assumiu token ausente = \"typedef\"", false);
+                typedefDeclaration();
+                header2();
+            }else if(t.getLexema().equals("(")){
+                error(" assumiu token ausente = \"procedure\"", false);
+                procedureDefine();
+            }else if(t.getLexema().equals("extends")||t.getLexema().equals("{")){
+                error(" assumiu token ausente = \"struct\"", false);
+                structDeclaration();
+                header2();
+            }else{
+                error("tentativa falha de assumir produção de \"struct\", \"typedef\" ou \"procedure\"", true);
+                error("ESPERAVA: \"extends\", '(' IDE ou '{'", true);
+                header2();
+            }
+        }else if(currentToken().getLexema().equals("{")){
+            error(" assumiu token ausente = \"var\"", false);
+            varDeclaration();
+            header3();
+        }else{
+            if(t.getId().equals("IDE")){
+                Token tp = lookaheadP();
+                switch (tp.getLexema()) {
+                    case ";":
+                        error(" assumiu token ausente = \"typedef\"", false);
+                        typedefDeclaration();
+                        header2();
+                        break;
+                    case "(":
+                        error(" assumiu token ausente = \"function\"", false);
+                        function();
+                        functionList();
+                        break;
+                    default:
+                        error("tentativa falha de assumir produção de \"typedef\" ou \"function\".", true);
+                        error("tentativa falha de assumir produção de \"typedef\" ou \"function\".", true);
+                        error("ESPERAVA: ';', ou '('.", true);
+                        inicio();
+                        break;
+                }
+            }else{
+                error("tentativa falha de assumir produção de \"typedef\" ou \"function\".", true);
+                error("ESPERAVA: IDE", true);
+                header1();
+            }
+        }
+    }
+    
+    //Recebeu var e const;
     private void header3() throws FimInesperadoDeArquivo {
         switch (currentToken().getLexema()) {
             case "typedef":
@@ -290,7 +470,75 @@ public class AnalisadorSintatico {
                 functionList();
                 break;
             default:
-                error("\"typedef\", \"struct\", \"procedure\", \"function\"", true);
+                header3Erro();
+        }
+    }
+    
+    //Já recebeu o const
+    private void header3Erro() throws FimInesperadoDeArquivo {
+        if(currentToken().getLexema().equals("const")||currentToken().getLexema().equals("var")){
+            error(" campos \"var{}\" e \"const{}\" já declarados", false);
+            while(currentToken().getLexema().equals("const")||currentToken().getLexema().equals("var")||(!currentToken().getLexema().equals("}")&&!firstInicio.contains(currentToken().getLexema()))){
+                error("ESPERAVA: '}' \"typedef\", \"function\", \"procedure\" ou \"struct\"", true);
+            }
+            if(currentToken().getLexema().equals("}")){
+                error("Token de sincronização", true);
+            }else
+                error("Token de sincronização", false);
+            header3();
+            return;
+        }
+        
+        error(" (Token Ausente):  \"typedef\", \"struct\", \"var\", \"procedure\" ou \"function\"", false);
+        
+        while(!firstTypes.contains(currentToken().getLexema())&&!currentToken().getId().equals("IDE")){
+            error("ESPERAVA: \"int\", \"real\", \"boolean\", \"string\" ou IDE ", true);
+        }
+        
+        Token t = lookahead();
+        if(currentToken().getId().equals("IDE")){
+            if(t.getId().equals("IDE")){
+                error(" assumiu token ausente = \"typedef\"", false);
+                typedefDeclaration();
+                header3();
+            }else if(t.getLexema().equals("(")){
+                error(" assumiu token ausente = \"procedure\"", false);
+                procedureDefine();
+            }else if(t.getLexema().equals("extends")||t.getLexema().equals("{")){
+                error(" assumiu token ausente = \"struct\"", false);
+                structDeclaration();
+                header3();
+            }else{
+                error("tentativa falha de assumir produção de \"struct\", \"typedef\" ou \"procedure\"", true);
+                error("ESPERAVA: \"extends\", '(' IDE ou '{'", true);
+                header3();
+            }
+        }else{
+            if(t.getId().equals("IDE")){
+                Token tp = lookaheadP();
+                switch (tp.getLexema()) {
+                    case ";":
+                        error(" assumiu token ausente = \"typedef\"", false);
+                        typedefDeclaration();
+                        header3();
+                        break;
+                    case "(":
+                        error(" assumiu token ausente = \"function\"", false);
+                        function();
+                        functionList();
+                        break;
+                    default:
+                        error("tentativa falha de assumir produção de \"typedef\" ou \"function\".", true);
+                        error("tentativa falha de assumir produção de \"typedef\" ou \"function\".", true);
+                        error("ESPERAVA: ';', ou '('.", true);
+                        inicio();
+                        break;
+                }
+            }else{
+                error("tentativa falha de assumir produção de \"typedef\" ou \"function\".", true);
+                error("ESPERAVA: IDE", true);
+                header3();
+            }
         }
     }
 
@@ -316,7 +564,7 @@ public class AnalisadorSintatico {
                 functionList();
                 break;
             default:
-                error("\"procedure\" ou \"function\"", true);
+                error("ESPERAVA: \"procedure\" ou \"function\"", true);
                 break;
         }
     }
@@ -348,7 +596,7 @@ public class AnalisadorSintatico {
         if (currentToken().getId().equals("IDE") || firstTypes.contains(currentToken().getLexema())) {
             consumeToken();
         } else {
-            error("IDE", true);
+            error("ESPERAVA: IDE", true);
         }
     }
 
@@ -364,7 +612,7 @@ public class AnalisadorSintatico {
                 consumeToken();
                 break;
             default:
-                error("NRO ou CAD", true);
+                error("ESPERAVA: NRO ou CAD", true);
         }
     }
 
@@ -388,14 +636,14 @@ public class AnalisadorSintatico {
                                 contElement();
                             }
                         } else {
-                            error("IDE", true);
+                            error("ESPERAVA: IDE", true);
                         }
                     } else {
-                        error("'.'", true);
+                        error("ESPERAVA: '.'", true);
                     }
                     break;
                 default:
-                    error("IDE, \"global\" ou \"local\"", true);
+                    error("ESPERAVA: IDE, \"global\" ou \"local\"", true);
             }
         }
     }
@@ -421,15 +669,15 @@ public class AnalisadorSintatico {
                                 structE1();
                             }
                         } else {
-                            error("']'", true);
+                            error("ESPERAVA: ']'", true);
                         }
                     }
                 } else {
-                    error("]", true);
+                    error("ESPERAVA: ]", true);
                 }
                 break;
             default:
-                error("'.' ou '[' ", true);
+                error("ESPERAVA: '.' ou '[' ", true);
         }
     }
 
@@ -442,7 +690,7 @@ public class AnalisadorSintatico {
                 contElement();
             }
         } else {
-            error("IDE", true);
+            error("ESPERAVA: IDE", true);
         }
     }
 //******************************************** Data Types ********************************************   
@@ -455,7 +703,7 @@ public class AnalisadorSintatico {
             consumeToken();
             primeiraVar();
         } else {
-            error("'{'", true);
+            error("ESPERAVA: '{'", true);
         }
     }
 
@@ -476,7 +724,7 @@ public class AnalisadorSintatico {
             consumeToken();
             varExpression();
         } else {
-            error("IDE", true);
+            error("ESPERAVA: IDE", true);
         }
     }
 
@@ -504,7 +752,7 @@ public class AnalisadorSintatico {
                 }
                 break;
             default:
-                error("',', '=', ';', '['", true);
+                error("ESPERAVA: ',', '=', ';', '['", true);
                 break;
         }
     }
@@ -518,7 +766,7 @@ public class AnalisadorSintatico {
                     consumeToken();
                     contMatriz();
                 } else {
-                    error("']'", true);
+                    error("ESPERAVA: ']'", true);
                 }
                 break;
             case "=":
@@ -534,7 +782,7 @@ public class AnalisadorSintatico {
                 proxVar();
                 break;
             default:
-                error("'[', '=', ',', ';'", true);
+                error("ESPERAVA: '[', '=', ',', ';'", true);
         }
     }
 
@@ -544,7 +792,7 @@ public class AnalisadorSintatico {
             value();
             proxVetor();
         } else {
-            error("'['", true);
+            error("ESPERAVA: '['", true);
         }
     }
 
@@ -560,7 +808,7 @@ public class AnalisadorSintatico {
                 verifVar();
                 break;
             default:
-                error("',', ']'", true);
+                error("ESPERAVA: ',', ']'", true);
         }
     }
 
@@ -579,7 +827,7 @@ public class AnalisadorSintatico {
                 proxVar();
                 break;
             default:
-                error("'=', ',', ';'", true);
+                error("ESPERAVA: '=', ',', ';'", true);
         }
     }
 
@@ -588,7 +836,7 @@ public class AnalisadorSintatico {
             consumeToken();
             matrizValue();
         } else {
-            error("'['", true);
+            error("ESPERAVA: '['", true);
         }
     }
 
@@ -598,7 +846,7 @@ public class AnalisadorSintatico {
             value();
             proxMatriz();
         } else {
-            error("'['", true);
+            error("ESPERAVA: '['", true);
         }
     }
 
@@ -614,7 +862,7 @@ public class AnalisadorSintatico {
                 next();
                 break;
             default:
-                error("',', ']'", true);
+                error("ESPERAVA: ',', ']'", true);
         }
     }
 
@@ -629,7 +877,7 @@ public class AnalisadorSintatico {
                 verifVar();
                 break;
             default:
-                error("',', ']'", true);
+                error("ESPERAVA: ',', ']'", true);
         }
     }
 
@@ -644,7 +892,7 @@ public class AnalisadorSintatico {
                 proxVar();
                 break;
             default:
-                error("',', ';'", true);
+                error("ESPERAVA: ',', ';'", true);
                 break;
         }
     }
@@ -668,7 +916,7 @@ public class AnalisadorSintatico {
             continueConst();
             constId();
         } else {
-            error("'{'", true);
+            error("ESPERAVA: '{'", true);
         }
     }
 
@@ -693,7 +941,7 @@ public class AnalisadorSintatico {
             consumeToken();
             constExpression();
         } else {
-            error("IDE", true);
+            error("ESPERAVA: IDE", true);
         }
     }
 
@@ -711,11 +959,11 @@ public class AnalisadorSintatico {
                     consumeToken();
                     estruturaConst();
                 } else {
-                    error("']'", true);
+                    error("ESPERAVA: ']'", true);
                 }
                 break;
             default:
-                error("'=', '['", true);
+                error("ESPERAVA: '=', '['", true);
                 break;
         }
     }
@@ -729,7 +977,7 @@ public class AnalisadorSintatico {
                     value();
                     proxConstVetor();
                 } else {
-                    error("'['", true);
+                    error("ESPERAVA: '['", true);
                 }
                 break;
             case "[":
@@ -741,14 +989,14 @@ public class AnalisadorSintatico {
                         consumeToken();
                         initConstMatriz();
                     } else {
-                        error("'='", true);
+                        error("ESPERAVA: '='", true);
                     }
                 } else {
-                    error("']'", true);
+                    error("ESPERAVA: ']'", true);
                 }
                 break;
             default:
-                error("'=' ou '['", true);
+                error("ESPERAVA: '=' ou '['", true);
                 break;
         }
     }
@@ -765,7 +1013,7 @@ public class AnalisadorSintatico {
                 verifConst();
                 break;
             default:
-                error("',' ou ']'", true);
+                error("ESPERAVA: ',' ou ']'", true);
                 break;
         }
     }
@@ -775,7 +1023,7 @@ public class AnalisadorSintatico {
             consumeToken();
             matrizConstValue();
         } else {
-            error("'['", true);
+            error("ESPERAVA: '['", true);
         }
     }
 
@@ -785,7 +1033,7 @@ public class AnalisadorSintatico {
             value();
             proxConstMatriz();
         } else {
-            error("'['", true);
+            error("ESPERAVA: '['", true);
         }
     }
 
@@ -801,7 +1049,7 @@ public class AnalisadorSintatico {
                 nextConst();
                 break;
             default:
-                error("',', ']'", true);
+                error("ESPERAVA: ',', ']'", true);
         }
     }
 
@@ -816,7 +1064,7 @@ public class AnalisadorSintatico {
                 verifConst();
                 break;
             default:
-                error("',' ou ']'", true);
+                error("ESPERAVA: ',' ou ']'", true);
         }
     }
 
@@ -831,7 +1079,7 @@ public class AnalisadorSintatico {
                 proxConst();
                 break;
             default:
-                error("',' ou ';'", true);
+                error("ESPERAVA: ',' ou ';'", true);
                 break;
         }
     }
@@ -849,10 +1097,10 @@ public class AnalisadorSintatico {
             if (currentToken().getLexema().equals("(")) {
                 continueFunction();
             } else {
-                error("'('", true);
+                error("ESPERAVA: '('", true);
             }
         } else {
-            error("IDE", true);
+            error("ESPERAVA: IDE", true);
         }
     }
 
@@ -865,7 +1113,7 @@ public class AnalisadorSintatico {
             parameters();
             blockFunction();
         } else {
-            error("IDE, ')', \"int\" \"real\" \"boolean\"ou \"string\"", true);
+            error("ESPERAVA: IDE, ')', \"int\" \"real\" \"boolean\"ou \"string\"", true);
         }
     }
 
@@ -878,13 +1126,13 @@ public class AnalisadorSintatico {
                 if (currentToken().getLexema().equals("}")) {
                     consumeToken();
                 } else {
-                    error("'}'", true);
+                    error("ESPERAVA: '}'", true);
                 }
             } else {
-                error("';'", true);
+                error("ESPERAVA: ';'", true);
             }
         } else {
-            error("'{'", true);
+            error("ESPERAVA: '{'", true);
         }
     }
 
@@ -904,7 +1152,7 @@ public class AnalisadorSintatico {
                     consumeToken();
                     value();
                 } else {
-                    error("\"return\"", true);
+                    error("ESPERAVA: \"return\"", true);
                 }   break;
         }
 
@@ -920,7 +1168,7 @@ public class AnalisadorSintatico {
                 consumeToken();
                 value();
             } else {
-                error("\"return\"", true);
+                error("ESPERAVA: \"return\"", true);
             }
         }
     }
@@ -935,7 +1183,7 @@ public class AnalisadorSintatico {
                 consumeToken();
                 value();
             } else {
-                error("\"return\"", true);
+                error("ESPERAVA: \"return\"", true);
             }
         }
     }
@@ -946,7 +1194,7 @@ public class AnalisadorSintatico {
             consumeToken();
             value();
         } else {
-            error("\"return\"", true);
+            error("ESPERAVA: \"return\"", true);
         }
     }
 
@@ -955,7 +1203,7 @@ public class AnalisadorSintatico {
         if (currentToken().getId().equals("IDE")) {
             paramLoop();
         } else {
-            error("IDE", true);
+            error("ESPERAVA: IDE", true);
         }
     }
 
@@ -969,7 +1217,7 @@ public class AnalisadorSintatico {
                 consumeToken();
                 break;
             default:
-                error("',' ou ')'", true);
+                error("ESPERAVA: ',' ou ')'", true);
                 break;
         }
     }
@@ -984,7 +1232,7 @@ public class AnalisadorSintatico {
         if (currentToken().getId().equals("IDE")) {
             structVars();
         } else {
-            error("IDE", true);
+            error("ESPERAVA: IDE", true);
         }
     }
 
@@ -1004,13 +1252,13 @@ public class AnalisadorSintatico {
                         blockVarStruct();
                     }
                     else{
-                        error("'{'", true);
+                        error("ESPERAVA: '{'", true);
                     }
                 } else {
-                    error("IDE", true);
+                    error("ESPERAVA: IDE", true);
                 }   break;
             default:
-                error("'{' ou \"extends\"", true);
+                error("ESPERAVA: '{' ou \"extends\"", true);
                 break;
         }
     }
@@ -1022,10 +1270,10 @@ public class AnalisadorSintatico {
                 consumeToken();
                 firstStructVar();
             } else {
-                error("'{'", true);
+                error("ESPERAVA: '{'", true);
             }
         } else {
-            error("\"var\"", true);
+            error("ESPERAVA: \"var\"", true);
         }
     }
 
@@ -1039,7 +1287,7 @@ public class AnalisadorSintatico {
             consumeToken();
             structVarExp();
         } else {
-            error("IDE", true);
+            error("ESPERAVA: IDE", true);
         }
     }
 
@@ -1060,11 +1308,11 @@ public class AnalisadorSintatico {
                     consumeToken();
                     structMatriz();
                 } else {
-                    error("]", true);
+                    error("ESPERAVA: ]", true);
                 }
                 break;
             default:
-                error("',', ';' ou '['", true);
+                error("ESPERAVA: ',', ';' ou '['", true);
                 break;
         }
     }
@@ -1075,7 +1323,7 @@ public class AnalisadorSintatico {
             if (currentToken().getLexema().equals("}")) {
                 consumeToken();
             } else {
-                error("'}'", true);
+                error("ESPERAVA: '}'", true);
             }
         } else {
             dataType();
@@ -1092,7 +1340,7 @@ public class AnalisadorSintatico {
                     consumeToken();
                     contStructMatriz();
                 } else {
-                    error("']'", true);
+                    error("ESPERAVA: ']'", true);
                 }
                 break;
             case ",":
@@ -1104,7 +1352,7 @@ public class AnalisadorSintatico {
                 proxStructVar();
                 break;
             default:
-                error("'[', ',' ou ';'", true);
+                error("ESPERAVA: '[', ',' ou ';'", true);
                 break;
         }
     }
@@ -1120,7 +1368,7 @@ public class AnalisadorSintatico {
                 proxStructVar();
                 break;
             default:
-                error("',' ou ';'", true);
+                error("ESPERAVA: ',' ou ';'", true);
                 break;
         }
     }
@@ -1141,13 +1389,13 @@ public class AnalisadorSintatico {
                     consumeToken();
                     procedureContent();
                 } else {
-                    error("'{'", true);
+                    error("ESPERAVA: '{'", true);
                 }
             } else {
-                error("')'", true);
+                error("ESPERAVA: ')'", true);
             }
         } else {
-            error("'('", true);
+            error("ESPERAVA: '('", true);
         }
 
     }
@@ -1169,7 +1417,7 @@ public class AnalisadorSintatico {
                 if (currentToken().getLexema().equals("}")) {
                     consumeToken();
                 } else {
-                    error("'}", true);
+                    error("ESPERAVA: '}", true);
                 }
                 break;
         }
@@ -1184,7 +1432,7 @@ public class AnalisadorSintatico {
             if (currentToken().getLexema().equals("}")) {
                 consumeToken();
             } else {
-                error("'}'", true);
+                error("ESPERAVA: '}'", true);
             }
         }
     }
@@ -1198,7 +1446,7 @@ public class AnalisadorSintatico {
             if (currentToken().getLexema().equals("}")) {
                 consumeToken();
             } else {
-                error("'}'", true);
+                error("ESPERAVA: '}'", true);
             }
         } 
     }
@@ -1208,7 +1456,7 @@ public class AnalisadorSintatico {
         if (currentToken().getLexema().equals("}")) {
             consumeToken();
         } else {
-            error("'}", true);
+            error("ESPERAVA: '}", true);
         }
     }
 
@@ -1221,13 +1469,13 @@ public class AnalisadorSintatico {
                     consumeToken();
                     procedureContent();
                 } else {
-                    error("'{'", true);
+                    error("ESPERAVA: '{'", true);
                 }
             } else {
-                error("'('", true);
+                error("ESPERAVA: '('", true);
             }
         } else {
-            error("IDE", true);
+            error("ESPERAVA: IDE", true);
         }
     }
 
@@ -1238,7 +1486,7 @@ public class AnalisadorSintatico {
         } else if (currentToken().getId().equals("IDE") || firstTypes.contains(currentToken().getLexema())) {
             parameters();
         } else {
-            error("')' ou IDE", true);
+            error("ESPERAVA: ')' ou IDE", true);
         }
     }
 //************************************** Procedure Declaration ***************************************  
@@ -1247,7 +1495,7 @@ public class AnalisadorSintatico {
 //====================================== Codigo ======================================================
 //****************************************************************************************************  
     private void codigo() throws FimInesperadoDeArquivo {
-        if (firstComando.contains(currentToken().getLexema()) || currentToken().getId().equals("IDE") || currentToken().getLexema().equals("++") || currentToken().getLexema().equals("--")) { //IDE para increment e decrement, functioncall e atribuição
+        if (firstComando.contains(currentToken().getLexema()) || currentToken().getId().equals("IDE")) { //IDE para increment e decrement, functioncall e atribuição
             comando();
             codigo();
         }
@@ -1275,7 +1523,7 @@ public class AnalisadorSintatico {
                 if(currentToken().getLexema().equals(";"))
                     consumeToken();
                 else
-                    error("','", true);
+                    error("ESPERAVA: ','", true);
             } else { // casos de incrementop, decrementop e atribuição (first é variável nos 3 casos)
                 variavel();
                 //atribuição
@@ -1286,7 +1534,7 @@ public class AnalisadorSintatico {
                         if (currentToken().getLexema().equals(";")) {
                             consumeToken();
                         } else {
-                            error("';'", true);
+                            error("ESPERAVA: ';'", true);
                         }
                         break;
                     case "++":
@@ -1295,11 +1543,11 @@ public class AnalisadorSintatico {
                         if (currentToken().getLexema().equals(";")) {
                             consumeToken();
                         } else {
-                            error("';'", true);
+                            error("ESPERAVA: ';'", true);
                         }
                         break;
                     default:
-                        error("'=', \"--\" ou \"++\"", true);
+                        error("ESPERAVA: '=', \"--\" ou \"++\"", true);
                         break;
                 }
 
@@ -1311,10 +1559,10 @@ public class AnalisadorSintatico {
             if (currentToken().getLexema().equals(";")) {
                 consumeToken();
             } else {
-                error("';'", true);
+                error("ESPERAVA: ';'", true);
             }
         } else {
-            error("\"++\" ou \"--\"", true);
+            error("ESPERAVA: \"++\" ou \"--\"", true);
         }
     }
 
@@ -1324,7 +1572,7 @@ public class AnalisadorSintatico {
             consumeToken();
             printableList();
         } else {
-            error("'('", true);
+            error("ESPERAVA: '('", true);
         }
     }
 
@@ -1344,11 +1592,11 @@ public class AnalisadorSintatico {
                 if (currentToken().getLexema().equals(";")) {
                     consumeToken();
                 } else {
-                    error("';'", true);
+                    error("ESPERAVA: ';'", true);
                 }
                 break;
             default:
-                error("',' ou ')'", true);
+                error("ESPERAVA: ',' ou ')'", true);
                 break;
         }
     }
@@ -1359,7 +1607,7 @@ public class AnalisadorSintatico {
             consumeToken();
             readParams();
         } else {
-            error("'('", true);
+            error("ESPERAVA: '('", true);
         }
     }
 
@@ -1380,11 +1628,11 @@ public class AnalisadorSintatico {
                     consumeToken();
 
                 } else {
-                    error("';'", true);
+                    error("ESPERAVA: ';'", true);
                 }
                 break;
             default:
-                error("',' ou ')'", true);
+                error("ESPERAVA: ',' ou ')'", true);
                 break;
         }
     }
@@ -1405,19 +1653,19 @@ public class AnalisadorSintatico {
                             consumeToken();
                             elsePart();
                         } else {
-                            error("'}'", true);
+                            error("ESPERAVA: '}'", true);
                         }
                     } else {
-                        error("'{'", true);
+                        error("ESPERAVA: '{'", true);
                     }
                 } else {
-                    error("\"then\"", true);
+                    error("ESPERAVA: \"then\"", true);
                 }
             } else {
-                error("')'", true);
+                error("ESPERAVA: ')'", true);
             }
         } else {
-            error("'('", true);
+            error("ESPERAVA: '('", true);
         }
 
     }
@@ -1431,10 +1679,10 @@ public class AnalisadorSintatico {
                 if (currentToken().getLexema().equals("}")) {
                     consumeToken();
                 } else {
-                    error("'}", true);
+                    error("ESPERAVA: '}", true);
                 }
             } else {
-                error("\"else\"", true);
+                error("ESPERAVA: \"else\"", true);
             }
         }
     }
@@ -1452,16 +1700,16 @@ public class AnalisadorSintatico {
                     if (currentToken().getLexema().equals("}")) {
                         consumeToken();
                     } else {
-                        error("'}'", true);
+                        error("ESPERAVA: '}'", true);
                     }
                 } else {
-                    error("'{'", true);
+                    error("ESPERAVA: '{'", true);
                 }
             } else {
-                error("')'", true);
+                error("ESPERAVA: ')'", true);
             }
         } else {
-            error("'('", true);
+            error("ESPERAVA: '('", true);
         }
     }
 
@@ -1482,13 +1730,13 @@ public class AnalisadorSintatico {
                     if (currentToken().getLexema().equals(";")) {
                         consumeToken();
                     } else {
-                        error("';'", true);
+                        error("ESPERAVA: ';'", true);
                     }
                 } else {
-                    error("IDE", true);
+                    error("ESPERAVA: IDE", true);
                 }
             } else {
-                error("IDE", true);
+                error("ESPERAVA: IDE", true);
             }
         } else {
             dataType();
@@ -1497,10 +1745,10 @@ public class AnalisadorSintatico {
                 if (currentToken().getLexema().equals(";")) {
                     consumeToken();
                 } else {
-                    error("';'", true);
+                    error("ESPERAVA: ';'", true);
                 }
             } else {
-                error("IDE ou \"struc\"", true);
+                error("ESPERAVA: IDE ou \"struc\"", true);
             }
         }
     }
@@ -1561,7 +1809,7 @@ public class AnalisadorSintatico {
                     aritmeticOp();
                 }
             } else {
-                error("'*' ou '/'", true);
+                error("ESPERAVA: '*' ou '/'", true);
             }
         } else {
             opNegate();
@@ -1585,7 +1833,7 @@ public class AnalisadorSintatico {
                 contRelLogic();
                 break;
             default:
-                error("REL ou LOG", true);
+                error("ESPERAVA: REL ou LOG", true);
         }
     }
 
@@ -1615,7 +1863,7 @@ public class AnalisadorSintatico {
             consumeToken();
             variavel();
         } else {
-            error("'!'", true);
+            error("ESPERAVA: '!'", true);
 
         }
     }
@@ -1648,7 +1896,7 @@ public class AnalisadorSintatico {
                                 logicOrRelacionalOp();
                             }
                         } else {
-                            error("')'", true);
+                            error("ESPERAVA: ')'", true);
                         }
                     }
                 } else {
@@ -1660,12 +1908,12 @@ public class AnalisadorSintatico {
                             logicOrRelacionalOp();
                         }
                     } else {
-                        error("')'", true);
+                        error("ESPERAVA: ')'", true);
                     }
                 }
                 break;
             default:
-                error("'!', '(', \"true\" ou \"false\"", true);
+                error("ESPERAVA: '!', '(', \"true\" ou \"false\"", true);
         }
     }
 
@@ -1713,7 +1961,7 @@ public class AnalisadorSintatico {
                                 logicOrRelacionalOp();
                             }
                         } else {
-                            error("')'", true);
+                            error("ESPERAVA: ')'", true);
                         }
                     }
                     if (currentToken().getLexema().equals(")")) {
@@ -1722,11 +1970,11 @@ public class AnalisadorSintatico {
                             logicOrRelacionalOp();
                         }
                     } else {
-                        error("')'", true);
+                        error("ESPERAVA: ')'", true);
                     }
                     break;
                 default:
-                    error("'!', '(', \"true\" ou \"false\"", true);
+                    error("ESPERAVA: '!', '(', \"true\" ou \"false\"", true);
             }
         }
     }
@@ -1746,7 +1994,7 @@ public class AnalisadorSintatico {
                 fCallParams();
             }
         } else {
-            error("'('", true);
+            error("ESPERAVA: '('", true);
         }
     }
 
@@ -1761,7 +2009,7 @@ public class AnalisadorSintatico {
                 consumeToken();
                 break;
             default:
-                error("',' ou ')'", true);
+                error("ESPERAVA: ',' ou ')'", true);
                 break;
         }
     }
