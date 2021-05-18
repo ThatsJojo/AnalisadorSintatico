@@ -5,7 +5,52 @@ var{
 	int a, b;
 }
 
+function int sftart(){
+    //read(a);
+    i=10;
+    i++;
+    i--;
+    return a;
+}
+
+function int sftart(){
+    //read(a);
+    i++;
+    i--;
+    return a;
+}
+
+function int sftart(){
+    //read(a);
+    i--;
+    i--;
+    return a;
+}
+
+function int sftart(){
+    //read(a);
+    ++i;
+    i++;
+    i--;
+    return a;
+}
+
+function int sftart(){
+    //read(a);
+    --i;
+    i++;
+    i--;
+    return a;
+}
+
+procedure fstart(){
+    read(a);
+    i++;
+    i--;
+}
+
 procedure start(){
+    read(a);
     i++;
     i--;
 }

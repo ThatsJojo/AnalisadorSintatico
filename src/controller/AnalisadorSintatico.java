@@ -15,7 +15,6 @@ public class AnalisadorSintatico {
     private String analiseret = "";
 
     private static final HashSet<String> firstTypes = new HashSet();
-    private static final HashSet<String> firstInicio = new HashSet();
     private static final HashSet<String> firstComando = new HashSet();
 
     public AnalisadorSintatico() {
@@ -24,14 +23,6 @@ public class AnalisadorSintatico {
         firstTypes.add("real");
         firstTypes.add("boolean");
         firstTypes.add("string");
-
-        //Conjunto first do método Inicio
-        firstInicio.add("typedef");
-        firstInicio.add("struct");
-        firstInicio.add("var");
-        firstInicio.add("const");
-        firstInicio.add("procedure");
-        firstInicio.add("function");
 
         //Conjunto first do método comando //faltam algumas coisas
         firstComando.add("print");
@@ -121,7 +112,7 @@ public class AnalisadorSintatico {
                 + " lookahead: " + lookahead().getLexema());
         this.erros++;
         
-        int i = 10/0;
+        //int i = 10/0;
         if(consumir)
             consumeToken(true);
     }
@@ -847,6 +838,8 @@ public class AnalisadorSintatico {
 //***************************************** Const Declaration ****************************************  
 //====================================================================================================
 
+    
+    
 //======================================= Function Declaration =======================================
 //****************************************************************************************************
     private void function() throws FimInesperadoDeArquivo {
@@ -896,23 +889,23 @@ public class AnalisadorSintatico {
     }
 
     private void blockFuncContent() throws FimInesperadoDeArquivo {
-        if (currentToken().getLexema().equals("var")) {
-            varDeclaration();
-            content1();
-        } else if (currentToken().getLexema().equals("const")) {
-            constDeclaration();
-            content2();
-        } else if (firstComando.contains(currentToken().getLexema())) {
-            codigo();
-            if (currentToken().getLexema().equals("return")) {
-                consumeToken();
-                value();
-            } else {
-                error("\"return\"", true);
-            }
-        } else {
-            error("\"var\", \"const\", \"print\", \"read\", \"while\", \"const\","
-                    + " \"typedef\", \"struct\" ou \"if\"", true);
+        switch (currentToken().getLexema()) {
+            case "var":
+                varDeclaration();
+                content1();
+                break;
+            case "const":
+                constDeclaration();
+                content2();
+                break;
+            default:
+                codigo();
+                if (currentToken().getLexema().equals("return")) {
+                    consumeToken();
+                    value();
+                } else {
+                    error("\"return\"", true);
+                }   break;
         }
 
     }
@@ -921,7 +914,7 @@ public class AnalisadorSintatico {
         if (currentToken().getLexema().equals("const")) {
             constDeclaration();
             content3();
-        } else if (firstComando.contains(currentToken().getLexema())) {
+        } else {
             codigo();
             if (currentToken().getLexema().equals("return")) {
                 consumeToken();
@@ -929,9 +922,6 @@ public class AnalisadorSintatico {
             } else {
                 error("\"return\"", true);
             }
-        } else {
-            error("\"const\", \"print\", \"read\", \"while\", \"const\","
-                    + " \"typedef\", \"struct\" ou \"if\"", true);
         }
     }
 
@@ -939,7 +929,7 @@ public class AnalisadorSintatico {
         if (currentToken().getLexema().equals("var")) {
             varDeclaration();
             content3();
-        } else if (firstComando.contains(currentToken().getLexema())) {
+        } else{
             codigo();
             if (currentToken().getLexema().equals("return")) {
                 consumeToken();
@@ -947,21 +937,16 @@ public class AnalisadorSintatico {
             } else {
                 error("\"return\"", true);
             }
-        } else {
-            error("\"var\", \"print\", \"read\", \"while\", \"const\","
-                    + " \"typedef\", \"struct\" ou \"if\"", true);
         }
     }
 
     private void content3() throws FimInesperadoDeArquivo {
-        if (firstComando.contains(currentToken().getLexema())) {
-            codigo();
-            if (currentToken().getLexema().equals("return")) {
-                consumeToken();
-                value();
-            } else {
-                error("\"return\"", true);
-            }
+        codigo();
+        if (currentToken().getLexema().equals("return")) {
+            consumeToken();
+            value();
+        } else {
+            error("\"return\"", true);
         }
     }
 
@@ -991,6 +976,8 @@ public class AnalisadorSintatico {
 //*************************************** Function Declaration ***************************************  
 //====================================================================================================
 
+    
+    
 //======================================== Struct Declaration ========================================
 //**************************************************************************************************** 
     private void structDeclaration() throws FimInesperadoDeArquivo {
@@ -1140,6 +1127,9 @@ public class AnalisadorSintatico {
 
     //**************************************** Struct Declaration ****************************************  
     //====================================================================================================
+    
+    
+    
     //====================================== Procedure Declaration =======================================
     //****************************************************************************************************     
     private void startProcedure() throws FimInesperadoDeArquivo {
@@ -1175,7 +1165,12 @@ public class AnalisadorSintatico {
                 procedureContent3();
                 break;
             default:
-                error("\"var\" ou \"const\"", true);
+                codigo();
+                if (currentToken().getLexema().equals("}")) {
+                    consumeToken();
+                } else {
+                    error("'}", true);
+                }
                 break;
         }
     }
@@ -1184,16 +1179,13 @@ public class AnalisadorSintatico {
         if (currentToken().getLexema().equals("const")) {
             constDeclaration();
             procedureContent4();
-        } else if (firstComando.contains(currentToken().getLexema())) {
+        } else {
             codigo();
             if (currentToken().getLexema().equals("}")) {
                 consumeToken();
             } else {
                 error("'}'", true);
             }
-        } else {
-            error("\"const\", \"print\", \"read\", \"while\", \"const\","
-                    + " \"typedef\", \"struct\" ou \"if\"", true);
         }
     }
 
@@ -1201,30 +1193,22 @@ public class AnalisadorSintatico {
         if (currentToken().getLexema().equals("var")) {
             varDeclaration();
             procedureContent4();
-        } else if (firstComando.contains(currentToken().getLexema())) {
+        } else{
             codigo();
             if (currentToken().getLexema().equals("}")) {
                 consumeToken();
             } else {
                 error("'}'", true);
             }
-        } else {
-            error("\"var\", \"print\", \"read\", \"while\", \"const\","
-                    + " \"typedef\", \"struct\" ou \"if\"", true);
-        }
+        } 
     }
 
     private void procedureContent4() throws FimInesperadoDeArquivo {
-        if (firstComando.contains(currentToken().getLexema())) {
-            codigo();
-            if (currentToken().getLexema().equals("}")) {
-                consumeToken();
-            } else {
-                error("'}", true);
-            }
+        codigo();
+        if (currentToken().getLexema().equals("}")) {
+            consumeToken();
         } else {
-            error("\"print\", \"read\", \"while\", \"const\","
-                    + " \"typedef\", \"struct\" ou \"if\"", true);
+            error("'}", true);
         }
     }
 
@@ -1483,7 +1467,10 @@ public class AnalisadorSintatico {
 
 //************************************** Codigo ****************************************************** 
 //====================================================================================================
-//====================================== Procedure Declaration =======================================
+    
+    
+    
+//====================================== Typedef Declaration =======================================
 //**************************************************************************************************** 
     private void typedefDeclaration() throws FimInesperadoDeArquivo {
         if (currentToken().getLexema().equals("struct")) {
@@ -1520,6 +1507,8 @@ public class AnalisadorSintatico {
 //*************************************** Typedef Declaration ****************************************  
 //====================================================================================================
 
+    
+    
 //=========================================== Operations =============================================  
 //****************************************************************************************************    
     //Produções que podem assumir valores aritméticos

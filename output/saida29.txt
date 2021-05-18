@@ -9,5 +9,5 @@
 1 IDE c
 1 DEL )
 1 DEL {
-2 PRE return ERRO SINTÁTICO. ESPERAVA: "var" ou "const".  Encontrado: return
+2 PRE return ERRO SINTÁTICO. ESPERAVA: '}.  Encontrado: return
 2 IDE c ERRO SINTÁTICO. ESPERAVA: "procedure" ou "function".  Encontrado: c
