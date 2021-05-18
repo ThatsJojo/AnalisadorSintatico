@@ -7,7 +7,6 @@
 2 PRE string
 2 IDE frase
 2 DEL ;
-4 PRE struct
 4 IDE pessoa
 4 DEL {
 5 PRE var

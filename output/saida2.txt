@@ -20,4 +20,4 @@
 8 DEL (
 8 DEL )
 8 DEL {
-IDE ERRO SINTÁTICO. ESPERAVA: "var" ou "const".  Encontrado: i
+9 IDE i ERRO SINTÁTICO. ESPERAVA: "var" ou "const".  Encontrado: i

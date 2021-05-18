@@ -1,1 +1,11 @@
-IDE ERRO SINTÁTICO. ESPERAVA: "typedef", "struct", "var", "const", "procedure" ou "function".  Encontrado: public
+1 IDE public
+1 IDE static
+1 PRE boolean ERRO SINTÁTICO. ESPERAVA: ';'.  Encontrado: boolean
+1 IDE isSpace
+1 DEL (
+1 IDE char
+1 IDE c
+1 DEL )
+1 DEL {
+2 PRE return ERRO SINTÁTICO. ESPERAVA: "var" ou "const".  Encontrado: return
+2 IDE c ERRO SINTÁTICO. ESPERAVA: "procedure" ou "function".  Encontrado: c

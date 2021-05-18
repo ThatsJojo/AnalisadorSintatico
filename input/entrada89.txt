@@ -71,4 +71,4 @@ procedure start(){
     read(i, u[i]);
 
 
-
+}

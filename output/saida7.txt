@@ -1,1 +1,62 @@
-IDE ERRO SINTÁTICO. ESPERAVA: "typedef", "struct", "var", "const", "procedure" ou "function".  Encontrado: int54
+1 IDE int54
+1 DEL {
+1 DEL } ERRO SINTÁTICO. ESPERAVA: "var".  Encontrado: }
+1 IDE Codigo1 ERRO SINTÁTICO. ESPERAVA: PRE ausente.  Encontrado: Codigo1
+1 DEL ) ERRO SINTÁTICO. ESPERAVA: "extends", IDE ou '{'.  Encontrado: )
+1 NMF 1.a ERRO SINTÁTICO. ESPERAVA: "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 1.a
+1 NRO 1.2 ERRO SINTÁTICO. ESPERAVA: "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 1.2
+1 IDE para ERRO SINTÁTICO. ESPERAVA: PRE ausente.  Encontrado: para
+1 NMF 1231teste ERRO SINTÁTICO. ESPERAVA: "extends", IDE ou '{'.  Encontrado: 1231teste
+1 REL == ERRO SINTÁTICO. ESPERAVA: "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: ==
+1 IDE j ERRO SINTÁTICO. ESPERAVA: PRE ausente.  Encontrado: j
+1 LOG && ERRO SINTÁTICO. ESPERAVA: "extends", IDE ou '{'.  Encontrado: &&
+1 IDE i ERRO SINTÁTICO. ESPERAVA: PRE ausente.  Encontrado: i
+1 NRO 5 ERRO SINTÁTICO. ESPERAVA: "extends", IDE ou '{'.  Encontrado: 5
+1 LOG || ERRO SINTÁTICO. ESPERAVA: "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: ||
+1 NRO 4 ERRO SINTÁTICO. ESPERAVA: "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 4
+1 PRE real ERRO SINTÁTICO. ESPERAVA: PRE ausente.  Encontrado: real
+1 DEL } ERRO SINTÁTICO. ESPERAVA: PRE ausente.  Encontrado: }
+1 PRE boolean ERRO SINTÁTICO. ESPERAVA: "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: boolean
+2 IDE i ERRO SINTÁTICO. ESPERAVA: PRE ausente.  Encontrado: i
+2 REL != ERRO SINTÁTICO. ESPERAVA: "extends", IDE ou '{'.  Encontrado: !=
+2 IDE jota
+2 IDE A
+2 REL == ERRO SINTÁTICO. ESPERAVA: ';'.  Encontrado: ==
+2 NRO 9 ERRO SINTÁTICO. ESPERAVA: "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 9
+2 DEL } ERRO SINTÁTICO. ESPERAVA: "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: }
+2 NRO 6.2 ERRO SINTÁTICO. ESPERAVA: "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 6.2
+2 LOG ! ERRO SINTÁTICO. ESPERAVA: "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: !
+2 REL <= ERRO SINTÁTICO. ESPERAVA: "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: <=
+2 NRO 9.87 ERRO SINTÁTICO. ESPERAVA: "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 9.87
+2 NRO 8 ERRO SINTÁTICO. ESPERAVA: "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 8
+2 REL > ERRO SINTÁTICO. ESPERAVA: "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: >
+2 IDE seis
+2 IDE casa
+3 IDE for ERRO SINTÁTICO. ESPERAVA: ';'.  Encontrado: for
+3 DEL ( ERRO SINTÁTICO. ESPERAVA: "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: (
+3 PRE int ERRO SINTÁTICO. ESPERAVA: ';', ou '('.  Encontrado: int
+3 IDE i ERRO SINTÁTICO. ESPERAVA: PRE ausente.  Encontrado: i
+3 ATRIB = ERRO SINTÁTICO. ESPERAVA: "extends", IDE ou '{'.  Encontrado: =
+3 NRO 0 ERRO SINTÁTICO. ESPERAVA: "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 0
+3 DEL ; ERRO SINTÁTICO. ESPERAVA: "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: ;
+3 IDE i ERRO SINTÁTICO. ESPERAVA: PRE ausente.  Encontrado: i
+3 REL < ERRO SINTÁTICO. ESPERAVA: "extends", IDE ou '{'.  Encontrado: <
+3 IDE j ERRO SINTÁTICO. ESPERAVA: PRE ausente.  Encontrado: j
+3 DEL . ERRO SINTÁTICO. ESPERAVA: "extends", IDE ou '{'.  Encontrado: .
+3 IDE size ERRO SINTÁTICO. ESPERAVA: PRE ausente.  Encontrado: size
+3 DEL ; ERRO SINTÁTICO. ESPERAVA: "extends", IDE ou '{'.  Encontrado: ;
+3 IDE i ERRO SINTÁTICO. ESPERAVA: PRE ausente.  Encontrado: i
+3 ART ++ ERRO SINTÁTICO. ESPERAVA: "extends", IDE ou '{'.  Encontrado: ++
+3 DEL ) ERRO SINTÁTICO. ESPERAVA: "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: )
+4 PRE int ERRO SINTÁTICO. ESPERAVA: ';', ou '('.  Encontrado: int
+4 IDE i
+4 PRE extends
+6 IDE Tem
+6 ART + ERRO SINTÁTICO. ESPERAVA: '{'.  Encontrado: +
+6 NRO 1 ERRO SINTÁTICO. ESPERAVA: "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 1
+6 IDE arquivo
+6 IDE l
+6 SIB á ERRO SINTÁTICO. ESPERAVA: ';'.  Encontrado: á
+6 IDE no
+6 IDE input
+0000 ERRO SINTÁTICO. EOF

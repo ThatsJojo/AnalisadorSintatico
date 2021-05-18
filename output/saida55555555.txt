@@ -1,1 +1,76 @@
-IDE ERRO SINTÁTICO. ESPERAVA: "typedef", "struct", "var", "const", "procedure" ou "function".  Encontrado: linha1
+1 IDE linha1 ERRO SINTÁTICO. ESPERAVA: PRE ausente.  Encontrado: linha1
+1 ATRIB = ERRO SINTÁTICO. ESPERAVA: "extends", IDE ou '{'.  Encontrado: =
+1 NRO 8 ERRO SINTÁTICO. ESPERAVA: "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 8
+1 LOG ! ERRO SINTÁTICO. ESPERAVA: "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: !
+2 IDE linha2 ERRO SINTÁTICO. ESPERAVA: PRE ausente.  Encontrado: linha2
+2 LOG ! ERRO SINTÁTICO. ESPERAVA: "extends", IDE ou '{'.  Encontrado: !
+3 IDE linha3
+3 DEL {
+4 IDE linha4 ERRO SINTÁTICO. ESPERAVA: "var".  Encontrado: linha4
+4 OpMF & ERRO SINTÁTICO. ESPERAVA: "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: &
+5 IDE linha5 ERRO SINTÁTICO. ESPERAVA: PRE ausente.  Encontrado: linha5
+5 OpMF | ERRO SINTÁTICO. ESPERAVA: "extends", IDE ou '{'.  Encontrado: |
+6 IDE linha6 ERRO SINTÁTICO. ESPERAVA: PRE ausente.  Encontrado: linha6
+6 REL < ERRO SINTÁTICO. ESPERAVA: "extends", IDE ou '{'.  Encontrado: <
+7 IDE linha7 ERRO SINTÁTICO. ESPERAVA: PRE ausente.  Encontrado: linha7
+7 REL <= ERRO SINTÁTICO. ESPERAVA: "extends", IDE ou '{'.  Encontrado: <=
+8 IDE linha8 ERRO SINTÁTICO. ESPERAVA: PRE ausente.  Encontrado: linha8
+8 REL == ERRO SINTÁTICO. ESPERAVA: "extends", IDE ou '{'.  Encontrado: ==
+9 IDE linha9 ERRO SINTÁTICO. ESPERAVA: PRE ausente.  Encontrado: linha9
+9 ART / ERRO SINTÁTICO. ESPERAVA: "extends", IDE ou '{'.  Encontrado: /
+9 IDE linha8_asfa45
+10 IDE linha10
+10 LOG || ERRO SINTÁTICO. ESPERAVA: ';'.  Encontrado: ||
+10 PRE while ERRO SINTÁTICO. ESPERAVA: "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: while
+11 IDE linha11 ERRO SINTÁTICO. ESPERAVA: PRE ausente.  Encontrado: linha11
+11 REL < ERRO SINTÁTICO. ESPERAVA: "extends", IDE ou '{'.  Encontrado: <
+11 NRO 10.22 ERRO SINTÁTICO. ESPERAVA: "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 10.22
+12 IDE linha12 ERRO SINTÁTICO. ESPERAVA: PRE ausente.  Encontrado: linha12
+12 LOG && ERRO SINTÁTICO. ESPERAVA: "extends", IDE ou '{'.  Encontrado: &&
+12 NMF 12.aaaa ERRO SINTÁTICO. ESPERAVA: "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 12.aaaa
+12 LOG ! ERRO SINTÁTICO. ESPERAVA: "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: !
+13 IDE linha13 ERRO SINTÁTICO. ESPERAVA: PRE ausente.  Encontrado: linha13
+13 DEL ; ERRO SINTÁTICO. ESPERAVA: "extends", IDE ou '{'.  Encontrado: ;
+13 NMF 15aaaa ERRO SINTÁTICO. ESPERAVA: "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 15aaaa
+13 LOG ! ERRO SINTÁTICO. ESPERAVA: "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: !
+14 NRO 8 ERRO SINTÁTICO. ESPERAVA: "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 8
+14 LOG ! ERRO SINTÁTICO. ESPERAVA: "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: !
+14 IDE linha14 ERRO SINTÁTICO. ESPERAVA: PRE ausente.  Encontrado: linha14
+14 OpMF |a ERRO SINTÁTICO. ESPERAVA: "extends", IDE ou '{'.  Encontrado: |a
+15 IDE linha15 ERRO SINTÁTICO. ESPERAVA: PRE ausente.  Encontrado: linha15
+15 LOG && ERRO SINTÁTICO. ESPERAVA: "extends", IDE ou '{'.  Encontrado: &&
+16 IDE linha16 ERRO SINTÁTICO. ESPERAVA: PRE ausente.  Encontrado: linha16
+16 OpMF &8 ERRO SINTÁTICO. ESPERAVA: "extends", IDE ou '{'.  Encontrado: &8
+17 IDE linha27 ERRO SINTÁTICO. ESPERAVA: PRE ausente.  Encontrado: linha27
+17 ATRIB = ERRO SINTÁTICO. ESPERAVA: "extends", IDE ou '{'.  Encontrado: =
+18 IDE linha18
+18 IDE ga
+18 SIB ç ERRO SINTÁTICO. ESPERAVA: ';'.  Encontrado: ç
+18 IDE lskdjfa ERRO SINTÁTICO. ESPERAVA: PRE ausente.  Encontrado: lskdjfa
+18 ART / ERRO SINTÁTICO. ESPERAVA: "extends", IDE ou '{'.  Encontrado: /
+18 IDE g ERRO SINTÁTICO. ESPERAVA: PRE ausente.  Encontrado: g
+18 SIB ç ERRO SINTÁTICO. ESPERAVA: "extends", IDE ou '{'.  Encontrado: ç
+18 IDE lkajs ERRO SINTÁTICO. ESPERAVA: PRE ausente.  Encontrado: lkajs
+18 SIB ç ERRO SINTÁTICO. ESPERAVA: "extends", IDE ou '{'.  Encontrado: ç
+18 IDE lda
+18 IDE a
+18 SIB ç ERRO SINTÁTICO. ESPERAVA: ';'.  Encontrado: ç
+18 IDE lgkaj
+18 IDE sadfa
+19 IDE linha19 ERRO SINTÁTICO. ESPERAVA: ';'.  Encontrado: linha19
+20 IDE linha20 ERRO SINTÁTICO. ESPERAVA: PRE ausente.  Encontrado: linha20
+20 REL < ERRO SINTÁTICO. ESPERAVA: "extends", IDE ou '{'.  Encontrado: <
+20 NRO 20 ERRO SINTÁTICO. ESPERAVA: "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 20
+21 IDE linha21 ERRO SINTÁTICO. ESPERAVA: PRE ausente.  Encontrado: linha21
+21 LOG && ERRO SINTÁTICO. ESPERAVA: "extends", IDE ou '{'.  Encontrado: &&
+21 NRO 20.2 ERRO SINTÁTICO. ESPERAVA: "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 20.2
+21 LOG ! ERRO SINTÁTICO. ESPERAVA: "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: !
+22 IDE linha22 ERRO SINTÁTICO. ESPERAVA: PRE ausente.  Encontrado: linha22
+22 ART ++ ERRO SINTÁTICO. ESPERAVA: "extends", IDE ou '{'.  Encontrado: ++
+23 IDE linha23for
+23 DEL (
+23 PRE int
+23 IDE i
+23 ATRIB = ERRO SINTÁTICO. ESPERAVA: ',' ou ')'.  Encontrado: =
+23 IDE jota ERRO SINTÁTICO. ESPERAVA: '{'.  Encontrado: jota
+23 ART + ERRO SINTÁTICO. ESPERAVA: "procedure" ou "function".  Encontrado: +

@@ -1,1 +1,12 @@
-IDE ERRO SINTÁTICO. ESPERAVA: "typedef", "struct", "var", "const", "procedure" ou "function".  Encontrado: kkkk
+1 IDE kkkk
+1 IDE agora
+1 IDE foi ERRO SINTÁTICO. ESPERAVA: ';'.  Encontrado: foi
+1 IDE fdp
+1 IDE do
+1 IDE carai ERRO SINTÁTICO. ESPERAVA: ';'.  Encontrado: carai
+1 IDE kkk12 ERRO SINTÁTICO. ESPERAVA: PRE ausente.  Encontrado: kkk12
+1 REL < ERRO SINTÁTICO. ESPERAVA: "extends", IDE ou '{'.  Encontrado: <
+1 NRO 45 ERRO SINTÁTICO. ESPERAVA: "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 45
+1 LOG || ERRO SINTÁTICO. ESPERAVA: "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: ||
+1 NRO 27 ERRO SINTÁTICO. ESPERAVA: "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 27
+0000 ERRO SINTÁTICO. EOF

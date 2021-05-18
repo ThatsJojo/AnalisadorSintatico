@@ -1,7 +1,7 @@
 typedef struct Pessoa Pessoa;
 typedef string frase;
 
-struct pessoa {
+ pessoa {
     var{
         String cpf, nome;
         int idade, peso, altura;
