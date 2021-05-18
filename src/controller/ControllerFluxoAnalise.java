@@ -13,13 +13,10 @@ package controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.logging.Level;
 import javafx.util.Pair;
 import model.Arquivo;
 import util.CaminhoInvalidoException;
-import util.FimInesperadoDeArquivo;
 import util.SemEntradasException;
 
 public class ControllerFluxoAnalise {
@@ -53,6 +50,7 @@ public class ControllerFluxoAnalise {
             Pair<ArrayList,String> par = analisadorLexico.analise(arq);//Pega a o conjunto de tokens gerados pelo conteúdo do arquivo.
             ArrayList tokens = par.getKey();
             String ret = analisadorSintatico.analise(arq, tokens);
+            //String ret = par.getValue();
             String outputFile = "saida";
             String inputFile = arq.getNome();
             int i;

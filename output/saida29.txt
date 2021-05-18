@@ -1,6 +1,8 @@
+1 IDE public ERRO SINTÁTICO. ESPERAVA: "typedef", "struct", "var", "const", "procedure" ou "function" - Token Ausente..  Encontrado: public
 1 IDE public
 1 IDE static
 1 PRE boolean ERRO SINTÁTICO. ESPERAVA: ';'.  Encontrado: boolean
+1 IDE isSpace ERRO SINTÁTICO. ESPERAVA: "typedef", "struct", "var", "const", "procedure" ou "function" - Token Ausente..  Encontrado: isSpace
 1 IDE isSpace
 1 DEL (
 1 IDE char

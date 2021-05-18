@@ -1,7 +1,7 @@
 typedef struct Pessoa Pessoa;
 typedef string frase;
 
- pessoa {
+struct pessoa {
     var{
         String cpf, nome;
         int idade, peso, altura;
@@ -13,8 +13,12 @@ struct funcionario extends pessoa{
         real salario;
     }
 }
+
 var{
+	int i = 20*8+"jacobina";
 	int i[2] = [false,true], j = false;
+	int jota = 2*focafunc[jota]*pedro("Joao", 85*3, i[2*focafunc("Joao", 85*3, i[7])]);
+	string japa = "Opa gangnangstyle", zoom = "app";
 	real i = false,k=true, k[3]=[urubu,sem,asa], l;
 	int i[2][3]=[[false,true, zip, zop],[biri, flinston],[opa],[eita]], joao=i,false1 =  j;
 	//Testanto operações
@@ -44,6 +48,8 @@ function int soma(){
     --i;
     ++j;
     teste();
+    imprime("ZAPERSON", "zop", "zip",jota);
+    print("ZAPERSON", "zop", "zip",jota);
     while(!variavel){
 	read(j);
     }

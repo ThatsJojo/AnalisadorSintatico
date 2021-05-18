@@ -418,6 +418,7 @@ public class AnalisadorLexico {
                         }else if(caractere=='"'){//Fim de cadeia.
                             lexema+=caractere;
                             this.addToken("CAD", lexema, line);
+                            estado = 0;
                         }else{//Símbolo inválido dentro da cadeia. Será removido como SIB e a cadeia será formada sem ele.
                             String temp = lexema;
                             this.addToken("SIB", ""+caractere, line);

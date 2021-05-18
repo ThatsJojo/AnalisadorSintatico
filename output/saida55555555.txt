@@ -1,3 +1,4 @@
+1 IDE linha1 ERRO SINTÁTICO. ESPERAVA: "typedef", "struct", "var", "const", "procedure" ou "function" - Token Ausente..  Encontrado: linha1
 1 IDE linha1 ERRO SINTÁTICO. ESPERAVA: PRE ausente.  Encontrado: linha1
 1 ATRIB = ERRO SINTÁTICO. ESPERAVA: "extends", IDE ou '{'.  Encontrado: =
 1 NRO 8 ERRO SINTÁTICO. ESPERAVA: "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 8
@@ -7,6 +8,7 @@
 3 IDE linha3
 3 DEL {
 4 IDE linha4 ERRO SINTÁTICO. ESPERAVA: "var".  Encontrado: linha4
+4 OpMF & ERRO SINTÁTICO. ESPERAVA: "typedef", "struct", "var", "const", "procedure" ou "function" - Token Ausente..  Encontrado: &
 4 OpMF & ERRO SINTÁTICO. ESPERAVA: "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: &
 5 IDE linha5 ERRO SINTÁTICO. ESPERAVA: PRE ausente.  Encontrado: linha5
 5 OpMF | ERRO SINTÁTICO. ESPERAVA: "extends", IDE ou '{'.  Encontrado: |
@@ -21,6 +23,7 @@
 9 IDE linha8_asfa45
 10 IDE linha10
 10 LOG || ERRO SINTÁTICO. ESPERAVA: ';'.  Encontrado: ||
+10 PRE while ERRO SINTÁTICO. ESPERAVA: "typedef", "struct", "var", "const", "procedure" ou "function" - Token Ausente..  Encontrado: while
 10 PRE while ERRO SINTÁTICO. ESPERAVA: "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: while
 11 IDE linha11 ERRO SINTÁTICO. ESPERAVA: PRE ausente.  Encontrado: linha11
 11 REL < ERRO SINTÁTICO. ESPERAVA: "extends", IDE ou '{'.  Encontrado: <
@@ -46,6 +49,7 @@
 18 IDE linha18
 18 IDE ga
 18 SIB ç ERRO SINTÁTICO. ESPERAVA: ';'.  Encontrado: ç
+18 IDE lskdjfa ERRO SINTÁTICO. ESPERAVA: "typedef", "struct", "var", "const", "procedure" ou "function" - Token Ausente..  Encontrado: lskdjfa
 18 IDE lskdjfa ERRO SINTÁTICO. ESPERAVA: PRE ausente.  Encontrado: lskdjfa
 18 ART / ERRO SINTÁTICO. ESPERAVA: "extends", IDE ou '{'.  Encontrado: /
 18 IDE g ERRO SINTÁTICO. ESPERAVA: PRE ausente.  Encontrado: g
@@ -55,9 +59,11 @@
 18 IDE lda
 18 IDE a
 18 SIB ç ERRO SINTÁTICO. ESPERAVA: ';'.  Encontrado: ç
+18 IDE lgkaj ERRO SINTÁTICO. ESPERAVA: "typedef", "struct", "var", "const", "procedure" ou "function" - Token Ausente..  Encontrado: lgkaj
 18 IDE lgkaj
 18 IDE sadfa
 19 IDE linha19 ERRO SINTÁTICO. ESPERAVA: ';'.  Encontrado: linha19
+20 IDE linha20 ERRO SINTÁTICO. ESPERAVA: "typedef", "struct", "var", "const", "procedure" ou "function" - Token Ausente..  Encontrado: linha20
 20 IDE linha20 ERRO SINTÁTICO. ESPERAVA: PRE ausente.  Encontrado: linha20
 20 REL < ERRO SINTÁTICO. ESPERAVA: "extends", IDE ou '{'.  Encontrado: <
 20 NRO 20 ERRO SINTÁTICO. ESPERAVA: "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 20

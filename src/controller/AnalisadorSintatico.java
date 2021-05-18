@@ -53,12 +53,7 @@ public class AnalisadorSintatico {
         //percorrer toda a lista de tokens até o ultimo elemento
         try{
             consumeToken();
-            //if (firstInicio.contains(currentToken().getLexema())) {
                 inicio();
-            //} else {
-                //error("\"typedef\", \"struct\", \"var\", \"const\", \"procedure\" ou \"function\"");
-                
-            //}
         }catch(FimInesperadoDeArquivo e){
             analiseret += ""+(privateCurrentToken==null?""+privateCurrentToken.getId():"0000")
                     +" ERRO SINTÁTICO. EOF";
@@ -121,11 +116,12 @@ public class AnalisadorSintatico {
         analiseret+=""+privateCurrentToken.getLinha()+" "+privateCurrentToken.getId()+" "+privateCurrentToken.getLexema()+" ERRO SINTÁTICO. ESPERAVA: "+
                 esperado+".  Encontrado: "+currentToken().getLexema()+"\n";
         
-        //int i = 10/0;
         System.out.println("Erro"+erros+" no token " + currentToken().getId() + " na linha " 
                 + currentToken().getLinha() + ": " + currentToken().getLexema() 
                 + " lookahead: " + lookahead().getLexema());
         this.erros++;
+        
+        int i = 10/0;
         if(consumir)
             consumeToken(true);
     }
@@ -164,7 +160,7 @@ public class AnalisadorSintatico {
                 functionList();
                 break;
             default:
-                error("\"typedef\", \"struct\", \"var\", \"const\", \"procedure\" ou \"function\" ausente.", false);
+                error("\"typedef\", \"struct\", \"var\", \"const\", \"procedure\" ou \"function\" - Token Ausente.", false);
                 inicioErro();
         }
     }
@@ -181,7 +177,6 @@ public class AnalisadorSintatico {
             }else if(t.getLexema().equals("(")){
                 procedureDefine();
             }else if(t.getLexema().equals("extends")||t.getLexema().equals("{")){
-                System.out.println("CHAMOU O STRUCT");
                 structDeclaration();
                 inicio();
             }else{
@@ -342,27 +337,18 @@ public class AnalisadorSintatico {
     //Incompleto... 
     private void value() throws FimInesperadoDeArquivo {
         Token t = lookahead();
-        if (currentToken().getId().equals("IDE")) {
-            if (t.getLexema().equals("(")) {
-                consumeToken();
-                functionCall();
-            } else {
-                operation();
-            }
-        } else {
-            switch (currentToken().getLexema()) {
-                case "true":
-                case "false":
-                    if (t.getId().equals("REL") || t.getId().equals("LOG")) {
-                        operation();
-                    } else {
-                        consumeToken();
-                    }
-                    break;
-                default:
+        switch (currentToken().getLexema()) {
+            case "true":
+            case "false":
+                if (t.getId().equals("REL") || t.getId().equals("LOG")) {
                     operation();
-                    break;
-            }
+                } else {
+                    consumeToken();
+                }
+                break;
+            default:
+                operation();
+                break;
         }
     }
 
@@ -376,6 +362,7 @@ public class AnalisadorSintatico {
     }
 
     private void vectMatIndex() throws FimInesperadoDeArquivo {
+        
         aritmeticOp();
     }
 
@@ -1301,6 +1288,10 @@ public class AnalisadorSintatico {
             Token t = lookahead();
             if (t.getLexema().equals("(")) {
                 functionCall();
+                if(currentToken().getLexema().equals(";"))
+                    consumeToken();
+                else
+                    error("','", true);
             } else { // casos de incrementop, decrementop e atribuição (first é variável nos 3 casos)
                 variavel();
                 //atribuição
@@ -1346,6 +1337,7 @@ public class AnalisadorSintatico {
     private void print() throws FimInesperadoDeArquivo {
         consumeToken();
         if (currentToken().getLexema().equals("(")) {
+            consumeToken();
             printableList();
         } else {
             error("'('", true);
@@ -1360,6 +1352,7 @@ public class AnalisadorSintatico {
     private void nextPrintValue() throws FimInesperadoDeArquivo {
         switch (currentToken().getLexema()) {
             case ",":
+                consumeToken();
                 printableList();
                 break;
             case ")":
@@ -1539,8 +1532,12 @@ public class AnalisadorSintatico {
             case "-":
                 consumeToken();
                 if (currentToken().getId().equals("IDE")) {
-                    variavel();
-                } else {
+                    if (lookahead().getLexema().equals("(")) {
+                        functionCall();
+                    } else {
+                        variavel();
+                    }
+                }else {
                     aritmeticValue();
                 }
                 break;
@@ -1549,9 +1546,13 @@ public class AnalisadorSintatico {
                 consumeToken();
                 variavel();
             default:
-                variavel();
-                if (currentToken().getLexema().equals("++") || currentToken().getLexema().equals("--")) {
-                    consumeToken();
+                if (currentToken().getId().equals("IDE")&&lookahead().getLexema().equals("(")) {
+                    functionCall();
+                }else {
+                    variavel();
+                    if (currentToken().getLexema().equals("++") || currentToken().getLexema().equals("--")) {
+                        consumeToken();
+                    }
                 }
         }
     }
@@ -1751,11 +1752,6 @@ public class AnalisadorSintatico {
             consumeToken();
             if (currentToken().getLexema().equals(")")) {
                 consumeToken();
-                if (currentToken().getLexema().equals(";")) {
-                    consumeToken();
-                } else {
-                    error("';'", true);
-                }
             } else {
                 value();
                 fCallParams();
@@ -1768,16 +1764,12 @@ public class AnalisadorSintatico {
     private void fCallParams() throws FimInesperadoDeArquivo {
         switch (currentToken().getLexema()) {
             case ",":
+                consumeToken();
                 value();
                 fCallParams();
                 break;
             case ")":
                 consumeToken();
-                if (currentToken().getLexema().equals(";")) {
-                    consumeToken();
-                } else {
-                    error("';'", true);
-                }
                 break;
             default:
                 error("',' ou ')'", true);
