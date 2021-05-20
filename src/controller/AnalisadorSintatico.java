@@ -2,7 +2,9 @@ package controller;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import javafx.util.Pair;
 import model.Arquivo;
+import model.TabelaSimbolos;
 import model.Token;
 import util.FimInesperadoDeArquivo;
 
@@ -13,10 +15,12 @@ public class AnalisadorSintatico {
     private ArrayList tokens;
     private int countToken = 0;
     private String analiseret = "";
+    private static final ArrayList<TabelaSimbolos> escopos = new ArrayList();
 
     private static final HashSet<String> firstTypes = new HashSet();
     private static final HashSet<String> firstComando = new HashSet();
     private static final HashSet<String> firstInicio = new HashSet();
+    private static TabelaSimbolos escopoAtual;
 
     public AnalisadorSintatico() {
         //Conjunto first do método types
@@ -47,6 +51,7 @@ public class AnalisadorSintatico {
     }
 
     public String analise(Arquivo arq, ArrayList tokens) {
+        escopos.clear();
         analiseret = "";
         this.erros = 0;
         this.tokens = tokens;
@@ -144,6 +149,8 @@ public class AnalisadorSintatico {
 //================================== Cabeçalhos de início do código ==================================
 //****************************************************************************************************     
     private void inicio() throws FimInesperadoDeArquivo {
+        TabelaSimbolos global = new TabelaSimbolos(null);
+        escopos.add(global);
         switch (currentToken().getLexema()) {
             case "typedef":
                 consumeToken();
@@ -670,12 +677,15 @@ public class AnalisadorSintatico {
     }
 
     //verifica se é um tipo válido
-    private void dataType() throws FimInesperadoDeArquivo {
+    private Token dataType() throws FimInesperadoDeArquivo {
+        Token ret = null;
         if (currentToken().getId().equals("IDE") || firstTypes.contains(currentToken().getLexema())) {
+            ret = currentToken();
             consumeToken();
         } else {
             error("ESPERAVA: IDE", true);
         }
+        return ret;
     }
 
     private void vectMatIndex() throws FimInesperadoDeArquivo {
@@ -786,36 +796,48 @@ public class AnalisadorSintatico {
     }
 
     private void primeiraVar() throws FimInesperadoDeArquivo {
-        continueVar();
-        varId();
+        Object apontado = continueVar();
+        Token simbolo = varId(apontado);
+        escopoAtual.inserirSimbolo(simbolo, "variavel", simbolo.getId(), simbolo.getLexema(), apontado);
     }
 
-    private void continueVar() throws FimInesperadoDeArquivo {
+    private Object continueVar() throws FimInesperadoDeArquivo {
+        Token apontado1 = null;
         if (currentToken().getLexema().equals("struct")) {
+            apontado1 = currentToken();
             consumeToken();
         }
-        dataType();
+        Object ret = null;
+        Token apontado2 = dataType();
+        if(apontado1 == null){
+            return apontado2;
+        }
+        return new Pair<>(apontado1, apontado2);
     }
 
-    private void varId() throws FimInesperadoDeArquivo {
+    private Token varId(Object apontado) throws FimInesperadoDeArquivo {
+        Token simbolo = null;
         if (currentToken().getId().equals("IDE")) {
+            simbolo = currentToken();
             consumeToken();
-            varExpression();
+            varExpression(apontado);
         } else {
             error("ESPERAVA: IDE", true);
         }
+        return simbolo;
     }
 
-    private void varExpression() throws FimInesperadoDeArquivo {
+    private void varExpression(Object apontado) throws FimInesperadoDeArquivo {
         switch (currentToken().getLexema()) {
             case ",":
                 consumeToken();
-                varId();
+                Token simbolo = varId(apontado);
+                escopoAtual.inserirSimbolo(simbolo, "variavel", simbolo.getId(), simbolo.getLexema(), apontado);
                 break;
             case "=":
                 consumeToken();
                 value();
-                verifVar();
+                verifVar(apontado);
                 break;
             case ";":
                 consumeToken();
@@ -825,8 +847,10 @@ public class AnalisadorSintatico {
                 consumeToken();
                 vectMatIndex();
                 if (currentToken().getLexema().equals("]")) {
+                    Token simbolo2 = currentToken();
                     consumeToken();
-                    estrutura();
+                    estrutura(apontado);
+                    escopoAtual.inserirSimbolo(simbolo2, "variavel", simbolo2.getId(), simbolo2.getLexema(), apontado);
                 }
                 break;
             default:
@@ -835,25 +859,26 @@ public class AnalisadorSintatico {
         }
     }
 
-    private void estrutura() throws FimInesperadoDeArquivo {
+    private void estrutura(Object apontado) throws FimInesperadoDeArquivo {
         switch (currentToken().getLexema()) {
             case "[":
                 consumeToken();
                 vectMatIndex();
                 if (currentToken().getLexema().equals("]")) {
                     consumeToken();
-                    contMatriz();
+                    contMatriz(apontado);
                 } else {
                     error("ESPERAVA: ']'", true);
                 }
                 break;
             case "=":
                 consumeToken();
-                initVetor();
+                initVetor(apontado);
                 break;
             case ",":
                 consumeToken();
-                varId();
+                Token simbolo = varId(apontado);    
+                escopoAtual.inserirSimbolo(simbolo, "variavel", simbolo.getId(), simbolo.getLexema(), apontado);
                 break;
             case ";":
                 consumeToken();
@@ -864,41 +889,42 @@ public class AnalisadorSintatico {
         }
     }
 
-    private void initVetor() throws FimInesperadoDeArquivo {
+    private void initVetor(Object apontado) throws FimInesperadoDeArquivo {
         if (currentToken().getLexema().equals("[")) {
             consumeToken();
             value();
-            proxVetor();
+            proxVetor(apontado);
         } else {
             error("ESPERAVA: '['", true);
         }
     }
 
-    private void proxVetor() throws FimInesperadoDeArquivo {
+    private void proxVetor(Object apontado) throws FimInesperadoDeArquivo {
         switch (currentToken().getLexema()) {
             case ",":
                 consumeToken();
                 value();
-                proxVetor();
+                proxVetor(apontado);
                 break;
             case "]":
                 consumeToken();
-                verifVar();
+                verifVar(apontado);
                 break;
             default:
                 error("ESPERAVA: ',', ']'", true);
         }
     }
 
-    private void contMatriz() throws FimInesperadoDeArquivo {
+    private void contMatriz(Object apontado) throws FimInesperadoDeArquivo {
         switch (currentToken().getLexema()) {
             case "=":
                 consumeToken();
-                initMatriz();
+                initMatriz(apontado);
                 break;
             case ",":
                 consumeToken();
-                varId();
+                Token simbolo = varId(apontado);
+                escopoAtual.inserirSimbolo(simbolo, "variavel", simbolo.getId(), simbolo.getLexema(), apontado);
                 break;
             case ";":
                 consumeToken();
@@ -909,61 +935,62 @@ public class AnalisadorSintatico {
         }
     }
 
-    private void initMatriz() throws FimInesperadoDeArquivo {
+    private void initMatriz(Object apontado) throws FimInesperadoDeArquivo {
         if (currentToken().getLexema().equals("[")) {
             consumeToken();
-            matrizValue();
+            matrizValue(apontado);
         } else {
             error("ESPERAVA: '['", true);
         }
     }
 
-    private void matrizValue() throws FimInesperadoDeArquivo {
+    private void matrizValue(Object apontado) throws FimInesperadoDeArquivo {
         if (currentToken().getLexema().equals("[")) {
             consumeToken();
             value();
-            proxMatriz();
+            proxMatriz(apontado);
         } else {
             error("ESPERAVA: '['", true);
         }
     }
 
-    private void proxMatriz() throws FimInesperadoDeArquivo {
+    private void proxMatriz(Object apontado) throws FimInesperadoDeArquivo {
         switch (currentToken().getLexema()) {
             case ",":
                 consumeToken();
                 value();
-                proxMatriz();
+                proxMatriz(apontado);
                 break;
             case "]":
                 consumeToken();
-                next();
+                next(apontado);
                 break;
             default:
                 error("ESPERAVA: ',', ']'", true);
         }
     }
 
-    private void next() throws FimInesperadoDeArquivo {
+    private void next(Object apontado) throws FimInesperadoDeArquivo {
         switch (currentToken().getLexema()) {
             case ",":
                 consumeToken();
-                matrizValue();
+                matrizValue(apontado);
                 break;
             case "]":
                 consumeToken();
-                verifVar();
+                verifVar(apontado);
                 break;
             default:
                 error("ESPERAVA: ',', ']'", true);
         }
     }
 
-    private void verifVar() throws FimInesperadoDeArquivo {
+    private void verifVar(Object apontado) throws FimInesperadoDeArquivo {
         switch (currentToken().getLexema()) {
             case ",":
                 consumeToken();
-                varId();
+                Token simbolo = varId(apontado);
+                escopoAtual.inserirSimbolo(simbolo, "variavel", simbolo.getId(), simbolo.getLexema(), apontado);
                 break;
             case ";":
                 consumeToken();
@@ -979,8 +1006,9 @@ public class AnalisadorSintatico {
         if (currentToken().getLexema().equals("}")) {
             consumeToken();
         } else {
-            continueVar();
-            varId();
+            Object apontado = continueVar();
+            Token simbolo = varId(apontado);
+                escopoAtual.inserirSimbolo(simbolo, "variavel", simbolo.getId(), simbolo.getLexema(), apontado);
         }
     }
 //*************************************** Variable Declaration ***************************************      
@@ -1800,12 +1828,16 @@ public class AnalisadorSintatico {
 //**************************************************************************************************** 
     private void typedefDeclaration() throws FimInesperadoDeArquivo {
         if (currentToken().getLexema().equals("struct")) {
+            Token apontado1 = currentToken();
             consumeToken();
             if (currentToken().getId().equals("IDE")) {
+                Token apontado2 = currentToken();
                 consumeToken();
                 if (currentToken().getId().equals("IDE")) {
+                    Token simbolo = currentToken();
                     consumeToken();
                     if (currentToken().getLexema().equals(";")) {
+                        escopoAtual.inserirSimbolo(simbolo, "tipo", simbolo.getId(), simbolo.getLexema(), new Pair<>(apontado1, apontado2));
                         consumeToken();
                     } else {
                         error("ESPERAVA: ';'", true);
@@ -1817,10 +1849,12 @@ public class AnalisadorSintatico {
                 error("ESPERAVA: IDE", true);
             }
         } else {
-            dataType();
+            Token apontado = dataType();
             if (currentToken().getId().equals("IDE")) {
+                Token simbolo = currentToken();
                 consumeToken();
                 if (currentToken().getLexema().equals(";")) {
+                    escopoAtual.inserirSimbolo(simbolo, "tipo", simbolo.getId(), simbolo.getLexema(),apontado);
                     consumeToken();
                 } else {
                     error("ESPERAVA: ';'", true);

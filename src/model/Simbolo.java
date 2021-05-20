@@ -11,6 +11,14 @@ public class Simbolo {
         this.token = token;
     }
 
+    public Simbolo(Token token, String categoria, String tipo, String valor, Object variavel) {
+        this.token = token;
+        this.categoria = categoria;
+        this.tipo = tipo;
+        this.valor = valor;
+        this.variavel = variavel;
+    }
+
     public Token getToken() {
         return token;
     }

@@ -29,7 +29,7 @@ struct pessoa{
 	var{int i;}
 }
 
- string joao function int fstart(){return 5;};frase;
+ string joao;
 
  pessoa{
 	var{int i;}

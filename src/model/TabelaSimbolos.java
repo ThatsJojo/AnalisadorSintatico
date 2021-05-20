@@ -12,8 +12,8 @@ public class TabelaSimbolos {
         escopoPai = ep;
     }
     
-    public Simbolo inserirSimbolo (Token t){
-        Simbolo ret = new Simbolo(t);
+    public Simbolo inserirSimbolo (Token t, String categoria, String tipo, String valor, Object variavel) {
+        Simbolo ret = new Simbolo(t,categoria,tipo,valor,variavel);
         simbolos.put(t, ret);
         return ret;
     }
