@@ -68,4 +68,4 @@
 4 PRE int ERRO SINTÁTICO. tentativa falha de assumir produção de "typedef" ou "function"..  Encontrado: int
 4 IDE i ERRO SINTÁTICO. tentativa falha de assumir produção de "typedef" ou "function"..  Encontrado: i
 4 PRE extends ERRO SINTÁTICO. ESPERAVA: ';', ou '('..  Encontrado: extends
-0000 ERRO SINTÁTICO. EOF4 PRE extends ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: extends
+0000 ERRO SINTÁTICO. EOF

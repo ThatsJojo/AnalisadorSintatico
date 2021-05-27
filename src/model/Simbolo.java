@@ -54,5 +54,12 @@ public class Simbolo {
     public void setVariavel(Object variavel) {
         this.variavel = variavel;
     }
+
+    @Override
+    public String toString() {
+        return "Simbolo do tipo " + categoria + " encontrado na linha "+token.getLinha();
+    }
+    
+    
     
 }

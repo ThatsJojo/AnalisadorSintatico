@@ -11,6 +11,8 @@ do código, e estamos ciente que estes trechos não serão considerados para fin
 
 package model;
 
+import java.util.Objects;
+
 public class Token {
     private final String lexema;
     private final int linha;
@@ -49,9 +51,7 @@ public class Token {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 71 * hash + this.codigo;
-        return hash;
+        return lexema.hashCode();
     }
 
     @Override
@@ -66,11 +66,15 @@ public class Token {
             return false;
         }
         final Token other = (Token) obj;
-        if (this.codigo != other.codigo) {
+        if (!Objects.equals(this.lexema, other.lexema)) {
             return false;
         }
         return true;
     }
+
+    
+
+    
     
     
 }

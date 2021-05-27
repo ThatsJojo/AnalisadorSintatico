@@ -15,4 +15,4 @@
 1 NRO 45 ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 45
 1 LOG || ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: ||
 1 NRO 27 ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 27
-0000 ERRO SINTÁTICO. EOF1 NRO 27 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 27
+0000 ERRO SINTÁTICO. EOF

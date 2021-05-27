@@ -45,4 +45,5 @@
 2 IDE casa
 3 IDE for ERRO SINTÁTICO. ESPERAVA: ';'.  Encontrado: for
 3 CoMF  ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "var", "const", "procedure" ou "function".  Encontrado: 
-0000 ERRO SINTÁTICO. EOF3 CoMF  ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 
+3 CoMF  ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 
+0000 ERRO SINTÁTICO. EOF
