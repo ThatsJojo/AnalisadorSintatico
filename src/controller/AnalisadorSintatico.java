@@ -707,7 +707,6 @@ public class AnalisadorSintatico {
     }
 
     private void vectMatIndex() throws FimInesperadoDeArquivo {
-
         aritmeticOp();
     }
 
@@ -873,15 +872,8 @@ public class AnalisadorSintatico {
                 consumeToken();
                 vectMatIndex();
                 if (currentToken().getLexema().equals("]")) {
-                    Token simbolo2 = currentToken();
                     consumeToken();
                     estrutura(apontado);
-                    try {
-                        escopoAtual.inserirSimbolo(simbolo2, "variavel", simbolo2.getId(), simbolo2.getLexema(), apontado);
-                    } catch (identificadorJaUtilizado ex) {
-                        erroSemantico("" + simbolo2 + " Identificador já utilizado. " +  escopoAtual.getSimbolo(simbolo2).toString());
-                    }
-
                 }
                 break;
             default:
