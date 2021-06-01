@@ -15,13 +15,18 @@ struct jubileu {
     }
 }
 
+typedef pessoa alguem;
+
 struct funcionario extends pessoa{
     var{
         real salario;
     }
 }
 
+typedef funcionario empregado;
+
 var{
+	struct jubileu jubileu1; 
 	int jubileu = 10;
 	int i = 20*8+"jacobina";
         int xablau = 0, xablau = 2;
@@ -43,6 +48,9 @@ var{
 const{
 	inteiro zipzop = 10;
 	struct pessoa pessoa1 = 1;
+	alguem pessoa2 = 1;
+	empregado pessoa2 = 1;
+	funcionario pessoa3 = 4;
 	int i = i+i, j = true;
 	real i = reali, joao = safe;
 	real i = reali, joao = safe;
@@ -56,6 +64,7 @@ const{
 }
 
 function int soma(){
+    typedef int5 inteiro;
     read(i, u[i]);
     if(!variavel) then{
        read(i);

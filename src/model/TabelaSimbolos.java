@@ -32,15 +32,30 @@ public class TabelaSimbolos {
         if(flag){
             throw new identificadorJaUtilizado();
         }
-        simbolos.put(t, lista);
         if(categoria.equals("tipo")||categoria.equals("struct")){
-            tipos.put(t, ret);
+            if(escopoPai!=null&&escopoPai.contains(t)){
+                throw new identificadorJaUtilizado();
+            }
+                tipos.put(t, ret);
         }
+        simbolos.put(t, lista);
         return ret;
     }
     
+    private boolean contains(Token identificador){
+        return simbolos.containsKey(identificador)||(escopoPai!=null&&escopoPai.contains(identificador));
+    }
+    
+    /*public void print(){
+        tipos.forEach((a, b)->{
+            System.out.println(a.getLexema());
+        });
+    }*/
+    
     public LinkedList<Simbolo> getSimbolo(Token t) throws identificadorNaoEncontrado{
         LinkedList<Simbolo> lista = simbolos.get(t);
+        if((lista == null) && (escopoPai!=null))
+            lista = escopoPai.getSimbolo(t);
         if(lista == null)
             throw new identificadorNaoEncontrado();
         return lista;

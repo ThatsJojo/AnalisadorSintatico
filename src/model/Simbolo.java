@@ -57,7 +57,7 @@ public class Simbolo {
 
     @Override
     public String toString() {
-        return "Simbolo do tipo " + categoria + " encontrado na linha "+token.getLinha();
+        return "Simbolo de categoria \"" + categoria + "\" encontrado na linha "+token.getLinha();
     }
     
     
