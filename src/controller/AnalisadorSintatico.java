@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.util.Pair;
 import model.Arquivo;
 import model.Simbolo;
@@ -677,7 +679,7 @@ public class AnalisadorSintatico {
 //============================================ Data Types ============================================
 //**************************************************************************************************** 
     //Incompleto... 
-    private void value() throws FimInesperadoDeArquivo {
+    private Token value() throws FimInesperadoDeArquivo {
         Token t = lookahead();
         switch (currentToken().getLexema()) {
             case "true":
@@ -692,6 +694,7 @@ public class AnalisadorSintatico {
                 operation();
                 break;
         }
+        return new Token("PRE","int",9);
     }
 
     //verifica se é um tipo válido
@@ -707,7 +710,6 @@ public class AnalisadorSintatico {
     }
 
     private void vectMatIndex() throws FimInesperadoDeArquivo {
-
         aritmeticOp();
     }
 
@@ -873,15 +875,8 @@ public class AnalisadorSintatico {
                 consumeToken();
                 vectMatIndex();
                 if (currentToken().getLexema().equals("]")) {
-                    Token simbolo2 = currentToken();
                     consumeToken();
                     estrutura(apontado);
-                    try {
-                        escopoAtual.inserirSimbolo(simbolo2, "variavel", simbolo2.getId(), simbolo2.getLexema(), apontado);
-                    } catch (identificadorJaUtilizado ex) {
-                        erroSemantico("" + simbolo2 + " Identificador já utilizado. " +  escopoAtual.getSimbolo(simbolo2).toString());
-                    }
-
                 }
                 break;
             default:
@@ -1063,36 +1058,40 @@ public class AnalisadorSintatico {
 
 //========================================= Const Declaration ========================================
 //**************************************************************************************************** 
-    private void constDeclaration() throws FimInesperadoDeArquivo {
+    private void constDeclaration() throws FimInesperadoDeArquivo, identificadorNaoEncontrado {
         if (currentToken().getLexema().equals("{")) {
             consumeToken();
-            ArrayList<Token> tipo = continueConst();
+            Token tipo = continueConst();
             constId(tipo);
         } else {
             error("ESPERAVA: '{'", true);
         }
     }
 
-    private ArrayList<Token> continueConst() throws FimInesperadoDeArquivo {
-        ArrayList ret = new ArrayList(2);
+    private Token continueConst() throws FimInesperadoDeArquivo {
+        Token ret;
         if (currentToken().getLexema().equals("struct")) {
-            ret.add(currentToken());
             consumeToken();
+            if(currentToken().getId().equals("IDE")){
+                ret = currentToken();
+                consumeToken();
+                return ret;
+            }
+                
         }
-        ret.add(dataType());
-        return ret;
+        return dataType();
     }
 
-    private void proxConst() throws FimInesperadoDeArquivo {
+    private void proxConst() throws FimInesperadoDeArquivo, identificadorNaoEncontrado {
         if (currentToken().getLexema().equals("}")) {
             consumeToken();
         } else {
-            ArrayList<Token> tipo = continueConst();
+            Token tipo = continueConst();
             constId(tipo);
         }
     }
 
-    private void constId(ArrayList<Token> tipo) throws FimInesperadoDeArquivo {
+    private void constId(Token tipo) throws FimInesperadoDeArquivo, identificadorNaoEncontrado {
         if (currentToken().getId().equals("IDE")) {
             Token simbolo = currentToken();
             try {
@@ -1101,25 +1100,26 @@ public class AnalisadorSintatico {
                 erroSemantico("" + simbolo + " Identificador já utilizado. "+ escopoAtual.getSimbolo(simbolo).toString());
             }
             consumeToken();
-            constExpression();
+            constExpression(tipo);
         } else {
             error("ESPERAVA: IDE", true);
         }
     }
 
-    private void constExpression() throws FimInesperadoDeArquivo {
+    private void constExpression(Token tipo) throws FimInesperadoDeArquivo, identificadorNaoEncontrado {
         switch (currentToken().getLexema()) {
             case "=":
+                Token simbolo = currentToken();
                 consumeToken();
-                value();
-                verifConst();
+                confereTipo(tipo, value());
+                verifConst(tipo);
                 break;
             case "[":
                 consumeToken();
                 vectMatIndex();
                 if (currentToken().getLexema().equals("]")) {
                     consumeToken();
-                    estruturaConst();
+                    estruturaConst(tipo);
                 } else {
                     error("ESPERAVA: ']'", true);
                 }
@@ -1130,14 +1130,14 @@ public class AnalisadorSintatico {
         }
     }
 
-    private void estruturaConst() throws FimInesperadoDeArquivo {
+    private void estruturaConst(Token tipo) throws FimInesperadoDeArquivo, identificadorNaoEncontrado {
         switch (currentToken().getLexema()) {
             case "=":
                 consumeToken();
                 if (currentToken().getLexema().equals("[")) {
                     consumeToken();
-                    value();
-                    proxConstVetor();
+                    confereTipo(tipo, value());
+                    proxConstVetor(tipo);
                 } else {
                     error("ESPERAVA: '['", true);
                 }
@@ -1149,7 +1149,7 @@ public class AnalisadorSintatico {
                     consumeToken();
                     if (currentToken().getLexema().equals("=")) {
                         consumeToken();
-                        initConstMatriz();
+                        initConstMatriz(tipo);
                     } else {
                         error("ESPERAVA: '='", true);
                     }
@@ -1163,16 +1163,16 @@ public class AnalisadorSintatico {
         }
     }
 
-    private void proxConstVetor() throws FimInesperadoDeArquivo {
+    private void proxConstVetor(Token tipo) throws FimInesperadoDeArquivo, identificadorNaoEncontrado {
         switch (currentToken().getLexema()) {
             case ",":
                 consumeToken();
-                value();
-                proxConstVetor();
+                confereTipo(tipo, value());
+                proxConstVetor(tipo);
                 break;
             case "]":
                 consumeToken();
-                verifConst();
+                verifConst(tipo);
                 break;
             default:
                 error("ESPERAVA: ',' ou ']'", true);
@@ -1180,61 +1180,61 @@ public class AnalisadorSintatico {
         }
     }
 
-    private void initConstMatriz() throws FimInesperadoDeArquivo {
+    private void initConstMatriz(Token tipo) throws FimInesperadoDeArquivo, identificadorNaoEncontrado {
         if (currentToken().getLexema().equals("[")) {
             consumeToken();
-            matrizConstValue();
+            matrizConstValue(tipo);
         } else {
             error("ESPERAVA: '['", true);
         }
     }
 
-    private void matrizConstValue() throws FimInesperadoDeArquivo {
+    private void matrizConstValue(Token tipo) throws FimInesperadoDeArquivo, identificadorNaoEncontrado {
         if (currentToken().getLexema().equals("[")) {
             consumeToken();
-            value();
-            proxConstMatriz();
+            confereTipo(tipo, value());
+            proxConstMatriz(tipo);
         } else {
             error("ESPERAVA: '['", true);
         }
     }
 
-    private void proxConstMatriz() throws FimInesperadoDeArquivo {
+    private void proxConstMatriz(Token tipo) throws FimInesperadoDeArquivo, identificadorNaoEncontrado {
         switch (currentToken().getLexema()) {
             case ",":
                 consumeToken();
-                value();
-                proxConstMatriz();
+                confereTipo(tipo, value());
+                proxConstMatriz(tipo);
                 break;
             case "]":
                 consumeToken();
-                nextConst();
+                nextConst(tipo);
                 break;
             default:
                 error("ESPERAVA: ',', ']'", true);
         }
     }
 
-    private void nextConst() throws FimInesperadoDeArquivo {
+    private void nextConst(Token tipo) throws FimInesperadoDeArquivo, identificadorNaoEncontrado {
         switch (currentToken().getLexema()) {
             case ",":
                 consumeToken();
-                matrizConstValue();
+                matrizConstValue(tipo);
                 break;
             case "]":
                 consumeToken();
-                verifConst();
+                verifConst(tipo);
                 break;
             default:
                 error("ESPERAVA: ',' ou ']'", true);
         }
     }
 
-    private void verifConst() throws FimInesperadoDeArquivo {
+    private void verifConst(Token tipo) throws FimInesperadoDeArquivo, identificadorNaoEncontrado {
         switch (currentToken().getLexema()) {
             case ",":
                 consumeToken();
-                constId();
+                constId(tipo);
                 break;
             case ";":
                 consumeToken();
@@ -1960,17 +1960,16 @@ public class AnalisadorSintatico {
 //**************************************************************************************************** 
     private void typedefDeclaration() throws FimInesperadoDeArquivo, identificadorNaoEncontrado {
         if (currentToken().getLexema().equals("struct")) {
-            Token apontado1 = currentToken();
             consumeToken();
             if (currentToken().getId().equals("IDE")) {
-                Token apontado2 = currentToken();
+                Token apontado = currentToken();
                 consumeToken();
                 if (currentToken().getId().equals("IDE")) {
                     Token simbolo = currentToken();
                     consumeToken();
                     if (currentToken().getLexema().equals(";")) {
                         try {
-                            escopoAtual.inserirSimbolo(simbolo, "tipo", simbolo.getId(), simbolo.getLexema(), new Pair<>(apontado1, apontado2));
+                            escopoAtual.inserirSimbolo(simbolo, "struct", simbolo.getId(), simbolo.getLexema(), apontado);
                         } catch (identificadorJaUtilizado ex) {
                             erroSemantico("" + simbolo + " Identificador já utilizado. "+ escopoAtual.getSimbolo(simbolo).toString());
                         }
@@ -2279,5 +2278,69 @@ public class AnalisadorSintatico {
         }
         return true;
     }
+
+    private boolean confereTipo(Token t1, Token t2) {
+        if(t1 == null || t2 == null)
+            return false;
+        Simbolo simbolo1 = null;
+        Simbolo simbolo2 = null;
+        
+        String lexema1 = null;
+        String lexema2 = null;
+        
+        if(t1.getId().equals("IDE")){
+            try {
+                simbolo1 = tipoPrimitivoApontado(escopoAtual.getTipo(t1));
+                if(simbolo1.getCategoria().equals("tipo")){
+                    lexema1 = ((Token) simbolo1.getVariavel()).getLexema();
+                    simbolo1 = null;
+                }
+            } catch (identificadorNaoEncontrado ex) {
+                erroSemantico("" + t1 + " o tipo utilizado não foi declarado. ");
+                return false;
+            }
+        }else
+            lexema1 = t1.getLexema();
+        
+        if(t2.getId().equals("IDE")){
+            try {
+                simbolo2 = tipoPrimitivoApontado(escopoAtual.getTipo(t2));
+                if(simbolo2.getCategoria().equals("tipo")){
+                    lexema2 = ((Token) simbolo2.getVariavel()).getLexema();
+                    simbolo2 = null;
+                }
+            } catch (identificadorNaoEncontrado ex) {
+                erroSemantico("" + t2 + " o tipo utilizado não foi declarado. ");
+                return false;
+            }
+        }else
+            lexema2 = t2.getLexema();
+        //System.out.println("SÍMBOLO 1 " +simbolo1+" SÍMBOLO 2 "+ simbolo2+" t1 "+t1+" t2 "+t2+" lexema1 "+lexema1+" lexema2 "+lexema2);
+        if((lexema1 == null && lexema2!= null) || (lexema1 != null && lexema2 == null)){
+            erroSemantico(""+t1+" Tipos Incompatíveis: "+(lexema1==null?"struct "+simbolo1.getToken().getLexema():lexema1)+" e "+(lexema2==null?"struct "+simbolo2.getToken().getLexema():lexema2));
+            return false;
+        }else if(lexema1 != null && lexema2 != null){
+            if(lexema1.equals(lexema2))
+                return true;
+            else{
+                erroSemantico(""+t1+" Tipos Incompatíveis: "+lexema1+" e "+lexema2);
+                return false;
+            }
+        }
+        
+        return simbolo1.getToken().getLexema().equals(simbolo2.getToken().getLexema());
+
+    }
     
+    private Simbolo tipoPrimitivoApontado(Simbolo t) throws identificadorNaoEncontrado{
+        if(t.getVariavel() instanceof Token){
+            Token tipoApontado = (Token) t.getVariavel();
+            if(tipoApontado.getId().equals("IDE")){
+                return tipoPrimitivoApontado(escopoAtual.getTipo(tipoApontado));
+            }else
+                return t;
+        }else
+            throw new identificadorNaoEncontrado();
+
+    }
 }

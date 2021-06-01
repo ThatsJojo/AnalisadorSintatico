@@ -1,6 +1,11 @@
-typedef struct Pessoa Pessoa;
+typedef struct pessoa Pessoa;
 typedef string frase;
-//typedef inteiro soma;
+typedef string int1;
+typedef int1 int2;
+typedef int2 int3;
+typedef int3 int4;
+typedef int4 int5;
+typedef int5 inteiro;
 
 struct jubileu {
     var{
@@ -32,17 +37,21 @@ var{
 
 }
 
-typedef int inteiro;
+//typedef int inteiro;
 
 
 const{
-	int soma;
+	inteiro zipzop = 10;
+	struct pessoa pessoa1 = 1;
 	int i = i+i, j = true;
 	real i = reali, joao = safe;
+	real i = reali, joao = safe;
 	int i[2]=[opa,zap];
-	int i[2] = [false,true], j = false;
+	int i32[2] = [false,true], j = false;
+	int i32[2] = [false,true], j = false;
 	real i = false,k=true, k[3]=[urubu,sem,asa];
-	int i[2][3]=[[false,true, zip, zop],[biri, flinston],[opa],[eita]], joao=i,false1 =  j;
+	int i654[2][3]=[[false,true, zip, zop],[biri, flinston],[opa],[eita]], joao157=i,false157 =  j;
+	int i654[2][3]=[[false,true, zip, zop],[biri, flinston],[opa],[eita]], joao157=i,false157 =  j;
 
 }
 

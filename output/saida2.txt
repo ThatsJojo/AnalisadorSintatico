@@ -117,7 +117,7 @@
 44 DEL ;
 46 PRE const
 46 DEL {
-47 PRE int
+47 PRE real
 47 IDE i
 47 ATRIB =
 47 NRO 20
@@ -180,7 +180,7 @@
 49 DEL ]
 49 DEL )
 49 DEL ;
-50 PRE string
+50 IDE frase
 50 IDE japa
 50 ATRIB =
 50 CAD "Opa gangnangstyle"

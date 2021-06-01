@@ -44,10 +44,10 @@ struct pessoa{
 typedef string frase;
 	
 const{
-	int i = 20*8+"jacobina";
+	real i = 20*8+"jacobina";
 	int i[2] = [false,true], j = false;
 	int jota = 2*focafunc[jota]*pedro("Joao", 85*3, i[2*focafunc("Joao", 85*3, i[7])]);
-	string japa = "Opa gangnangstyle", zoom = "app";
+	frase japa = "Opa gangnangstyle", zoom = "app";
 	real i = false,k=true, k[3]=[urubu,sem,asa], l=1;
 	int i[2][3]=[[false,true, zip, zop],[biri, flinston],[opa],[eita]], joao=i,false1 =  j;
 	//Testanto operações
