@@ -1,7 +1,8 @@
 typedef struct Pessoa Pessoa;
 typedef string frase;
+//typedef inteiro soma;
 
-struct pessoa {
+struct jubileu {
     var{
         String cpf, nome;
         int idade, peso, altura;
@@ -16,6 +17,7 @@ struct funcionario extends pessoa{
 }
 
 var{
+	int jubileu = 10;
 	int i = 20*8+"jacobina";
         int xablau = 0, xablau = 2;
 	int i[2] = [false,true], j = false;
@@ -34,7 +36,8 @@ typedef int inteiro;
 
 
 const{
-	int i = false, j = true;
+	int soma;
+	int i = i+i, j = true;
 	real i = reali, joao = safe;
 	int i[2]=[opa,zap];
 	int i[2] = [false,true], j = false;
@@ -96,7 +99,7 @@ procedure soma(string abacaxi, int girafa, real jota, string i){
 
 }
 
-procedure soma(string corrimao, int peixe, string vaca, real manobra){
+procedure soma(string corrimao, int peixe, real vaca, string manobra){
 
 }
 
@@ -104,7 +107,7 @@ procedure soma(string i, real urubu, string casa, real pessoa){
 
 }
 
-function string soma(string i, real papagaio,  real ihRapaz, string i){
+function string soma(string i, real papagaio,  string ihRapaz, boolean i){
 	return aviao;
 }
 

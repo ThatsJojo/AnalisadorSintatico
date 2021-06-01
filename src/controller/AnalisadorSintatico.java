@@ -2,9 +2,9 @@ package controller;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.List;
 import javafx.util.Pair;
 import model.Arquivo;
 import model.Simbolo;
@@ -1066,31 +1066,40 @@ public class AnalisadorSintatico {
     private void constDeclaration() throws FimInesperadoDeArquivo {
         if (currentToken().getLexema().equals("{")) {
             consumeToken();
-            continueConst();
-            constId();
+            ArrayList<Token> tipo = continueConst();
+            constId(tipo);
         } else {
             error("ESPERAVA: '{'", true);
         }
     }
 
-    private void continueConst() throws FimInesperadoDeArquivo {
+    private ArrayList<Token> continueConst() throws FimInesperadoDeArquivo {
+        ArrayList ret = new ArrayList(2);
         if (currentToken().getLexema().equals("struct")) {
+            ret.add(currentToken());
             consumeToken();
         }
-        dataType();
+        ret.add(dataType());
+        return ret;
     }
 
     private void proxConst() throws FimInesperadoDeArquivo {
         if (currentToken().getLexema().equals("}")) {
             consumeToken();
         } else {
-            continueConst();
-            constId();
+            ArrayList<Token> tipo = continueConst();
+            constId(tipo);
         }
     }
 
-    private void constId() throws FimInesperadoDeArquivo {
+    private void constId(ArrayList<Token> tipo) throws FimInesperadoDeArquivo {
         if (currentToken().getId().equals("IDE")) {
+            Token simbolo = currentToken();
+            try {
+                escopoAtual.inserirSimbolo(simbolo, "constante", simbolo.getId(), simbolo.getLexema(), tipo);
+            } catch (identificadorJaUtilizado ex) {
+                erroSemantico("" + simbolo + " Identificador já utilizado. "+ escopoAtual.getSimbolo(simbolo).toString());
+            }
             consumeToken();
             constExpression();
         } else {
@@ -2257,18 +2266,16 @@ public class AnalisadorSintatico {
 //****************************************** Function Call *******************************************  
 //====================================================================================================
 
-    private boolean equalsParams(LinkedList<String> a, LinkedList<String> b){
+    private boolean equalsParams(List<String> a, List<String> b){
         if(a.size()!=b.size())
             return false;
-        LinkedList<String> c = new LinkedList();
-        for(String param: b)
-            c.add(param);
+        LinkedList<String> c = new LinkedList(b);
         
-        Boolean presente;
-        for(String param: a){
-            presente = c.remove(param);
-            if(!presente)
-                return false;  
+        Iterator ia = a.iterator();
+        Iterator ib = b.iterator();
+        while(ia.hasNext()){
+            if(!ia.next().equals(ib.next()))
+                return false;
         }
         return true;
     }

@@ -20,6 +20,7 @@ public class TabelaSimbolos {
         //System.out.println("INSERINDO SÍMBOLO: "+t.getLexema()+" "+(simbolos.containsKey(t)));
         LinkedList<Simbolo> lista = simbolos.get(t);
         boolean flag = true;
+        
         if(lista == null){
             flag = false;
             lista = new LinkedList<>();
@@ -44,7 +45,5 @@ public class TabelaSimbolos {
             throw new EscopoPaiException();
         return escopoPai;
     }
-    
-    
     
 }
