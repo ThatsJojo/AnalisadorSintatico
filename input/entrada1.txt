@@ -15,7 +15,7 @@ struct jubileu {
     }
 }
 
-typedef pessoa alguem;
+typedef Pessoa alguem;
 
 struct funcionario extends pessoa{
     var{

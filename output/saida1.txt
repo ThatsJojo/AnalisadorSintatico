@@ -54,7 +54,7 @@
 15 DEL }
 16 DEL }
 18 PRE typedef
-18 IDE pessoa
+18 IDE Pessoa
 18 IDE alguem
 18 DEL ;
 20 PRE struct
