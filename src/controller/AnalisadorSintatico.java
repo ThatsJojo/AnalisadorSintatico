@@ -141,6 +141,10 @@ public class AnalisadorSintatico {
         return (Token) tokens.get(countToken);
     }
 
+    private Token lookback() throws FimInesperadoDeArquivo {
+        return (Token) tokens.get(countToken - 2);
+    }
+
     private Token lookaheadP() throws FimInesperadoDeArquivo {
         if (countToken >= tokens.size()) {
             erros++;
@@ -707,15 +711,25 @@ public class AnalisadorSintatico {
         aritmeticOp();
     }
 
-    private void aritmeticValue() throws FimInesperadoDeArquivo {
+    private Token aritmeticValue() throws FimInesperadoDeArquivo {
+        Token ret = new Token("PRE", "int", currentToken().getLinha());
         switch (currentToken().getId()) {
             case "NRO":
+                consumeToken();
+                ret = new Token("PRE", "int", currentToken().getLinha());
+                break;
+            case "NRO REAL":
+                consumeToken();
+                ret = new Token("PRE", "real", currentToken().getLinha());
+                break;
             case "CAD":
                 consumeToken();
+                ret = new Token("PRE", "string", currentToken().getLinha());
                 break;
             default:
                 error("ESPERAVA: NRO ou CAD", true);
         }
+        return ret;
     }
 
     private Token variavel() throws FimInesperadoDeArquivo {
@@ -1997,7 +2011,7 @@ public class AnalisadorSintatico {
                                 s.add(simbolo1);
                                 escopoAtual.getTipos().put(simbolo, simbolo1);
                             } else {*/
-                                erroSemantico("" + simbolo + " Identificador já utilizado. " + escopoAtual.getSimbolo(simbolo).toString());
+                            erroSemantico("" + simbolo + " Identificador já utilizado. " + escopoAtual.getSimbolo(simbolo).toString());
                             //}
                         } catch (identificadorNaoEncontrado e) {
                             erroSemantico("" + simbolo + " tipo não encontrado. " + apontado);
@@ -2040,10 +2054,14 @@ public class AnalisadorSintatico {
 //=========================================== Operations =============================================  
 //****************************************************************************************************    
     //Produções que podem assumir valores aritméticos
-    private void opNegate() throws FimInesperadoDeArquivo {
-        if (currentToken().getId().equals("CAD") || currentToken().getId().equals("NRO") || currentToken().getId().equals("NRO REAL") ) {
+    private Token opNegate() throws FimInesperadoDeArquivo {
+        Token ret = new Token("PRE", "int", currentToken().getLinha());
+        if (currentToken().getId().equals("NRO")) { //removi cadeia 
             consumeToken();
-            return;
+            return new Token("PRE", "int", currentToken().getLinha());
+        }else if ( currentToken().getId().equals("NRO REAL")) { //removi cadeia 
+            consumeToken();
+            return new Token("PRE", "real", currentToken().getLinha());
         }
         switch (currentToken().getLexema()) {
             case "-":
@@ -2055,7 +2073,7 @@ public class AnalisadorSintatico {
                         variavel();
                     }
                 } else {
-                    aritmeticValue();
+                    ret = aritmeticValue();
                 }
                 break;
             case "--":
@@ -2072,10 +2090,12 @@ public class AnalisadorSintatico {
                     }
                 }
         }
+        return ret; //int como default
     }
 
     //Operação aritmética
-    private void aritmeticOp() throws FimInesperadoDeArquivo {
+    private Token aritmeticOp() throws FimInesperadoDeArquivo {
+        Token ret = new Token("PRE", "int", currentToken().getLinha());
         if (currentToken().getLexema().equals("-") && lookahead().getLexema().equals("(")) {
             consumeToken();
         }
@@ -2085,6 +2105,7 @@ public class AnalisadorSintatico {
             if (currentToken().getLexema().equals(")")) {
                 consumeToken();
                 if (currentToken().getLexema().equals("*") || currentToken().getLexema().equals("/")) {
+                    confereTipo((Token) lookahead(), (Token) lookback()); //conferindo tipos iguais numa operação
                     consumeToken();
                     aritmeticOp();
                 }
@@ -2092,16 +2113,19 @@ public class AnalisadorSintatico {
                 error("ESPERAVA: '*' ou '/'", true);
             }
         } else {
-            opNegate();
+            ret = opNegate();
             if (currentToken().getLexema().equals("*") || currentToken().getLexema().equals("/")) {
+                confereTipo((Token) lookahead(), (Token) lookback()); //conferindo tipos iguais numa operação
                 consumeToken();
                 aritmeticOp();
             }
         }
         if (currentToken().getLexema().equals("+") || currentToken().getLexema().equals("-")) {
+            confereTipo((Token) lookahead(), (Token) lookback()); //conferindo tipos iguais numa operação
             consumeToken();
             aritmeticOp();
         }
+        return ret;
     }
 
     //Operação relacional
@@ -2210,24 +2234,14 @@ public class AnalisadorSintatico {
 
     private Token operation() throws FimInesperadoDeArquivo {
         Token ret = new Token("PRE", "int", currentToken().getLinha());
-        if (currentToken().getId().equals("NRO") || currentToken().getId().equals("CAD")
+        if (currentToken().getId().equals("NRO") || currentToken().getId().equals("NRO REAL") || currentToken().getId().equals("CAD")
                 || currentToken().getId().equals("IDE") || currentToken().getLexema().equals("-")) {
-            aritmeticOp();
+            ret = aritmeticOp();
             if (currentToken().getId().equals("REL") || currentToken().getId().equals("LOG")) {
                 logicOrRelacionalOp();
                 return new Token("PRE", "boolean", currentToken().getLinha());
             }
-        } 
-        else if(currentToken().getId().equals("NRO REAL")){
-            System.out.println(currentToken());
-            aritmeticOp();
-            if (currentToken().getId().equals("REL") || currentToken().getId().equals("LOG")) {
-                logicOrRelacionalOp();
-                return new Token("PRE", "boolean", currentToken().getLinha());
-            }
-            ret = new Token("PRE", "real", currentToken().getLinha());
-        }
-        else {
+        } else {
             switch (currentToken().getLexema()) {
                 case "true":
                 case "false":
@@ -2239,9 +2253,9 @@ public class AnalisadorSintatico {
                     break;
                 case "(":
                     consumeToken();
-                    if (currentToken().getId().equals("NRO") ||currentToken().getId().equals("NRO REAL") || currentToken().getId().equals("CAD")
+                    if (currentToken().getId().equals("NRO") || currentToken().getId().equals("NRO REAL") || currentToken().getId().equals("CAD")
                             || currentToken().getId().equals("IDE") || currentToken().getLexema().equals("-")) {
-                        aritmeticOp();
+                        ret = aritmeticOp();
                         if (currentToken().getId().equals("REL") || currentToken().getId().equals("LOG")) {
                             logicOrRelacionalOp();
                         }
@@ -2348,30 +2362,41 @@ public class AnalisadorSintatico {
                 erroSemantico("" + t1 + " o tipo utilizado não foi declarado. ");
                 return false;
             }
-        } else {
+        } else if(t1.getId().equals("NRO REAL")){
+            lexema1 = "real";
+        }
+        else if(t1.getId().equals("NRO")){
+            lexema1 = "int";
+        }else {
             lexema1 = t1.getLexema();
         }
 
         if (t2.getId().equals("IDE")) {
             try {
-
                 simbolo2 = tipoPrimitivoApontado(escopoAtual.getTipo(t2));
                 if (simbolo2.getCategoria().equals("tipo")) {
                     lexema2 = ((Token) simbolo2.getVariavel()).getLexema();
                     simbolo2 = null;
                 }
             } catch (identificadorNaoEncontrado ex) {
+                escopoAtual.print();
                 erroSemantico("" + t2 + " o tipo utilizado não foi declarado. ");
                 return false;
             }
-        } else {
+        } else if(t2.getId().equals("NRO REAL")){
+            lexema2 = "real";
+        }
+        else if(t2.getId().equals("NRO")){
+            lexema2 = "int";
+        }
+        else {
             lexema2 = t2.getLexema();
         }
         if ((lexema1 == null && lexema2 != null) || (lexema1 != null && lexema2 == null)) {
             erroSemantico("" + t1 + " Tipos Incompatíveis: " + (lexema1 == null ? "struct " + simbolo1.getToken().getLexema() : lexema1) + " e " + (lexema2 == null ? "struct " + simbolo2.getToken().getLexema() : lexema2));
             return false;
         } else if (lexema1 != null && lexema2 != null) {
-            if (lexema1.equals(lexema2)) {
+            if (lexema1.equals(lexema2) ) {
                 return true;
             } else {
                 erroSemantico("" + t1 + " Tipos Incompatíveis: " + lexema1 + " e " + lexema2);

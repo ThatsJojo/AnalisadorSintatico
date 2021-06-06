@@ -124,7 +124,7 @@
 47 ART *
 47 NRO 8
 47 ART +
-47 CAD "jacobina"
+47 CAD "jacobina" ERRO SINTÁTICO. ESPERAVA: IDE, "global" ou "local".  Encontrado: "jacobina"
 47 DEL ;
 48 PRE int
 48 IDE i
@@ -154,7 +154,7 @@
 49 ART *
 49 IDE pedro
 49 DEL (
-49 CAD "Joao"
+49 CAD "Joao" ERRO SINTÁTICO. ESPERAVA: IDE, "global" ou "local".  Encontrado: "Joao"
 49 DEL ,
 49 NRO 85
 49 ART *
@@ -166,7 +166,7 @@
 49 ART *
 49 IDE focafunc
 49 DEL (
-49 CAD "Joao"
+49 CAD "Joao" ERRO SINTÁTICO. ESPERAVA: IDE, "global" ou "local".  Encontrado: "Joao"
 49 DEL ,
 49 NRO 85
 49 ART *
@@ -183,11 +183,11 @@
 50 IDE frase
 50 IDE japa
 50 ATRIB =
-50 CAD "Opa gangnangstyle"
+50 CAD "Opa gangnangstyle" ERRO SINTÁTICO. ESPERAVA: IDE, "global" ou "local".  Encontrado: "Opa gangnangstyle"
 50 DEL ,
 50 IDE zoom
 50 ATRIB =
-50 CAD "app"
+50 CAD "app" ERRO SINTÁTICO. ESPERAVA: IDE, "global" ou "local".  Encontrado: "app"
 50 DEL ;
 51 PRE real
 51 IDE i
