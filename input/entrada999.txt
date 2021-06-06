@@ -1,0 +1,68 @@
+typedef struct Pessoa Pessoa;
+typedef real frase;
+typedef frase frase1;
+typedef frase1 frase2;
+
+struct Pessoa {
+    var{
+        String cpf, nome;
+        int idade, peso, altura;
+    }
+}
+
+struct funcionario extends Pessoa{
+    var{
+        real salario;
+    }
+}
+var{
+	frase2 i;
+        frase2 p;
+ }
+const{
+    real w=2.3;
+ }
+typedef struct Pessoa Pessoa;
+
+function int soma(){
+    var{
+	real i;
+        real p;
+ }
+    p = i+2.2;
+    read(i, u[i]);
+    if(!variavel) then{
+       read(i);
+    }
+    i++;
+    i--;
+    --i;
+    ++j;
+    teste();
+    while(!variavel){
+	read(j);
+    }
+
+    return i;
+}
+
+procedure teste(){
+    var{
+        struct Pessoa xablau;
+        frase2 soma;
+    }
+    xablau = true;
+    soma = true;
+   
+    read(i, u[i]);
+
+}
+
+procedure start(){
+    var{
+        struct Pessoa xablau;
+    }
+    read(i, u[i]);
+
+
+}
