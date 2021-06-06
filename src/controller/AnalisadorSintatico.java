@@ -673,21 +673,22 @@ public class AnalisadorSintatico {
     //Incompleto... 
     private Token value() throws FimInesperadoDeArquivo {
         Token t = lookahead();
+        Token ret = new Token("PRE", "int", 9);;
         switch (currentToken().getLexema()) {
             case "true":
             case "false":
                 if (t.getId().equals("REL") || t.getId().equals("LOG")) {
-                    operation();
+                    ret = operation();
                 } else {
                     consumeToken();
                     return new Token("PRE", "boolean", currentToken().getLinha());
                 }
                 break;
             default:
-                operation();
+                ret = operation();
                 break;
         }
-        return new Token("PRE", "int", 9);
+        return ret;
     }
 
     //verifica se é um tipo válido
@@ -2040,7 +2041,7 @@ public class AnalisadorSintatico {
 //****************************************************************************************************    
     //Produções que podem assumir valores aritméticos
     private void opNegate() throws FimInesperadoDeArquivo {
-        if (currentToken().getId().equals("CAD") || currentToken().getId().equals("NRO")) {
+        if (currentToken().getId().equals("CAD") || currentToken().getId().equals("NRO") || currentToken().getId().equals("NRO REAL") ) {
             consumeToken();
             return;
         }
@@ -2207,14 +2208,26 @@ public class AnalisadorSintatico {
         }
     }
 
-    private void operation() throws FimInesperadoDeArquivo {
+    private Token operation() throws FimInesperadoDeArquivo {
+        Token ret = new Token("PRE", "int", currentToken().getLinha());
         if (currentToken().getId().equals("NRO") || currentToken().getId().equals("CAD")
                 || currentToken().getId().equals("IDE") || currentToken().getLexema().equals("-")) {
             aritmeticOp();
             if (currentToken().getId().equals("REL") || currentToken().getId().equals("LOG")) {
                 logicOrRelacionalOp();
+                return new Token("PRE", "boolean", currentToken().getLinha());
             }
-        } else {
+        } 
+        else if(currentToken().getId().equals("NRO REAL")){
+            System.out.println(currentToken());
+            aritmeticOp();
+            if (currentToken().getId().equals("REL") || currentToken().getId().equals("LOG")) {
+                logicOrRelacionalOp();
+                return new Token("PRE", "boolean", currentToken().getLinha());
+            }
+            ret = new Token("PRE", "real", currentToken().getLinha());
+        }
+        else {
             switch (currentToken().getLexema()) {
                 case "true":
                 case "false":
@@ -2226,7 +2239,7 @@ public class AnalisadorSintatico {
                     break;
                 case "(":
                     consumeToken();
-                    if (currentToken().getId().equals("NRO") || currentToken().getId().equals("CAD")
+                    if (currentToken().getId().equals("NRO") ||currentToken().getId().equals("NRO REAL") || currentToken().getId().equals("CAD")
                             || currentToken().getId().equals("IDE") || currentToken().getLexema().equals("-")) {
                         aritmeticOp();
                         if (currentToken().getId().equals("REL") || currentToken().getId().equals("LOG")) {
@@ -2256,6 +2269,7 @@ public class AnalisadorSintatico {
                     error("ESPERAVA: '!', '(', \"true\" ou \"false\"", true);
             }
         }
+        return ret;
     }
 //******************************************* Operations *********************************************  
 //====================================================================================================
@@ -2342,7 +2356,6 @@ public class AnalisadorSintatico {
             try {
 
                 simbolo2 = tipoPrimitivoApontado(escopoAtual.getTipo(t2));
-                System.out.println(simbolo2.getToken().getLexema());
                 if (simbolo2.getCategoria().equals("tipo")) {
                     lexema2 = ((Token) simbolo2.getVariavel()).getLexema();
                     simbolo2 = null;

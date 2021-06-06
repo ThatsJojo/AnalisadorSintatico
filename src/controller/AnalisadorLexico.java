@@ -249,7 +249,7 @@ public class AnalisadorLexico {
                         lexema+=caractere;
                         if (ReconhecedorCaracteres.isDigit(caractere)) {
                             if(size-1==i)
-                                this.addToken("NRO", lexema, line);
+                                this.addToken("NRO REAL", lexema, line);
                             else
                                 estado = 5;//Sendo digito, vaipara o estado 5.
                         }else if(ReconhecedorCaracteres.isChar(caractere)){
@@ -270,7 +270,7 @@ public class AnalisadorLexico {
                         //Fica nesse estado enquanto receber digitos ou chegar o fim da linha, recebendo letra vai para o estado 6.
                             lexema += caractere;
                             if(size-1==i)
-                                this.addToken("NRO", lexema, line);
+                                this.addToken("NRO REAL", lexema, line);
                         } else if(ReconhecedorCaracteres.isChar(caractere)){
                             lexema += caractere;
                             if(size-1==i){
@@ -280,7 +280,7 @@ public class AnalisadorLexico {
                                 estado = 6;
                         }else{
                             caractereExcedente = true;
-                            this.addToken("NRO", lexema, line);
+                            this.addToken("NRO REAL", lexema, line);
                             estado = 0;
                         }
                         break;
