@@ -23,8 +23,9 @@ typedef struct Pessoa Pessoa;
 
 function int soma(){
     var{
+int i=p;
         real teste=2.8+2, p;
-        int i=p;
+        
      }
     p = 2+2;
     i = p + 2;
