@@ -28,7 +28,7 @@ typedef funcionario empregado;
 var{
 	struct jubileu jubileu1; 
 	int jubileu = 10;
-	int i = 20*8+"jacobina";
+	//int i = 20*8+"jacobina";
         int xablau = 0, xablau = 2;
 	int i[2] = [false,true], j = false;
 	int jota = 2*focafunc[jota]*pedro("Joao", 85*3, i[2*focafunc("Joao", 85*3, i[7])]);

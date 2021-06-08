@@ -84,15 +84,6 @@
 30 ATRIB =
 30 NRO 10
 30 DEL ;
-31 PRE int
-31 IDE i
-31 ATRIB =
-31 NRO 20
-31 ART *
-31 NRO 8
-31 ART +
-31 CAD "jacobina" ERRO SINTÁTICO. ESPERAVA: IDE, "global" ou "local".  Encontrado: "jacobina"
-31 DEL ;
 32 PRE int
 32 IDE xablau
 32 ATRIB =
@@ -130,7 +121,7 @@
 34 ART *
 34 IDE pedro
 34 DEL (
-34 CAD "Joao" ERRO SINTÁTICO. ESPERAVA: IDE, "global" ou "local".  Encontrado: "Joao"
+34 CAD "Joao"
 34 DEL ,
 34 NRO 85
 34 ART *
@@ -142,7 +133,7 @@
 34 ART *
 34 IDE focafunc
 34 DEL (
-34 CAD "Joao" ERRO SINTÁTICO. ESPERAVA: IDE, "global" ou "local".  Encontrado: "Joao"
+34 CAD "Joao"
 34 DEL ,
 34 NRO 85
 34 ART *
@@ -159,11 +150,11 @@
 35 PRE string
 35 IDE japa
 35 ATRIB =
-35 CAD "Opa gangnangstyle" ERRO SINTÁTICO. ESPERAVA: IDE, "global" ou "local".  Encontrado: "Opa gangnangstyle"
+35 CAD "Opa gangnangstyle"
 35 DEL ,
 35 IDE zoom
 35 ATRIB =
-35 CAD "app" ERRO SINTÁTICO. ESPERAVA: IDE, "global" ou "local".  Encontrado: "app"
+35 CAD "app"
 35 DEL ;
 36 PRE real
 36 IDE i
@@ -683,22 +674,22 @@
 76 DEL ;
 77 IDE imprime
 77 DEL (
-77 CAD "ZAPERSON" ERRO SINTÁTICO. ESPERAVA: IDE, "global" ou "local".  Encontrado: "ZAPERSON"
+77 CAD "ZAPERSON"
 77 DEL ,
-77 CAD "zop" ERRO SINTÁTICO. ESPERAVA: IDE, "global" ou "local".  Encontrado: "zop"
+77 CAD "zop"
 77 DEL ,
-77 CAD "zip" ERRO SINTÁTICO. ESPERAVA: IDE, "global" ou "local".  Encontrado: "zip"
+77 CAD "zip"
 77 DEL ,
 77 IDE jota
 77 DEL )
 77 DEL ;
 78 PRE print
 78 DEL (
-78 CAD "ZAPERSON" ERRO SINTÁTICO. ESPERAVA: IDE, "global" ou "local".  Encontrado: "ZAPERSON"
+78 CAD "ZAPERSON"
 78 DEL ,
-78 CAD "zop" ERRO SINTÁTICO. ESPERAVA: IDE, "global" ou "local".  Encontrado: "zop"
+78 CAD "zop"
 78 DEL ,
-78 CAD "zip" ERRO SINTÁTICO. ESPERAVA: IDE, "global" ou "local".  Encontrado: "zip"
+78 CAD "zip"
 78 DEL ,
 78 IDE jota
 78 DEL )
@@ -963,22 +954,22 @@
 155 DEL ;
 156 IDE imprime
 156 DEL (
-156 CAD "ZAPERSON" ERRO SINTÁTICO. ESPERAVA: IDE, "global" ou "local".  Encontrado: "ZAPERSON"
+156 CAD "ZAPERSON"
 156 DEL ,
-156 CAD "zop" ERRO SINTÁTICO. ESPERAVA: IDE, "global" ou "local".  Encontrado: "zop"
+156 CAD "zop"
 156 DEL ,
-156 CAD "zip" ERRO SINTÁTICO. ESPERAVA: IDE, "global" ou "local".  Encontrado: "zip"
+156 CAD "zip"
 156 DEL ,
 156 IDE jota
 156 DEL )
 156 DEL ;
 157 PRE print
 157 DEL (
-157 CAD "ZAPERSON" ERRO SINTÁTICO. ESPERAVA: IDE, "global" ou "local".  Encontrado: "ZAPERSON"
+157 CAD "ZAPERSON"
 157 DEL ,
-157 CAD "zop" ERRO SINTÁTICO. ESPERAVA: IDE, "global" ou "local".  Encontrado: "zop"
+157 CAD "zop"
 157 DEL ,
-157 CAD "zip" ERRO SINTÁTICO. ESPERAVA: IDE, "global" ou "local".  Encontrado: "zip"
+157 CAD "zip"
 157 DEL ,
 157 IDE jota
 157 DEL )

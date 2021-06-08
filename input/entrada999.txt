@@ -15,21 +15,19 @@ struct funcionario extends Pessoa{
         real salario;
     }
 }
+
 var{
-	frase2 i;
-        frase2 p;
- }
-const{
     real w=2.3;
  }
 typedef struct Pessoa Pessoa;
 
 function int soma(){
     var{
-	real i;
-        real p;
- }
-    p = i+2.2;
+        real teste=2.8+2, p;
+        int i=p;
+     }
+    p = 2+2;
+    i = p + 2;
     read(i, u[i]);
     if(!variavel) then{
        read(i);
@@ -50,6 +48,7 @@ procedure teste(){
     var{
         struct Pessoa xablau;
         frase2 soma;
+        string cadeia="zap";
     }
     xablau = true;
     soma = true;
