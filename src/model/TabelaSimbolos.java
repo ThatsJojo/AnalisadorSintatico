@@ -15,6 +15,7 @@ public class TabelaSimbolos {
 
     public TabelaSimbolos(TabelaSimbolos ep) {
         //functions = new HashMap();
+        Token t = new Token("PRE", "tipo", 0);
         simbolos = new HashMap();
         tipos = new HashMap();
         escopoPai = ep;
@@ -82,7 +83,6 @@ public class TabelaSimbolos {
                 throw new identificadorNaoEncontrado();
             }
         }
-
         return ret;
     }
     
