@@ -21,7 +21,7 @@ public class AnalisadorSintatico {
     private ArrayList tokens;
     private int countToken = 0;
     private String analiseret = "";
-    private static final ArrayList<TabelaSimbolos> escopos = new ArrayList();
+    private static final ArrayList<TabelaSimbolos> ESCOPOS = new ArrayList();
 
     private static final HashSet<String> firstTypes = new HashSet();
     private static final HashSet<String> firstComando = new HashSet();
@@ -62,10 +62,10 @@ public class AnalisadorSintatico {
     }
 
     public String analise(Arquivo arq, ArrayList tokens) {
-        escopos.clear();
+        ESCOPOS.clear();
         escopoAtual = new TabelaSimbolos(null);
         global = escopoAtual;
-        escopos.add(escopoAtual);
+        ESCOPOS.add(escopoAtual);
         analiseret = "";
         this.erros = 0;
         this.tokens = tokens;
@@ -1244,7 +1244,7 @@ public class AnalisadorSintatico {
 //****************************************************************************************************
     private void function() throws FimInesperadoDeArquivo, identificadorNaoEncontrado {
         escopoAtual = new TabelaSimbolos(global);
-        escopos.add(escopoAtual);
+        ESCOPOS.add(escopoAtual);
         Token apontado = dataType();
         if (currentToken().getId().equals("IDE")) {
             Token simbolo = currentToken();
@@ -1669,7 +1669,7 @@ public class AnalisadorSintatico {
 
     private void procedure() throws FimInesperadoDeArquivo, identificadorNaoEncontrado {
         escopoAtual = new TabelaSimbolos(global);
-        escopos.add(escopoAtual);
+        ESCOPOS.add(escopoAtual);
         if (currentToken().getId().equals("IDE")) {
             Token simbolo = currentToken();
 
