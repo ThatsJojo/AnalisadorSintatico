@@ -10,7 +10,15 @@ struct Pessoa {
     }
 }
 
-struct funcionario extends Pessoa{
+typedef struct Pessoa alguem;
+
+struct funcionario extends alguem{
+    var{
+        real salario;
+    }
+}
+
+struct empregado extends Pessoa{
     var{
         real salario;
     }
@@ -19,14 +27,23 @@ struct funcionario extends Pessoa{
 var{
     real w=2.3,i, esther;
  }
+
+struct gerente extends w{
+    var{
+        real salario;
+    }
+}
+
+
 typedef struct Pessoa Pessoa;
 
 procedure soma(){
     var{
-        frase2 teste=2.8+2, p, i, j;
+        real teste=2.8+2, p, i, j;
      }
 
-    p = i;
+    p = 
+    i;
     read(i, u[i]);
     if(!variavel) then{
        read(i);
