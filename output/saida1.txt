@@ -91,7 +91,7 @@
 31 ART *
 31 NRO 8
 31 ART +
-31 CAD "jacobina"
+31 CAD "jacobina" ERRO SINTÁTICO. ESPERAVA: IDE, "global" ou "local".  Encontrado: "jacobina"
 31 DEL ;
 32 PRE int
 32 IDE xablau
@@ -135,969 +135,971 @@
 34 NRO 85
 34 ART *
 34 NRO 3
-34 DEL ,
-34 IDE i
-34 DEL [
-34 NRO 2
-34 ART *
+34 DEL , ERRO SINTÁTICO. ESPERAVA: '!', '(', "true" ou "false".  Encontrado: ,
+34 IDE i ERRO SINTÁTICO. ESPERAVA: ',' ou ')'.  Encontrado: i
+34 DEL [ ERRO SINTÁTICO. ESPERAVA: ',', ';'.  Encontrado: [
+34 NRO 2 ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "const", "procedure" ou "function".  Encontrado: 2
+34 NRO 2 ERRO SINTÁTICO. ESPERAVA: "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 2
+34 ART * ERRO SINTÁTICO. ESPERAVA: "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: *
+34 IDE focafunc ERRO SINTÁTICO.  assumiu token ausente = "procedure".  Encontrado: focafunc
 34 IDE focafunc
 34 DEL (
-34 CAD "Joao"
-34 DEL ,
-34 NRO 85
-34 ART *
-34 NRO 3
-34 DEL ,
-34 IDE i
-34 DEL [
-34 NRO 7
-34 DEL ]
-34 DEL )
-34 DEL ]
-34 DEL )
-34 DEL ;
-35 PRE string
-35 IDE japa
-35 ATRIB =
-35 CAD "Opa gangnangstyle"
-35 DEL ,
-35 IDE zoom
-35 ATRIB =
-35 CAD "app"
-35 DEL ;
-36 PRE real
-36 IDE i
-36 ATRIB =
-36 PRE false
-36 DEL ,
-36 IDE k
-36 ATRIB =
-36 PRE true
-36 DEL ,
-36 IDE k
-36 DEL [
-36 NRO 3
-36 DEL ]
-36 ATRIB =
-36 DEL [
-36 IDE urubu
-36 DEL ,
-36 IDE sem
-36 DEL ,
-36 IDE asa
-36 DEL ]
-36 DEL ,
-36 IDE l
-36 DEL ;
-37 PRE int
-37 IDE i
-37 DEL [
-37 NRO 2
-37 DEL ]
-37 DEL [
-37 NRO 3
-37 DEL ]
-37 ATRIB =
-37 DEL [
-37 DEL [
-37 PRE false
-37 DEL ,
-37 PRE true
-37 DEL ,
-37 IDE zip
-37 DEL ,
-37 IDE zop
-37 DEL ]
-37 DEL ,
-37 DEL [
-37 IDE biri
-37 DEL ,
-37 IDE flinston
-37 DEL ]
-37 DEL ,
-37 DEL [
-37 IDE opa
-37 DEL ]
-37 DEL ,
-37 DEL [
-37 IDE eita
-37 DEL ]
-37 DEL ]
-37 DEL ,
-37 IDE joao
-37 ATRIB =
-37 IDE i
-37 DEL ,
-37 IDE false1
-37 ATRIB =
-37 IDE j
-37 DEL ;
-39 PRE int
-39 IDE i
-39 DEL [
-39 NRO 2
-39 ART *
-39 NRO 90
-39 ART /
-39 NRO 1520
-39 DEL ]
-39 ATRIB =
-39 DEL [
-39 PRE false
-39 DEL ,
-39 DEL (
-39 NRO 2
-39 ART +
-39 NRO 3
-39 DEL )
-39 REL !=
-39 DEL (
-39 NRO 2
-39 ART +
-39 NRO 3
-39 DEL )
-39 REL <
-39 NRO 7
-39 DEL ]
-39 DEL ,
-39 IDE j
-39 ATRIB =
-39 PRE false
-39 REL <=
-39 DEL (
-39 NRO 8
-39 ART *
-39 NRO 5.2
-39 ART +
-39 IDE i
-39 DEL [
-39 NRO 5
-39 ART /
-39 NRO 4
-39 DEL ]
-39 ART *
-39 IDE jota
-39 DEL .
-39 IDE ka
-39 DEL [
-39 NRO 21
-39 DEL ]
-39 DEL [
-39 NRO 5
-39 ART +
-39 NRO 3
-39 DEL ]
-39 DEL )
-39 DEL ;
-40 PRE real
-40 IDE i
-40 ATRIB =
-40 NRO 10
-40 ART *
-40 NRO 3.1
-40 ART +
-40 NRO 2.7
-40 ART *
-40 NRO 8.777
-40 ART /
-40 NRO 15
-40 ART +
-40 DEL (
-40 NRO 128
-40 ART /
-40 NRO 12.2
-40 DEL )
-40 DEL ,
-40 IDE k
-40 ATRIB =
-40 IDE i
-40 DEL [
-40 NRO 20.5
-40 ART /
-40 DEL (
-40 NRO 12
-40 ART -
-40 NRO 15
-40 DEL )
-40 ART *
-40 DEL (
-40 ART -
-40 IDE I
-40 ART +
-40 NRO 20
-40 DEL )
-40 DEL ]
-40 LOG ||
-40 DEL (
-40 NRO 128
-40 LOG &&
-40 NRO 15
-40 DEL )
-40 REL >
-40 NRO 14
-40 DEL ,
-40 IDE k
-40 DEL [
-40 NRO 3
-40 DEL ]
-40 ATRIB =
-40 DEL [
-40 IDE urubu
-40 DEL ,
-40 IDE sem
-40 DEL ,
-40 IDE asa
-40 DEL ]
-40 DEL ,
-40 IDE l
-40 DEL ;
-41 PRE int
-41 IDE i
-41 DEL [
-41 NRO 2
-41 ART *
-41 NRO 3
-41 DEL ]
-41 DEL [
-41 NRO 3
-41 ART +
-41 NRO 2
-41 DEL ]
-41 ATRIB =
-41 DEL [
-41 DEL [
-41 PRE false
-41 DEL ,
-41 PRE true
-41 LOG ||
-41 IDE ele
-41 DEL ,
-41 IDE zip
-41 REL <=
-41 IDE zop
-41 DEL ,
-41 IDE uat
-41 LOG &&
-41 IDE zap
-41 DEL ]
-41 DEL ,
-41 DEL [
-41 IDE biri
-41 REL >
-41 IDE flinston
-41 DEL ,
-41 IDE opa
-41 ART -
-41 IDE flinston
-41 DEL ]
-41 DEL ,
-41 DEL [
-41 ART -
-41 IDE opa
-41 ART *
-41 NRO 2
-41 DEL ]
-41 DEL ,
-41 DEL [
-41 NRO 2
-41 ART /
-41 DEL (
-41 IDE eita
-41 DEL )
-41 DEL ]
-41 DEL ]
-41 DEL ,
-41 IDE joao
-41 ATRIB =
-41 ART -
-41 IDE i
-41 DEL ,
-41 IDE false1
-41 ATRIB =
-41 ART -
-41 DEL (
-41 IDE j
-41 ART /
-41 NRO 2
-41 DEL )
-41 DEL ;
-43 DEL }
-48 PRE const
-48 DEL {
-49 IDE inteiro
-49 IDE zipzop
-49 ATRIB =
-49 NRO 10
-49 DEL ;
-50 PRE struct
-50 IDE pessoa
-50 IDE pessoa1
-50 ATRIB =
-50 NRO 1
-50 DEL ;
-51 IDE alguem
-51 IDE pessoa2
-51 ATRIB =
-51 NRO 1
-51 DEL ;
-52 IDE empregado
-52 IDE pessoa2
-52 ATRIB =
-52 NRO 1
-52 DEL ;
-53 IDE funcionario
-53 IDE pessoa3
-53 ATRIB =
-53 NRO 4
-53 DEL ;
-54 PRE int
-54 IDE i
-54 ATRIB =
-54 IDE i
-54 ART +
-54 IDE i
-54 DEL ,
-54 IDE j
-54 ATRIB =
-54 PRE true
-54 DEL ;
-55 PRE real
-55 IDE i
-55 ATRIB =
-55 IDE reali
-55 DEL ,
-55 IDE joao
-55 ATRIB =
-55 IDE safe
-55 DEL ;
-56 PRE real
-56 IDE i
-56 ATRIB =
-56 IDE reali
-56 DEL ,
-56 IDE joao
-56 ATRIB =
-56 IDE safe
-56 DEL ;
-57 PRE int
-57 IDE i
-57 DEL [
-57 NRO 2
-57 DEL ]
-57 ATRIB =
-57 DEL [
-57 IDE opa
-57 DEL ,
-57 IDE zap
-57 DEL ]
-57 DEL ;
-58 PRE int
-58 IDE i32
-58 DEL [
-58 NRO 2
-58 DEL ]
-58 ATRIB =
-58 DEL [
-58 PRE false
-58 DEL ,
-58 PRE true
-58 DEL ]
-58 DEL ,
-58 IDE j
-58 ATRIB =
-58 PRE false
-58 DEL ;
-59 PRE int
-59 IDE i32
-59 DEL [
-59 NRO 2
-59 DEL ]
-59 ATRIB =
-59 DEL [
-59 PRE false
-59 DEL ,
-59 PRE true
-59 DEL ]
-59 DEL ,
-59 IDE j
-59 ATRIB =
-59 PRE false
-59 DEL ;
-60 PRE real
-60 IDE i
-60 ATRIB =
-60 PRE false
-60 DEL ,
-60 IDE k
-60 ATRIB =
-60 PRE true
-60 DEL ,
-60 IDE k
-60 DEL [
-60 NRO 3
-60 DEL ]
-60 ATRIB =
-60 DEL [
-60 IDE urubu
-60 DEL ,
-60 IDE sem
-60 DEL ,
-60 IDE asa
-60 DEL ]
-60 DEL ;
-61 PRE int
-61 IDE i654
-61 DEL [
-61 NRO 2
-61 DEL ]
-61 DEL [
-61 NRO 3
-61 DEL ]
-61 ATRIB =
-61 DEL [
-61 DEL [
-61 PRE false
-61 DEL ,
-61 PRE true
-61 DEL ,
-61 IDE zip
-61 DEL ,
-61 IDE zop
-61 DEL ]
-61 DEL ,
-61 DEL [
-61 IDE biri
-61 DEL ,
-61 IDE flinston
-61 DEL ]
-61 DEL ,
-61 DEL [
-61 IDE opa
-61 DEL ]
-61 DEL ,
-61 DEL [
-61 IDE eita
-61 DEL ]
-61 DEL ]
-61 DEL ,
-61 IDE joao157
-61 ATRIB =
-61 IDE i
-61 DEL ,
-61 IDE false157
-61 ATRIB =
-61 IDE j
-61 DEL ;
-62 PRE int
-62 IDE i654
-62 DEL [
-62 NRO 2
-62 DEL ]
-62 DEL [
-62 NRO 3
-62 DEL ]
-62 ATRIB =
-62 DEL [
-62 DEL [
-62 PRE false
-62 DEL ,
-62 PRE true
-62 DEL ,
-62 IDE zip
-62 DEL ,
-62 IDE zop
-62 DEL ]
-62 DEL ,
-62 DEL [
-62 IDE biri
-62 DEL ,
-62 IDE flinston
-62 DEL ]
-62 DEL ,
-62 DEL [
-62 IDE opa
-62 DEL ]
-62 DEL ,
-62 DEL [
-62 IDE eita
-62 DEL ]
-62 DEL ]
-62 DEL ,
-62 IDE joao157
-62 ATRIB =
-62 IDE i
-62 DEL ,
-62 IDE false157
-62 ATRIB =
-62 IDE j
-62 DEL ;
-64 DEL }
-66 PRE function
-66 PRE int
-66 IDE soma
-66 DEL (
-66 DEL )
-66 DEL {
-67 PRE typedef
-67 IDE int5
-67 IDE inteiro
-67 DEL ;
-68 PRE read
-68 DEL (
-68 IDE i
-68 DEL ,
-68 IDE u
-68 DEL [
-68 IDE i
-68 DEL ]
-68 DEL )
-68 DEL ;
-69 PRE if
-69 DEL (
-69 LOG !
-69 IDE variavel
-69 DEL )
-69 PRE then
-69 DEL {
-70 PRE read
-70 DEL (
-70 IDE i
-70 DEL )
-70 DEL ;
-71 DEL }
-72 IDE i
-72 ART ++
-72 DEL ;
-73 IDE i
-73 ART --
-73 DEL ;
-74 ART --
-74 IDE i
-74 DEL ;
-75 ART ++
-75 IDE j
-75 DEL ;
-76 IDE teste
-76 DEL (
-76 DEL )
-76 DEL ;
-77 IDE imprime
-77 DEL (
-77 CAD "ZAPERSON"
-77 DEL ,
-77 CAD "zop"
-77 DEL ,
-77 CAD "zip"
-77 DEL ,
-77 IDE jota
-77 DEL )
-77 DEL ;
-78 PRE print
-78 DEL (
-78 CAD "ZAPERSON"
-78 DEL ,
-78 CAD "zop"
-78 DEL ,
-78 CAD "zip"
-78 DEL ,
-78 IDE jota
-78 DEL )
-78 DEL ;
-79 PRE while
-79 DEL (
-79 LOG !
-79 IDE variavel
-79 DEL )
-79 DEL {
-80 PRE read
-80 DEL (
-80 IDE j
-80 DEL )
-80 DEL ;
-81 DEL }
-83 PRE return
-83 IDE i
-83 DEL ;
-84 DEL }
-86 PRE procedure
-86 IDE soma
-86 DEL (
-86 PRE int
-86 IDE i
-86 DEL ,
-86 PRE int
-86 IDE jota
-86 DEL )
-86 DEL {
-88 DEL }
-90 PRE procedure
-90 IDE soma
-90 DEL (
-90 PRE int
-90 IDE casa
-90 DEL ,
-90 PRE int
-90 IDE carro
-90 DEL )
-90 DEL {
-92 DEL }
-94 PRE procedure
-94 IDE soma
-94 DEL (
-94 PRE int
-94 IDE i
-94 DEL )
-94 DEL {
-96 DEL }
-98 PRE procedure
-98 IDE soma
-98 DEL (
-98 PRE int
-98 IDE opa
-98 DEL )
-98 DEL {
-100 DEL }
-103 PRE function
-103 PRE real
-103 IDE soma
-103 DEL (
-103 PRE int
-103 IDE casa
-103 DEL ,
-103 PRE int
-103 IDE carro
-103 DEL )
-103 DEL {
-104 PRE return
-104 IDE i
-104 DEL ;
-105 DEL }
-107 PRE function
-107 PRE string
-107 IDE soma
-107 DEL (
-107 PRE int
-107 IDE i
-107 DEL )
-107 DEL {
-108 PRE return
-108 IDE i
-108 DEL ;
-109 DEL }
-111 PRE function
-111 PRE int
-111 IDE soma
-111 DEL (
-111 PRE int
-111 IDE opa
-111 DEL )
-111 DEL {
-112 PRE return
-112 IDE i
-112 DEL ;
-113 DEL }
-116 PRE procedure
-116 IDE soma
-116 DEL (
-116 PRE string
-116 IDE abacaxi
-116 DEL ,
-116 PRE int
-116 IDE girafa
-116 DEL ,
-116 PRE real
-116 IDE jota
-116 DEL ,
-116 PRE string
-116 IDE i
-116 DEL )
-116 DEL {
-118 DEL }
-120 PRE procedure
-120 IDE soma
-120 DEL (
-120 PRE string
-120 IDE corrimao
-120 DEL ,
-120 PRE int
-120 IDE peixe
-120 DEL ,
-120 PRE real
-120 IDE vaca
-120 DEL ,
-120 PRE string
-120 IDE manobra
-120 DEL )
-120 DEL {
-122 DEL }
-124 PRE procedure
-124 IDE soma
-124 DEL (
-124 PRE string
-124 IDE i
-124 DEL ,
-124 PRE real
-124 IDE urubu
-124 DEL ,
-124 PRE string
-124 IDE casa
-124 DEL ,
-124 PRE real
-124 IDE pessoa
-124 DEL )
-124 DEL {
-126 DEL }
-128 PRE function
-128 PRE string
-128 IDE soma
-128 DEL (
-128 PRE string
-128 IDE i
-128 DEL ,
-128 PRE real
-128 IDE papagaio
-128 DEL ,
-128 PRE string
-128 IDE ihRapaz
-128 DEL ,
-128 PRE boolean
-128 IDE i
-128 DEL )
-128 DEL {
-129 PRE return
-129 IDE aviao
-129 DEL ;
-130 DEL }
-132 PRE procedure
-132 IDE soma
-132 DEL (
-132 PRE string
-132 IDE i
-132 DEL ,
-132 PRE real
-132 IDE papagaio
-132 DEL ,
-132 PRE string
-132 IDE i
-132 DEL ,
-132 PRE boolean
-132 IDE ihRapaz
-132 DEL )
-132 DEL {
-134 DEL }
-136 PRE procedure
-136 IDE soma
-136 DEL (
-136 PRE real
-136 IDE carnaval
-136 DEL ,
-136 PRE boolean
-136 IDE jiboia
-136 DEL ,
-136 PRE string
-136 IDE mula
-136 DEL ,
-136 PRE real
-136 IDE cobra
-136 DEL )
-136 DEL {
-138 DEL }
-141 PRE function
-141 PRE int
-141 IDE soma
-141 DEL (
-141 PRE int
-141 IDE i
-141 DEL )
-141 DEL {
-142 PRE var
-142 DEL {
-143 PRE struct
-143 IDE Pessoa
-143 IDE xablau
-143 DEL ;
-144 PRE int
-144 IDE xablau
-144 ATRIB =
-144 NRO 12
-144 DEL ;
-145 DEL }
-146 PRE read
-146 DEL (
-146 IDE i
-146 DEL ,
-146 IDE u
-146 DEL [
-146 IDE i
-146 DEL ]
-146 DEL )
-146 DEL ;
-147 PRE if
-147 DEL (
-147 LOG !
-147 IDE variavel
-147 DEL )
-147 PRE then
-147 DEL {
-148 PRE read
-148 DEL (
-148 IDE i
-148 DEL )
-148 DEL ;
-149 DEL }
-150 IDE i
-150 ART ++
-150 DEL ;
-151 IDE i
-151 ART --
-151 DEL ;
-152 ART --
-152 IDE i
-152 DEL ;
-153 ART ++
-153 IDE j
-153 DEL ;
-155 IDE teste
-155 DEL (
-155 DEL )
-155 DEL ;
-156 IDE imprime
-156 DEL (
-156 CAD "ZAPERSON"
-156 DEL ,
-156 CAD "zop"
-156 DEL ,
-156 CAD "zip"
-156 DEL ,
-156 IDE jota
-156 DEL )
-156 DEL ;
-157 PRE print
-157 DEL (
-157 CAD "ZAPERSON"
-157 DEL ,
-157 CAD "zop"
-157 DEL ,
-157 CAD "zip"
-157 DEL ,
-157 IDE jota
-157 DEL )
-157 DEL ;
-158 PRE while
-158 DEL (
-158 LOG !
-158 IDE variavel
-158 DEL )
-158 DEL {
-159 PRE read
-159 DEL (
-159 IDE j
-159 DEL )
-159 DEL ;
-160 DEL }
-162 PRE return
-162 IDE i
-162 DEL ;
-163 DEL }
-165 PRE procedure
-165 IDE testandow
-165 DEL (
-165 DEL )
-165 DEL {
-166 PRE var
-166 DEL {
-167 PRE struct
-167 IDE Pessoa
-167 IDE xablau
-167 DEL ;
-168 PRE int
-168 IDE soma1
-168 DEL ;
-169 DEL }
-170 PRE typedef
-170 PRE struct
-170 IDE Pessoa
-170 IDE Pessoa
-170 DEL ;
-171 PRE typedef
-171 PRE string
-171 IDE frase
-171 DEL ;
-172 PRE read
-172 DEL (
-172 IDE i
-172 DEL ,
-172 IDE u
-172 DEL [
-172 IDE i
-172 DEL ]
-172 DEL )
-172 DEL ;
-175 DEL }
-177 PRE procedure
-177 IDE testandow
-177 DEL (
-177 DEL )
-177 DEL {
-178 PRE var
-178 DEL {
-179 PRE struct
-179 IDE Pessoa
-179 IDE xablau
-179 DEL ;
-180 PRE int
-180 IDE soma1
-180 DEL ;
-181 DEL }
-182 PRE typedef
-182 PRE struct
-182 IDE Pessoa
-182 IDE Pessoa
-182 DEL ;
-183 PRE typedef
-183 PRE string
-183 IDE frase
-183 DEL ;
-184 PRE read
-184 DEL (
-184 IDE i
-184 DEL ,
-184 IDE u
-184 DEL [
-184 IDE i
-184 DEL ]
-184 DEL )
-184 DEL ;
-187 DEL }
-189 PRE procedure
-189 PRE start
-189 DEL (
-189 DEL )
-189 DEL {
-190 PRE var
-190 DEL {
-191 PRE struct
-191 IDE Pessoa
-191 IDE xablau
-191 DEL ;
-192 DEL }
-193 PRE typedef
-193 PRE struct
-193 IDE Pessoa
-193 IDE Pessoa
-193 DEL ;
-194 PRE typedef
-194 PRE string
-194 IDE frase
-194 DEL ;
-195 PRE read
-195 DEL (
-195 IDE i
-195 DEL ,
-195 IDE u
-195 DEL [
-195 IDE i
-195 DEL ]
-195 DEL )
-195 DEL ;
-197 DEL }
+34 CAD "Joao" ERRO SINTÁTICO. ESPERAVA: ')' ou IDE.  Encontrado: "Joao"
+34 DEL , ERRO SINTÁTICO. ESPERAVA: '{'.  Encontrado: ,
+34 NRO 85 ERRO SINTÁTICO. tentativa falha de assumir produção de "procedure" ou "function"..  Encontrado: 85
+34 ART * ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: *
+34 NRO 3 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 3
+34 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+34 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+34 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+34 NRO 7 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 7
+34 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+34 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+34 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+34 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+34 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+35 PRE string ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: string
+35 IDE japa ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: japa
+35 ATRIB = ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: =
+35 CAD "Opa gangnangstyle" ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: "Opa gangnangstyle"
+35 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+35 IDE zoom ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: zoom
+35 ATRIB = ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: =
+35 CAD "app" ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: "app"
+35 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+36 PRE real ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: real
+36 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+36 ATRIB = ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: =
+36 PRE false ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: false
+36 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+36 IDE k ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: k
+36 ATRIB = ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: =
+36 PRE true ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: true
+36 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+36 IDE k ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: k
+36 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+36 NRO 3 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 3
+36 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+36 ATRIB = ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: =
+36 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+36 IDE urubu ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: urubu
+36 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+36 IDE sem ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: sem
+36 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+36 IDE asa ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: asa
+36 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+36 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+36 IDE l ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: l
+36 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+37 PRE int ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: int
+37 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+37 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+37 NRO 2 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 2
+37 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+37 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+37 NRO 3 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 3
+37 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+37 ATRIB = ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: =
+37 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+37 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+37 PRE false ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: false
+37 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+37 PRE true ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: true
+37 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+37 IDE zip ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: zip
+37 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+37 IDE zop ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: zop
+37 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+37 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+37 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+37 IDE biri ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: biri
+37 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+37 IDE flinston ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: flinston
+37 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+37 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+37 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+37 IDE opa ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: opa
+37 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+37 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+37 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+37 IDE eita ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: eita
+37 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+37 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+37 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+37 IDE joao ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: joao
+37 ATRIB = ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: =
+37 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+37 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+37 IDE false1 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: false1
+37 ATRIB = ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: =
+37 IDE j ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: j
+37 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+39 PRE int ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: int
+39 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+39 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+39 NRO 2 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 2
+39 ART * ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: *
+39 NRO 90 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 90
+39 ART / ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: /
+39 NRO 1520 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 1520
+39 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+39 ATRIB = ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: =
+39 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+39 PRE false ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: false
+39 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+39 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+39 NRO 2 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 2
+39 ART + ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: +
+39 NRO 3 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 3
+39 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+39 REL != ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: !=
+39 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+39 NRO 2 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 2
+39 ART + ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: +
+39 NRO 3 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 3
+39 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+39 REL < ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: <
+39 NRO 7 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 7
+39 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+39 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+39 IDE j ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: j
+39 ATRIB = ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: =
+39 PRE false ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: false
+39 REL <= ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: <=
+39 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+39 NRO 8 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 8
+39 ART * ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: *
+39 NRO REAL 5.2 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 5.2
+39 ART + ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: +
+39 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+39 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+39 NRO 5 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 5
+39 ART / ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: /
+39 NRO 4 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 4
+39 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+39 ART * ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: *
+39 IDE jota ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: jota
+39 DEL . ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: .
+39 IDE ka ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ka
+39 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+39 NRO 21 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 21
+39 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+39 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+39 NRO 5 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 5
+39 ART + ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: +
+39 NRO 3 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 3
+39 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+39 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+39 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+40 PRE real ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: real
+40 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+40 ATRIB = ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: =
+40 NRO 10 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 10
+40 ART * ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: *
+40 NRO REAL 3.1 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 3.1
+40 ART + ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: +
+40 NRO REAL 2.7 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 2.7
+40 ART * ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: *
+40 NRO REAL 8.777 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 8.777
+40 ART / ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: /
+40 NRO 15 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 15
+40 ART + ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: +
+40 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+40 NRO 128 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 128
+40 ART / ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: /
+40 NRO REAL 12.2 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 12.2
+40 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+40 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+40 IDE k ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: k
+40 ATRIB = ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: =
+40 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+40 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+40 NRO REAL 20.5 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 20.5
+40 ART / ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: /
+40 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+40 NRO 12 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 12
+40 ART - ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: -
+40 NRO 15 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 15
+40 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+40 ART * ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: *
+40 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+40 ART - ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: -
+40 IDE I ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: I
+40 ART + ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: +
+40 NRO 20 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 20
+40 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+40 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+40 LOG || ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ||
+40 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+40 NRO 128 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 128
+40 LOG && ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: &&
+40 NRO 15 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 15
+40 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+40 REL > ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: >
+40 NRO 14 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 14
+40 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+40 IDE k ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: k
+40 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+40 NRO 3 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 3
+40 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+40 ATRIB = ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: =
+40 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+40 IDE urubu ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: urubu
+40 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+40 IDE sem ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: sem
+40 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+40 IDE asa ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: asa
+40 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+40 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+40 IDE l ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: l
+40 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+41 PRE int ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: int
+41 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+41 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+41 NRO 2 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 2
+41 ART * ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: *
+41 NRO 3 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 3
+41 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+41 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+41 NRO 3 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 3
+41 ART + ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: +
+41 NRO 2 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 2
+41 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+41 ATRIB = ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: =
+41 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+41 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+41 PRE false ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: false
+41 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+41 PRE true ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: true
+41 LOG || ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ||
+41 IDE ele ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ele
+41 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+41 IDE zip ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: zip
+41 REL <= ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: <=
+41 IDE zop ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: zop
+41 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+41 IDE uat ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: uat
+41 LOG && ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: &&
+41 IDE zap ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: zap
+41 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+41 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+41 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+41 IDE biri ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: biri
+41 REL > ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: >
+41 IDE flinston ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: flinston
+41 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+41 IDE opa ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: opa
+41 ART - ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: -
+41 IDE flinston ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: flinston
+41 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+41 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+41 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+41 ART - ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: -
+41 IDE opa ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: opa
+41 ART * ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: *
+41 NRO 2 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 2
+41 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+41 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+41 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+41 NRO 2 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 2
+41 ART / ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: /
+41 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+41 IDE eita ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: eita
+41 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+41 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+41 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+41 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+41 IDE joao ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: joao
+41 ATRIB = ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: =
+41 ART - ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: -
+41 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+41 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+41 IDE false1 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: false1
+41 ATRIB = ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: =
+41 ART - ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: -
+41 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+41 IDE j ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: j
+41 ART / ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: /
+41 NRO 2 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 2
+41 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+41 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+43 DEL } ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: }
+48 PRE const ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: const
+48 DEL { ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: {
+49 IDE inteiro ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: inteiro
+49 IDE zipzop ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: zipzop
+49 ATRIB = ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: =
+49 NRO 10 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 10
+49 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+50 PRE struct ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: struct
+50 IDE pessoa ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: pessoa
+50 IDE pessoa1 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: pessoa1
+50 ATRIB = ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: =
+50 NRO 1 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 1
+50 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+51 IDE alguem ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: alguem
+51 IDE pessoa2 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: pessoa2
+51 ATRIB = ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: =
+51 NRO 1 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 1
+51 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+52 IDE empregado ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: empregado
+52 IDE pessoa2 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: pessoa2
+52 ATRIB = ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: =
+52 NRO 1 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 1
+52 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+53 IDE funcionario ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: funcionario
+53 IDE pessoa3 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: pessoa3
+53 ATRIB = ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: =
+53 NRO 4 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 4
+53 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+54 PRE int ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: int
+54 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+54 ATRIB = ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: =
+54 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+54 ART + ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: +
+54 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+54 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+54 IDE j ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: j
+54 ATRIB = ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: =
+54 PRE true ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: true
+54 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+55 PRE real ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: real
+55 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+55 ATRIB = ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: =
+55 IDE reali ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: reali
+55 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+55 IDE joao ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: joao
+55 ATRIB = ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: =
+55 IDE safe ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: safe
+55 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+56 PRE real ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: real
+56 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+56 ATRIB = ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: =
+56 IDE reali ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: reali
+56 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+56 IDE joao ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: joao
+56 ATRIB = ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: =
+56 IDE safe ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: safe
+56 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+57 PRE int ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: int
+57 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+57 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+57 NRO 2 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 2
+57 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+57 ATRIB = ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: =
+57 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+57 IDE opa ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: opa
+57 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+57 IDE zap ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: zap
+57 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+57 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+58 PRE int ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: int
+58 IDE i32 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i32
+58 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+58 NRO 2 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 2
+58 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+58 ATRIB = ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: =
+58 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+58 PRE false ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: false
+58 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+58 PRE true ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: true
+58 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+58 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+58 IDE j ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: j
+58 ATRIB = ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: =
+58 PRE false ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: false
+58 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+59 PRE int ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: int
+59 IDE i32 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i32
+59 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+59 NRO 2 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 2
+59 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+59 ATRIB = ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: =
+59 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+59 PRE false ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: false
+59 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+59 PRE true ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: true
+59 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+59 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+59 IDE j ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: j
+59 ATRIB = ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: =
+59 PRE false ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: false
+59 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+60 PRE real ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: real
+60 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+60 ATRIB = ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: =
+60 PRE false ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: false
+60 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+60 IDE k ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: k
+60 ATRIB = ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: =
+60 PRE true ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: true
+60 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+60 IDE k ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: k
+60 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+60 NRO 3 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 3
+60 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+60 ATRIB = ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: =
+60 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+60 IDE urubu ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: urubu
+60 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+60 IDE sem ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: sem
+60 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+60 IDE asa ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: asa
+60 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+60 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+61 PRE int ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: int
+61 IDE i654 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i654
+61 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+61 NRO 2 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 2
+61 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+61 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+61 NRO 3 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 3
+61 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+61 ATRIB = ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: =
+61 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+61 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+61 PRE false ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: false
+61 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+61 PRE true ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: true
+61 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+61 IDE zip ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: zip
+61 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+61 IDE zop ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: zop
+61 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+61 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+61 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+61 IDE biri ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: biri
+61 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+61 IDE flinston ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: flinston
+61 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+61 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+61 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+61 IDE opa ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: opa
+61 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+61 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+61 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+61 IDE eita ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: eita
+61 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+61 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+61 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+61 IDE joao157 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: joao157
+61 ATRIB = ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: =
+61 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+61 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+61 IDE false157 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: false157
+61 ATRIB = ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: =
+61 IDE j ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: j
+61 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+62 PRE int ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: int
+62 IDE i654 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i654
+62 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+62 NRO 2 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 2
+62 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+62 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+62 NRO 3 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 3
+62 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+62 ATRIB = ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: =
+62 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+62 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+62 PRE false ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: false
+62 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+62 PRE true ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: true
+62 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+62 IDE zip ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: zip
+62 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+62 IDE zop ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: zop
+62 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+62 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+62 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+62 IDE biri ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: biri
+62 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+62 IDE flinston ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: flinston
+62 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+62 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+62 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+62 IDE opa ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: opa
+62 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+62 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+62 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+62 IDE eita ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: eita
+62 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+62 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+62 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+62 IDE joao157 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: joao157
+62 ATRIB = ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: =
+62 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+62 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+62 IDE false157 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: false157
+62 ATRIB = ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: =
+62 IDE j ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: j
+62 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+64 DEL } ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: }
+66 PRE function ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: function
+66 PRE int ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: int
+66 IDE soma ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: soma
+66 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+66 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+66 DEL { ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: {
+67 PRE typedef ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: typedef
+67 IDE int5 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: int5
+67 IDE inteiro ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: inteiro
+67 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+68 PRE read ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: read
+68 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+68 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+68 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+68 IDE u ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: u
+68 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+68 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+68 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+68 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+68 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+69 PRE if ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: if
+69 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+69 LOG ! ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: !
+69 IDE variavel ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: variavel
+69 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+69 PRE then ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: then
+69 DEL { ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: {
+70 PRE read ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: read
+70 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+70 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+70 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+70 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+71 DEL } ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: }
+72 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+72 ART ++ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ++
+72 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+73 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+73 ART -- ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: --
+73 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+74 ART -- ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: --
+74 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+74 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+75 ART ++ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ++
+75 IDE j ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: j
+75 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+76 IDE teste ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: teste
+76 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+76 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+76 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+77 IDE imprime ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: imprime
+77 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+77 CAD "ZAPERSON" ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: "ZAPERSON"
+77 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+77 CAD "zop" ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: "zop"
+77 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+77 CAD "zip" ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: "zip"
+77 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+77 IDE jota ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: jota
+77 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+77 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+78 PRE print ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: print
+78 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+78 CAD "ZAPERSON" ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: "ZAPERSON"
+78 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+78 CAD "zop" ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: "zop"
+78 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+78 CAD "zip" ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: "zip"
+78 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+78 IDE jota ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: jota
+78 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+78 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+79 PRE while ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: while
+79 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+79 LOG ! ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: !
+79 IDE variavel ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: variavel
+79 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+79 DEL { ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: {
+80 PRE read ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: read
+80 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+80 IDE j ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: j
+80 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+80 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+81 DEL } ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: }
+83 PRE return ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: return
+83 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+83 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+84 DEL } ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: }
+86 PRE procedure ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: procedure
+86 IDE soma ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: soma
+86 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+86 PRE int ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: int
+86 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+86 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+86 PRE int ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: int
+86 IDE jota ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: jota
+86 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+86 DEL { ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: {
+88 DEL } ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: }
+90 PRE procedure ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: procedure
+90 IDE soma ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: soma
+90 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+90 PRE int ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: int
+90 IDE casa ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: casa
+90 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+90 PRE int ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: int
+90 IDE carro ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: carro
+90 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+90 DEL { ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: {
+92 DEL } ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: }
+94 PRE procedure ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: procedure
+94 IDE soma ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: soma
+94 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+94 PRE int ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: int
+94 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+94 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+94 DEL { ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: {
+96 DEL } ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: }
+98 PRE procedure ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: procedure
+98 IDE soma ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: soma
+98 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+98 PRE int ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: int
+98 IDE opa ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: opa
+98 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+98 DEL { ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: {
+100 DEL } ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: }
+103 PRE function ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: function
+103 PRE real ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: real
+103 IDE soma ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: soma
+103 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+103 PRE int ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: int
+103 IDE casa ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: casa
+103 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+103 PRE int ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: int
+103 IDE carro ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: carro
+103 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+103 DEL { ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: {
+104 PRE return ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: return
+104 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+104 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+105 DEL } ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: }
+107 PRE function ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: function
+107 PRE string ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: string
+107 IDE soma ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: soma
+107 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+107 PRE int ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: int
+107 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+107 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+107 DEL { ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: {
+108 PRE return ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: return
+108 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+108 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+109 DEL } ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: }
+111 PRE function ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: function
+111 PRE int ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: int
+111 IDE soma ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: soma
+111 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+111 PRE int ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: int
+111 IDE opa ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: opa
+111 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+111 DEL { ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: {
+112 PRE return ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: return
+112 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+112 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+113 DEL } ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: }
+116 PRE procedure ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: procedure
+116 IDE soma ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: soma
+116 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+116 PRE string ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: string
+116 IDE abacaxi ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: abacaxi
+116 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+116 PRE int ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: int
+116 IDE girafa ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: girafa
+116 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+116 PRE real ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: real
+116 IDE jota ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: jota
+116 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+116 PRE string ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: string
+116 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+116 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+116 DEL { ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: {
+118 DEL } ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: }
+120 PRE procedure ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: procedure
+120 IDE soma ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: soma
+120 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+120 PRE string ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: string
+120 IDE corrimao ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: corrimao
+120 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+120 PRE int ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: int
+120 IDE peixe ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: peixe
+120 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+120 PRE real ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: real
+120 IDE vaca ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: vaca
+120 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+120 PRE string ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: string
+120 IDE manobra ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: manobra
+120 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+120 DEL { ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: {
+122 DEL } ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: }
+124 PRE procedure ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: procedure
+124 IDE soma ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: soma
+124 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+124 PRE string ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: string
+124 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+124 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+124 PRE real ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: real
+124 IDE urubu ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: urubu
+124 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+124 PRE string ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: string
+124 IDE casa ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: casa
+124 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+124 PRE real ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: real
+124 IDE pessoa ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: pessoa
+124 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+124 DEL { ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: {
+126 DEL } ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: }
+128 PRE function ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: function
+128 PRE string ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: string
+128 IDE soma ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: soma
+128 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+128 PRE string ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: string
+128 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+128 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+128 PRE real ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: real
+128 IDE papagaio ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: papagaio
+128 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+128 PRE string ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: string
+128 IDE ihRapaz ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ihRapaz
+128 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+128 PRE boolean ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: boolean
+128 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+128 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+128 DEL { ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: {
+129 PRE return ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: return
+129 IDE aviao ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: aviao
+129 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+130 DEL } ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: }
+132 PRE procedure ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: procedure
+132 IDE soma ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: soma
+132 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+132 PRE string ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: string
+132 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+132 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+132 PRE real ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: real
+132 IDE papagaio ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: papagaio
+132 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+132 PRE string ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: string
+132 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+132 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+132 PRE boolean ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: boolean
+132 IDE ihRapaz ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ihRapaz
+132 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+132 DEL { ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: {
+134 DEL } ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: }
+136 PRE procedure ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: procedure
+136 IDE soma ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: soma
+136 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+136 PRE real ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: real
+136 IDE carnaval ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: carnaval
+136 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+136 PRE boolean ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: boolean
+136 IDE jiboia ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: jiboia
+136 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+136 PRE string ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: string
+136 IDE mula ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: mula
+136 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+136 PRE real ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: real
+136 IDE cobra ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: cobra
+136 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+136 DEL { ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: {
+138 DEL } ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: }
+141 PRE function ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: function
+141 PRE int ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: int
+141 IDE soma ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: soma
+141 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+141 PRE int ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: int
+141 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+141 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+141 DEL { ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: {
+142 PRE var ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: var
+142 DEL { ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: {
+143 PRE struct ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: struct
+143 IDE Pessoa ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: Pessoa
+143 IDE xablau ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: xablau
+143 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+144 PRE int ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: int
+144 IDE xablau ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: xablau
+144 ATRIB = ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: =
+144 NRO 12 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 12
+144 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+145 DEL } ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: }
+146 PRE read ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: read
+146 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+146 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+146 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+146 IDE u ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: u
+146 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+146 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+146 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+146 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+146 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+147 PRE if ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: if
+147 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+147 LOG ! ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: !
+147 IDE variavel ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: variavel
+147 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+147 PRE then ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: then
+147 DEL { ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: {
+148 PRE read ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: read
+148 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+148 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+148 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+148 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+149 DEL } ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: }
+150 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+150 ART ++ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ++
+150 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+151 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+151 ART -- ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: --
+151 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+152 ART -- ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: --
+152 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+152 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+153 ART ++ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ++
+153 IDE j ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: j
+153 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+155 IDE teste ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: teste
+155 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+155 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+155 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+156 IDE imprime ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: imprime
+156 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+156 CAD "ZAPERSON" ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: "ZAPERSON"
+156 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+156 CAD "zop" ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: "zop"
+156 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+156 CAD "zip" ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: "zip"
+156 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+156 IDE jota ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: jota
+156 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+156 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+157 PRE print ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: print
+157 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+157 CAD "ZAPERSON" ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: "ZAPERSON"
+157 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+157 CAD "zop" ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: "zop"
+157 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+157 CAD "zip" ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: "zip"
+157 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+157 IDE jota ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: jota
+157 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+157 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+158 PRE while ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: while
+158 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+158 LOG ! ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: !
+158 IDE variavel ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: variavel
+158 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+158 DEL { ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: {
+159 PRE read ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: read
+159 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+159 IDE j ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: j
+159 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+159 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+160 DEL } ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: }
+162 PRE return ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: return
+162 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+162 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+163 DEL } ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: }
+165 PRE procedure ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: procedure
+165 IDE testandow ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: testandow
+165 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+165 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+165 DEL { ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: {
+166 PRE var ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: var
+166 DEL { ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: {
+167 PRE struct ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: struct
+167 IDE Pessoa ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: Pessoa
+167 IDE xablau ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: xablau
+167 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+168 PRE int ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: int
+168 IDE soma1 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: soma1
+168 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+169 DEL } ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: }
+170 PRE typedef ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: typedef
+170 PRE struct ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: struct
+170 IDE Pessoa ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: Pessoa
+170 IDE Pessoa ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: Pessoa
+170 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+171 PRE typedef ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: typedef
+171 PRE string ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: string
+171 IDE frase ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: frase
+171 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+172 PRE read ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: read
+172 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+172 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+172 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+172 IDE u ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: u
+172 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+172 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+172 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+172 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+172 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+175 DEL } ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: }
+177 PRE procedure ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: procedure
+177 IDE testandow ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: testandow
+177 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+177 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+177 DEL { ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: {
+178 PRE var ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: var
+178 DEL { ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: {
+179 PRE struct ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: struct
+179 IDE Pessoa ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: Pessoa
+179 IDE xablau ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: xablau
+179 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+180 PRE int ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: int
+180 IDE soma1 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: soma1
+180 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+181 DEL } ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: }
+182 PRE typedef ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: typedef
+182 PRE struct ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: struct
+182 IDE Pessoa ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: Pessoa
+182 IDE Pessoa ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: Pessoa
+182 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+183 PRE typedef ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: typedef
+183 PRE string ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: string
+183 IDE frase ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: frase
+183 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+184 PRE read ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: read
+184 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+184 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+184 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+184 IDE u ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: u
+184 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+184 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+184 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+184 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+184 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+187 DEL } ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: }
+189 PRE procedure ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: procedure
+189 PRE start ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: start
+189 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+189 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+189 DEL { ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: {
+190 PRE var ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: var
+190 DEL { ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: {
+191 PRE struct ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: struct
+191 IDE Pessoa ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: Pessoa
+191 IDE xablau ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: xablau
+191 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+192 DEL } ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: }
+193 PRE typedef ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: typedef
+193 PRE struct ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: struct
+193 IDE Pessoa ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: Pessoa
+193 IDE Pessoa ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: Pessoa
+193 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+194 PRE typedef ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: typedef
+194 PRE string ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: string
+194 IDE frase ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: frase
+194 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+195 PRE read ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: read
+195 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+195 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+195 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+195 IDE u ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: u
+195 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+195 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+195 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+195 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+195 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+197 DEL } ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: }

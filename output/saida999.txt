@@ -60,7 +60,7 @@
 23 PRE real
 23 IDE w
 23 ATRIB =
-23 NRO 2.3
+23 NRO REAL 2.3
 23 DEL ;
 24 DEL }
 25 PRE typedef
@@ -87,7 +87,7 @@
 32 ATRIB =
 32 IDE i
 32 ART +
-32 NRO 2.2
+32 NRO REAL 2.2
 32 DEL ;
 33 PRE read
 33 DEL (

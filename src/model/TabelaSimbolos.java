@@ -9,10 +9,13 @@ import util.identificadorNaoEncontrado;
 public class TabelaSimbolos {
 
     private final HashMap<Token, LinkedList<Simbolo>> simbolos;
+  // private final HashMap<Token, LinkedList<Simbolo>> functions;
     private final HashMap<Token, Simbolo> tipos;
     private final TabelaSimbolos escopoPai;
 
     public TabelaSimbolos(TabelaSimbolos ep) {
+        //functions = new HashMap();
+        Token t = new Token("PRE", "tipo", 0);
         simbolos = new HashMap();
         tipos = new HashMap();
         escopoPai = ep;
@@ -43,6 +46,12 @@ public class TabelaSimbolos {
         return ret;
     }
 
+    /*public Simbolo inserirFuncao(Token t, LinkedList<Simbolo> lista){
+        Simbolo ret = new Simbolo(t, categoria, tipo, valor, variavel);
+        functions.put(t, lista);
+        return ret;
+    }*/
+    
     private boolean contains(Token identificador) {
         return simbolos.containsKey(identificador) || (escopoPai != null && escopoPai.contains(identificador));
     }
@@ -74,7 +83,6 @@ public class TabelaSimbolos {
                 throw new identificadorNaoEncontrado();
             }
         }
-
         return ret;
     }
     
