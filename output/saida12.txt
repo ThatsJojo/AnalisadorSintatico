@@ -1,9 +1,8 @@
-1 IDE int54 ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "var", "const", "procedure" ou "function".  Encontrado: int54
-1 IDE int54 ERRO SINTÁTICO.  assumiu token ausente = "struct".  Encontrado: int54
-1 IDE int54
-1 DEL {
-1 DEL } ERRO SINTÁTICO. ESPERAVA: "var".  Encontrado: }
-1 IDE Codigo1 ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "var", "const", "procedure" ou "function".  Encontrado: Codigo1
+1 PRE int ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "var", "const", "procedure" ou "function".  Encontrado: int
+1 PRE int ERRO SINTÁTICO. ESPERAVA: PRE.  Encontrado: int
+1 NRO 54 ERRO SINTÁTICO. ESPERAVA: PRE.  Encontrado: 54
+1 DEL { ERRO SINTÁTICO. ESPERAVA: "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: {
+1 DEL } ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: }
 1 IDE Codigo1 ERRO SINTÁTICO. tentativa falha de assumir produção de "struct", "typedef" ou "procedure".  Encontrado: Codigo1
 1 DEL ) ERRO SINTÁTICO. ESPERAVA: "extends", '(' IDE ou '{'.  Encontrado: )
 1 NMF 1.a ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "var", "const", "procedure" ou "function".  Encontrado: 1.a

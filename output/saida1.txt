@@ -84,15 +84,6 @@
 30 ATRIB =
 30 NRO 10
 30 DEL ;
-31 PRE int
-31 IDE i
-31 ATRIB =
-31 NRO 20
-31 ART *
-31 NRO 8
-31 ART +
-31 CAD "jacobina" ERRO SINTÁTICO. ESPERAVA: IDE, "global" ou "local".  Encontrado: "jacobina"
-31 DEL ;
 32 PRE int
 32 IDE xablau
 32 ATRIB =
@@ -167,7 +158,7 @@
 35 ATRIB = ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: =
 35 CAD "app" ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: "app"
 35 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
-36 PRE real ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: real
+36 PRE boolean ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: boolean
 36 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
 36 ATRIB = ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: =
 36 PRE false ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: false

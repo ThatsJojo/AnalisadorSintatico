@@ -10,46 +10,67 @@ struct Pessoa {
     }
 }
 
-struct funcionario extends Pessoa{
+typedef struct Pessoa alguem;
+
+struct funcionario extends alguem{
     var{
         real salario;
     }
 }
+
+struct empregado extends Pessoa{
+    var{
+        real salario;
+    }
+}
+
+struct empregado extends serHumano{
+    var{
+        real salario;
+    }
+}
+
 var{
-	frase2 i;
-        frase2 p;
+    real w=2.3,i, esther;
  }
-const{
-    real w=2.3;
- }
+
+struct gerente extends w{
+    var{
+        real salario;
+    }
+}
+
+
 typedef struct Pessoa Pessoa;
 
-function int soma(){
+procedure soma(){
     var{
-	real i;
-        real p;
- }
-    p = i+2.2;
+        real teste=2.8+2, p, i, j;
+     }
+
+    p = 
+    i;
     read(i, u[i]);
     if(!variavel) then{
        read(i);
     }
     i++;
     i--;
-    --i;
+    --j;
     ++j;
     teste();
     while(!variavel){
 	read(j);
     }
 
-    return i;
 }
 
 procedure teste(){
     var{
         struct Pessoa xablau;
         frase2 soma;
+        int i;
+        string cadeia="zap";
     }
     xablau = true;
     soma = true;
