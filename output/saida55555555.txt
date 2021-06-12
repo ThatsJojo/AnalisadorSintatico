@@ -36,8 +36,8 @@
 10 PRE while ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: while
 11 IDE linha11 ERRO SINTÁTICO. tentativa falha de assumir produção de "struct", "typedef" ou "procedure".  Encontrado: linha11
 11 REL < ERRO SINTÁTICO. ESPERAVA: "extends", '(' IDE ou '{'.  Encontrado: <
-11 NRO 10.22 ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "var", "const", "procedure" ou "function".  Encontrado: 10.22
-11 NRO 10.22 ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 10.22
+11 NRO REAL 10.22 ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "var", "const", "procedure" ou "function".  Encontrado: 10.22
+11 NRO REAL 10.22 ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 10.22
 12 IDE linha12 ERRO SINTÁTICO. tentativa falha de assumir produção de "struct", "typedef" ou "procedure".  Encontrado: linha12
 12 LOG && ERRO SINTÁTICO. ESPERAVA: "extends", '(' IDE ou '{'.  Encontrado: &&
 12 NMF 12.aaaa ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "var", "const", "procedure" ou "function".  Encontrado: 12.aaaa
@@ -92,8 +92,8 @@
 20 NRO 20 ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 20
 21 IDE linha21 ERRO SINTÁTICO. tentativa falha de assumir produção de "struct", "typedef" ou "procedure".  Encontrado: linha21
 21 LOG && ERRO SINTÁTICO. ESPERAVA: "extends", '(' IDE ou '{'.  Encontrado: &&
-21 NRO 20.2 ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "var", "const", "procedure" ou "function".  Encontrado: 20.2
-21 NRO 20.2 ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 20.2
+21 NRO REAL 20.2 ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "var", "const", "procedure" ou "function".  Encontrado: 20.2
+21 NRO REAL 20.2 ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 20.2
 21 LOG ! ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: !
 22 IDE linha22 ERRO SINTÁTICO. tentativa falha de assumir produção de "struct", "typedef" ou "procedure".  Encontrado: linha22
 22 ART ++ ERRO SINTÁTICO. ESPERAVA: "extends", '(' IDE ou '{'.  Encontrado: ++
@@ -112,7 +112,7 @@
 23 REL < ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: <
 23 IDE size ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: size
 23 ART - ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: -
-23 NRO 1.5 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 1.5
+23 NRO REAL 1.5 ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: 1.5
 23 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
 23 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
 23 ART ++ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ++

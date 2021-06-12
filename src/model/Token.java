@@ -14,10 +14,22 @@ package model;
 import java.util.Objects;
 
 public class Token {
-    private final String lexema;
-    private final int linha;
-    private final String id;
+    private String lexema;
+    private  int linha;
+    private  String id;
     private final int codigo;
+
+    public void setLexema(String lexema) {
+        this.lexema = lexema;
+    }
+
+    public void setLinha(int linha) {
+        this.linha = linha;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
     private static int count = 0;
     
     private static synchronized int getCodigo(){

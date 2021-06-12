@@ -8,7 +8,7 @@
 1 DEL ) ERRO SINTÁTICO. ESPERAVA: "extends", '(' IDE ou '{'.  Encontrado: )
 1 NMF 1.a ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "var", "const", "procedure" ou "function".  Encontrado: 1.a
 1 NMF 1.a ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 1.a
-1 NRO 1.2 ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 1.2
+1 NRO REAL 1.2 ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 1.2
 1 IDE para ERRO SINTÁTICO. tentativa falha de assumir produção de "struct", "typedef" ou "procedure".  Encontrado: para
 1 NMF 1231teste ERRO SINTÁTICO. ESPERAVA: "extends", '(' IDE ou '{'.  Encontrado: 1231teste
 1 REL == ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "var", "const", "procedure" ou "function".  Encontrado: ==
@@ -34,10 +34,10 @@
 2 NRO 9 ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "var", "const", "procedure" ou "function".  Encontrado: 9
 2 NRO 9 ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 9
 2 DEL } ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: }
-2 NRO 6.2 ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 6.2
+2 NRO REAL 6.2 ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 6.2
 2 LOG ! ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: !
 2 REL <= ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: <=
-2 NRO 9.87 ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 9.87
+2 NRO REAL 9.87 ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 9.87
 2 NRO 8 ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 8
 2 REL > ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: >
 2 IDE seis ERRO SINTÁTICO.  assumiu token ausente = "typedef".  Encontrado: seis
