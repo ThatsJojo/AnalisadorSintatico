@@ -2459,7 +2459,7 @@ public class AnalisadorSintatico {
                     if (currentToken().getLexema().equals(")")) {
                         consumeToken();
                         if (currentToken().getId().equals("REL") || currentToken().getId().equals("LOG")) {
-                            consumeToken();
+                            //consumeToken();
                             logicOrRelacionalOp(tipo);
                         }
                     } else {
@@ -2529,7 +2529,8 @@ public class AnalisadorSintatico {
                             consumeToken();
                             if (currentToken().getId().equals("REL") || currentToken().getId().equals("LOG")) {
                                 logicOrRelacionalOp(tipo);
-                            }
+                            }else
+                                return ret;
                         } else {
                             error("ESPERAVA: ')'", true);
                         }
