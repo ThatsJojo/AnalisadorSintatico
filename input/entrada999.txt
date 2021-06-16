@@ -43,7 +43,7 @@ struct gerente extends w{
 
 typedef struct Pessoa Pessoa;
 
-procedure soma(){
+procedure soma(int a, int b){
     var{
         real teste=2.8+2, p, i, j;
      }
@@ -65,7 +65,11 @@ procedure soma(){
 
 }
 
-procedure teste(){
+procedure teste(int a, int b){print("casa");}
+procedure teste(int a, int b, int c){print("casa");}
+procedure teste(int a, int b, int c, int d){print("casa");}
+
+procedure teste(int a, int b){
     var{
         struct Pessoa xablau;
         frase2 soma;
@@ -74,7 +78,7 @@ procedure teste(){
     }
     xablau = true;
     soma = true;
-   
+    teste(1, 2, 3);
     read(i, u[i]);
 
 }

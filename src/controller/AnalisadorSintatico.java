@@ -59,7 +59,7 @@ public class AnalisadorSintatico {
     }
 
     private void erroSemantico(String texto) {
-        System.out.println(texto);
+        //System.out.println(texto);
     }
 
     public String analise(Arquivo arq, ArrayList tokens) {
@@ -158,6 +158,8 @@ public class AnalisadorSintatico {
         analiseret += "" + privateCurrentToken.getLinha() + " " + privateCurrentToken.getId() + " " + privateCurrentToken.getLexema() + " ERRO SINTÁTICO. "
                 + esperado + ".  Encontrado: " + currentToken().getLexema() + "\n";
 
+        System.out.println("" + privateCurrentToken.getLinha() + " " + privateCurrentToken.getId() + " " + privateCurrentToken.getLexema() + " ERRO SINTÁTICO. "
+                + esperado + ".  Encontrado: " + currentToken().getLexema());
         this.erros++;
 
         if (consumir) {
@@ -1132,6 +1134,7 @@ public class AnalisadorSintatico {
     }
 
     private void verifVar(Object apontado) throws FimInesperadoDeArquivo, identificadorNaoEncontrado {
+        System.out.println(currentToken());
         switch (currentToken().getLexema()) {
             case ",":
                 consumeToken();
@@ -1830,7 +1833,7 @@ public class AnalisadorSintatico {
 
             consumeToken();
             if (currentToken().getLexema().equals("(")) {
-                LinkedList apontado = procedureParams(simbolo.getLexema());
+                LinkedList<String> apontado = procedureParams(simbolo.getLexema());
                 try {
                     global.inserirSimbolo(simbolo, "procedure", simbolo.getId(), simbolo.getLexema(), apontado);
                 } catch (identificadorJaUtilizado ex) {
@@ -2574,7 +2577,8 @@ public class AnalisadorSintatico {
             } else {
                 LinkedList<Token> tiposParametros = new LinkedList();
                 fCallParams(tiposParametros);
-                comparaFuncoes(lista, tiposParametros);
+                if(lista!= null)
+                    comparaFuncoes(lista, tiposParametros);
             }
         } else {
             error("ESPERAVA: '('", true);
@@ -2584,22 +2588,27 @@ public class AnalisadorSintatico {
 
     private void fCallParams(LinkedList<Token> tiposParametros) throws FimInesperadoDeArquivo {
         Token atual = currentToken();
-
+        System.out.println("INÍCIO "+currentToken());
+        
         try {
             tiposParametros.add(value());
-
+            System.out.println("depois do value"+currentToken());
         } catch (ExpressaoInvalidaException ex) {
             erroSemantico(String.format("%04d", ex.getErro().getLinha()) + " " + atual.getId() + " " + atual.getLexema() + " Expressão inválida ");
         }
         switch (currentToken().getLexema()) {
             case ",":
+                System.out.println("ENTROU AQUI "+currentToken());
                 consumeToken();
+                fCallParams(tiposParametros);/*
                 try {
                     tiposParametros.add(value());
                 } catch (ExpressaoInvalidaException ex) {
                     erroSemantico(String.format("%04d", ex.getErro().getLinha()) + " " + atual.getId() + " " + atual.getLexema() + " Expressão inválida ");
                 }
-                fCallParams(tiposParametros);
+                if(currentToken().getLexema().equals(","))
+                    consumeToken();
+                fCallParams(tiposParametros);*/
                 break;
             case ")":
                 consumeToken();
@@ -2721,6 +2730,29 @@ public class AnalisadorSintatico {
         }
     }
 
-    private void comparaFuncoes(LinkedList<Simbolo> lista, LinkedList<Token> tiposParametros) {
+    private void comparaFuncoes(LinkedList<Simbolo> lista, LinkedList<Token> tiposParametros) throws FimInesperadoDeArquivo {
+        int paramsPassados = tiposParametros.hashCode();
+        Iterator i1 = lista.iterator();
+        
+        boolean matchParams = false;
+        while(i1.hasNext()){
+            Simbolo funcao = (Simbolo)i1.next();
+            if(funcao.getCategoria().equals("procedure")){
+                LinkedList pParams = (LinkedList)funcao.getVariavel();
+                if(pParams.hashCode() == paramsPassados){
+                    break;
+                }
+            }else if(funcao.getCategoria().equals("funcao")){
+                LinkedList pParams = (LinkedList) ((Pair)funcao.getVariavel()).getValue();
+                if(pParams.hashCode() == paramsPassados){
+                    break;
+                }
+            }
+            if(!matchParams){
+                erroSemantico(""+currentToken().getLinha()+" Função não encontrada.");
+            }
+        }
+        
+        
     }
 }

@@ -107,6 +107,11 @@
 46 PRE procedure
 46 IDE soma
 46 DEL (
+46 PRE int
+46 IDE a
+46 DEL ,
+46 PRE int
+46 IDE b
 46 DEL )
 46 DEL {
 47 PRE var
@@ -184,65 +189,136 @@
 68 PRE procedure
 68 IDE teste
 68 DEL (
+68 PRE int
+68 IDE a
+68 DEL ,
+68 PRE int
+68 IDE b
 68 DEL )
 68 DEL {
-69 PRE var
+68 PRE print
+68 DEL (
+68 CAD "casa"
+68 DEL )
+68 DEL ;
+68 DEL }
+69 PRE procedure
+69 IDE teste
+69 DEL (
+69 PRE int
+69 IDE a
+69 DEL ,
+69 PRE int
+69 IDE b
+69 DEL ,
+69 PRE int
+69 IDE c
+69 DEL )
 69 DEL {
-70 PRE struct
-70 IDE Pessoa
-70 IDE xablau
+69 PRE print
+69 DEL (
+69 CAD "casa"
+69 DEL )
+69 DEL ;
+69 DEL }
+70 PRE procedure
+70 IDE teste
+70 DEL (
+70 PRE int
+70 IDE a
+70 DEL ,
+70 PRE int
+70 IDE b
+70 DEL ,
+70 PRE int
+70 IDE c
+70 DEL ,
+70 PRE int
+70 IDE d
+70 DEL )
+70 DEL {
+70 PRE print
+70 DEL (
+70 CAD "casa"
+70 DEL )
 70 DEL ;
-71 IDE frase2
-71 IDE soma
-71 DEL ;
+70 DEL }
+72 PRE procedure
+72 IDE teste
+72 DEL (
 72 PRE int
-72 IDE i
-72 DEL ;
-73 PRE string
-73 IDE cadeia
-73 ATRIB =
-73 CAD "zap"
-73 DEL ;
-74 DEL }
-75 IDE xablau
-75 ATRIB =
-75 PRE true
+72 IDE a
+72 DEL ,
+72 PRE int
+72 IDE b
+72 DEL )
+72 DEL {
+73 PRE var
+73 DEL {
+74 PRE struct
+74 IDE Pessoa
+74 IDE xablau
+74 DEL ;
+75 IDE frase2
+75 IDE soma
 75 DEL ;
-76 IDE soma
-76 ATRIB =
-76 PRE true
+76 PRE int
+76 IDE i
 76 DEL ;
-78 PRE read
-78 DEL (
-78 IDE i
-78 DEL ,
-78 IDE u
-78 DEL [
-78 IDE i
-78 DEL ]
-78 DEL )
-78 DEL ;
-80 DEL }
-82 PRE procedure
-82 PRE start
-82 DEL (
-82 DEL )
-82 DEL {
-83 PRE var
-83 DEL {
-84 PRE struct
-84 IDE Pessoa
-84 IDE xablau
-84 DEL ;
-85 DEL }
-86 PRE read
-86 DEL (
-86 IDE i
-86 DEL ,
-86 IDE u
-86 DEL [
-86 IDE i
-86 DEL ]
-86 DEL )
-86 DEL ;
-89 DEL }
+77 PRE string
+77 IDE cadeia
+77 ATRIB =
+77 CAD "zap"
+77 DEL ;
+78 DEL }
+79 IDE xablau
+79 ATRIB =
+79 PRE true
+79 DEL ;
+80 IDE soma
+80 ATRIB =
+80 PRE true
+80 DEL ;
+81 IDE teste
+81 DEL (
+81 NRO 1
+81 DEL ,
+81 NRO 2
+81 DEL , ERRO SINTÁTICO. ESPERAVA: '!', '(', "true" ou "false".  Encontrado: ,
+81 NRO 3 ERRO SINTÁTICO. ESPERAVA: ',' ou ')'.  Encontrado: 3
+81 DEL ) ERRO SINTÁTICO. ESPERAVA: ','.  Encontrado: )
+81 DEL ; ERRO SINTÁTICO. ESPERAVA: '}'.  Encontrado: ;
+82 PRE read ERRO SINTÁTICO. tentativa falha de assumir produção de "procedure" ou "function"..  Encontrado: read
+82 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+82 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+82 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+82 IDE u ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: u
+82 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+82 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+82 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+82 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+82 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+84 DEL } ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: }
+86 PRE procedure ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: procedure
+86 PRE start ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: start
+86 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+86 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+86 DEL { ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: {
+87 PRE var ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: var
+87 DEL { ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: {
+88 PRE struct ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: struct
+88 IDE Pessoa ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: Pessoa
+88 IDE xablau ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: xablau
+88 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+89 DEL } ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: }
+90 PRE read ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: read
+90 DEL ( ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: (
+90 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+90 DEL , ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ,
+90 IDE u ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: u
+90 DEL [ ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: [
+90 IDE i ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: i
+90 DEL ] ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ]
+90 DEL ) ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: )
+90 DEL ; ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: ;
+93 DEL } ERRO SINTÁTICO. ESPERADO: EOF.  Encontrado: }
