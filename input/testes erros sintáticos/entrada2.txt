@@ -1,12 +1,11 @@
-typedef struct Pessoa ,
-Pessoa;
+typedef struct Pessoa Pessoa;
 
 typedef int inteiro;
 
 typedef inteiro numero;
 
 
-string frase;
+typedef string frase;
 
 id zop;
 j + i 0

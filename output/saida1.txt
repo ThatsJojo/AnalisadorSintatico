@@ -278,167 +278,141 @@
 39 ART +
 39 NRO 3
 39 DEL ]
-39 DEL ) ERRO SINTÁTICO. ESPERAVA: ',', ';'.  Encontrado: )
-39 DEL ; ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "const", "procedure" ou "function".  Encontrado: ;
-39 DEL ; ERRO SINTÁTICO. ESPERAVA: "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: ;
-40 PRE real ERRO SINTÁTICO. tentativa falha de assumir produção de "typedef" ou "function"..  Encontrado: real
-40 IDE i ERRO SINTÁTICO. tentativa falha de assumir produção de "typedef" ou "function"..  Encontrado: i
-40 ATRIB = ERRO SINTÁTICO. ESPERAVA: ';', ou '('..  Encontrado: =
-40 NRO 10 ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "var", "const", "procedure" ou "function".  Encontrado: 10
-40 NRO 10 ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 10
-40 ART * ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: *
-40 NRO REAL 3.1 ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 3.1
-40 ART + ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: +
-40 NRO REAL 2.7 ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 2.7
-40 ART * ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: *
-40 NRO REAL 8.777 ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 8.777
-40 ART / ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: /
-40 NRO 15 ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 15
-40 ART + ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: +
-40 DEL ( ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: (
-40 NRO 128 ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 128
-40 ART / ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: /
-40 NRO REAL 12.2 ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 12.2
-40 DEL ) ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: )
-40 DEL , ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: ,
-40 IDE k ERRO SINTÁTICO. tentativa falha de assumir produção de "struct", "typedef" ou "procedure".  Encontrado: k
-40 ATRIB = ERRO SINTÁTICO. ESPERAVA: "extends", '(' IDE ou '{'.  Encontrado: =
-40 IDE i ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "var", "const", "procedure" ou "function".  Encontrado: i
-40 IDE i ERRO SINTÁTICO. tentativa falha de assumir produção de "struct", "typedef" ou "procedure".  Encontrado: i
-40 DEL [ ERRO SINTÁTICO. ESPERAVA: "extends", '(' IDE ou '{'.  Encontrado: [
-40 NRO REAL 20.5 ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "var", "const", "procedure" ou "function".  Encontrado: 20.5
-40 NRO REAL 20.5 ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 20.5
-40 ART / ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: /
-40 DEL ( ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: (
-40 NRO 12 ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 12
-40 ART - ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: -
-40 NRO 15 ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 15
-40 DEL ) ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: )
-40 ART * ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: *
-40 DEL ( ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: (
-40 ART - ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: -
-40 IDE I ERRO SINTÁTICO. tentativa falha de assumir produção de "struct", "typedef" ou "procedure".  Encontrado: I
-40 ART + ERRO SINTÁTICO. ESPERAVA: "extends", '(' IDE ou '{'.  Encontrado: +
-40 NRO 20 ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "var", "const", "procedure" ou "function".  Encontrado: 20
-40 NRO 20 ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 20
-40 DEL ) ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: )
-40 DEL ] ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: ]
-40 LOG || ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: ||
-40 DEL ( ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: (
-40 NRO 128 ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 128
-40 LOG && ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: &&
-40 NRO 15 ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 15
-40 DEL ) ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: )
-40 REL > ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: >
-40 NRO 14 ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 14
-40 DEL , ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: ,
-40 IDE k ERRO SINTÁTICO. tentativa falha de assumir produção de "struct", "typedef" ou "procedure".  Encontrado: k
-40 DEL [ ERRO SINTÁTICO. ESPERAVA: "extends", '(' IDE ou '{'.  Encontrado: [
-40 NRO 3 ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "var", "const", "procedure" ou "function".  Encontrado: 3
-40 NRO 3 ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 3
-40 DEL ] ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: ]
-40 ATRIB = ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: =
-40 DEL [ ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: [
-40 IDE urubu ERRO SINTÁTICO. tentativa falha de assumir produção de "struct", "typedef" ou "procedure".  Encontrado: urubu
-40 DEL , ERRO SINTÁTICO. ESPERAVA: "extends", '(' IDE ou '{'.  Encontrado: ,
-40 IDE sem ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "var", "const", "procedure" ou "function".  Encontrado: sem
-40 IDE sem ERRO SINTÁTICO. tentativa falha de assumir produção de "struct", "typedef" ou "procedure".  Encontrado: sem
-40 DEL , ERRO SINTÁTICO. ESPERAVA: "extends", '(' IDE ou '{'.  Encontrado: ,
-40 IDE asa ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "var", "const", "procedure" ou "function".  Encontrado: asa
-40 IDE asa ERRO SINTÁTICO. tentativa falha de assumir produção de "struct", "typedef" ou "procedure".  Encontrado: asa
-40 DEL ] ERRO SINTÁTICO. ESPERAVA: "extends", '(' IDE ou '{'.  Encontrado: ]
-40 DEL , ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "var", "const", "procedure" ou "function".  Encontrado: ,
-40 DEL , ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: ,
-40 IDE l ERRO SINTÁTICO. tentativa falha de assumir produção de "struct", "typedef" ou "procedure".  Encontrado: l
-40 DEL ; ERRO SINTÁTICO. ESPERAVA: "extends", '(' IDE ou '{'.  Encontrado: ;
-41 PRE int ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "var", "const", "procedure" ou "function".  Encontrado: int
-41 PRE int ERRO SINTÁTICO. tentativa falha de assumir produção de "typedef" ou "function"..  Encontrado: int
-41 IDE i ERRO SINTÁTICO. tentativa falha de assumir produção de "typedef" ou "function"..  Encontrado: i
-41 DEL [ ERRO SINTÁTICO. ESPERAVA: ';', ou '('..  Encontrado: [
-41 NRO 2 ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "var", "const", "procedure" ou "function".  Encontrado: 2
-41 NRO 2 ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 2
-41 ART * ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: *
-41 NRO 3 ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 3
-41 DEL ] ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: ]
-41 DEL [ ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: [
-41 NRO 3 ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 3
-41 ART + ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: +
-41 NRO 2 ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 2
-41 DEL ] ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: ]
-41 ATRIB = ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: =
-41 DEL [ ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: [
-41 DEL [ ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: [
-41 PRE false ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: false
-41 DEL , ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: ,
-41 PRE true ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: true
-41 LOG || ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: ||
-41 IDE ele ERRO SINTÁTICO. tentativa falha de assumir produção de "struct", "typedef" ou "procedure".  Encontrado: ele
-41 DEL , ERRO SINTÁTICO. ESPERAVA: "extends", '(' IDE ou '{'.  Encontrado: ,
-41 IDE zip ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "var", "const", "procedure" ou "function".  Encontrado: zip
-41 IDE zip ERRO SINTÁTICO. tentativa falha de assumir produção de "struct", "typedef" ou "procedure".  Encontrado: zip
-41 REL <= ERRO SINTÁTICO. ESPERAVA: "extends", '(' IDE ou '{'.  Encontrado: <=
-41 IDE zop ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "var", "const", "procedure" ou "function".  Encontrado: zop
-41 IDE zop ERRO SINTÁTICO. tentativa falha de assumir produção de "struct", "typedef" ou "procedure".  Encontrado: zop
-41 DEL , ERRO SINTÁTICO. ESPERAVA: "extends", '(' IDE ou '{'.  Encontrado: ,
-41 IDE uat ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "var", "const", "procedure" ou "function".  Encontrado: uat
-41 IDE uat ERRO SINTÁTICO. tentativa falha de assumir produção de "struct", "typedef" ou "procedure".  Encontrado: uat
-41 LOG && ERRO SINTÁTICO. ESPERAVA: "extends", '(' IDE ou '{'.  Encontrado: &&
-41 IDE zap ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "var", "const", "procedure" ou "function".  Encontrado: zap
-41 IDE zap ERRO SINTÁTICO. tentativa falha de assumir produção de "struct", "typedef" ou "procedure".  Encontrado: zap
-41 DEL ] ERRO SINTÁTICO. ESPERAVA: "extends", '(' IDE ou '{'.  Encontrado: ]
-41 DEL , ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "var", "const", "procedure" ou "function".  Encontrado: ,
-41 DEL , ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: ,
-41 DEL [ ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: [
-41 IDE biri ERRO SINTÁTICO. tentativa falha de assumir produção de "struct", "typedef" ou "procedure".  Encontrado: biri
-41 REL > ERRO SINTÁTICO. ESPERAVA: "extends", '(' IDE ou '{'.  Encontrado: >
-41 IDE flinston ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "var", "const", "procedure" ou "function".  Encontrado: flinston
-41 IDE flinston ERRO SINTÁTICO. tentativa falha de assumir produção de "struct", "typedef" ou "procedure".  Encontrado: flinston
-41 DEL , ERRO SINTÁTICO. ESPERAVA: "extends", '(' IDE ou '{'.  Encontrado: ,
-41 IDE opa ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "var", "const", "procedure" ou "function".  Encontrado: opa
-41 IDE opa ERRO SINTÁTICO. tentativa falha de assumir produção de "struct", "typedef" ou "procedure".  Encontrado: opa
-41 ART - ERRO SINTÁTICO. ESPERAVA: "extends", '(' IDE ou '{'.  Encontrado: -
-41 IDE flinston ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "var", "const", "procedure" ou "function".  Encontrado: flinston
-41 IDE flinston ERRO SINTÁTICO. tentativa falha de assumir produção de "struct", "typedef" ou "procedure".  Encontrado: flinston
-41 DEL ] ERRO SINTÁTICO. ESPERAVA: "extends", '(' IDE ou '{'.  Encontrado: ]
-41 DEL , ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "var", "const", "procedure" ou "function".  Encontrado: ,
-41 DEL , ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: ,
-41 DEL [ ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: [
-41 ART - ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: -
-41 IDE opa ERRO SINTÁTICO. tentativa falha de assumir produção de "struct", "typedef" ou "procedure".  Encontrado: opa
-41 ART * ERRO SINTÁTICO. ESPERAVA: "extends", '(' IDE ou '{'.  Encontrado: *
-41 NRO 2 ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "var", "const", "procedure" ou "function".  Encontrado: 2
-41 NRO 2 ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 2
-41 DEL ] ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: ]
-41 DEL , ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: ,
-41 DEL [ ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: [
-41 NRO 2 ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 2
-41 ART / ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: /
-41 DEL ( ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: (
-41 IDE eita ERRO SINTÁTICO. tentativa falha de assumir produção de "struct", "typedef" ou "procedure".  Encontrado: eita
-41 DEL ) ERRO SINTÁTICO. ESPERAVA: "extends", '(' IDE ou '{'.  Encontrado: )
-41 DEL ] ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "var", "const", "procedure" ou "function".  Encontrado: ]
-41 DEL ] ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: ]
-41 DEL ] ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: ]
-41 DEL , ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: ,
-41 IDE joao ERRO SINTÁTICO. tentativa falha de assumir produção de "struct", "typedef" ou "procedure".  Encontrado: joao
-41 ATRIB = ERRO SINTÁTICO. ESPERAVA: "extends", '(' IDE ou '{'.  Encontrado: =
-41 ART - ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "var", "const", "procedure" ou "function".  Encontrado: -
-41 ART - ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: -
-41 IDE i ERRO SINTÁTICO. tentativa falha de assumir produção de "struct", "typedef" ou "procedure".  Encontrado: i
-41 DEL , ERRO SINTÁTICO. ESPERAVA: "extends", '(' IDE ou '{'.  Encontrado: ,
-41 IDE false1 ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "var", "const", "procedure" ou "function".  Encontrado: false1
-41 IDE false1 ERRO SINTÁTICO. tentativa falha de assumir produção de "struct", "typedef" ou "procedure".  Encontrado: false1
-41 ATRIB = ERRO SINTÁTICO. ESPERAVA: "extends", '(' IDE ou '{'.  Encontrado: =
-41 ART - ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "var", "const", "procedure" ou "function".  Encontrado: -
-41 ART - ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: -
-41 DEL ( ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: (
-41 IDE j ERRO SINTÁTICO. tentativa falha de assumir produção de "struct", "typedef" ou "procedure".  Encontrado: j
-41 ART / ERRO SINTÁTICO. ESPERAVA: "extends", '(' IDE ou '{'.  Encontrado: /
-41 NRO 2 ERRO SINTÁTICO.  (Token Ausente):  "typedef", "struct", "var", "const", "procedure" ou "function".  Encontrado: 2
-41 NRO 2 ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: 2
-41 DEL ) ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: )
-41 DEL ; ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: ;
-43 DEL } ERRO SINTÁTICO.  (Token Ausente):  "int", "real", "boolean", "string", IDE ou '{'.  Encontrado: }
+39 DEL )
+39 DEL ;
+40 PRE real
+40 IDE i
+40 ATRIB =
+40 NRO 10
+40 ART *
+40 NRO REAL 3.1
+40 ART +
+40 NRO REAL 2.7
+40 ART *
+40 NRO REAL 8.777
+40 ART /
+40 NRO 15
+40 ART +
+40 DEL (
+40 NRO 128
+40 ART /
+40 NRO REAL 12.2
+40 DEL )
+40 DEL ,
+40 IDE k
+40 ATRIB =
+40 IDE i
+40 DEL [
+40 NRO REAL 20.5
+40 ART /
+40 DEL (
+40 NRO 12
+40 ART -
+40 NRO 15
+40 DEL )
+40 ART *
+40 DEL (
+40 ART -
+40 IDE I
+40 ART +
+40 NRO 20
+40 DEL )
+40 DEL ]
+40 LOG ||
+40 DEL (
+40 NRO 128
+40 LOG &&
+40 NRO 15
+40 DEL )
+40 REL >
+40 NRO 14
+40 DEL ,
+40 IDE k
+40 DEL [
+40 NRO 3
+40 DEL ]
+40 ATRIB =
+40 DEL [
+40 IDE urubu
+40 DEL ,
+40 IDE sem
+40 DEL ,
+40 IDE asa
+40 DEL ]
+40 DEL ,
+40 IDE l
+40 DEL ;
+41 PRE int
+41 IDE i
+41 DEL [
+41 NRO 2
+41 ART *
+41 NRO 3
+41 DEL ]
+41 DEL [
+41 NRO 3
+41 ART +
+41 NRO 2
+41 DEL ]
+41 ATRIB =
+41 DEL [
+41 DEL [
+41 PRE false
+41 DEL ,
+41 PRE true
+41 LOG ||
+41 IDE ele
+41 DEL ,
+41 IDE zip
+41 REL <=
+41 IDE zop
+41 DEL ,
+41 IDE uat
+41 LOG &&
+41 IDE zap
+41 DEL ]
+41 DEL ,
+41 DEL [
+41 IDE biri
+41 REL >
+41 IDE flinston
+41 DEL ,
+41 IDE opa
+41 ART -
+41 IDE flinston
+41 DEL ]
+41 DEL ,
+41 DEL [
+41 ART -
+41 IDE opa
+41 ART *
+41 NRO 2
+41 DEL ]
+41 DEL ,
+41 DEL [
+41 NRO 2
+41 ART /
+41 DEL (
+41 IDE eita
+41 DEL )
+41 DEL ]
+41 DEL ]
+41 DEL ,
+41 IDE joao
+41 ATRIB =
+41 ART -
+41 IDE i
+41 DEL ,
+41 IDE false1
+41 ATRIB =
+41 ART -
+41 DEL (
+41 IDE j
+41 ART /
+41 NRO 2
+41 DEL )
+41 DEL ;
+43 DEL }
 48 PRE const
 48 DEL {
 49 IDE inteiro
