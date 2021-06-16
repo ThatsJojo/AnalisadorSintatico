@@ -62,7 +62,7 @@ public class AnalisadorSintatico {
     }
 
     private void erroSemantico(String texto) {
-        //System.out.println(texto);
+        System.out.println(texto);
     }
 
     public String analise(Arquivo arq, ArrayList tokens) {
@@ -160,9 +160,6 @@ public class AnalisadorSintatico {
     private void error(String esperado, boolean consumir) throws FimInesperadoDeArquivo {
         analiseret += "" + privateCurrentToken.getLinha() + " " + privateCurrentToken.getId() + " " + privateCurrentToken.getLexema() + " ERRO SINTÁTICO. "
                 + esperado + ".  Encontrado: " + currentToken().getLexema() + "\n";
-
-        System.out.println("" + privateCurrentToken.getLinha() + " " + privateCurrentToken.getId() + " " + privateCurrentToken.getLexema() + " ERRO SINTÁTICO. "
-                + esperado + ".  Encontrado: " + currentToken().getLexema());
         this.erros++;
 
         if (consumir) {
@@ -756,7 +753,7 @@ public class AnalisadorSintatico {
         try {
             aritmeticOp(new Token("NRO", "2", currentToken().getLinha()));
         } catch (ExpressaoInvalidaException ex) {
-            erroSemantico(String.format("%04d", ex.getErro().getLinha()) + " " + atual.getId() + " " + atual.getLexema() + " Expressão inválida ");
+            erroSemantico(String.format("%04d", ex.getErro().getLinha()) + " " + atual.getId() + " " + atual.getLexema() + " Expressão inválida: possui tipos não inteiros ou operadores lógicos/relacionais. ");
         }
     }
 
@@ -786,6 +783,7 @@ public class AnalisadorSintatico {
         Token tipo = new Token(null, null, 0); //sem global e local por enquanto
         Token atual = currentToken();
         boolean isStruct = false;
+        String message = "";
         if (currentToken().getId().equals("IDE")) {
             consumeToken();
             try {
@@ -809,21 +807,23 @@ public class AnalisadorSintatico {
                             tipo.setId(tipoEncontrado.getId());
                             tipo.setLexema(tipoEncontrado.getLexema());
                         } catch (identificadorNaoEncontrado e) {
-                            erroSemantico("" + atual + " tipo da variável ou constante não foi encontrado. " + s);
+                            message = "" + atual + " tipo da variável ou constante não foi encontrado. " + s;
+                            //erroSemantico("" + atual + " tipo da variável ou constante não foi encontrado. " + s);
                         }
                     }
                 } else {
-                    erroSemantico("" + atual + " IDE não é variável ou constante. " + s);
+                    message = "" + atual + " tipo da variável ou constante não foi encontrado. " + s;
+                    //erroSemantico("" + atual + " IDE não é variável ou constante. " + s);
                 }
 
             } catch (identificadorNaoEncontrado e) {
-                erroSemantico(atual + " Variável não declarada");
+                message = atual + " Variável não declarada";
             }
 
             if (aheadToken.equals(".") || aheadToken.equals("[")) {
                 Token tipoElemento = contElement(tipo);
                 if (!isStruct && aheadToken.equals(".")) {
-                    erroSemantico("" + atual + " Variável não declarada como struct ");
+                    message = "" + atual + " Busca de elemento em variável não declarada como struct ";
                 } else {
                     tipo.setId(tipoElemento.getId());
                     tipo.setLexema(tipoElemento.getLexema());
@@ -853,7 +853,8 @@ public class AnalisadorSintatico {
             }
         }
         if (tipo.getId() == null) {
-            throw new VariavelInvalidaException("");
+            VariavelInvalidaException var = new VariavelInvalidaException(message);
+            throw var;
         }
         return tipo;
     }
@@ -1750,6 +1751,8 @@ public class AnalisadorSintatico {
     //====================================== Procedure Declaration =======================================
     //****************************************************************************************************     
     private void startProcedure() throws FimInesperadoDeArquivo, identificadorNaoEncontrado {
+        escopoAtual = new TabelaSimbolos(global);
+        ESCOPOS.add(escopoAtual);
         if (currentToken().getLexema().equals("(")) {
             consumeToken();
             if (currentToken().getLexema().equals(")")) {
@@ -2657,7 +2660,7 @@ public class AnalisadorSintatico {
                 LinkedList<Token> tiposParametros = new LinkedList();
                 fCallParams(tiposParametros);
                 if (lista != null) {
-                    comparaFuncoes(lista, tiposParametros);
+                    comparaFuncoes(lista, tiposParametros, ret);
                 }
             }
         } else {
@@ -2807,7 +2810,7 @@ public class AnalisadorSintatico {
         }
     }
 
-    private void comparaFuncoes(LinkedList<Simbolo> lista, LinkedList<Token> tiposParametros) throws FimInesperadoDeArquivo {
+    private void comparaFuncoes(LinkedList<Simbolo> lista, LinkedList<Token> tiposParametros, Token ret) throws FimInesperadoDeArquivo {
         int paramsPassados = tiposParametros.hashCode();
         Iterator i1 = lista.iterator();
 
@@ -2826,7 +2829,7 @@ public class AnalisadorSintatico {
                 }
             }
             if (!matchParams) {
-                erroSemantico("" + currentToken().getLinha() + " Função não encontrada.");
+                erroSemantico(ret + " Função não encontrada.");
             }
         }
 

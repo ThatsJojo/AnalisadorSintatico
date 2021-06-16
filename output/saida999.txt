@@ -20,7 +20,7 @@
 6 DEL {
 7 PRE var
 7 DEL {
-8 IDE String
+8 PRE string
 8 IDE cpf
 8 DEL ,
 8 IDE nome

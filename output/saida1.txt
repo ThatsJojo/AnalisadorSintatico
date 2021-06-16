@@ -36,7 +36,7 @@
 10 DEL {
 11 PRE var
 11 DEL {
-12 IDE String
+12 PRE string
 12 IDE cpf
 12 DEL ,
 12 IDE nome

@@ -9,7 +9,7 @@ typedef int5 inteiro;
 
 struct jubileu {
     var{
-        String cpf, nome;
+        string cpf, nome;
         int idade, peso, altura;
 	int idade;
     }

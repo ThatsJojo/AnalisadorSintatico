@@ -22,7 +22,6 @@ public class TabelaSimbolos {
     }
 
     public Simbolo inserirSimbolo(Token t, String categoria, String tipo, String valor, Object variavel) throws identificadorJaUtilizado {
-
         Simbolo ret = new Simbolo(t, categoria, tipo, valor, variavel);
         //System.out.println("INSERINDO SÍMBOLO: "+t.getLexema()+" "+(simbolos.containsKey(t)));
         LinkedList<Simbolo> lista = simbolos.get(t);

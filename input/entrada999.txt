@@ -5,7 +5,7 @@ typedef frase1 frase2;
 
 struct Pessoa {
     var{
-        String cpf, nome;
+        string cpf, nome;
         int idade, peso, altura;
     }
 }
