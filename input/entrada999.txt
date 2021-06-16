@@ -12,6 +12,8 @@ struct Pessoa {
 
 typedef struct Pessoa alguem;
 
+typedef int funcionario;
+
 struct funcionario extends alguem{
     var{
         real salario;
@@ -24,6 +26,12 @@ struct empregado extends Pessoa{
     }
 }
 
+struct empregado extends struct Pessoa{
+    var{
+        real salario;
+    }
+}
+
 struct empregado extends serHumano{
     var{
         real salario;
@@ -31,7 +39,9 @@ struct empregado extends serHumano{
 }
 
 var{
+    funcionario1 zap;
     real w=2.3,i, esther;
+    int carro[10][20]=[[1,2,3,4,5,3],[1,2,3,4,esther]];
  }
 
 struct gerente extends w{
