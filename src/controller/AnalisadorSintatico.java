@@ -917,11 +917,11 @@ public class AnalisadorSintatico {
         } else {
             error("ESPERAVA: '{'", true);
         }
-        System.out.println("******************************************************************");
+        /*System.out.println("******************************************************************");
         System.out.println(currentToken()+"  "+lookahead()+"    "+lookaheadP());
         escopoAtual.printSimbolos();
-        System.out.println("******************************************************************");
-        
+        System.out.println("******************************************************************");*/
+
     }
 
     private void primeiraVar() throws FimInesperadoDeArquivo, identificadorNaoEncontrado {
@@ -934,6 +934,7 @@ public class AnalisadorSintatico {
                 erroSemantico("" + simbolo + " Identificador já utilizado. " + escopoAtual.getSimbolo(simbolo).toString());
             }
         }
+        varExpression(apontado);
     }
 
     private Token continueVar() throws FimInesperadoDeArquivo {
@@ -943,7 +944,7 @@ public class AnalisadorSintatico {
             struct = "struct ";
         }
         Token retorno = dataType(struct);
-        Token ret = new Token(retorno.getId(), struct + retorno.getLexema(), retorno.getLinha());
+        Token ret = new Token(retorno.getId(),retorno.getLexema(), retorno.getLinha());
         return ret;
     }
 
@@ -952,7 +953,6 @@ public class AnalisadorSintatico {
         if (currentToken().getId().equals("IDE")) {
             simbolo = currentToken();
             consumeToken();
-            varExpression(apontado);
         } else {
             error("ESPERAVA: IDE", true);
         }
@@ -964,11 +964,14 @@ public class AnalisadorSintatico {
             case ",":
                 consumeToken();
                 Token simbolo = varId(apontado);
-                try {
-                    escopoAtual.inserirSimbolo(simbolo, "variavel", simbolo.getId(), simbolo.getLexema(), apontado);
-                } catch (identificadorJaUtilizado ex) {
-                    erroSemantico("" + simbolo + " Identificador já utilizado. " + escopoAtual.getSimbolo(simbolo).toString());
+                if (simbolo != null) {
+                    try {
+                        escopoAtual.inserirSimbolo(simbolo, "variavel", simbolo.getId(), simbolo.getLexema(), apontado);
+                    } catch (identificadorJaUtilizado ex) {
+                        erroSemantico("" + simbolo + " Identificador já utilizado. " + escopoAtual.getSimbolo(simbolo).toString());
+                    }
                 }
+                varExpression(apontado);
                 break;
             case "=":
                 consumeToken();
@@ -1020,11 +1023,14 @@ public class AnalisadorSintatico {
             case ",":
                 consumeToken();
                 Token simbolo = varId(apontado);
-                try {
-                    escopoAtual.inserirSimbolo(simbolo, "variavel", simbolo.getId(), simbolo.getLexema(), apontado);
-                } catch (identificadorJaUtilizado ex) {
-                    erroSemantico("" + simbolo + " Identificador já utilizado. " + escopoAtual.getSimbolo(simbolo).toString());
+                if (simbolo != null) {
+                    try {
+                        escopoAtual.inserirSimbolo(simbolo, "variavel", simbolo.getId(), simbolo.getLexema(), apontado);
+                    } catch (identificadorJaUtilizado ex) {
+                        erroSemantico("" + simbolo + " Identificador já utilizado. " + escopoAtual.getSimbolo(simbolo).toString());
+                    }
                 }
+                varExpression(apontado);
                 break;
             case ";":
                 consumeToken();
@@ -1078,11 +1084,14 @@ public class AnalisadorSintatico {
             case ",":
                 consumeToken();
                 Token simbolo = varId((Token) apontado);
-                try {
-                    escopoAtual.inserirSimbolo(simbolo, "variavel", simbolo.getId(), simbolo.getLexema(), apontado);
-                } catch (identificadorJaUtilizado ex) {
-                    erroSemantico("" + simbolo + " Identificador já utilizado. " + escopoAtual.getSimbolo(simbolo).toString());
+                if (simbolo != null) {
+                    try {
+                        escopoAtual.inserirSimbolo(simbolo, "variavel", simbolo.getId(), simbolo.getLexema(), apontado);
+                    } catch (identificadorJaUtilizado ex) {
+                        erroSemantico("" + simbolo + " Identificador já utilizado. " + escopoAtual.getSimbolo(simbolo).toString());
+                    }
                 }
+                varExpression(apontado);
                 break;
             case ";":
                 consumeToken();
@@ -1151,16 +1160,21 @@ public class AnalisadorSintatico {
         }
     }
 
-    private void verifVar(Object apontado) throws FimInesperadoDeArquivo, identificadorNaoEncontrado {
+    private void verifVar(Token apontado) throws FimInesperadoDeArquivo, identificadorNaoEncontrado {
         switch (currentToken().getLexema()) {
             case ",":
                 consumeToken();
                 Token simbolo = varId((Token) apontado);
-                try {
-                    escopoAtual.inserirSimbolo(simbolo, "variavel", simbolo.getId(), simbolo.getLexema(), apontado);
-                } catch (identificadorJaUtilizado ex) {
-                    erroSemantico("" + simbolo + " Identificador já utilizado. " + escopoAtual.getSimbolo(simbolo).toString());
+                if (simbolo != null) {
+                    if (simbolo != null) {
+                        try {
+                            escopoAtual.inserirSimbolo(simbolo, "variavel", simbolo.getId(), simbolo.getLexema(), apontado);
+                        } catch (identificadorJaUtilizado ex) {
+                            erroSemantico("" + simbolo + " Identificador já utilizado. " + escopoAtual.getSimbolo(simbolo).toString());
+                        }
+                    }
                 }
+                varExpression(apontado);
                 break;
             case ";":
                 consumeToken();
@@ -1176,13 +1190,16 @@ public class AnalisadorSintatico {
         if (currentToken().getLexema().equals("}")) {
             consumeToken();
         } else {
-            Object apontado = continueVar();
-            Token simbolo = varId((Token) apontado);
-            try {
-                escopoAtual.inserirSimbolo(simbolo, "variavel", simbolo.getId(), simbolo.getLexema(), apontado);
-            } catch (identificadorJaUtilizado ex) {
-                erroSemantico("" + simbolo + " Identificador já utilizado. " + escopoAtual.getSimbolo(simbolo).toString());
+            Token apontado = continueVar();
+            Token simbolo = varId(apontado);
+            if (simbolo != null) {
+                try {
+                    escopoAtual.inserirSimbolo(simbolo, "variavel", simbolo.getId(), simbolo.getLexema(), apontado);
+                } catch (identificadorJaUtilizado ex) {
+                    erroSemantico("" + simbolo + " Identificador já utilizado. " + escopoAtual.getSimbolo(simbolo).toString());
+                }
             }
+            varExpression(apontado);
         }
     }
 //*************************************** Variable Declaration ***************************************      
@@ -2281,7 +2298,7 @@ public class AnalisadorSintatico {
                 error("ESPERAVA: IDE", true);
             }
         } else {
-            
+
             Token apontado = dataType("");
             if (currentToken().getId().equals("IDE")) {
                 Token simbolo = currentToken();
@@ -2397,7 +2414,8 @@ public class AnalisadorSintatico {
                     Token atual2 = currentToken();
                     Token ret = null;
                     try {
-                        variavel();
+                        Token temp = variavel();
+                        ret = new Token(temp.getId(), temp.getLexema(), temp.getLinha());
                     } catch (VariavelInvalidaException ex) {
                         erroSemantico(atual2 + " Variável inválida: " + ex.getMensagem());
                     }
