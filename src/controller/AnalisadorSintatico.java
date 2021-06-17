@@ -800,7 +800,7 @@ public class AnalisadorSintatico {
                     consumeToken();
                     if (!currentToken().getId().equals("IDE")) {
                         error("ESPERAVA: IDE, \"global\" ou \"local\"", true);
-                        return null;
+                        throw new VariavelInvalidaException("");
                     }
                     return auxVariavel(flag);
                 } else {
@@ -810,7 +810,7 @@ public class AnalisadorSintatico {
             default:
                 if (!currentToken().getId().equals("IDE")) {
                     error("ESPERAVA: IDE, \"global\" ou \"local\"", true);
-                    return null;
+                    throw new VariavelInvalidaException("");
                 }
                 return auxVariavel(flag);
         }
@@ -1794,9 +1794,9 @@ public class AnalisadorSintatico {
             consumeToken();
             Simbolo s = null;
             try {
-                s = escopoStruct.inserirSimbolo(simbolo, "variavel", simbolo.getId(), simbolo.getLexema(), tipo);
+                s = escopoStruct.inserirSimboloGlobal(simbolo, "variavel", simbolo.getId(), simbolo.getLexema(), tipo);
             } catch (identificadorJaUtilizado ex) {
-                erroSemantico("" + simbolo + " Identificador já utilizado. " + escopoStruct.getSimbolo(simbolo).toString());
+                erroSemantico("" + simbolo + " Identificador já utilizado na struct atual ou na struct pai. " + escopoStruct.getSimbolo(simbolo).toString());
             }
             structVarExp(escopoStruct, tipo, s);
         } else {
@@ -2378,7 +2378,8 @@ public class AnalisadorSintatico {
                     consumeToken();
                     if (currentToken().getLexema().equals(";")) {
                         try {
-                            escopoAtual.inserirSimbolo(simbolo, "struct", simbolo.getId(), simbolo.getLexema(), escopoAtual.getTipo(apontado).getToken());
+                            Simbolo s = escopoAtual.inserirSimbolo(simbolo, "struct", simbolo.getId(), simbolo.getLexema(), escopoAtual.getTipo(apontado).getToken());
+                            s.setEscopo(escopoAtual.getTipo(apontado).getEscopo());
                         } catch (identificadorJaUtilizado ex) {
                             /*LinkedList<Simbolo> s = escopoAtual.getSimbolo(simbolo);
                             if (s.get(0).getCategoria().equals("struct")) {
@@ -2608,6 +2609,7 @@ public class AnalisadorSintatico {
                     case "&&":
                     case "!=":
                     case "||":
+                    case "==":
                         tipo.setId(null);
                         tipo.setLexema(null);
                         break;

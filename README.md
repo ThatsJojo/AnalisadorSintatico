@@ -1,12 +1,9 @@
-# AnalisadorSintático
-Analisador Sintático criado para a disciplina MI - Processadores de Linguagem de Programação.
-
-Este analisador dá continuação ao processo de compilação iniciado pelo Analisador Léxico desenvolvido anteriormente.
-
 # AnalisadorSemântico
 Analisador Semântico criado para a disciplina MI - Processadores de Linguagem de Programação.
 
 ## Estrutura de declaração de Struct
+Para utilizar o extends, deve-se passar um tipo de struct (struct + identificador) ou um apelido de struct (identificador utilizado em typedef)
+structs não podem ter campos com mesmo identificador que os campos de structs herdadas.
 
 struct pessoa{
     var{
@@ -15,9 +12,28 @@ struct pessoa{
     }
 }
 
+struct funcionario extends struct pessoa{
+    var{
+        string sobrenome;
+	struct pessoa p;
+    }
+}
+
+typedef struct funcionario pessoa;
+
+struct empregado extends pessoa{
+	var{
+		int numero;
+		pessoa f;
+		struct pessoa p;
+		struct pessoa p[10];
+	}
+}
+
 var{
     struct pessoa Fernando;
 }
+
 
 ## Uso do local e global
 
@@ -27,6 +43,16 @@ e local, que devem ser colocados antes do nome da variável, juntamente com um d
 
 Quando o identificador não é precedido de "local." o analisador primeiramente procura se o mesmo foi declarado no escopo local, 
 caso não encontre ele procura no escopo global.
+
+## Uso de expressões
+
+Não é permitido realizar expressões aritméticas ou relacionais (exceção para o uso de != ou ==) com argumentos de tipos diferentes, apenas expressões lógias (uso de &&, ||).
+
+
+# AnalisadorSintático
+Analisador Sintático criado para a disciplina MI - Processadores de Linguagem de Programação.
+
+Este analisador dá continuação ao processo de compilação iniciado pelo Analisador Léxico desenvolvido anteriormente.
 
 # Estrutura Léxica da Linguagem 
 

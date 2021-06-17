@@ -1,40 +1,46 @@
+O aqruivo atual possui erros sintáticos. Assim sendo, a análise sintática pode não ter sido feita corretamente.
+
 0001 IDE Pessoa tipo não encontrado. 0001 IDE struct Pessoa
-0025 IDE Pessoa O identificador não corresponde a uma Struct pai já declarada.
-0045 IDE zap Identificador já utilizado. [Simbolo de categoria "variavel" encontrado na linha 44]
-0054 IDE casa campo ausente na struct passada
-0056 IDE casa campo ausente na struct passada
-0056 Tipos Incompatíveis: struct Pessoa e int
-0058 IDE casa campo ausente na struct passada
-0060 IDE esther1 Busca de elemento em variável não declarada como struct. Obs: vetor de struct não é tratada como uma struct, apenas seus elementos
-0064 IDE w O identificador não corresponde a uma Struct pai já declarada.
-0075 Tipos Incompatíveis: real e int
-0080 IDE u Busca de elemento em variável não declarada como struct. Obs: vetor de struct não é tratada como uma struct, apenas seus elementos
-0080 DEL [ a variável não é um vetor ou matriz. 
-0080 IDE u Variável inválida: 0080 IDE u Variável não declarada
-0081 IDE variavel Variável inválida: 0081 IDE variavel Variável não declarada
-0081 LOG ! valor passado não é booleano
-0086 IDE j Tipo de váriavel não declarado
+0021 DEL ] Variável inválida: 
+0026 IDE Pessoa O identificador não corresponde a uma Struct pai já declarada.
+0046 IDE zap Identificador já utilizado. [Simbolo de categoria "variavel" encontrado na linha 45]
+0055 IDE casa campo ausente na struct passada
+0057 IDE casa campo ausente na struct passada
+0057 Tipos Incompatíveis: struct Pessoa e int
+0059 IDE casa campo ausente na struct passada
+0061 IDE esther1 Busca de elemento em variável não declarada como struct. Obs: vetor de struct não é tratada como uma struct, apenas seus elementos
+0065 IDE w O identificador não corresponde a uma Struct pai já declarada.
+0076 Tipos Incompatíveis: real e int
+0081 IDE u Busca de elemento em variável não declarada como struct. Obs: vetor de struct não é tratada como uma struct, apenas seus elementos
+0081 DEL [ a variável não é um vetor ou matriz. 
+0081 IDE u Variável inválida: 0081 IDE u Variável não declarada
+0082 IDE variavel Variável inválida: 0082 IDE variavel Variável não declarada
+0082 LOG ! valor passado não é booleano
 0087 IDE j Tipo de váriavel não declarado
-0089 IDE variavel Variável inválida: 0089 IDE variavel Variável não declarada
-0089 LOG ! valor passado não é booleano
-0101 IDE zip Variável inválida: 0101 IDE zip Variável não declarada
-0101 IDE zip Expressão inválida 
-0101 IDE struct funcionario Expressão inválida 
-0112 Tipos Incompatíveis: boolean e struct Pessoa
-0115 Tipos Incompatíveis: boolean e int
-0118 Tipos Incompatíveis: boolean e struct Pessoa
-0119 Tipos Incompatíveis: boolean e real
-0125 IDE teste Função não encontrada.
-0126 IDE u Busca de elemento em variável não declarada como struct. Obs: vetor de struct não é tratada como uma struct, apenas seus elementos
-0126 DEL [ a variável não é um vetor ou matriz. 
-0126 IDE u Variável inválida: 0126 IDE u Variável não declarada
-0128 Tipos Incompatíveis: string e struct Pessoa
-0129 Tipos Incompatíveis: struct Pessoa e string
-0130 PRE global Variável inválida: 0130 IDE teste o identificador não está vinculado a uma variável nem constante. 
-0131 IDE i Busca de elemento em variável não declarada como struct. Obs: vetor de struct não é tratada como uma struct, apenas seus elementos
-0131 Tipos Incompatíveis: real e int
-0132 Tipos Incompatíveis: struct Pessoa e int
-0134 IDE xablau Tipo de váriavel não permite incremento ou decremento: struct Pessoa
-0143 IDE u Busca de elemento em variável não declarada como struct. Obs: vetor de struct não é tratada como uma struct, apenas seus elementos
-0143 DEL [ a variável não é um vetor ou matriz. 
-0143 IDE u Variável inválida: 0143 IDE u Variável não declarada
+0088 IDE j Tipo de váriavel não declarado
+0090 IDE variavel Variável inválida: 0090 IDE variavel Variável não declarada
+0090 LOG ! valor passado não é booleano
+0102 IDE zip Variável inválida: 0102 IDE zip Variável não declarada
+0102 IDE zip Expressão inválida 
+0102 IDE struct funcionario Expressão inválida 
+0113 Tipos Incompatíveis: boolean e struct Pessoa
+0116 Tipos Incompatíveis: boolean e int
+0119 Tipos Incompatíveis: boolean e struct Pessoa
+0120 Tipos Incompatíveis: boolean e real
+0126 IDE teste Função não encontrada.
+0127 IDE u Busca de elemento em variável não declarada como struct. Obs: vetor de struct não é tratada como uma struct, apenas seus elementos
+0127 DEL [ a variável não é um vetor ou matriz. 
+0127 IDE u Variável inválida: 0127 IDE u Variável não declarada
+0129 Tipos Incompatíveis: string e struct Pessoa
+0130 Tipos Incompatíveis: struct Pessoa e string
+0131 PRE global Variável inválida: 0131 IDE teste o identificador não está vinculado a uma variável nem constante. 
+0132 IDE i Busca de elemento em variável não declarada como struct. Obs: vetor de struct não é tratada como uma struct, apenas seus elementos
+0132 Tipos Incompatíveis: real e int
+0133 Tipos Incompatíveis: struct Pessoa e int
+0135 IDE xablau Tipo de váriavel não permite incremento ou decremento: struct Pessoa
+0021 IDE p2 a variável não é um vetor ou matriz. 
+0136 IDE salario variável não indica uma struct.
+0136 Tipos Incompatíveis: real e struct Pessoa
+0145 IDE u Busca de elemento em variável não declarada como struct. Obs: vetor de struct não é tratada como uma struct, apenas seus elementos
+0145 DEL [ a variável não é um vetor ou matriz. 
+0145 IDE u Variável inválida: 0145 IDE u Variável não declarada

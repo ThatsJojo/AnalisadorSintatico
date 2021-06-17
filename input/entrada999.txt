@@ -19,6 +19,7 @@ struct funcionario extends alguem{
         real salario;
 	struct funcionario p;
 	struct funcionario p2[10];
+	int idade;
     }
 }
 
@@ -133,6 +134,7 @@ procedure teste(int jota, int ka, struct Pessoa carro, real eta){
     i++;
     xablau++;
     jaca[10][10].p2[10].salario=2.5;//[2][1].salario = 2.5;
+    jaca[10][2].idade = jaca[8][7].peso;
 
 }
 

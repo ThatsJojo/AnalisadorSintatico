@@ -2,6 +2,8 @@ package model;
 
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import util.EscopoPaiException;
 import util.identificadorJaUtilizado;
 import util.identificadorNaoEncontrado;
@@ -9,7 +11,7 @@ import util.identificadorNaoEncontrado;
 public class TabelaSimbolos {
 
     private final HashMap<Token, LinkedList<Simbolo>> simbolos;
-  // private final HashMap<Token, LinkedList<Simbolo>> functions;
+    // private final HashMap<Token, LinkedList<Simbolo>> functions;
     private final HashMap<Token, Simbolo> tipos;
     private TabelaSimbolos escopoPai;
     private final LinkedList<Token> array;
@@ -48,12 +50,45 @@ public class TabelaSimbolos {
         return ret;
     }
 
+    public Simbolo inserirSimboloGlobal(Token t, String categoria, String tipo, String valor, Object variavel) throws identificadorJaUtilizado {
+        Simbolo ret = new Simbolo(t, categoria, tipo, valor, variavel);
+        //System.out.println("INSERINDO SÍMBOLO: "+t.getLexema()+" "+(simbolos.containsKey(t)));
+        LinkedList<Simbolo> lista = simbolos.get(t);
+        boolean flag = false;
+
+        if (lista == null) {
+            TabelaSimbolos escPai = this.escopoPai;
+            while (escPai != null) {
+                if (escPai.contains(t)) {
+                    flag = true;
+                }try{
+                    escPai = escPai.getEscopoPai();
+                } catch (EscopoPaiException ex) {
+                    break;
+                }
+            }
+        }
+        if (flag||lista!=null) {
+            throw new identificadorJaUtilizado();
+        }
+        lista = new LinkedList<>();
+        lista.add(ret);
+        if (categoria.equals("tipo") || categoria.equals("struct")) {
+            if (escopoPai != null && escopoPai.contains(t)) {
+                throw new identificadorJaUtilizado();
+            }
+            tipos.put(t, ret);
+        }
+        simbolos.put(t, lista);
+        array.add(t);
+        return ret;
+    }
+
     /*public Simbolo inserirFuncao(Token t, LinkedList<Simbolo> lista){
         Simbolo ret = new Simbolo(t, categoria, tipo, valor, variavel);
         functions.put(t, lista);
         return ret;
     }*/
-    
     private boolean contains(Token identificador) {
         return simbolos.containsKey(identificador) || (escopoPai != null && escopoPai.contains(identificador));
     }
@@ -63,18 +98,18 @@ public class TabelaSimbolos {
             System.out.println(a.getLexema());
         });
     }
-    
+
     public void printSimbolos() {
         /*simbolos.forEach((a, b) -> {
             System.out.println(a.getLexema());
         });*/
-        array.forEach((simb)->{
+        array.forEach((simb) -> {
             System.out.println(simb.getLexema());
         });
     }
 
     public LinkedList<Simbolo> getSimbolo(Token t) throws identificadorNaoEncontrado {
-        if(simbolos.isEmpty()){
+        if (simbolos.isEmpty()) {
             throw new identificadorNaoEncontrado();
         }
         LinkedList<Simbolo> lista = simbolos.get(t);
@@ -86,8 +121,8 @@ public class TabelaSimbolos {
         }
         return lista;
     }
-    
-    public Simbolo localSimbolo (Token t) throws identificadorNaoEncontrado{
+
+    public Simbolo localSimbolo(Token t) throws identificadorNaoEncontrado {
         Simbolo ret = simbolos.get(t).get(0);
         if (ret == null) {
             throw new identificadorNaoEncontrado();
@@ -107,8 +142,8 @@ public class TabelaSimbolos {
         }
         return ret;
     }
-    
-    public HashMap<Token, Simbolo> getTipos(){
+
+    public HashMap<Token, Simbolo> getTipos() {
         return tipos;
     }
 
