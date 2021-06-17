@@ -784,22 +784,20 @@ public class AnalisadorSintatico {
         Token atual = currentToken();
         boolean isStruct = false;
         String message = "";
+        Simbolo s = null;
         if (currentToken().getId().equals("IDE")) {
             consumeToken();
             try {
                 LinkedList<Simbolo> simb = escopoAtual.getSimbolo(atual);
-                Simbolo s = simb.get(0);
+                s = simb.get(0);
                 if (s.getCategoria().equals("variavel") || s.getCategoria().equals("constante")) {
-                    Token tipoAp;
-                    Object tipoApontado = s.getVariavel();
-                    if (tipoApontado instanceof Token) {
-                        tipoAp = (Token) tipoApontado;
-                        tipo.setId(tipoAp.getId());
-                        tipo.setLexema(tipoAp.getLexema());
-                    } else if (tipoApontado instanceof Simbolo) {
-                        s = (Simbolo) tipoApontado;
+                    Token tipoApontado = (Token) s.getVariavel();
+                    if (!tipoApontado.getId().equals("IDE")) {
+                        tipo.setId(tipoApontado.getId());
+                        tipo.setLexema(tipoApontado.getLexema());
+                    } else {
                         try {
-                            Simbolo s2 = escopoAtual.getTipo(s.getToken());
+                            Simbolo s2 = escopoAtual.getTipo(tipoApontado);
                             Token tipoEncontrado = s2.getToken();
                             if (s2.getCategoria().equals("struct")) {
                                 isStruct = true;
@@ -811,9 +809,6 @@ public class AnalisadorSintatico {
                             //erroSemantico("" + atual + " tipo da variável ou constante não foi encontrado. " + s);
                         }
                     }
-                } else {
-                    message = "" + atual + " tipo da variável ou constante não foi encontrado. " + s;
-                    //erroSemantico("" + atual + " IDE não é variável ou constante. " + s);
                 }
 
             } catch (identificadorNaoEncontrado e) {
@@ -822,8 +817,10 @@ public class AnalisadorSintatico {
 
             if (aheadToken.equals(".") || aheadToken.equals("[")) {
                 Token tipoElemento = contElement(tipo);
-                if (!isStruct && aheadToken.equals(".")) {
-                    message = "" + atual + " Busca de elemento em variável não declarada como struct ";
+                if ((!isStruct && aheadToken.equals(".")) || (aheadToken.equals(".") && (s != null && (s.getVetorStruct().equals("matriz") || s.getVetorStruct().equals("vetor"))))) {
+                    erroSemantico("" + atual + " Busca de elemento em variável não declarada como struct. Obs: vetor de struct não é tratada como uma struct, apenas seus elementos");
+                } else if (aheadToken.equals(s)) {
+
                 } else {
                     tipo.setId(tipoElemento.getId());
                     tipo.setLexema(tipoElemento.getLexema());
@@ -838,6 +835,7 @@ public class AnalisadorSintatico {
                         consumeToken();
                         if (currentToken().getId().equals("IDE")) {
                             consumeToken();
+
                             if (aheadToken.equals(".") | aheadToken.equals("[")) {
                                 contElement(tipo);
                             }
@@ -927,14 +925,15 @@ public class AnalisadorSintatico {
     private void primeiraVar() throws FimInesperadoDeArquivo, identificadorNaoEncontrado {
         Token apontado = continueVar();
         Token simbolo = varId(apontado);
+        Simbolo s = null;
         if (simbolo != null) {
             try {
-                escopoAtual.inserirSimbolo(simbolo, "variavel", simbolo.getId(), simbolo.getLexema(), apontado);
+                s = escopoAtual.inserirSimbolo(simbolo, "variavel", simbolo.getId(), simbolo.getLexema(), apontado);
             } catch (identificadorJaUtilizado ex) {
                 erroSemantico("" + simbolo + " Identificador já utilizado. " + escopoAtual.getSimbolo(simbolo).toString());
             }
         }
-        varExpression(apontado);
+        varExpression(apontado, s);
     }
 
     private Token continueVar() throws FimInesperadoDeArquivo {
@@ -944,7 +943,7 @@ public class AnalisadorSintatico {
             struct = "struct ";
         }
         Token retorno = dataType(struct);
-        Token ret = new Token(retorno.getId(),retorno.getLexema(), retorno.getLinha());
+        Token ret = new Token(retorno.getId(), retorno.getLexema(), retorno.getLinha());
         return ret;
     }
 
@@ -959,19 +958,19 @@ public class AnalisadorSintatico {
         return simbolo;
     }
 
-    private void varExpression(Token apontado) throws FimInesperadoDeArquivo, identificadorNaoEncontrado {
+    private void varExpression(Token apontado, Simbolo s) throws FimInesperadoDeArquivo, identificadorNaoEncontrado {
         switch (currentToken().getLexema()) {
             case ",":
                 consumeToken();
                 Token simbolo = varId(apontado);
                 if (simbolo != null) {
                     try {
-                        escopoAtual.inserirSimbolo(simbolo, "variavel", simbolo.getId(), simbolo.getLexema(), apontado);
+                        s = escopoAtual.inserirSimbolo(simbolo, "variavel", simbolo.getId(), simbolo.getLexema(), apontado);
                     } catch (identificadorJaUtilizado ex) {
                         erroSemantico("" + simbolo + " Identificador já utilizado. " + escopoAtual.getSimbolo(simbolo).toString());
                     }
                 }
-                varExpression(apontado);
+                varExpression(apontado, s);
                 break;
             case "=":
                 consumeToken();
@@ -993,7 +992,7 @@ public class AnalisadorSintatico {
                 vectMatIndex();
                 if (currentToken().getLexema().equals("]")) {
                     consumeToken();
-                    estrutura(apontado);
+                    estrutura(apontado, s);
                 } else {
                     error("ESPERAVA: ']'", true);
                 }
@@ -1004,33 +1003,39 @@ public class AnalisadorSintatico {
         }
     }
 
-    private void estrutura(Token apontado) throws FimInesperadoDeArquivo, identificadorNaoEncontrado {
+    private void estrutura(Token apontado, Simbolo s) throws FimInesperadoDeArquivo, identificadorNaoEncontrado {
         switch (currentToken().getLexema()) {
             case "[":
                 consumeToken();
                 vectMatIndex();
                 if (currentToken().getLexema().equals("]")) {
                     consumeToken();
-                    contMatriz(apontado);
+                    contMatriz(apontado, s);
                 } else {
                     error("ESPERAVA: ']'", true);
                 }
                 break;
             case "=":
+                if (s != null) {
+                    s.setVetorStruct("vetor");
+                }
                 consumeToken();
                 initVetor(apontado);
                 break;
             case ",":
+                if (s != null) {
+                    s.setVetorStruct("vetor");
+                }
                 consumeToken();
                 Token simbolo = varId(apontado);
                 if (simbolo != null) {
                     try {
-                        escopoAtual.inserirSimbolo(simbolo, "variavel", simbolo.getId(), simbolo.getLexema(), apontado);
+                        s = escopoAtual.inserirSimbolo(simbolo, "variavel", simbolo.getId(), simbolo.getLexema(), apontado);
                     } catch (identificadorJaUtilizado ex) {
                         erroSemantico("" + simbolo + " Identificador já utilizado. " + escopoAtual.getSimbolo(simbolo).toString());
                     }
                 }
-                varExpression(apontado);
+                varExpression(apontado, s);
                 break;
             case ";":
                 consumeToken();
@@ -1075,7 +1080,10 @@ public class AnalisadorSintatico {
         }
     }
 
-    private void contMatriz(Token apontado) throws FimInesperadoDeArquivo, identificadorNaoEncontrado {
+    private void contMatriz(Token apontado, Simbolo s) throws FimInesperadoDeArquivo, identificadorNaoEncontrado {
+        if (s != null) {
+            s.setVetorStruct("matriz");
+        }
         switch (currentToken().getLexema()) {
             case "=":
                 consumeToken();
@@ -1086,12 +1094,12 @@ public class AnalisadorSintatico {
                 Token simbolo = varId((Token) apontado);
                 if (simbolo != null) {
                     try {
-                        escopoAtual.inserirSimbolo(simbolo, "variavel", simbolo.getId(), simbolo.getLexema(), apontado);
+                        s = escopoAtual.inserirSimbolo(simbolo, "variavel", simbolo.getId(), simbolo.getLexema(), apontado);
                     } catch (identificadorJaUtilizado ex) {
                         erroSemantico("" + simbolo + " Identificador já utilizado. " + escopoAtual.getSimbolo(simbolo).toString());
                     }
                 }
-                varExpression(apontado);
+                varExpression(apontado, s);
                 break;
             case ";":
                 consumeToken();
@@ -1165,16 +1173,15 @@ public class AnalisadorSintatico {
             case ",":
                 consumeToken();
                 Token simbolo = varId((Token) apontado);
+                Simbolo s = null;
                 if (simbolo != null) {
-                    if (simbolo != null) {
-                        try {
-                            escopoAtual.inserirSimbolo(simbolo, "variavel", simbolo.getId(), simbolo.getLexema(), apontado);
-                        } catch (identificadorJaUtilizado ex) {
-                            erroSemantico("" + simbolo + " Identificador já utilizado. " + escopoAtual.getSimbolo(simbolo).toString());
-                        }
+                    try {
+                        s = escopoAtual.inserirSimbolo(simbolo, "variavel", simbolo.getId(), simbolo.getLexema(), apontado);
+                    } catch (identificadorJaUtilizado ex) {
+                        erroSemantico("" + simbolo + " Identificador já utilizado. " + escopoAtual.getSimbolo(simbolo).toString());
                     }
                 }
-                varExpression(apontado);
+                varExpression(apontado, s);
                 break;
             case ";":
                 consumeToken();
@@ -1192,14 +1199,15 @@ public class AnalisadorSintatico {
         } else {
             Token apontado = continueVar();
             Token simbolo = varId(apontado);
+            Simbolo s = null;
             if (simbolo != null) {
                 try {
-                    escopoAtual.inserirSimbolo(simbolo, "variavel", simbolo.getId(), simbolo.getLexema(), apontado);
+                    s = escopoAtual.inserirSimbolo(simbolo, "variavel", simbolo.getId(), simbolo.getLexema(), apontado);
                 } catch (identificadorJaUtilizado ex) {
                     erroSemantico("" + simbolo + " Identificador já utilizado. " + escopoAtual.getSimbolo(simbolo).toString());
                 }
             }
-            varExpression(apontado);
+            varExpression(apontado, s);
         }
     }
 //*************************************** Variable Declaration ***************************************      
@@ -1239,19 +1247,20 @@ public class AnalisadorSintatico {
     private void constId(Token tipo) throws FimInesperadoDeArquivo, identificadorNaoEncontrado {
         if (currentToken().getId().equals("IDE")) {
             Token simbolo = currentToken();
+            Simbolo s = null;
             try {
-                escopoAtual.inserirSimbolo(simbolo, "constante", simbolo.getId(), simbolo.getLexema(), tipo);
+                s = escopoAtual.inserirSimbolo(simbolo, "constante", simbolo.getId(), simbolo.getLexema(), tipo);
             } catch (identificadorJaUtilizado ex) {
                 erroSemantico("" + simbolo + " Identificador já utilizado. " + escopoAtual.getSimbolo(simbolo).toString());
             }
             consumeToken();
-            constExpression(tipo);
+            constExpression(tipo, s);
         } else {
             error("ESPERAVA: IDE", true);
         }
     }
 
-    private void constExpression(Token tipo) throws FimInesperadoDeArquivo, identificadorNaoEncontrado {
+    private void constExpression(Token tipo, Simbolo s) throws FimInesperadoDeArquivo, identificadorNaoEncontrado {
         switch (currentToken().getLexema()) {
             case "=":
                 consumeToken();
@@ -1267,7 +1276,7 @@ public class AnalisadorSintatico {
                 vectMatIndex();
                 if (currentToken().getLexema().equals("]")) {
                     consumeToken();
-                    estruturaConst(tipo);
+                    estruturaConst(tipo, s);
                 } else {
                     error("ESPERAVA: ']'", true);
                 }
@@ -1278,9 +1287,12 @@ public class AnalisadorSintatico {
         }
     }
 
-    private void estruturaConst(Token tipo) throws FimInesperadoDeArquivo, identificadorNaoEncontrado {
+    private void estruturaConst(Token tipo, Simbolo s) throws FimInesperadoDeArquivo, identificadorNaoEncontrado {
         switch (currentToken().getLexema()) {
             case "=":
+                if (s != null) {
+                    s.setVetorStruct("vetor");
+                }
                 consumeToken();
                 if (currentToken().getLexema().equals("[")) {
                     consumeToken();
@@ -1295,6 +1307,9 @@ public class AnalisadorSintatico {
                 }
                 break;
             case "[":
+                if (s != null) {
+                    s.setVetorStruct("matriz");
+                }
                 consumeToken();
                 vectMatIndex();
                 if (currentToken().getLexema().equals("]")) {
@@ -1422,12 +1437,12 @@ public class AnalisadorSintatico {
             struct = "struct ";
             consumeToken();
         }
-        Token apontado = dataType("");
+        Token apontado = dataType(struct);
         if (currentToken().getId().equals("IDE")) {
             Token simbolo = currentToken();
             consumeToken();
             if (currentToken().getLexema().equals("(")) {
-                LinkedList<String> lista = continueFunction(apontado);
+                LinkedList<Token> lista = continueFunction(apontado);
                 try {
                     global.inserirSimbolo(simbolo, "funcao", simbolo.getId(), simbolo.getLexema(), new Pair<>(apontado, lista));
                 } catch (identificadorJaUtilizado ex) {
@@ -1436,11 +1451,11 @@ public class AnalisadorSintatico {
                     boolean semErro = true;
                     for (Simbolo concorrente : concorrentes) {
                         if (concorrente.getCategoria().equals("procedure") || concorrente.getCategoria().equals("funcao")) {
-                            LinkedList<String> apontadoConcorrente;
+                            LinkedList<Token> apontadoConcorrente;
                             if (concorrente.getVariavel() instanceof LinkedList) {
-                                apontadoConcorrente = (LinkedList<String>) concorrente.getVariavel();
+                                apontadoConcorrente = (LinkedList<Token>) concorrente.getVariavel();
                             } else if (concorrente.getVariavel() instanceof Pair) {
-                                apontadoConcorrente = (LinkedList<String>) ((Pair) concorrente.getVariavel()).getValue();
+                                apontadoConcorrente = (LinkedList<Token>) ((Pair) concorrente.getVariavel()).getValue();
                             } else {
                                 erroSemantico("" + simbolo + " Identificador já utilizado. " + concorrente);
                                 semErro = false;
@@ -1469,8 +1484,8 @@ public class AnalisadorSintatico {
         }
     }
 
-    private LinkedList<String> continueFunction(Token tipo) throws FimInesperadoDeArquivo, identificadorNaoEncontrado {
-        LinkedList<String> ret = new LinkedList();
+    private LinkedList<Token> continueFunction(Token tipo) throws FimInesperadoDeArquivo, identificadorNaoEncontrado {
+        LinkedList<Token> ret = new LinkedList();
         consumeToken();
         if (currentToken().getLexema().equals(")")) {
             consumeToken();
@@ -1584,7 +1599,7 @@ public class AnalisadorSintatico {
         }
     }
 
-    private void parameters(LinkedList<String> lista) throws FimInesperadoDeArquivo {
+    private void parameters(LinkedList<Token> lista) throws FimInesperadoDeArquivo {
         String struct = "";
         if (currentToken().getLexema().equals("struct")) {
             struct = "struct ";
@@ -1592,7 +1607,7 @@ public class AnalisadorSintatico {
         }
         Token tipo = dataType(struct);
         if (tipo != null) {
-            lista.add(tipo.getLexema());
+            lista.add(tipo);
         }
         if (currentToken().getId().equals("IDE")) {
             paramLoop(lista);
@@ -1601,7 +1616,7 @@ public class AnalisadorSintatico {
         }
     }
 
-    private void paramLoop(LinkedList<String> lista) throws FimInesperadoDeArquivo {
+    private void paramLoop(LinkedList<Token> lista) throws FimInesperadoDeArquivo {
         consumeToken();
         switch (currentToken().getLexema()) {
             case ",":
@@ -1891,7 +1906,7 @@ public class AnalisadorSintatico {
 
             consumeToken();
             if (currentToken().getLexema().equals("(")) {
-                LinkedList<String> apontado = procedureParams(simbolo.getLexema());
+                LinkedList<Token> apontado = procedureParams(simbolo.getLexema());
                 try {
                     global.inserirSimbolo(simbolo, "procedure", simbolo.getId(), simbolo.getLexema(), apontado);
                 } catch (identificadorJaUtilizado ex) {
@@ -1900,11 +1915,11 @@ public class AnalisadorSintatico {
                     boolean semErro = true;
                     for (Simbolo concorrente : concorrentes) {
                         if (concorrente.getCategoria().equals("procedure") || concorrente.getCategoria().equals("funcao")) {
-                            LinkedList<String> apontadoConcorrente;
+                            LinkedList<Token> apontadoConcorrente;
                             if (concorrente.getVariavel() instanceof LinkedList) {
-                                apontadoConcorrente = (LinkedList<String>) concorrente.getVariavel();
+                                apontadoConcorrente = (LinkedList<Token>) concorrente.getVariavel();
                             } else if (concorrente.getVariavel() instanceof Pair) {
-                                apontadoConcorrente = (LinkedList<String>) ((Pair) concorrente.getVariavel()).getValue();
+                                apontadoConcorrente = (LinkedList<Token>) ((Pair) concorrente.getVariavel()).getValue();
                             } else {
                                 erroSemantico("" + simbolo + " Identificador já utilizado. " + concorrente);
                                 semErro = false;
@@ -1940,8 +1955,8 @@ public class AnalisadorSintatico {
         }
     }
 
-    private LinkedList<String> procedureParams(String procedureName) throws FimInesperadoDeArquivo {
-        LinkedList<String> ret = new LinkedList();
+    private LinkedList<Token> procedureParams(String procedureName) throws FimInesperadoDeArquivo {
+        LinkedList<Token> ret = new LinkedList();
         consumeToken();
         if (currentToken().getLexema().equals(")")) {
             consumeToken();
@@ -2753,16 +2768,16 @@ public class AnalisadorSintatico {
 //****************************************** Function Call *******************************************  
 //====================================================================================================
 
-    private boolean equalsParams(List<String> a, List<String> b) {
+    private boolean equalsParams(List<Token> a, List<Token> b) {
         if (a.size() != b.size()) {
             return false;
         }
-        LinkedList<String> c = new LinkedList(b);
+        LinkedList<Token> c = new LinkedList(b);
 
         Iterator ia = a.iterator();
         Iterator ib = b.iterator();
         while (ia.hasNext()) {
-            if (!ia.next().equals(ib.next())) {
+            if (!((Token) ia.next()).equals((Token) ib.next())) {
                 return false;
             }
         }
@@ -2770,6 +2785,10 @@ public class AnalisadorSintatico {
     }
 
     private boolean confereTipo(Token t1, Token t2) throws FimInesperadoDeArquivo {
+        return confereTipo(t1, t2, true);
+    }
+
+    private boolean confereTipo(Token t1, Token t2, boolean flag) throws FimInesperadoDeArquivo {
         if (t1 == null || t2 == null) {
             return false;
         }
@@ -2789,7 +2808,9 @@ public class AnalisadorSintatico {
                 }
 
             } catch (identificadorNaoEncontrado ex) {
-                erroSemantico("" + String.format("%04d", currentToken().getLinha()) + " o tipo utilizado não foi declarado. ");
+                if (flag) {
+                    erroSemantico("" + String.format("%04d", currentToken().getLinha()) + " o tipo utilizado não foi declarado. ");
+                }
                 return false;
             }
         } else if (t1.getId().equals("NRO REAL")) {
@@ -2809,7 +2830,9 @@ public class AnalisadorSintatico {
                     simbolo2 = null;
                 }
             } catch (identificadorNaoEncontrado ex) {
-                erroSemantico("" + String.format("%04d", currentToken().getLinha()) + " o tipo utilizado não foi declarado. ");
+                if (flag) {
+                    erroSemantico("" + String.format("%04d", currentToken().getLinha()) + " o tipo utilizado não foi declarado. ");
+                }
                 return false;
             }
         } else if (t2.getId().equals("NRO REAL")) {
@@ -2822,13 +2845,17 @@ public class AnalisadorSintatico {
             lexema2 = t2.getLexema();
         }
         if ((lexema1 == null && lexema2 != null) || (lexema1 != null && lexema2 == null)) {
-            erroSemantico("" + String.format("%04d", currentToken().getLinha()) + " Tipos Incompatíveis: " + (lexema1 == null ? simbolo1.getToken().getLexema() : lexema1) + " e " + (lexema2 == null ? simbolo2.getToken().getLexema() : lexema2));
+            if (flag) {
+                erroSemantico("" + String.format("%04d", currentToken().getLinha()) + " Tipos Incompatíveis: " + (lexema1 == null ? simbolo1.getToken().getLexema() : lexema1) + " e " + (lexema2 == null ? simbolo2.getToken().getLexema() : lexema2));
+            }
             return false;
         } else if (lexema1 != null && lexema2 != null) {
             if (lexema1.equals(lexema2)) {
                 return true;
             } else {
-                erroSemantico("" + String.format("%04d", currentToken().getLinha()) + " Tipos Incompatíveis: " + lexema1 + " e " + lexema2);
+                if (flag) {
+                    erroSemantico("" + String.format("%04d", currentToken().getLinha()) + " Tipos Incompatíveis: " + lexema1 + " e " + lexema2);
+                }
                 return false;
             }
         }
@@ -2872,21 +2899,31 @@ public class AnalisadorSintatico {
         boolean matchParams = false;
         while (i1.hasNext()) {
             Simbolo funcao = (Simbolo) i1.next();
+            LinkedList pParams = null;
             if (funcao.getCategoria().equals("procedure")) {
-                LinkedList pParams = (LinkedList) funcao.getVariavel();
-                if (pParams.hashCode() == paramsPassados) {
-                    break;
-                }
+                pParams = (LinkedList<Token>) funcao.getVariavel();
             } else if (funcao.getCategoria().equals("funcao")) {
-                LinkedList pParams = (LinkedList) ((Pair) funcao.getVariavel()).getValue();
-                if (pParams.hashCode() == paramsPassados) {
-                    break;
-                }
+                pParams = (LinkedList) ((Pair) funcao.getVariavel()).getValue();
             }
-            if (!matchParams) {
-                erroSemantico(ret + " Função não encontrada.");
+            if (pParams != null) {
+                Iterator i2 = tiposParametros.iterator();
+                Iterator i3 = pParams.iterator();
+                boolean flag = false;
+                while (i2.hasNext()) {
+                    flag = false;
+                    
+                    //System.out.println(""+currentToken().getLinha()+" t1: "+t1+" t2: "+t2+" result: "+(result)+" size func: "+pParams.size()+" i2.has: "+i2.hasNext()+"  lista: "+lista.size());
+                    if (i3.hasNext()&&confereTipo((Token) i2.next(),(Token) i3.next() , false)) {
+                        flag = true;
+                    } else {
+                        break;
+                    }
+                }
+                if (flag == true) {
+                    return;
+                }
             }
         }
-
+        erroSemantico(ret + " Função não encontrada.");
     }
 }

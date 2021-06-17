@@ -6,6 +6,7 @@ public class Simbolo {
     private String tipo;
     private String valor;
     private Object variavel;
+    private String vetorStruct;
 
     public Simbolo(Token token) {
         this.token = token;
@@ -17,6 +18,7 @@ public class Simbolo {
         this.tipo = tipo;
         this.valor = valor;
         this.variavel = variavel;
+        this.vetorStruct = "";
     }
 
     public Token getToken() {
@@ -53,6 +55,14 @@ public class Simbolo {
 
     public void setVariavel(Object variavel) {
         this.variavel = variavel;
+    }
+
+    public String getVetorStruct() {
+        return vetorStruct;
+    }
+
+    public void setVetorStruct(String vetorStruct) {
+        this.vetorStruct = vetorStruct;
     }
 
     @Override

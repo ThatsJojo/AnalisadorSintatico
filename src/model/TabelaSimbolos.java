@@ -83,6 +83,14 @@ public class TabelaSimbolos {
         }
         return lista;
     }
+    
+    public Simbolo localSimbolo (Token t) throws identificadorNaoEncontrado{
+        Simbolo ret = simbolos.get(t).get(0);
+        if (ret == null) {
+            throw new identificadorNaoEncontrado();
+        }
+        return ret;
+    }
 
     public Simbolo getTipo(Token t) throws identificadorNaoEncontrado {
         Simbolo ret = tipos.get(t);

@@ -32,7 +32,7 @@ struct empregado extends struct Pessoa{
     }
 }
 
-struct empregado extends serHumano{
+struct empregado1 extends struct Pessoa{
     var{
         real salario;
     }
@@ -49,11 +49,13 @@ var{
  }
 
 const{
-    struct funcionario z1 = zup, z2 = zip;
+    struct funcionario z1 = zup, z2 = zip.casa;
     struct funcionario z2p=z1, z3p = z2 ;
-    struct funcionario jaca1[15][10] = [[z1, z2, z3p],[z2p,10, zup],[z1, z2p, zup]];
+    struct funcionario jaca1[15][10] = [[z1.casa, z2, z3p],[z2p,10, zup],[z1, z2p, zup]];
     real w1=2.3,i1=2.1, esther1 = 2.3;
-    real carro1[10][20]=[[1.1,2.1,3.1,4.1,5.1,3.1],[1.1,2.1,3.1,4.1,esther1]];
+    struct funcionario f2 = jaca1.casa;
+    
+    real carro1[10][20]=[[1.1,2.1,3.1,4.1,5.1,3.1],[1.1,2.1,3.1,4.1,esther1.casa]];
 	
 }
 
@@ -90,11 +92,17 @@ procedure soma(int a, int b){
 
 procedure teste(int a, int b){print("casa");}
 procedure teste(int a, int b, int c){print("casa");}
-procedure teste(int a, int b, int c, int d){print("casa");}
+procedure teste(int a, int b, int c, string d){print("casa");}
 
-procedure teste(int a, int b){
+function struct funcionario teste(int a, real opa, int hip, struct Pessoa ela){
+	print("casa");
+	return zip;
+}
+
+procedure teste(int jota, int ka, struct Pessoa carro){
     var{
         struct Pessoa xablau;
+        struct empregado1 joao = zup;  
         frase2 soma;
         int i;
         string cadeia="zap";
@@ -102,7 +110,13 @@ procedure teste(int a, int b){
     xablau = true;
     soma = true;
     teste(1, 2, 3);
+    teste(1, 2);
+    teste(i, 1.2, 3, xablau);
+    teste(i, i, i, cadeia);
+    teste(i, i, i, "opa");
+    teste(i, i, cadeia, cadeia);//Erro na cadeia 2
     read(i, u[i]);
+    teste(i, 2, xablau);
 
 }
 
