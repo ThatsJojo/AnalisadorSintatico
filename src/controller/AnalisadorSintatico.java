@@ -778,7 +778,7 @@ public class AnalisadorSintatico {
         return ret;
     }
 
-    private Token variavel() throws FimInesperadoDeArquivo, VariavelInvalidaException {
+    private Token auxVariavel() throws FimInesperadoDeArquivo, VariavelInvalidaException{
         String aheadToken = lookahead().getLexema();
         Token tipo = new Token(null, null, currentToken().getLinha()); //sem global e local por enquanto
         Token atual = currentToken();
@@ -826,35 +826,32 @@ public class AnalisadorSintatico {
                     tipo.setLexema(tipoElemento.getLexema());
                 }
             }
-        } else {
-            switch (currentToken().getLexema()) {
-                case "global":
-                case "local":
-                    consumeToken();
-                    if (currentToken().getLexema().equals(".")) {
-                        consumeToken();
-                        if (currentToken().getId().equals("IDE")) {
-                            consumeToken();
-
-                            if (lookahead().getLexema().equals(".") ||lookahead().getLexema().equals("[")) {
-                                contElement(tipo);
-                            }
-                        } else {
-                            error("ESPERAVA: IDE", true);
-                        }
-                    } else {
-                        error("ESPERAVA: '.'", true);
-                    }
-                    break;
-                default:
-                    error("ESPERAVA: IDE, \"global\" ou \"local\"", true);
-            }
         }
         if (tipo.getId() == null) {
             VariavelInvalidaException var = new VariavelInvalidaException(message);
             throw var;
         }
         return tipo;
+    }
+    
+    private Token variavel() throws FimInesperadoDeArquivo, VariavelInvalidaException {
+            switch (currentToken().getLexema()) {
+                case "global":
+                case "local":
+                    consumeToken();
+                    if (currentToken().getLexema().equals(".")) {
+                        consumeToken();
+                        return auxVariavel();
+                    } else {
+                        error("ESPERAVA: '.'", true);
+                    }
+                    break;
+                default:
+                    if(!currentToken().getId().equals("IDE"))
+                        error("ESPERAVA: IDE, \"global\" ou \"local\"", true);
+                    return auxVariavel();
+            }
+            throw new VariavelInvalidaException("");
     }
 
     private Token contElement(Token tipo) throws FimInesperadoDeArquivo {
