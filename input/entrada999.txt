@@ -99,7 +99,7 @@ function struct funcionario teste(int a, real opa, int hip, struct Pessoa ela){
 	return zip;
 }
 
-procedure teste(int jota, int ka, struct Pessoa carro){
+procedure teste(int jota, int ka, struct Pessoa carro, real eta){
     var{
         struct Pessoa xablau;
         struct empregado1 joao = zup;  
@@ -107,6 +107,9 @@ procedure teste(int jota, int ka, struct Pessoa carro){
         int i;
         string cadeia="zap";
     }
+    while((8<10)&&(2.5>7.2)||(joao+zup)){
+	print("casa");
+	}
     xablau = true;
     soma = true;
     teste(1, 2, 3);
@@ -116,7 +119,7 @@ procedure teste(int jota, int ka, struct Pessoa carro){
     teste(i, i, i, "opa");
     teste(i, i, cadeia, cadeia);//Erro na cadeia 2
     read(i, u[i]);
-    teste(i, 2, xablau);
+    teste(i, 2+local.i, xablau, 2.2/2.3);
 
 }
 

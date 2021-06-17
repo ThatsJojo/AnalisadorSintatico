@@ -836,7 +836,7 @@ public class AnalisadorSintatico {
                         if (currentToken().getId().equals("IDE")) {
                             consumeToken();
 
-                            if (aheadToken.equals(".") | aheadToken.equals("[")) {
+                            if (lookahead().getLexema().equals(".") ||lookahead().getLexema().equals("[")) {
                                 contElement(tipo);
                             }
                         } else {
@@ -2461,6 +2461,9 @@ public class AnalisadorSintatico {
             if (currentToken().getLexema().equals(")")) {
                 consumeToken();
                 if (currentToken().getLexema().equals("*") || currentToken().getLexema().equals("/")) {
+                    if (currentToken().getLexema().equals("/") && (confereTipo(tipo, new Token("NRO", "0", currentToken().getLinha())))) {
+                        erroSemantico(currentToken() + " Divisão não é permitida com tipos inteiros.");
+                    }
                     consumeToken();
                     aritmeticOp(tipo);
                 }
@@ -2470,6 +2473,9 @@ public class AnalisadorSintatico {
         } else {
             ret = opNegate(tipo);
             if (currentToken().getLexema().equals("*") || currentToken().getLexema().equals("/")) {
+                if (currentToken().getLexema().equals("/") && !(confereTipo(tipo, new Token("NRO REAL", "0.0", currentToken().getLinha()), false))) {
+                    erroSemantico(currentToken() + " Divisão é permitida apenas com valores reais.");
+                }
                 consumeToken();
                 aritmeticOp(tipo);
             }
@@ -2489,6 +2495,14 @@ public class AnalisadorSintatico {
         switch (currentToken().getId()) {
             case "REL":
             case "LOG":
+                switch (currentToken().getLexema()) {
+                    case "&&":
+                    case "!=":
+                    case "||":
+                        tipo.setId(null);
+                        tipo.setLexema(null);
+                        break;
+                }
                 consumeToken();
                 contRelLogic(tipo);
                 break;
@@ -2911,9 +2925,9 @@ public class AnalisadorSintatico {
                 boolean flag = false;
                 while (i2.hasNext()) {
                     flag = false;
-                    
+
                     //System.out.println(""+currentToken().getLinha()+" t1: "+t1+" t2: "+t2+" result: "+(result)+" size func: "+pParams.size()+" i2.has: "+i2.hasNext()+"  lista: "+lista.size());
-                    if (i3.hasNext()&&confereTipo((Token) i2.next(),(Token) i3.next() , false)) {
+                    if (i3.hasNext() && confereTipo((Token) i2.next(), (Token) i3.next(), false)) {
                         flag = true;
                     } else {
                         break;
