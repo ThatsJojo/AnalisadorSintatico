@@ -2730,7 +2730,7 @@ public class AnalisadorSintatico {
         return true;
     }
 
-    private boolean confereTipo(Token t1, Token t2) {
+    private boolean confereTipo(Token t1, Token t2) throws FimInesperadoDeArquivo {
         if (t1 == null || t2 == null) {
             return false;
         }
@@ -2750,7 +2750,7 @@ public class AnalisadorSintatico {
                 }
 
             } catch (identificadorNaoEncontrado ex) {
-                erroSemantico("" + t1 + " o tipo utilizado não foi declarado. ");
+                erroSemantico("" + String.format("%04d", currentToken().getLinha()) + " o tipo utilizado não foi declarado. ");
                 return false;
             }
         } else if (t1.getId().equals("NRO REAL")) {
@@ -2770,7 +2770,7 @@ public class AnalisadorSintatico {
                     simbolo2 = null;
                 }
             } catch (identificadorNaoEncontrado ex) {
-                erroSemantico("" + t2 + " o tipo utilizado não foi declarado. ");
+                erroSemantico("" + String.format("%04d", currentToken().getLinha()) + " o tipo utilizado não foi declarado. ");
                 return false;
             }
         } else if (t2.getId().equals("NRO REAL")) {
@@ -2783,13 +2783,13 @@ public class AnalisadorSintatico {
             lexema2 = t2.getLexema();
         }
         if ((lexema1 == null && lexema2 != null) || (lexema1 != null && lexema2 == null)) {
-            erroSemantico("" + t1 + " Tipos Incompatíveis: " + (lexema1 == null ? "struct " + simbolo1.getToken().getLexema() : lexema1) + " e " + (lexema2 == null ? "struct " + simbolo2.getToken().getLexema() : lexema2));
+            erroSemantico("" + String.format("%04d", currentToken().getLinha()) + " Tipos Incompatíveis: " + (lexema1 == null ?simbolo1.getToken().getLexema() : lexema1) + " e " + (lexema2 == null ?simbolo2.getToken().getLexema() : lexema2));
             return false;
         } else if (lexema1 != null && lexema2 != null) {
             if (lexema1.equals(lexema2)) {
                 return true;
             } else {
-                erroSemantico("" + t1 + " Tipos Incompatíveis: " + lexema1 + " e " + lexema2);
+                erroSemantico("" + String.format("%04d", currentToken().getLinha()) + " Tipos Incompatíveis: " + lexema1 + " e " + lexema2);
                 return false;
             }
         }
