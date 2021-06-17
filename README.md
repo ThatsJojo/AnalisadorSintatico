@@ -3,8 +3,30 @@ Analisador Sintático criado para a disciplina MI - Processadores de Linguagem d
 
 Este analisador dá continuação ao processo de compilação iniciado pelo Analisador Léxico desenvolvido anteriormente.
 
-# AnalisadorLexico
-Analisador Léxico criado para a disciplina MI - Processadores de Linguagem de Programação
+# AnalisadorSemântico
+Analisador Semântico criado para a disciplina MI - Processadores de Linguagem de Programação.
+
+## Estrutura de declaração de Struct
+
+struct pessoa{
+    var{
+        string nome;
+        real salario;
+    }
+}
+
+var{
+    struct pessoa Fernando;
+}
+
+## Uso do local e global
+
+É permitido o uso de identificadores de mesmo nome, desde que em escopos diferentes. Caso um identificador
+global tenha o mesmo nome que um identificador local, a linguagem permite distingui-los através das palavras global
+e local, que devem ser colocados antes do nome da variável, juntamente com um delimitador . (ponto).
+
+Quando o identificador não é precedido de "local." o analisador primeiramente procura se o mesmo foi declarado no escopo local, 
+caso não encontre ele procura no escopo global.
 
 # Estrutura Léxica da Linguagem 
 

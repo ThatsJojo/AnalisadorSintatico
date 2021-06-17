@@ -1,35 +1,70 @@
-typedef struct Pessoa Pessoa;
-typedef real frase;
-typedef frase frase1;
-typedef frase1 frase2;
+typedef struct pessoa Pessoa;
+typedef string frase;
+typedef string int1;
+typedef int1 int2;
+typedef int2 int3;
+typedef int3 int4;
+typedef int4 int5;
+typedef int5 inteiro;
 
-struct Pessoa {
+struct jubileu {
     var{
-        String cpf, nome;
+        string cpf, nome;
         int idade, peso, altura;
+	int idade;
     }
 }
 
-struct funcionario extends Pessoa{
+typedef Pessoa alguem;
+
+struct funcionario extends pessoa{
     var{
         real salario;
     }
 }
+
+typedef funcionario empregado;
+
 var{
-	frase2 i;
-        frase2 p;
- }
+	struct jubileu jubileu1; 
+	int jubileu = 10;
+	//int i = 20*8+"jacobina";
+        int xablau = 0, xablau = 2;
+	int i[2] = [false,true], j = false;
+	int jota = 2*focafunc[jota]*pedro("Joao", 85*3, i[2*focafunc("Joao", 85*3, i[7])]);
+	string japa = "Opa gangnangstyle", zoom = "app";
+	boolean i = false,k=true, k[3]=[urubu,sem,asa], l;
+	int i[2][3]=[[false,true, zip, zop],[biri, flinston],[opa],[eita]], joao=i,false1 =  j;
+	//Testanto operações
+	int i[2*90/1520] = [false,(2+3)!=(2+3)<7], j = false<=(8*5.2+i[5/4]*jota.ka[21][5+3]);
+	real i = 10*3.1+2.7*8.777/15+(128/12.2), k=i[20.5/(12-15)*(-I+20)]||(128&&15)>14, k[3]=[urubu,sem,asa], l;
+	int i[2*3][3+2]=[[false,true||ele, zip<=zop, uat&&zap],[biri>flinston, opa-flinston],[-opa*2],[2/(eita)]], joao=-i,false1 =  -(j/2);
+
+}
+
+//typedef int inteiro;
+
+
 const{
-    real w=2.3;
- }
-typedef struct Pessoa Pessoa;
+	inteiro zipzop = 10;
+	struct pessoa pessoa1 = 1;
+	alguem pessoa2 = 1;
+	empregado pessoa2 = 1;
+	funcionario pessoa3 = 4;
+	int i = i+i, j = true;
+	real i = reali, joao = safe;
+	real i = reali, joao = safe;
+	int i[2]=[opa,zap];
+	int i32[2] = [false,true], j = false;
+	int i32[2] = [false,true], j = false;
+	real i = false,k=true, k[3]=[urubu,sem,asa];
+	int i654[2][3]=[[false,true, zip, zop],[biri, flinston],[opa],[eita]], joao157=i,false157 =  j;
+	int i654[2][3]=[[false,true, zip, zop],[biri, flinston],[opa],[eita]], joao157=i,false157 =  j;
+
+}
 
 function int soma(){
-    var{
-	real i;
-        real p;
- }
-    p = i;
+    typedef int5 inteiro;
     read(i, u[i]);
     if(!variavel) then{
        read(i);
@@ -39,6 +74,8 @@ function int soma(){
     --i;
     ++j;
     teste();
+    imprime("ZAPERSON", "zop", "zip",jota);
+    print("ZAPERSON", "zop", "zip",jota);
     while(!variavel){
 	read(j);
     }
@@ -46,15 +83,106 @@ function int soma(){
     return i;
 }
 
-procedure teste(){
+procedure soma(int i, int jota){
+
+}
+
+procedure soma(int casa, int carro){
+
+}
+
+procedure soma(int i){
+
+}
+
+procedure soma(int opa){
+
+}
+
+
+function real soma(int casa, int carro){
+	return i;
+}
+
+function string soma(int i){
+	return i;
+}
+
+function int soma(int opa){
+	return i;
+}
+
+
+procedure soma(string abacaxi, int girafa, real jota, string i){
+
+}
+
+procedure soma(string corrimao, int peixe, real vaca, string manobra){
+
+}
+
+procedure soma(string i, real urubu, string casa, real pessoa){
+
+}
+
+function string soma(string i, real papagaio,  string ihRapaz, boolean i){
+	return aviao;
+}
+
+procedure soma(string i, real papagaio, string i, boolean ihRapaz){
+
+}
+
+procedure soma(real carnaval, boolean jiboia, string mula, real cobra){
+
+}
+
+
+function int soma(int i){
     var{
         struct Pessoa xablau;
-        frase2 soma;
+	int xablau = 12;
     }
-    xablau = true;
-    soma = true;
-   
     read(i, u[i]);
+    if(!variavel) then{
+       read(i);
+    }
+    i++;
+    i--;
+    --i;
+    ++j;
+//    i = jota[5]+start;
+    teste();
+    imprime("ZAPERSON", "zop", "zip",jota);
+    print("ZAPERSON", "zop", "zip",jota);
+    while(!variavel){
+	read(j);
+    }
+
+    return i;
+}
+
+procedure testandow(){
+    var{
+        struct Pessoa xablau;
+        int soma1;
+    }
+    typedef struct Pessoa Pessoa;
+    typedef string frase;
+    read(i, u[i]);
+//    return a;
+
+}
+
+procedure testandow(){
+    var{
+        struct Pessoa xablau;
+        int soma1;
+    }
+    typedef struct Pessoa Pessoa;
+    typedef string frase;
+    read(i, u[i]);
+//    return a;
 
 }
 
@@ -62,7 +190,8 @@ procedure start(){
     var{
         struct Pessoa xablau;
     }
+    typedef struct Pessoa Pessoa;
+    typedef string frase;
     read(i, u[i]);
-
 
 }
