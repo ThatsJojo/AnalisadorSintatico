@@ -12,6 +12,7 @@ public class TabelaSimbolos {
   // private final HashMap<Token, LinkedList<Simbolo>> functions;
     private final HashMap<Token, Simbolo> tipos;
     private final TabelaSimbolos escopoPai;
+    private final LinkedList<Token> array;
 
     public TabelaSimbolos(TabelaSimbolos ep) {
         //functions = new HashMap();
@@ -19,6 +20,7 @@ public class TabelaSimbolos {
         simbolos = new HashMap();
         tipos = new HashMap();
         escopoPai = ep;
+        array = new LinkedList();
     }
 
     public Simbolo inserirSimbolo(Token t, String categoria, String tipo, String valor, Object variavel) throws identificadorJaUtilizado {
@@ -42,6 +44,7 @@ public class TabelaSimbolos {
             tipos.put(t, ret);
         }
         simbolos.put(t, lista);
+        array.add(t);
         return ret;
     }
 
@@ -55,9 +58,18 @@ public class TabelaSimbolos {
         return simbolos.containsKey(identificador) || (escopoPai != null && escopoPai.contains(identificador));
     }
 
-    public void print() {
+    public void printTipos() {
         tipos.forEach((a, b) -> {
             System.out.println(a.getLexema());
+        });
+    }
+    
+    public void printSimbolos() {
+        /*simbolos.forEach((a, b) -> {
+            System.out.println(a.getLexema());
+        });*/
+        array.forEach((simb)->{
+            System.out.println(simb.getLexema());
         });
     }
 

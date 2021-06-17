@@ -730,10 +730,10 @@ public class AnalisadorSintatico {
     }
     //verifica se é um tipo válido
 
-    private Token dataType() throws FimInesperadoDeArquivo {
+    private Token dataType(String struct) throws FimInesperadoDeArquivo {
         Token ret = null;
         if (currentToken().getId().equals("IDE") || FIRSTTYPES.contains(currentToken().getLexema())) {
-            ret = currentToken();
+            ret = new Token(currentToken().getId(), struct + currentToken().getLexema(), currentToken().getLinha());
             consumeToken();
         } else {
             error("ESPERAVA: IDE", true);
@@ -917,6 +917,11 @@ public class AnalisadorSintatico {
         } else {
             error("ESPERAVA: '{'", true);
         }
+        System.out.println("******************************************************************");
+        System.out.println(currentToken()+"  "+lookahead()+"    "+lookaheadP());
+        escopoAtual.printSimbolos();
+        System.out.println("******************************************************************");
+        
     }
 
     private void primeiraVar() throws FimInesperadoDeArquivo, identificadorNaoEncontrado {
@@ -937,8 +942,8 @@ public class AnalisadorSintatico {
             consumeToken();
             struct = "struct ";
         }
-        Token ret = dataType();
-        ret.setLexema(struct+ret.getLexema());
+        Token retorno = dataType(struct);
+        Token ret = new Token(retorno.getId(), struct + retorno.getLexema(), retorno.getLinha());
         return ret;
     }
 
@@ -986,8 +991,7 @@ public class AnalisadorSintatico {
                 if (currentToken().getLexema().equals("]")) {
                     consumeToken();
                     estrutura(apontado);
-                }
-                else{
+                } else {
                     error("ESPERAVA: ']'", true);
                 }
                 break;
@@ -1198,16 +1202,12 @@ public class AnalisadorSintatico {
 
     private Token continueConst() throws FimInesperadoDeArquivo {
         Token ret;
+        String struct = "";
         if (currentToken().getLexema().equals("struct")) {
+            struct = "struct ";
             consumeToken();
-            if (currentToken().getId().equals("IDE")) {
-                ret = currentToken();
-                consumeToken();
-                return ret;
-            }
-
         }
-        return dataType();
+        return dataType(struct);
     }
 
     private void proxConst() throws FimInesperadoDeArquivo, identificadorNaoEncontrado {
@@ -1400,7 +1400,12 @@ public class AnalisadorSintatico {
     private void function() throws FimInesperadoDeArquivo, identificadorNaoEncontrado {
         escopoAtual = new TabelaSimbolos(global);
         ESCOPOS.add(escopoAtual);
-        Token apontado = dataType();
+        String struct = "";
+        if (currentToken().getLexema().equals("struct")) {
+            struct = "struct ";
+            consumeToken();
+        }
+        Token apontado = dataType("");
         if (currentToken().getId().equals("IDE")) {
             Token simbolo = currentToken();
             consumeToken();
@@ -1563,7 +1568,12 @@ public class AnalisadorSintatico {
     }
 
     private void parameters(LinkedList<String> lista) throws FimInesperadoDeArquivo {
-        Token tipo = dataType();
+        String struct = "";
+        if (currentToken().getLexema().equals("struct")) {
+            struct = "struct ";
+            consumeToken();
+        }
+        Token tipo = dataType(struct);
         if (tipo != null) {
             lista.add(tipo.getLexema());
         }
@@ -1603,7 +1613,7 @@ public class AnalisadorSintatico {
     }
 
     private void structVars() throws FimInesperadoDeArquivo, identificadorNaoEncontrado {
-        Token simbolo = new Token(currentToken().getId(), "struct "+ currentToken().getLexema(), currentToken().getLinha());
+        Token simbolo = new Token(currentToken().getId(), "struct " + currentToken().getLexema(), currentToken().getLinha());
         consumeToken();
         switch (currentToken().getLexema()) {
             case "{":
@@ -1618,12 +1628,12 @@ public class AnalisadorSintatico {
             case "extends":
                 consumeToken();
                 String struct = "";
-                if(currentToken().getLexema().equals("struct")){
+                if (currentToken().getLexema().equals("struct")) {
                     struct = "struct ";
                     consumeToken();
                 }
                 if (currentToken().getId().equals("IDE")) {
-                    Token apontado = new Token(currentToken().getId(), struct+currentToken().getLexema(), currentToken().getLinha());
+                    Token apontado = new Token(currentToken().getId(), struct + currentToken().getLexema(), currentToken().getLinha());
                     try {
                         //tipoPrimitivo(apontado
                         escopoAtual.inserirSimbolo(simbolo, "struct", simbolo.getId(), simbolo.getLexema(), escopoAtual.getTipo(apontado).getToken());
@@ -1664,7 +1674,12 @@ public class AnalisadorSintatico {
     }
 
     private void firstStructVar() throws FimInesperadoDeArquivo {
-        dataType();
+        String struct = "";
+        if (currentToken().getLexema().equals("struct")) {
+            struct = "struct ";
+            consumeToken();
+        }
+        dataType(struct);
         structVarId();
     }
 
@@ -1712,7 +1727,12 @@ public class AnalisadorSintatico {
                 error("ESPERAVA: '}'", true);
             }
         } else {
-            dataType();
+            String struct = "";
+            if (currentToken().getLexema().equals("struct")) {
+                struct = "struct ";
+                consumeToken();
+            }
+            dataType(struct);
             structVarId();
         }
     }
@@ -2230,10 +2250,10 @@ public class AnalisadorSintatico {
         if (currentToken().getLexema().equals("struct")) {
             consumeToken();
             if (currentToken().getId().equals("IDE")) {
-                Token apontado = new Token(currentToken().getId(), "struct "+ currentToken().getLexema(), currentToken().getLinha());
+                Token apontado = new Token(currentToken().getId(), "struct " + currentToken().getLexema(), currentToken().getLinha());
                 consumeToken();
                 if (currentToken().getId().equals("IDE")) {
-                    Token simbolo = new Token(currentToken().getId(),currentToken().getLexema(), currentToken().getLinha());
+                    Token simbolo = new Token(currentToken().getId(), currentToken().getLexema(), currentToken().getLinha());
                     consumeToken();
                     if (currentToken().getLexema().equals(";")) {
                         try {
@@ -2261,7 +2281,8 @@ public class AnalisadorSintatico {
                 error("ESPERAVA: IDE", true);
             }
         } else {
-            Token apontado = dataType();
+            
+            Token apontado = dataType("");
             if (currentToken().getId().equals("IDE")) {
                 Token simbolo = currentToken();
                 consumeToken();
@@ -2783,7 +2804,7 @@ public class AnalisadorSintatico {
             lexema2 = t2.getLexema();
         }
         if ((lexema1 == null && lexema2 != null) || (lexema1 != null && lexema2 == null)) {
-            erroSemantico("" + String.format("%04d", currentToken().getLinha()) + " Tipos Incompatíveis: " + (lexema1 == null ?simbolo1.getToken().getLexema() : lexema1) + " e " + (lexema2 == null ?simbolo2.getToken().getLexema() : lexema2));
+            erroSemantico("" + String.format("%04d", currentToken().getLinha()) + " Tipos Incompatíveis: " + (lexema1 == null ? simbolo1.getToken().getLexema() : lexema1) + " e " + (lexema2 == null ? simbolo2.getToken().getLexema() : lexema2));
             return false;
         } else if (lexema1 != null && lexema2 != null) {
             if (lexema1.equals(lexema2)) {
@@ -2816,8 +2837,8 @@ public class AnalisadorSintatico {
     }
 
     private Token tipoPrimitivo(Token tipo) throws identificadorNaoEncontrado {
-        if(tipo == null){
-        //    throw new identificadorNaoEncontrado();
+        if (tipo == null) {
+            //    throw new identificadorNaoEncontrado();
         }
         if (tipo.getId().equals("IDE")) {
             return tipoPrimitivo((Token) escopoAtual.getTipo(tipo).getVariavel());

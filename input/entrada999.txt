@@ -39,11 +39,13 @@ struct empregado extends serHumano{
 }
 
 var{
-    struct funcionario zop  = 10;
-    struct funcionario zap, zip = zap;
-    struct funcionario zup = zap;
+    struct funcionario zap;
+    struct funcionario zop;
+    struct funcionario zip;
+    struct funcionario zup;
     real w=2.3,i, esther;
     int carro[10][20]=[[1,2,3,4,5,3],[1,2,3,4,esther]];
+   
  }
 
 struct gerente extends w{
