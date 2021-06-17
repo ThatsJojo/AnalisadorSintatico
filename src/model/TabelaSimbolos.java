@@ -11,7 +11,7 @@ public class TabelaSimbolos {
     private final HashMap<Token, LinkedList<Simbolo>> simbolos;
   // private final HashMap<Token, LinkedList<Simbolo>> functions;
     private final HashMap<Token, Simbolo> tipos;
-    private final TabelaSimbolos escopoPai;
+    private TabelaSimbolos escopoPai;
     private final LinkedList<Token> array;
 
     public TabelaSimbolos(TabelaSimbolos ep) {
@@ -74,6 +74,9 @@ public class TabelaSimbolos {
     }
 
     public LinkedList<Simbolo> getSimbolo(Token t) throws identificadorNaoEncontrado {
+        if(simbolos.isEmpty()){
+            throw new identificadorNaoEncontrado();
+        }
         LinkedList<Simbolo> lista = simbolos.get(t);
         if ((lista == null) && (escopoPai != null)) {
             lista = escopoPai.getSimbolo(t);
@@ -116,4 +119,7 @@ public class TabelaSimbolos {
         return escopoPai;
     }
 
+    public void setEscopoPai(TabelaSimbolos escopoPai) {
+        this.escopoPai = escopoPai;
+    }
 }

@@ -7,6 +7,7 @@ public class Simbolo {
     private String valor;
     private Object variavel;
     private String vetorStruct;
+    private TabelaSimbolos escopo;
 
     public Simbolo(Token token) {
         this.token = token;
@@ -64,6 +65,16 @@ public class Simbolo {
     public void setVetorStruct(String vetorStruct) {
         this.vetorStruct = vetorStruct;
     }
+
+    public TabelaSimbolos getEscopo() {
+        return escopo;
+    }
+
+    public void setEscopo(TabelaSimbolos escopo) {
+        this.escopo = escopo;
+    }
+    
+    
 
     @Override
     public String toString() {
