@@ -14,6 +14,7 @@ package model;
 import java.util.Objects;
 
 public class Token {
+    private String flag;
     private String lexema;
     private  int linha;
     private  String id;
@@ -37,6 +38,7 @@ public class Token {
     }
 
     public Token(String id, String lexema, int linha) {
+        flag = null;
         this.lexema = lexema;
         this.linha = linha;
         this.id = id;
@@ -46,6 +48,14 @@ public class Token {
 
     public String getLexema() {
         return lexema;
+    }
+    
+    public String getFlag() {
+        return flag;
+    }
+    
+    public void setFlag(String flag){
+        this.flag = flag;
     }
 
     public int getLinha() {

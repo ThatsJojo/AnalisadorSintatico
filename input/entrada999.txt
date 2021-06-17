@@ -105,7 +105,7 @@ procedure teste(int jota, int ka, struct Pessoa carro, real eta){
         struct empregado1 joao = zup;  
         frase2 soma;
         int i;
-        string cadeia="zap";
+        string cadeia="zap", zip = "Roi";
     }
     while((8<10)&&(2.5>7.2)||(joao+zup)){
 	print("casa");
@@ -120,6 +120,9 @@ procedure teste(int jota, int ka, struct Pessoa carro, real eta){
     teste(i, i, cadeia, cadeia);//Erro na cadeia 2
     read(i, u[i]);
     teste(i, 2+local.i, xablau, 2.2/2.3);
+    global.zip = local.zip;
+    local.zip = global.zip;
+    global.teste = local.xablau;
 
 }
 

@@ -778,7 +778,7 @@ public class AnalisadorSintatico {
         return ret;
     }
 
-    private Token auxVariavel() throws FimInesperadoDeArquivo, VariavelInvalidaException{
+    private Token auxVariavel(Token flag) throws FimInesperadoDeArquivo, VariavelInvalidaException {
         String aheadToken = lookahead().getLexema();
         Token tipo = new Token(null, null, currentToken().getLinha()); //sem global e local por enquanto
         Token atual = currentToken();
@@ -788,8 +788,8 @@ public class AnalisadorSintatico {
         if (currentToken().getId().equals("IDE")) {
             consumeToken();
             try {
-                LinkedList<Simbolo> simb = escopoAtual.getSimbolo(atual);
-                s = simb.get(0);
+                s = (flag == null) ? escopoAtual.getSimbolo(atual).get(0) : (flag.getLexema().equals("global") ? global.getSimbolo(atual).get(0) : escopoAtual.localSimbolo(atual));
+                tipo.setFlag(s.getCategoria());
                 if (s.getCategoria().equals("variavel") || s.getCategoria().equals("constante")) {
                     Token tipoApontado = (Token) s.getVariavel();
                     if (!tipoApontado.getId().equals("IDE")) {
@@ -809,6 +809,8 @@ public class AnalisadorSintatico {
                             //erroSemantico("" + atual + " tipo da variável ou constante não foi encontrado. " + s);
                         }
                     }
+                }else{
+                    message = "" + atual + " o identificador não está vinculado a uma variável nem constante. " + s;
                 }
 
             } catch (identificadorNaoEncontrado e) {
@@ -833,25 +835,28 @@ public class AnalisadorSintatico {
         }
         return tipo;
     }
-    
+
     private Token variavel() throws FimInesperadoDeArquivo, VariavelInvalidaException {
-            switch (currentToken().getLexema()) {
-                case "global":
-                case "local":
+        Token flag = null;
+        switch (currentToken().getLexema()) {
+            case "global":
+            case "local":
+                flag = currentToken();
+                consumeToken();
+                if (currentToken().getLexema().equals(".")) {
                     consumeToken();
-                    if (currentToken().getLexema().equals(".")) {
-                        consumeToken();
-                        return auxVariavel();
-                    } else {
-                        error("ESPERAVA: '.'", true);
-                    }
-                    break;
-                default:
-                    if(!currentToken().getId().equals("IDE"))
-                        error("ESPERAVA: IDE, \"global\" ou \"local\"", true);
-                    return auxVariavel();
-            }
-            throw new VariavelInvalidaException("");
+                    return auxVariavel(flag);
+                } else {
+                    error("ESPERAVA: '.'", true);
+                }
+                break;
+            default:
+                if (!currentToken().getId().equals("IDE")) {
+                    error("ESPERAVA: IDE, \"global\" ou \"local\"", true);
+                }
+                return auxVariavel(flag);
+        }
+        throw new VariavelInvalidaException("");
     }
 
     private Token contElement(Token tipo) throws FimInesperadoDeArquivo {
@@ -1970,7 +1975,8 @@ public class AnalisadorSintatico {
 //====================================== Codigo ======================================================
 //****************************************************************************************************  
     private void codigo() throws FimInesperadoDeArquivo, identificadorNaoEncontrado {
-        if (FIRSTCOMANDO.contains(currentToken().getLexema()) || currentToken().getId().equals("IDE")) { //IDE para increment e decrement, functioncall e atribuição
+        if (FIRSTCOMANDO.contains(currentToken().getLexema()) || currentToken().getId().equals("IDE") || currentToken().getLexema().equals("global")
+                || currentToken().getLexema().equals("local")) { //IDE para increment e decrement, functioncall e atribuição
             comando();
             codigo();
         }
@@ -1991,7 +1997,8 @@ public class AnalisadorSintatico {
             conditional();
         } else if (currentToken().getLexema().equals("while")) {
             whileLoop();
-        } else if (currentToken().getId().equals("IDE")) {
+        } else if (currentToken().getId().equals("IDE") || currentToken().getLexema().equals("global")
+                || currentToken().getLexema().equals("local")) {
             Token t = lookahead();
             if (t.getLexema().equals("(")) {
                 functionCall();
@@ -2016,15 +2023,12 @@ public class AnalisadorSintatico {
                         consumeToken();
                         try {
                             Token v = value();
-                            LinkedList<Simbolo> simb = escopoAtual.getSimbolo(atual);
-                            Simbolo s = simb.get(0);
-                            if (s.getCategoria().equals("variavel")) {
-                                confereTipo(v, (Token) s.getVariavel());
-                            } else {
-                                erroSemantico(s + " Não é variável");
+                            if (tk != null) {
+                                confereTipo(v, tk);
+                                if (tk.getFlag() != null && !tk.getFlag().equals("variavel")) {
+                                    erroSemantico(tk + " Atribuição não pode ser realizada, pois o identificador não indica uma variável.");
+                                }
                             }
-                        } catch (identificadorNaoEncontrado e) {
-                            erroSemantico(atual + " Variável não declarada");
                         } catch (ExpressaoInvalidaException ex) {
                             erroSemantico(String.format("%04d", ex.getErro().getLinha()) + " Expressão inválida ");
                         }
@@ -2571,7 +2575,9 @@ public class AnalisadorSintatico {
             case "(":
                 consumeToken();
                 if (currentToken().getId().equals("NRO") || currentToken().getId().equals("CAD")
-                        || currentToken().getId().equals("IDE") || currentToken().getLexema().equals("-")) {
+                        || currentToken().getId().equals("IDE") || currentToken().getLexema().equals("-")
+                        || currentToken().getLexema().equals("global")
+                        || currentToken().getLexema().equals("local")) {
                     Token atual = currentToken();
                     try {
                         aritmeticOp(tipo);
@@ -2633,7 +2639,8 @@ public class AnalisadorSintatico {
             tipo = new Token(null, null, currentToken().getLinha());
         }
         if (currentToken().getId().equals("NRO") || currentToken().getId().equals("NRO REAL") || currentToken().getId().equals("CAD")
-                || currentToken().getId().equals("IDE") || currentToken().getLexema().equals("-")) {
+                || currentToken().getId().equals("IDE") || currentToken().getLexema().equals("-") || currentToken().getLexema().equals("global")
+                || currentToken().getLexema().equals("local")) {
             Token atual = currentToken();
             try {
                 Token tipoRecebido = aritmeticOp(tipo);
@@ -2660,7 +2667,8 @@ public class AnalisadorSintatico {
                 case "(":
                     consumeToken();
                     if (currentToken().getId().equals("NRO") || currentToken().getId().equals("NRO REAL") || currentToken().getId().equals("CAD")
-                            || currentToken().getId().equals("IDE") || currentToken().getLexema().equals("-")) {
+                            || currentToken().getId().equals("IDE") || currentToken().getLexema().equals("-") || currentToken().getLexema().equals("global")
+                            || currentToken().getLexema().equals("local")) {
 
                         try {
                             Token tipoRecebico = aritmeticOp(tipo);
@@ -2709,6 +2717,7 @@ public class AnalisadorSintatico {
                     break;
                 default:
                     error("ESPERAVA: '!', '(', \"true\" ou \"false\"", true);
+                    break;
             }
         }
         if (ret.getId() == null) {
