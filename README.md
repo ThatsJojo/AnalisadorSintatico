@@ -49,6 +49,13 @@ caso não encontre ele procura no escopo global.
 
 Não é permitido realizar expressões aritméticas ou relacionais (exceção para o uso de != ou ==) com argumentos de tipos diferentes, apenas expressões lógias (uso de &&, ||).
 
+## Elementos de vetores e structs
+
+É permitido criar vetores e matrizes. Assim sendo, pode-se criar vetores de structs, matrizes de struct, além de adicionar structs e vetores/matrizes aos  campos de uma struct.
+
+## Inicialização de variáveis
+
+Dado o fato de não poder, em tempo de compilação, decidir se uma variável foi ou não inicializada antes de seu uso (jumps no código empendem isso), não será apontado erro semâncico para esse caso.
 
 # AnalisadorSintático
 Analisador Sintático criado para a disciplina MI - Processadores de Linguagem de Programação.
