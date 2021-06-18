@@ -2,26 +2,27 @@
 Analisador Semântico criado para a disciplina MI - Processadores de Linguagem de Programação.
 
 ## Estrutura de declaração de Struct
+A produção struct declara um tipo. Esse tipo é indexado pela palavra reservada e por seu identificador. Para utilizá-lo, então, deve-se usar esses dois tokens.
 Para utilizar o extends, deve-se passar um tipo de struct (struct + identificador) ou um apelido de struct (identificador utilizado em typedef)
 structs não podem ter campos com mesmo identificador que os campos de structs herdadas.
 
-struct pessoa{
+**struct pessoa**{
     var{
         string nome;
         real salario;
     }
 }
 
-struct funcionario extends struct pessoa{
+struct funcionario **extends struct pessoa**{
     var{
         string sobrenome;
 	struct pessoa p;
     }
 }
 
-typedef struct funcionario pessoa;
+typedef struct funcionario **pessoa**;
 
-struct empregado extends pessoa{
+struct empregado **extends pessoa**{
 	var{
 		int numero;
 		pessoa f;
