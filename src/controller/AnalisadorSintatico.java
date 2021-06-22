@@ -825,7 +825,6 @@ public class AnalisadorSintatico {
         }
 
         String aheadToken = lookahead().getLexema();
-        tipo = new Token(null, null, currentToken().getLinha()); //sem global e local por enquanto
         Token atual = currentToken();
         boolean isStruct = false;
         Simbolo s = null;
