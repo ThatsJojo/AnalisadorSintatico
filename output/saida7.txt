@@ -1,0 +1,3 @@
+0012 Tipos Incompatíveis: int e real
+0020 Tipos Incompatíveis: string e int
+0022 Tipos Incompatíveis: string e int

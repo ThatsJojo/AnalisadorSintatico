@@ -18,9 +18,6 @@
 0088 IDE j Tipo de váriavel não declarado
 0090 IDE variavel Variável inválida: 0090 IDE variavel Variável não declarada
 0090 LOG ! valor passado não é booleano
-0102 IDE zip Variável inválida: 0102 IDE zip Variável não declarada
-0102 IDE zip Expressão inválida 
-0102 IDE struct funcionario Expressão inválida 
 0113 Tipos Incompatíveis: boolean e struct Pessoa
 0116 Tipos Incompatíveis: boolean e int
 0119 Tipos Incompatíveis: boolean e struct Pessoa

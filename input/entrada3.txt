@@ -1,0 +1,43 @@
+const { int bca = 10; }
+var { int abc; }
+
+procedure teste ( ) {
+	
+}
+
+procedure teste (string msg) {
+	
+}
+
+procedure teste (string msg) {  // erro01: id duplicado
+	
+}
+
+function real soma (real a, real b) {
+	var {real resultado;}
+	
+	return resultado;
+}
+
+function int soma (int a, int b) {
+	var {int resultado;}
+	
+	return resultado;
+}
+
+function real soma (real a, real b, real c) {
+	var {real resultado;}
+	
+	return resultado;
+}
+
+function real soma (real x, real y) {  // erro02: id duplicado
+	var {real resultado;}
+	
+	return resultado;
+}
+
+
+procedure start ( ) {
+	
+}

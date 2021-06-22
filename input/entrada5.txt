@@ -1,0 +1,19 @@
+const {
+	int max1 = 10; 
+
+	string msg = "mensagem teste";  
+
+	real salario = 998.00;
+}
+
+var { int abc; }
+
+procedure start ( ) {
+	var { int a; }
+	
+	max1 = 100;  			// erro01: atribuicao constante
+	
+	msg = "isso nao pode";  // erro02: atribuicao constante
+	
+	salario = salario + 9.99; // erro03: atribuicao constante
+} 

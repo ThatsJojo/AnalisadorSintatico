@@ -89,7 +89,7 @@ public class TabelaSimbolos {
         functions.put(t, lista);
         return ret;
     }*/
-    private boolean contains(Token identificador) {
+    public boolean contains(Token identificador) {
         return simbolos.containsKey(identificador) || (escopoPai != null && escopoPai.contains(identificador));
     }
 
@@ -109,9 +109,9 @@ public class TabelaSimbolos {
     }
 
     public LinkedList<Simbolo> getSimbolo(Token t) throws identificadorNaoEncontrado {
-        if (simbolos.isEmpty()) {
-            throw new identificadorNaoEncontrado();
-        }
+//        if (simbolos.isEmpty()) {
+//            throw new identificadorNaoEncontrado();
+//        }
         LinkedList<Simbolo> lista = simbolos.get(t);
         if ((lista == null) && (escopoPai != null)) {
             lista = escopoPai.getSimbolo(t);

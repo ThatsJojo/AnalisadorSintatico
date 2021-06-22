@@ -1,0 +1,3 @@
+0014 PRE int Atribuição não pode ser realizada, pois o identificador não indica uma variável.
+0016 PRE string Atribuição não pode ser realizada, pois o identificador não indica uma variável.
+0018 PRE real Atribuição não pode ser realizada, pois o identificador não indica uma variável.

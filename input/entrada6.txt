@@ -1,0 +1,41 @@
+const { int bca = 10; }
+
+var { int abc; }
+
+
+procedure imprimir (string msg) {
+	
+}
+
+function real calcula (real x, real j) {
+	var {
+		string msg1, msg2;
+		real resultado;
+	}		
+	imprimir(msg1, msg2);  		// erro01: parametros incorretos
+	return resultado;
+}
+
+function real calcula_aumento_bolsa (real bolsa, real juros) {
+	var {
+		real valor; 
+	}	
+	return valor;
+}
+
+procedure start ( ) {
+	var {
+		real novo_valor, valor_bolsa, tx_juros, resultado;
+		int quantidade;
+	}
+	
+	resultado = calcula_aumento_bolsa(valor_bolsa, tx_juros);
+	
+	resultado = imprimir("mensagem");
+
+	resultado = calcula_aumento_bolsa(valor_bolsa); 		 // erro02: parametros incorretos
+	
+	resultado = calcula_aumento_bolsa(quantidade, tx_juros); // erro03: parametros incorretos
+	
+	resultado = calcula_aumento(valor_bolsa, tx_juros); 	 // erro04: id nao declarado
+}

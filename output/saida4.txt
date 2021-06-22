@@ -1,0 +1,6 @@
+0034 IDE max3 Variável inválida: 0034 IDE max3 Variável não declarada
+0034 IDE max3 Expressão inválida 
+0034 Expressão inválida 
+0036 IDE valor Variável inválida: 0036 IDE valor Variável não declarada
+0038 IDE estado campo ausente na struct passada
+0038 Tipos Incompatíveis: string e struct pessoa

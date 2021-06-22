@@ -1,0 +1,33 @@
+const {
+	int a = 10, d = 20;
+	real b = 22.2;	
+}
+
+var {
+	int abc;
+}
+
+struct pessoa {
+		var {
+			string nome;
+			string cpf;
+			int idade;	
+			real notas[10];
+		}		
+	}
+
+procedure start ( ) { 
+	var { 
+		struct pessoa obj; 
+		int matriz1[10][10];
+		int matriz2[10][10];
+	}	
+	
+	obj.idade = b;   		 // erro01: tipos incompativeis 
+	
+	matriz1[1] = obj.cpf;    // erro02: tipos incompativeis 
+	
+	matriz1 = matriz2;
+	
+	obj.notas[a] = 10;		// erro03: tipos incompativeis 
+}

@@ -1,0 +1,2 @@
+0012 IDE teste Identificador já utilizado. Simbolo de categoria "procedure" encontrado na linha 8
+0034 IDE soma Identificador já utilizado. Simbolo de categoria "funcao" encontrado na linha 16

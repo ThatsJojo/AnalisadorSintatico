@@ -1,24 +1,5 @@
-0001 IDE Pessoa tipo não encontrado. 0001 IDE struct Pessoa
-0008 IDE String tipo não encontrado. 
-0013 IDE Pessoa O identificador não corresponde a uma Struct pai já declarada.
-0033 IDE u Busca de elemento em variável não declarada como struct. Obs: vetor de struct não é tratada como uma struct, apenas seus elementos
-0033 DEL [ a variável não é um vetor ou matriz. 
-0033 IDE u Variável inválida: 0033 IDE u Variável não declarada
-0034 IDE variavel Variável inválida: 0034 IDE variavel Variável não declarada
-0034 LOG ! valor passado não é booleano
-0039 IDE i Tipo de váriavel não declarado
-0040 IDE j Variável inválida: 0040 IDE j Variável não declarada
-0040 IDE j Variável não declarada
-0041 IDE teste Função não declarada. 
-0042 IDE variavel Variável inválida: 0042 IDE variavel Variável não declarada
-0042 LOG ! valor passado não é booleano
-0043 IDE j Variável inválida: 0043 IDE j Variável não declarada
-0046 Tipos Incompatíveis: int e real
-0054 Tipos Incompatíveis: boolean e struct Pessoa
-0055 Tipos Incompatíveis: boolean e real
-0057 IDE u Busca de elemento em variável não declarada como struct. Obs: vetor de struct não é tratada como uma struct, apenas seus elementos
-0057 DEL [ a variável não é um vetor ou matriz. 
-0057 IDE u Variável inválida: 0057 IDE u Variável não declarada
-0065 IDE u Busca de elemento em variável não declarada como struct. Obs: vetor de struct não é tratada como uma struct, apenas seus elementos
-0065 DEL [ a variável não é um vetor ou matriz. 
-0065 IDE u Variável inválida: 0065 IDE u Variável não declarada
+0008 IDE max2 Identificador já utilizado. [Simbolo de categoria "constante" encontrado na linha 2]
+0010 IDE msg1 Identificador já utilizado. [Simbolo de categoria "constante" encontrado na linha 4]
+0020 IDE max4 Identificador já utilizado. [Simbolo de categoria "variavel" encontrado na linha 14]
+0022 IDE msg2 Identificador já utilizado. [Simbolo de categoria "variavel" encontrado na linha 16]
+0044 IDE nome Identificador já utilizado na struct atual ou na struct pai. [Simbolo de categoria "variavel" encontrado na linha 29]

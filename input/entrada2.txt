@@ -1,0 +1,22 @@
+const { int x = 10; }
+var { int abc; }
+
+procedure teste ( ) {
+	var {
+		int max3, max4;  
+		
+		string msg2;
+		
+		boolean flag;
+	
+		real max4;  // erro01: variavel duplicada
+
+		int msg2;   // erro02: variavel duplicada
+		
+		int flag;   // erro03: variavel duplicada
+	}
+}
+
+procedure start ( ) { 
+	
+}

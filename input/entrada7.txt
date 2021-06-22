@@ -1,0 +1,27 @@
+const {
+	int a = 10, d = 20;
+	real b = 22.2;
+	string c = "teste tipo";
+}
+
+var { int abc; }
+
+function real somar (real x, real y) {
+	var { real result; }
+		
+	result = x + y + a;  // erro01: tipos incompativeis
+			
+	return result;
+}	
+
+function string imprimir (string msg) {
+	var { int b; }
+	
+	b = msg;  	 // erro02: tipos incompativeis 
+		
+	return b;    // erro03: tipos incompativeis 
+}
+
+procedure start ( ) { 
+	
+}

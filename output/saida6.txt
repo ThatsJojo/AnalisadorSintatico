@@ -1,0 +1,12 @@
+0015 IDE imprimir Função não encontrada.
+0034 IDE imprimir Expressão inválida 
+0034 Expressão inválida 
+0036 IDE calcula_aumento_bolsa Função não encontrada.
+0036 IDE calcula_aumento_bolsa Expressão inválida 
+0036 Expressão inválida 
+0038 IDE calcula_aumento_bolsa Função não encontrada.
+0038 IDE calcula_aumento_bolsa Expressão inválida 
+0038 Expressão inválida 
+0040 IDE calcula_aumento Função não declarada. 
+0040 IDE calcula_aumento Expressão inválida 
+0040 Expressão inválida 

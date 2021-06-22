@@ -1,0 +1,4 @@
+0026 Tipos Incompatíveis: real e int
+0022 IDE matriz1 a variável não é um vetor.
+0028 Tipos Incompatíveis: string e int
+0032 Tipos Incompatíveis: int e real
