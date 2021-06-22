@@ -5,8 +5,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.util.Pair;
 import model.Arquivo;
 import model.Simbolo;
@@ -87,12 +85,8 @@ public class AnalisadorSintatico {
             analiseret += "" + (privateCurrentToken == null ? "" + privateCurrentToken.getId() : "0000")
                     + " ERRO SINTÁTICO. EOF";
         } catch (identificadorNaoEncontrado ex) {
-            try {
-                System.out.println("Erro interno + " + currentToken() + lookahead() + lookaheadP());
-            } catch (FimInesperadoDeArquivo ex1) {
-                Logger.getLogger(AnalisadorSintatico.class.getName()).log(Level.SEVERE, null, ex1);
+            System.out.println("Erro interno");
             }
-        }
 
         try {
             while (hasToken()) {
@@ -1816,9 +1810,7 @@ public class AnalisadorSintatico {
             try {
                 s = escopoStruct.inserirSimboloGlobal(simbolo, "variavel", simbolo.getId(), simbolo.getLexema(), tipo);
             } catch (identificadorJaUtilizado ex) {
-                System.out.println("FOI AQUI" + currentToken() + " " + (escopoStruct.contains(simbolo)) + "  ");
                 erroSemantico("" + simbolo + " Identificador já utilizado na struct atual ou na struct pai. " + escopoStruct.getSimbolo(simbolo).toString());
-                System.out.println("DEPOIS" + currentToken());
             }
             structVarExp(escopoStruct, tipo, s);
         } else {
